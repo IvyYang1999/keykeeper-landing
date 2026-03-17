@@ -67,8 +67,8 @@ export default function Home() {
       {/* ── Nav ── */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/[0.06] bg-[#09090b]/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="text-[11px] tracking-[0.2em] text-zinc-400" style={{ fontFamily: "var(--font-pixel)" }}>
-            KEYKEEPER
+          <span className="flex items-center gap-1.5 text-sm font-semibold text-zinc-300">
+            <span className="text-lg">🔐</span> KeyKeeper
           </span>
           <div className="flex items-center gap-5">
             <a href="#features" className="text-zinc-500 hover:text-white transition-colors text-sm hidden sm:block">Features</a>
@@ -270,8 +270,8 @@ export default function Home() {
       {/* ── Footer ── */}
       <footer className="py-12 px-6 border-t border-white/[0.06]">
         <div className="max-w-3xl mx-auto text-center">
-          <p className="text-zinc-600 text-[9px] tracking-[0.2em] mb-3" style={{ fontFamily: "var(--font-pixel)" }}>
-            BUILT WITH OBSESSIVE SECURITY IN MIND
+          <p className="text-zinc-600 text-xs tracking-widest uppercase mb-3 font-medium">
+            🔐 Built with obsessive security in mind
           </p>
           <p className="text-zinc-600 text-xs">
             AI knows key names, never touches key values.
