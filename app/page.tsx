@@ -166,7 +166,7 @@ export default function Home() {
       <section className="py-24 px-6 dot-grid">
         <div className="max-w-5xl mx-auto">
           <h2
-            className="text-sm tracking-[0.3em] text-zinc-400 text-center mb-12 uppercase"
+            className="text-xl sm:text-2xl tracking-[0.2em] text-white text-center mb-12 uppercase"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             How It Works
@@ -222,7 +222,7 @@ export default function Home() {
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
           <h2
-            className="text-sm tracking-[0.3em] text-zinc-400 text-center mb-12 uppercase"
+            className="text-xl sm:text-2xl tracking-[0.2em] text-white text-center mb-12 uppercase"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             Features
@@ -267,7 +267,7 @@ export default function Home() {
       <section className="py-24 px-6 dot-grid">
         <div className="max-w-3xl mx-auto">
           <h2
-            className="text-sm tracking-[0.3em] text-zinc-400 text-center mb-12 uppercase"
+            className="text-xl sm:text-2xl tracking-[0.2em] text-white text-center mb-12 uppercase"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             See It In Action
@@ -316,7 +316,7 @@ export default function Home() {
       <section id="install" className="py-24 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <h2
-            className="text-sm tracking-[0.3em] text-zinc-400 text-center mb-8 uppercase"
+            className="text-xl sm:text-2xl tracking-[0.2em] text-white text-center mb-8 uppercase"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             Install
