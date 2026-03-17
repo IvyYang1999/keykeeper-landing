@@ -1,75 +1,50 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #e5e5e5;
+  --background: #09090b;
+  --foreground: #fafafa;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
   --font-pixel: var(--font-pixel);
-  --color-amber: #f59e0b;
-  --color-amber-light: #fbbf24;
-  --color-surface: #141414;
-  --color-border: #222222;
-  --color-muted: #737373;
-  --color-green: #22c55e;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
-/* Grid background pattern */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(245, 158, 11, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 158, 11, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+/* Subtle dot grid */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-/* Animated grid for hero */
-.grid-bg-animated {
-  background-image:
-    linear-gradient(rgba(245, 158, 11, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 158, 11, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: gridShift 20s linear infinite;
-}
-
-@keyframes gridShift {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 40px 40px;
-  }
-}
-
-/* Terminal window styling */
+/* Terminal window */
 .terminal-window {
-  background: #0d0d0d;
-  border: 1px solid #222;
-  border-radius: 8px;
+  background: #0c0c0c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
   overflow: hidden;
 }
 
 .terminal-titlebar {
-  background: #1a1a1a;
+  background: rgba(255, 255, 255, 0.03);
   padding: 10px 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid #222;
+  gap: 7px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .terminal-dot {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
 }
 
@@ -83,51 +58,18 @@ body {
   animation: blink 1s step-end infinite;
 }
 
-/* Glow effect on accent */
-.glow-amber {
-  text-shadow: 0 0 20px rgba(245, 158, 11, 0.3), 0 0 40px rgba(245, 158, 11, 0.1);
-}
-
-/* Subtle card hover */
+/* Card hover */
 .card-hover {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.2s, background-color 0.2s;
 }
 
 .card-hover:hover {
-  border-color: rgba(245, 158, 11, 0.3);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
-/* Fade in animation */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }

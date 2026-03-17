@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Silkscreen } from "next/font/google";
+import { Inter, Geist_Mono, Silkscreen } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -27,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistMono.variable} ${silkscreen.variable} antialiased`}
+        className={`${inter.variable} ${geistMono.variable} ${silkscreen.variable} antialiased`}
       >
         {children}
       </body>
