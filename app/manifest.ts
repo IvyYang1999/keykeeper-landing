@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Local credential access for AI coding tools on macOS.",
     start_url: "/",
     display: "standalone",
-    background_color: "#edf3f6",
-    theme_color: "#0b1924",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    background_color: "#f7f7f5",
+    theme_color: "#f7f7f5",
+    icons: [{ src: "/keykeeper-app-icon.png", sizes: "1024x1024", type: "image/png" }],
   };
 }

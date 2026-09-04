@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
+import Image from "next/image";
 import { siteCopy } from "./i18n";
 import type { Language } from "./i18n";
 
@@ -30,7 +31,7 @@ function subscribeToLanguage(change: () => void) {
 }
 
 function LogoMark() {
-  return <svg aria-hidden="true" viewBox="0 0 32 32" className="logo-mark"><path d="M16 2.8 27 7v8.2c0 7-4.4 11.8-11 14-6.6-2.2-11-7-11-14V7l11-4.2Z" /><circle cx="13.2" cy="15" r="3.2" /><path d="M16.4 15H22m-2 0v2.5" /></svg>;
+  return <Image aria-hidden="true" src="/keykeeper-app-icon.png" width={64} height={64} alt="" className="logo-mark" />;
 }
 
 function ArrowIcon() {
@@ -142,7 +143,13 @@ export default function Home() {
           <div className="hero-actions"><a className="button button-primary" href="#quick-start">{copy.hero.build} <ArrowIcon /></a><a className="button button-secondary" href="#security">{copy.hero.boundary}</a></div>
           <ul className="trust-list" aria-label={language === "zh" ? "项目事实" : "Project facts"}>{copy.hero.facts.map((fact) => <li key={fact}>{fact}</li>)}</ul>
         </div>
-        <AccessReceipt copy={copy.receipt} />
+        <div className="hero-showcase" aria-label={language === "zh" ? "KeyKeeper 应用与授权界面" : "KeyKeeper app and authorization interface"}>
+          <div className="hero-glow" aria-hidden="true" />
+          <div className="app-icon-stage" aria-hidden="true">
+            <Image src="/keykeeper-app-icon.png" width={1024} height={1024} alt="" priority />
+          </div>
+          <AccessReceipt copy={copy.receipt} />
+        </div>
       </section>
 
       <aside className="release-note" aria-label={copy.release.label}>
