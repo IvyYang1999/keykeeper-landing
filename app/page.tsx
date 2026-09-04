@@ -138,8 +138,13 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <div className="preview-pill"><span /> {copy.hero.preview}</div><p className="kicker">{copy.hero.kicker}</p>
-          <h1>{copy.hero.title}<br /><em>{copy.hero.emphasis}</em></h1><p className="hero-lede">{copy.hero.lede}</p>
+          <div className="preview-pill"><span /> {copy.hero.preview}</div>
+          <h1>
+            {copy.hero.titleLines.map((line) => <span key={line}>{line}</span>)}
+            <em>{copy.hero.emphasisLines.map((line) => <span key={line}>{line}</span>)}</em>
+          </h1>
+          <p className="hero-lede">{copy.hero.lede}</p>
+          <p className="hero-boundary-note">{copy.hero.boundaryNote}</p>
           <div className="hero-actions"><a className="button button-primary" href="#quick-start">{copy.hero.build} <ArrowIcon /></a><a className="button button-secondary" href="#security">{copy.hero.boundary}</a></div>
           <ul className="trust-list" aria-label={language === "zh" ? "项目事实" : "Project facts"}>{copy.hero.facts.map((fact) => <li key={fact}>{fact}</li>)}</ul>
         </div>
@@ -160,30 +165,11 @@ export default function Home() {
       <section className="content-section" id="how-it-works">
         <SectionIntro index="01" label={copy.handoff.label} title={copy.handoff.title} copy={copy.handoff.copy} />
         <div className="process-grid">{copy.handoff.steps.map((step, index) => <article className="process-card" key={step.title}><span className="process-number">0{index + 1}</span><code>{step.command}</code><h3>{step.title}</h3><p>{step.copy}</p></article>)}</div>
-        <div className="visibility-demo">
-          <div><p className="demo-label">{copy.handoff.conversation}</p><code><span>$</span> keykeeper run -c stripe -- python app.py</code></div>
-          <div className="value-panel"><p className="demo-label">{copy.handoff.receives}</p><code>STRIPE_API_KEY=<strong>[injected]</strong></code></div>
-          <p className="demo-footnote">{copy.handoff.footnote}</p>
-        </div>
-      </section>
-
-      <section className="content-section moat-section" id="difference">
-        <SectionIntro index="02" label={copy.moat.label} title={copy.moat.title} copy={copy.moat.copy} />
-        <div className="moat-grid">
-          <article className="moat-card moat-token">
-            <p className="boundary-label">{copy.moat.tokenLabel}</p>
-            <p>{copy.moat.tokenBody}</p>
-          </article>
-          <article className="moat-card moat-keeper">
-            <p className="boundary-label">{copy.moat.keeperLabel}</p>
-            <p>{copy.moat.keeperBody}</p>
-          </article>
-          <p className="moat-footnote">{copy.moat.footnote}</p>
-        </div>
       </section>
 
       <section className="security-section" id="security"><div className="security-inner">
-        <SectionIntro index="03" label={copy.security.label} title={copy.security.title} copy={copy.security.copy} />
+        <SectionIntro index="02" label={copy.security.label} title={copy.security.title} copy={copy.security.copy} />
+        <p className="security-principle">{copy.security.identityPrinciple}</p>
         <div className="boundary-grid">
           <article className="boundary-card boundary-protects"><p className="boundary-label">{copy.security.protectsLabel}</p><ul>{copy.security.protections.map((item) => <li key={item}><BoundaryIcon type="check" /><span>{item}</span></li>)}</ul></article>
           <article className="boundary-card boundary-limits"><p className="boundary-label">{copy.security.limitsLabel}</p><ul>{copy.security.limits.map((item) => <li key={item}><BoundaryIcon type="limit" /><span>{item}</span></li>)}</ul></article>
@@ -192,7 +178,7 @@ export default function Home() {
       </div></section>
 
       <section className="content-section quick-start" id="quick-start">
-        <SectionIntro index="04" label={copy.quick.label} title={copy.quick.title} copy={copy.quick.copy} />
+        <SectionIntro index="03" label={copy.quick.label} title={copy.quick.title} copy={copy.quick.copy} />
         <div className="quick-start-grid">
           <div className="terminal" aria-label={copy.quick.terminalAria}>
             <div className="terminal-bar"><span>Terminal</span><CopyButton label={copy.quick.copyCommands} copiedLabel={copy.quick.copied} /></div>
@@ -207,7 +193,7 @@ export default function Home() {
       </section>
 
       <section className="faq-section" id="faq">
-        <div className="faq-heading"><p className="section-index">05 / {copy.faq.label}</p><h2>{copy.faq.title}</h2></div>
+        <div className="faq-heading"><p className="section-index">04 / {copy.faq.label}</p><h2>{copy.faq.title}</h2></div>
         <div className="faq-list">{copy.faq.items.map((item) => <details key={item.q}><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div>
       </section>
 
