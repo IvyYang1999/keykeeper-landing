@@ -12,11 +12,12 @@ export const siteCopy = {
       deny: "Deny", authorize: "Authorize", caption: "Synthetic example based on the current authorization model.",
     },
     hero: {
-      preview: "Public preview · macOS 14+", kicker: "A local trust layer for AI coding tools",
-      title: "Give agents access.", emphasis: "Keep the secret out of chat.",
-      lede: "KeyKeeper stores API keys in macOS Keychain and injects them into approved local processes. Your AI tool works with credential names, without needing the plaintext value.",
+      preview: "Free · open source · macOS 14+",
+      kicker: "For everyone who has pasted an API key into a chat window",
+      title: "Your agent should see the key's name.", emphasis: "Never its value.",
+      lede: "Stop pasting sk-… into Cursor and Claude Code. KeyKeeper keeps your keys in the macOS Keychain and injects them straight into the command that needs them. No .env file to babysit, and no master password — signing in to your Mac is the unlock.",
       build: "Build from source", boundary: "Read the security boundary",
-      facts: ["MIT licensed", "Local-only storage", "Swift + macOS Keychain"],
+      facts: ["No master password", "No cloud account, no Docker", "MIT licensed"],
     },
     release: {
       label: "Release status", title: "Source install available now",
@@ -33,6 +34,15 @@ export const siteCopy = {
       ],
       conversation: "What the AI conversation needs", receives: "What the approved process receives",
       footnote: "The value crosses into the child process. It does not need to appear in the command, project file, or chat.",
+    },
+    moat: {
+      label: "The difference", title: "op run's interface, with a per-caller policy instead of one service-account token.",
+      copy: "Every other tool answers the question “is this token valid?”. KeyKeeper answers “which program is actually asking?” — and it does not take the caller's word for it.",
+      tokenLabel: "The token model",
+      tokenBody: "The agent holds a long-lived token. A prompt-injected agent can read that token out of its own environment, and anything that copies it can replay it somewhere else. The secret manager sees a valid token and answers honestly.",
+      keeperLabel: "KeyKeeper",
+      keeperBody: "There is no token to hold. KeyKeeper derives the caller's identity from the requesting process itself — its pid, code signature and parent chain, read from the socket it connected on. A program cannot claim to be a different one, and an injected prompt has nothing to steal.",
+      footnote: "It is also why approvals are per credential and per caller: you can revoke one agent without disturbing anything else on the machine.",
     },
     security: {
       label: "The boundary", title: "Trust is a boundary, not a slogan.",
@@ -54,10 +64,11 @@ export const siteCopy = {
     quick: {
       label: "Try it", title: "Build the current preview from source.",
       copy: "KeyKeeper is open source and currently distributed as source. The build script produces the macOS app and DMG locally.",
-      terminalAria: "Build KeyKeeper from source", commands: "5 commands",
+      terminalAria: "Build KeyKeeper from source", commands: "5 commands", copyCommands: "Copy", copied: "Copied",
+      prereq: "Needs the Xcode command line tools (xcode-select --install). A self-built app is not notarized, so the first launch is right-click → Open.",
       steps: [
         { title: "Build and open the app", copy: "The repository script creates the app bundle and a local DMG." },
-        { title: "Add a credential", copy: "Use the menu bar app. Values are stored in macOS Keychain." },
+        { title: "Add a key", copy: "Use the menu bar app. Values are stored in macOS Keychain." },
         { title: "Run an approved process", copy: "keykeeper run -c openai -- your-command" },
       ],
       source: "View source on GitHub",
@@ -65,9 +76,11 @@ export const siteCopy = {
     faq: {
       label: "Straight answers", title: "Before you trust it with a key.",
       items: [
+        { q: "Can't the agent just run keykeeper run itself and print the key?", a: "It can try, and that is the honest limit of any injection tool: whatever you approve, the approved process receives. What KeyKeeper changes is who gets approved. Each caller is identified from its own process rather than from a token it presents, so an agent you never approved is refused, and one you did approve can be revoked in a click. Credentials set to “ask every time” prompt on every new terminal session." },
+        { q: "Why not 1Password op run, Doppler, or Infisical?", a: "They are good tools with a different trust unit. Their unattended mode issues one service-account token that stands in for you, so every agent sharing it can read everything in its scope, and a stolen token replays anywhere. KeyKeeper issues no token: it authorizes each calling process separately, on your machine, with no cloud account and no server to run." },
         { q: "Does the AI ever need my plaintext key?", a: "Not in the recommended KeyKeeper workflow. The AI names a credential and KeyKeeper injects its fields into an approved child process. That process does receive the value, so KeyKeeper cannot protect against malicious code or deliberate exfiltration." },
         { q: "How is this different from a .env file?", a: "KeyKeeper keeps values in macOS Keychain instead of your project directory, and injects them only when a command runs. This reduces accidental exposure through chat, screenshots, shell history, and Git." },
-        { q: "What happens without Touch ID?", a: "KeyKeeper can use your Mac login authentication when biometrics are unavailable. The authorization button reflects the method your Mac can actually use." },
+        { q: "Is there a master password to remember?", a: "No. Values live in the macOS Keychain, which is unlocked by your normal Mac login. There is no vault passphrase, no recovery key to file away, and nothing to type after a reboot — background jobs work again as soon as you log in." },
         { q: "Why is there no download button yet?", a: "No signed public release has been published. Until that distribution path exists, this page points to the source build that is available today." },
       ],
     },
@@ -88,11 +101,12 @@ export const siteCopy = {
       deny: "拒绝", authorize: "授权", caption: "基于当前授权模型制作的示意图。",
     },
     hero: {
-      preview: "公开预览 · macOS 14+", kicker: "面向 AI 编程工具的本地信任层",
-      title: "让 Agent 使用密钥。", emphasis: "不让密钥进入对话。",
-      lede: "KeyKeeper 将 API 密钥存入 macOS 钥匙串，并只注入已获授权的本地进程。AI 工具只需使用凭据名称，无需看到明文密钥。",
+      preview: "免费 · 开源 · macOS 14+",
+      kicker: "写给每一个把 API key 粘进过聊天框的人",
+      title: "让 Agent 看见 key 的名字。", emphasis: "永远看不见它的值。",
+      lede: "别再把 sk-… 粘进 Cursor 和 Claude Code。KeyKeeper 把密钥放在 macOS 钥匙串里，运行命令时才直接注入进程。不用再维护 .env，也没有主密码——登录你的 Mac 就是解锁。",
       build: "从源码构建", boundary: "了解安全边界",
-      facts: ["MIT 开源许可", "仅本地存储", "Swift + macOS 钥匙串"],
+      facts: ["没有主密码", "不需要云账号，不需要 Docker", "MIT 开源许可"],
     },
     release: {
       label: "发布状态", title: "目前可从源码安装",
@@ -109,6 +123,15 @@ export const siteCopy = {
       ],
       conversation: "AI 对话需要看到的内容", receives: "获批进程收到的内容",
       footnote: "密钥值会进入子进程，但无需出现在命令、项目文件或聊天记录中。",
+    },
+    moat: {
+      label: "关键差异", title: "op run 的接口，但把一个 service-account token 换成一份 per-caller policy。",
+      copy: "别的工具回答的是「这个 token 有效吗」。KeyKeeper 回答的是「到底是哪个程序在要」——而且不听调用方自称。",
+      tokenLabel: "Token 模型",
+      tokenBody: "Agent 手里攥着一个长期 token。被 prompt injection 的 agent 能从自己的环境变量里把它读出来，任何拷走它的人都能拿到别处重放。密钥管理器看到一个有效 token，就如实作答。",
+      keeperLabel: "KeyKeeper",
+      keeperBody: "根本没有 token 可攥。KeyKeeper 从发起请求的进程本身推导身份——它的 pid、代码签名、父进程链，全部从它连上来的那个 socket 读出。一个程序无法谎称自己是另一个，被注入的提示词也没有东西可偷。",
+      footnote: "这也是为什么授权是按凭据、按调用方发放的：撤销某一个 agent，不会惊动机器上的其它任何东西。",
     },
     security: {
       label: "安全边界", title: "信任是一条边界，不是一句口号。",
@@ -129,10 +152,11 @@ export const siteCopy = {
     quick: {
       label: "开始体验", title: "从源码构建当前预览版。",
       copy: "KeyKeeper 是开源项目，目前以源码形式分发。构建脚本会在本机生成 macOS 应用和 DMG。",
-      terminalAria: "从源码构建 KeyKeeper", commands: "5 条命令",
+      terminalAria: "从源码构建 KeyKeeper", commands: "5 条命令", copyCommands: "复制", copied: "已复制",
+      prereq: "需要 Xcode 命令行工具（xcode-select --install）。自行构建的应用未经公证，首次打开请右键 → 打开。",
       steps: [
         { title: "构建并打开应用", copy: "仓库脚本会生成应用包和本地 DMG。" },
-        { title: "添加凭据", copy: "在菜单栏应用中操作，密钥值会保存到 macOS 钥匙串。" },
+        { title: "添加一个 key", copy: "在菜单栏应用中操作，密钥值会保存到 macOS 钥匙串。" },
         { title: "运行获批进程", copy: "keykeeper run -c openai -- your-command" },
       ],
       source: "在 GitHub 查看源码",
@@ -140,9 +164,11 @@ export const siteCopy = {
     faq: {
       label: "直接回答", title: "在把密钥交给它之前。",
       items: [
+        { q: "Agent 自己跑 keykeeper run，不就把 key 打出来了？", a: "它可以试，而这正是所有注入类工具的诚实边界：你批准了谁，谁就拿得到值。KeyKeeper 改变的是「谁能被批准」。每个调用方的身份都从它自己的进程推导，而不是靠它出示的 token，所以你从没批准过的 agent 会被拒绝，批准过的也能一键撤销。设为「每次都问」的凭据，每个新终端会话都会重新征求同意。" },
+        { q: "为什么不用 1Password op run、Doppler 或 Infisical？", a: "它们都是好工具，只是信任单元不同。它们的无人值守方案会签发一个代表你的 service-account token，共用它的每个 agent 都能读到其权限范围内的一切，而 token 一旦被偷，在哪都能重放。KeyKeeper 不签发 token：它在你的机器上逐个授权调用进程，不需要云账号，也不需要跑服务器。" },
         { q: "AI 是否需要看到我的明文密钥？", a: "在推荐的 KeyKeeper 工作流中不需要。AI 只指定凭据名称，KeyKeeper 把字段注入获批的子进程。子进程确实会收到密钥，因此 KeyKeeper 无法防止恶意代码或主动外传。" },
         { q: "它和 .env 文件有什么区别？", a: "KeyKeeper 将密钥值保存在 macOS 钥匙串而非项目目录中，只在命令运行时注入。这能减少密钥通过聊天、截图、Shell 历史和 Git 意外泄露的风险。" },
-        { q: "没有 Touch ID 怎么办？", a: "生物识别不可用时，KeyKeeper 可以使用 Mac 登录认证。授权按钮会反映当前 Mac 实际可用的认证方式。" },
+        { q: "需要记一个主密码吗？", a: "不需要。密钥值放在 macOS 钥匙串里，由你平时登录 Mac 的操作解锁。没有保险库口令，没有需要收好的恢复密钥，重启后也不用输入任何东西——你一登录，后台任务就恢复正常。" },
         { q: "为什么现在没有下载按钮？", a: "目前还没有发布签名的公开版本。在正式分发就绪前，本页只指向今天确实可用的源码构建方式。" },
       ],
     },

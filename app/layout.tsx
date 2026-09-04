@@ -18,19 +18,19 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://keykeeper.dev"),
   applicationName: "KeyKeeper",
-  title: "KeyKeeper — Keep API keys out of AI conversations",
-  description: "A macOS app and CLI that stores API keys in Keychain and injects them into approved local processes, without putting plaintext secrets in AI chat.",
+  title: "KeyKeeper — Your agent should see the key's name, never its value",
+  description: "Stop pasting sk-… into Cursor and Claude Code. KeyKeeper keeps API keys in the macOS Keychain and injects them into the command that needs them. Free, open source, no master password.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
     siteName: "KeyKeeper",
-    title: "Give agents access. Keep the secret out of chat.",
-    description: "Local, open-source credential access for AI coding workflows on macOS.",
+    title: "Your agent should see the key's name. Never its value.",
+    description: "Free and open source. No master password — your Mac login is the unlock.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KeyKeeper — Credential access for AI coding tools",
+    title: "KeyKeeper — the key's name, never its value",
     description: "Let local processes use API keys without pasting plaintext secrets into AI chat.",
   },
   robots: { index: true, follow: true },
@@ -40,7 +40,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#edf3f6",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#edf3f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a1620" },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

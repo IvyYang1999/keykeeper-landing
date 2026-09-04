@@ -1,10 +1,17 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { siteCopy } from "./i18n";
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
+const buildCommands = [
+  "git clone https://github.com/IvyYang1999/KeyKeeper.git",
+  "cd KeyKeeper",
+  "./scripts/build-app.sh",
+  "cp -R dist/dmg/KeyKeeper.app /Applications/",
+  "open /Applications/KeyKeeper.app",
+];
 const quickStartUrl = `${githubUrl}#quick-start`;
 const securityUrl = `${githubUrl}#security-model`;
 
@@ -62,6 +69,24 @@ function AccessReceipt({ copy }: { copy: typeof siteCopy.en.receipt | typeof sit
   );
 }
 
+function CopyButton({ label, copiedLabel }: { label: string; copiedLabel: string }) {
+  const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      className="copy-button"
+      onClick={() => {
+        navigator.clipboard.writeText(buildCommands.join("\n")).then(() => {
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 1800);
+        });
+      }}
+    >
+      {copied ? copiedLabel : label}
+    </button>
+  );
+}
+
 function SectionIntro({ index, label, title, copy }: { index: string; label: string; title: string; copy: string }) {
   return <header className="section-intro"><p className="section-index">{index} / {label}</p><h2>{title}</h2><p>{copy}</p></header>;
 }
@@ -73,6 +98,20 @@ export default function Home() {
   useEffect(() => {
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
   }, [language]);
+
+  // The sticky nav is light chrome; over the near-black security section it used to sit
+  // there as a hard pale slab. Repaint it while that section is underneath.
+  useEffect(() => {
+    const nav = document.querySelector(".site-nav");
+    const darkSection = document.querySelector("#security");
+    if (!nav || !darkSection) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => nav.classList.toggle("over-dark", entry.isIntersecting),
+      { rootMargin: "-76px 0px -100% 0px", threshold: 0 }
+    );
+    observer.observe(darkSection);
+    return () => observer.disconnect();
+  }, []);
 
   function chooseLanguage(next: Language) {
     window.localStorage.setItem("keykeeper-language", next);
@@ -121,8 +160,23 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="content-section moat-section" id="difference">
+        <SectionIntro index="02" label={copy.moat.label} title={copy.moat.title} copy={copy.moat.copy} />
+        <div className="moat-grid">
+          <article className="moat-card moat-token">
+            <p className="boundary-label">{copy.moat.tokenLabel}</p>
+            <p>{copy.moat.tokenBody}</p>
+          </article>
+          <article className="moat-card moat-keeper">
+            <p className="boundary-label">{copy.moat.keeperLabel}</p>
+            <p>{copy.moat.keeperBody}</p>
+          </article>
+          <p className="moat-footnote">{copy.moat.footnote}</p>
+        </div>
+      </section>
+
       <section className="security-section" id="security"><div className="security-inner">
-        <SectionIntro index="02" label={copy.security.label} title={copy.security.title} copy={copy.security.copy} />
+        <SectionIntro index="03" label={copy.security.label} title={copy.security.title} copy={copy.security.copy} />
         <div className="boundary-grid">
           <article className="boundary-card boundary-protects"><p className="boundary-label">{copy.security.protectsLabel}</p><ul>{copy.security.protections.map((item) => <li key={item}><BoundaryIcon type="check" /><span>{item}</span></li>)}</ul></article>
           <article className="boundary-card boundary-limits"><p className="boundary-label">{copy.security.limitsLabel}</p><ul>{copy.security.limits.map((item) => <li key={item}><BoundaryIcon type="limit" /><span>{item}</span></li>)}</ul></article>
@@ -131,18 +185,22 @@ export default function Home() {
       </div></section>
 
       <section className="content-section quick-start" id="quick-start">
-        <SectionIntro index="03" label={copy.quick.label} title={copy.quick.title} copy={copy.quick.copy} />
+        <SectionIntro index="04" label={copy.quick.label} title={copy.quick.title} copy={copy.quick.copy} />
         <div className="quick-start-grid">
-          <div className="terminal" aria-label={copy.quick.terminalAria}><div className="terminal-bar"><span>Terminal</span><span>{copy.quick.commands}</span></div><pre><code><span className="prompt">$</span> git clone https://github.com/IvyYang1999/KeyKeeper.git{"\n"}<span className="prompt">$</span> cd KeyKeeper{"\n"}<span className="prompt">$</span> ./scripts/build-app.sh{"\n"}<span className="prompt">$</span> cp -R dist/dmg/KeyKeeper.app /Applications/{"\n"}<span className="prompt">$</span> open /Applications/KeyKeeper.app</code></pre></div>
+          <div className="terminal" aria-label={copy.quick.terminalAria}>
+            <div className="terminal-bar"><span>Terminal</span><CopyButton label={copy.quick.copyCommands} copiedLabel={copy.quick.copied} /></div>
+            <pre><code>{buildCommands.map((command) => <span key={command} className="command-line"><span className="prompt">$</span> {command}{"\n"}</span>)}</code></pre>
+          </div>
           <div className="start-steps">
             {copy.quick.steps.map((step, index) => <div key={step.title}><span>{index + 1}</span><p><strong>{step.title}</strong>{index === 2 ? <code>{step.copy}</code> : step.copy}</p></div>)}
+            <p className="prereq-note">{copy.quick.prereq}</p>
             <a className="button button-primary" href={githubUrl} target="_blank" rel="noreferrer">{copy.quick.source} <ArrowIcon /></a>
           </div>
         </div>
       </section>
 
       <section className="faq-section" id="faq">
-        <div className="faq-heading"><p className="section-index">04 / {copy.faq.label}</p><h2>{copy.faq.title}</h2></div>
+        <div className="faq-heading"><p className="section-index">05 / {copy.faq.label}</p><h2>{copy.faq.title}</h2></div>
         <div className="faq-list">{copy.faq.items.map((item) => <details key={item.q}><summary>{item.q}<span aria-hidden="true">+</span></summary><p>{item.a}</p></details>)}</div>
       </section>
 
