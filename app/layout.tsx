@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://keykeeper.dev"),
   applicationName: "KeyKeeper",
-  title: "KeyKeeper — Your agent should see the key's name, never its value",
+  title: "KeyKeeper — Your AI sees the key's name. Never the value.",
   description: "Stop pasting sk-… into Cursor and Claude Code. KeyKeeper keeps API keys in the macOS Keychain and injects them into the command that needs them. Free, open source, no master password.",
   alternates: { canonical: "/" },
   openGraph: {
@@ -27,8 +27,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f7f5" },
-    { media: "(prefers-color-scheme: dark)", color: "#101010" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
 };
 
