@@ -1,41 +1,48 @@
-import type { Metadata } from "next";
-import { Inter, Geist_Mono, Silkscreen } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const archivo = Archivo({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
-});
-
-const silkscreen = Silkscreen({
-  variable: "--font-pixel",
-  weight: ["400", "700"],
-  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "KeyKeeper — Your API keys are safe. Even from AI.",
-  description:
-    "A macOS menu bar app that manages API keys for AI coding tools. AI knows key names, never touches key values.",
+  metadataBase: new URL("https://keykeeper.dev"),
+  applicationName: "KeyKeeper",
+  title: "KeyKeeper — Keep API keys out of AI conversations",
+  description: "A macOS app and CLI that stores API keys in Keychain and injects them into approved local processes, without putting plaintext secrets in AI chat.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "KeyKeeper",
+    title: "Give agents access. Keep the secret out of chat.",
+    description: "Local, open-source credential access for AI coding workflows on macOS.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KeyKeeper — Credential access for AI coding tools",
+    description: "Let local processes use API keys without pasting plaintext secrets into AI chat.",
+  },
+  robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en" className="dark">
-      <body
-        className={`${inter.variable} ${geistMono.variable} ${silkscreen.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#edf3f6",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en"><body className={`${archivo.variable} ${plexMono.variable}`}>{children}</body></html>;
 }
