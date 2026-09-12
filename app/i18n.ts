@@ -6,9 +6,9 @@ export const siteCopy = {
     hero: {
       title: ["Your AI sees the key's name.", "Never the value."],
       lede: "KeyKeeper keeps API keys in the macOS Keychain and hands them only to the command you approve. No .env file. No master password.",
-      primary: "Build from source",
+      primary: "Download for Mac",
       secondary: "View on GitHub",
-      facts: "Free · Open source · macOS 14+",
+      facts: "v0.3.0 · Free · Apple Silicon · macOS 14+",
     },
     window: {
       aria: "Illustration of the KeyKeeper menu bar window approving a request",
@@ -39,8 +39,8 @@ export const siteCopy = {
       },
     ],
     install: {
-      title: "Build it in a minute",
-      copy: "Signed binaries are coming. Until then, the build script makes the app locally. Needs the Xcode command line tools.",
+      title: "Download. Drag. Open.",
+      copy: "Download the signed, notarized DMG for Apple Silicon (M1 or later). Drag KeyKeeper into Applications and open it. Install the CLI from the setup assistant. Prefer building from source? Use the commands here with Xcode command line tools.",
       copyButton: "Copy",
       copied: "Copied",
     },
@@ -51,9 +51,9 @@ export const siteCopy = {
     hero: {
       title: ["AI 只看到 key 的名字，", "看不到值。"],
       lede: "KeyKeeper 把 API key 存进 macOS 钥匙串，只交给你批准的那条命令。不用 .env，也没有主密码。",
-      primary: "从源码构建",
+      primary: "下载 Mac 版",
       secondary: "查看 GitHub",
-      facts: "免费 · 开源 · macOS 14+",
+      facts: "v0.3.0 · 免费 · Apple Silicon · macOS 14+",
     },
     window: {
       aria: "KeyKeeper 菜单栏窗口批准请求的示意图",
@@ -84,8 +84,8 @@ export const siteCopy = {
       },
     ],
     install: {
-      title: "一分钟装好",
-      copy: "签名安装包还在路上。现在用构建脚本在本地生成 app，需要 Xcode 命令行工具。",
+      title: "下载，拖进去，打开",
+      copy: "下载已签名并通过苹果公证的 DMG，适用于 M1 及后续芯片。把 KeyKeeper 拖到 Applications 后打开，再从设置向导安装命令行工具。也可以按旁边的命令从源码构建，需要 Xcode 命令行工具。",
       copyButton: "复制",
       copied: "已复制",
     },

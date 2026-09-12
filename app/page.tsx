@@ -6,6 +6,7 @@ import { siteCopy } from "./i18n";
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
+const downloadUrl = `${githubUrl}/releases/download/v0.3.0/KeyKeeper-0.3.0.dmg`;
 const quickStartUrl = `${githubUrl}#quick-start`;
 const securityUrl = `${githubUrl}#security-model`;
 const buildCommands = [
@@ -116,7 +117,7 @@ export default function Home() {
         </h1>
         <p className="lede">{copy.hero.lede}</p>
         <div className="actions">
-          <a className="pill pill-dark" href="#install">{copy.hero.primary}</a>
+          <a className="pill pill-dark" href={downloadUrl}>{copy.hero.primary}</a>
           <a className="pill pill-light" href={githubUrl} target="_blank" rel="noreferrer">{copy.hero.secondary}</a>
         </div>
         <p className="facts">{copy.hero.facts}</p>
@@ -145,6 +146,7 @@ export default function Home() {
         <div className="install-text">
           <h2>{copy.install.title}</h2>
           <p>{copy.install.copy}</p>
+          <p><a href={downloadUrl} className="pill pill-dark">{copy.hero.primary}</a></p>
           <a href={quickStartUrl} target="_blank" rel="noreferrer" className="textlink">README ↗</a>
         </div>
         <div className="terminal">
