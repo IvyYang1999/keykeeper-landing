@@ -164,6 +164,7 @@ export default function Home() {
           <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>
           <a href={`${githubUrl}/blob/main/LICENSE`} target="_blank" rel="noreferrer">{copy.footer.license}</a>
           <a href={securityUrl} target="_blank" rel="noreferrer">{copy.footer.security}</a>
+          <a href="mailto:support@keykeeper.dev">{copy.footer.support}</a>
         </div>
       </footer>
     </main>

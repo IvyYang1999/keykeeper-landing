@@ -44,7 +44,7 @@ export const siteCopy = {
       copyButton: "Copy",
       copied: "Copied",
     },
-    footer: { license: "MIT license", security: "Security model", tagline: "A small macOS app that keeps API keys out of your prompts." },
+    footer: { license: "MIT license", security: "Security model", support: "Support", tagline: "A small macOS app that keeps API keys out of your prompts." },
   },
   zh: {
     nav: { github: "GitHub", language: "语言" },
@@ -89,6 +89,6 @@ export const siteCopy = {
       copyButton: "复制",
       copied: "已复制",
     },
-    footer: { license: "MIT 许可", security: "安全模型", tagline: "一个小小的 macOS 应用，让 API key 远离你的提示词。" },
+    footer: { license: "MIT 许可", security: "安全模型", support: "支持邮箱", tagline: "一个小小的 macOS 应用，让 API key 远离你的提示词。" },
   },
 } as const;
