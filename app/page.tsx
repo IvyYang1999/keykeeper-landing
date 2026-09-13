@@ -6,7 +6,7 @@ import { siteCopy } from "./i18n";
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
-const downloadUrl = `${githubUrl}/releases/download/v0.3.0/KeyKeeper-0.3.0.dmg`;
+const downloadUrl = `${githubUrl}/releases/download/v0.3.1/KeyKeeper-0.3.1.dmg`;
 const quickStartUrl = `${githubUrl}#quick-start`;
 const securityUrl = `${githubUrl}#security-model`;
 const buildCommands = [
