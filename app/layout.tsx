@@ -34,5 +34,5 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}<Script src="/dc-analytics.js" strategy="afterInteractive" data-ga-id="G-D3CN3CW2WT" data-site="keykeeper" data-hosts="keykeeper.dev,www.keykeeper.dev" /></body></html>;
+  return <html lang="en"><head><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({"@context":"https://schema.org","@type":"SoftwareApplication",name:"KeyKeeper",url:"https://keykeeper.dev/",operatingSystem:"macOS",applicationCategory:"DeveloperApplication"})}} /></head><body>{children}<Script src="/dc-analytics.js" strategy="afterInteractive" data-ga-id="G-D3CN3CW2WT" data-site="keykeeper" data-hosts="keykeeper.dev,www.keykeeper.dev" /></body></html>;
 }

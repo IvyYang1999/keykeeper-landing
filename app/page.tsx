@@ -120,6 +120,7 @@ export default function Home() {
           <a className="pill pill-dark" href={downloadUrl}>{copy.hero.primary}</a>
           <a className="pill pill-light" href={githubUrl} target="_blank" rel="noreferrer">{copy.hero.secondary}</a>
         </div>
+        <p className="beta-note">{copy.hero.betaNote}</p>
         <p className="facts">{copy.hero.facts}</p>
 
         <div className="stage">
