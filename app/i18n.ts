@@ -9,7 +9,7 @@ export const siteCopy = {
       primary: "Download the beta",
       betaNote: "Beta. It works, and it is still being hardened — two security fixes shipped this week. Keep a copy of any key you store.",
       secondary: "View on GitHub",
-      facts: "v0.3.3 · Free · Apple Silicon · macOS 14+",
+      facts: "v0.3.4 · Free · Apple Silicon · macOS 14+",
     },
     window: {
       aria: "Illustration of the KeyKeeper menu bar window approving a request",
@@ -55,7 +55,7 @@ export const siteCopy = {
       primary: "下载内测版",
       betaNote: "内测版。能用，但还在打磨，本周刚修掉两个安全问题。存进来的 key 请另外留一份。",
       secondary: "查看 GitHub",
-      facts: "v0.3.3 · 免费 · Apple Silicon · macOS 14+",
+      facts: "v0.3.4 · 免费 · Apple Silicon · macOS 14+",
     },
     window: {
       aria: "KeyKeeper 菜单栏窗口批准请求的示意图",
