@@ -104,6 +104,7 @@ export default function Home() {
 
       <section className="hero" id="top">
         <Image src="/keykeeper-app-icon.png" width={1024} height={1024} alt="" className="hero-icon" priority />
+        <p className="eyebrow">{copy.hero.eyebrow}</p>
         <h1>
           <span>{copy.hero.title[0]}</span>
           <span>{copy.hero.title[1]}</span>
