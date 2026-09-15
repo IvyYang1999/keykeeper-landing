@@ -1,0 +1,53 @@
+---
+title: Vercel
+description: How an agent gets a Vercel key through KeyKeeper, what to choose on vercel.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `vercel` (also `vercel-token`) |
+|---|---|
+| Field | `vercel-token` → `VERCEL_TOKEN` in `keykeeper run` |
+| Key looks like | starts with `vcp_`, at least 28 characters, shown once when created |
+| Created at | [vercel.com](https://vercel.com/account/tokens) |
+| Verified by KeyKeeper | `GET https://api.vercel.com/v9/projects` — lists the projects this token can see |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show vercel
+keykeeper save --provider vercel --from-clipboard --create --purpose "what this task does"
+keykeeper run -c vercel -- <your command>
+```
+
+`--provider vercel` fills in the credential id and the field. The field's environment
+variable is the one Vercel's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Log in to vercel.com</Step>
+<Step>Name the token</Step>
+<Step>Pick the scope and the expiry (some teams require 2FA)</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Scope: the single project when the task is about one project; otherwise the team. Not Full Account. Expiration: the shortest that fits (7 or 30 days), not No Expiration.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Vercel key (starts with `vcp_`, at least 28 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.vercel.com/v9/projects` with the key in the `Authorization` header (lists the projects this token can see). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+## Rotation and expiry
+
+Expiry is chosen at creation (1 day to 1 year, or none). A token that leaks to a public repo is revoked automatically. Rotate or revoke at [vercel.com](https://vercel.com/account/tokens).

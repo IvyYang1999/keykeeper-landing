@@ -1,0 +1,38 @@
+---
+title: Security model
+description: What KeyKeeper guarantees, what it does not, and how it compares.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## What KeyKeeper promises
+
+- **Values never reach the agent by accident.** They live in the macOS Keychain, are injected into one process's environment by `keykeeper run`, and are redacted from that process's output. Keys an agent creates are inject-only: no command prints them.
+- **Every use is approved and attributed.** The caller is identified from the connection (audit token, code signature, or the file it runs from), not from a name it reports. Approvals are stored in one Keychain item only KeyKeeper can write.
+- **Every access is recorded** with the caller, its stated reason and the command line; approvals can be revoked at any time.
+- **Nothing leaves the Mac** except the read-only verification request to the provider you chose, and the optional reviewer call you configure.
+
+## What KeyKeeper does not promise
+
+<Callout type="warn" title="A program you approved can misuse the value">
+`keykeeper run` hands the value to the command you approved. That command can do anything with
+it — `echo $KEY | base64`, write it to a file, send it somewhere. Output redaction catches the
+value verbatim, not encoded. This is the same boundary as 1Password's `op run`, Doppler's
+`doppler run` and every environment-injection tool. KeyKeeper's answer is to make the
+approval an informed one: it shows the command, the caller, and what the caller declared.
+</Callout>
+
+- An **unsigned program is recognised by its path**; replacing the file at that path inherits its approvals. The window says so.
+- **Malware running as your user** can prompt you for approvals and read the clipboard while a key is on it. KeyKeeper marks its own clipboard writes as concealed and clears them, but cannot protect a copy you made from a website before saving it.
+- KeyKeeper is **not a password manager**: it holds developer credentials for agents, and is deliberately separate from your personal passwords.
+
+## The reviewer sees no values
+
+The optional second-model reviewer receives key names, the caller's stated reason and command,
+the declared use and one line of history. Its key is stored in KeyKeeper's own Keychain item,
+never in a credential, so no local program can redirect it.
+
+## Reporting
+
+Security issues: security@keykeeper.dev, or a private report on GitHub. Findings from two
+independent audits on 2026-09-14 were fixed in 0.3.4; the release notes list them.

@@ -1,0 +1,49 @@
+---
+title: For agents
+description: The rules an agent follows with KeyKeeper, in one page. The full skill file is in the repository.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+The complete instructions live in
+[skill/keykeeper.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/skill/keykeeper.md);
+Codex and Claude Code read that file. This page is the short version for humans checking what
+their agent was told. Every docs page is also served as Markdown: add `.md` to the URL, or
+fetch [/llms.txt](/llms.txt).
+
+## Use a key without seeing it
+
+```bash
+keykeeper list                                   # names only
+keykeeper run -c openai --reason "why, in one line" -- python app.py
+```
+
+`run` puts the key into that command's environment and redacts it from the command's output.
+The first request from a caller must say why (`--reason`); the person reads it. `--duration
+once|run|always` is a wish the person sees next to KeyKeeper's own suggestion.
+
+## Get a key the user does not have
+
+```bash
+keykeeper providers                              # templates
+keykeeper providers show stripe                  # where, what to choose, key shape, verification
+keykeeper save --provider stripe --from-clipboard --create --purpose "refunds for the shop"
+```
+
+The agent opens the provider's page for the user and says what to pick; the user logs in and
+copies the key; KeyKeeper checks the shape before writing and verifies the key afterwards. The
+agent gets *accepted*, *rejected* or *could not reach* — never the value. See
+[Providers](/docs/providers).
+
+## What is refused
+
+- `keykeeper get` on a key the agent created (inject-only) — use `run`.
+- A first request without `--reason`.
+- A save whose value does not look like the provider's key.
+- `--security standard` on a new key without a `--purpose`.
+- Plain fields an agent writes over the command line are not injected until the person confirms them in the app.
+
+<Callout type="warn">
+An agent that pastes a key into a chat, a file or a command line has already leaked it. The
+skill tells the agent to say so and to have the user revoke it, then start over through KeyKeeper.
+</Callout>

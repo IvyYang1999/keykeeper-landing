@@ -1,0 +1,23 @@
+---
+title: KeyKeeper
+description: Trust agents to manage your API keys. Safely.
+---
+
+import { Card, Cards } from "fumadocs-ui/components/card";
+
+KeyKeeper is a small macOS app and command line. It lets an AI agent — Codex, Claude Code,
+Cursor, a script — fetch, store, verify and use API keys on your Mac, while you approve each
+use and the agent never sees a value.
+
+- Keys live in the macOS Keychain. Nothing in the chat, nothing in `.env`, nothing in the project.
+- Every use is approved by you: **just this once**, **while it runs**, or **don't ask again** — and revocable.
+- Keys an agent creates are **inject-only**: they go into a command's environment through `keykeeper run` and are never printed or returned.
+- KeyKeeper knows the providers: where a key is made, what to choose, and how to verify it.
+
+<Cards>
+  <Card title="Getting started" href="/docs/getting-started" description="Install, then let your agent get its first key." />
+  <Card title="Approvals" href="/docs/approvals" description="What the three answers mean, and what an approval covers." />
+  <Card title="Providers" href="/docs/providers" description="OpenAI, Anthropic, Stripe, GitHub and more — templates the agent follows." />
+  <Card title="For agents" href="/docs/agents" description="The commands and rules an agent needs." />
+  <Card title="Security model" href="/docs/security" description="What KeyKeeper guarantees, and what it does not." />
+</Cards>

@@ -1,0 +1,43 @@
+{
+  "aliases" : [
+    "vercel-token"
+  ],
+  "createURL" : "https:\/\/vercel.com\/account\/tokens",
+  "expiryNote" : "Expiry is chosen at creation (1 day to 1 year, or none). A token that leaks to a public repo is revoked automatically.",
+  "fieldName" : "vercel-token",
+  "gates" : [
+    "Log in to vercel.com",
+    "Name the token",
+    "Pick the scope and the expiry (some teams require 2FA)"
+  ],
+  "id" : "vercel",
+  "minChars" : 28,
+  "minimalPermission" : "Scope: the single project when the task is about one project; otherwise the team. Not Full Account. Expiration: the shortest that fits (7 or 30 days), not No Expiration.",
+  "name" : "Vercel",
+  "prefixes" : [
+    "vcp_"
+  ],
+  "rotateURL" : "https:\/\/vercel.com\/account\/tokens",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists the projects this token can see",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401,
+      403
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.vercel.com\/v9\/projects",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

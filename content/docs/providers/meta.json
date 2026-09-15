@@ -1,0 +1,16 @@
+{
+  "title": "Providers",
+  "pages": [
+    "index",
+    "openai",
+    "anthropic",
+    "gemini",
+    "supabase",
+    "vercel",
+    "github",
+    "cloudflare",
+    "stripe",
+    "resend",
+    "siliconflow"
+  ]
+}

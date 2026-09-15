@@ -1,0 +1,43 @@
+{
+  "aliases" : [
+    "resend-api-key"
+  ],
+  "createURL" : "https:\/\/resend.com\/api-keys",
+  "expiryNote" : "Keys do not expire; Resend suggests removing keys unused for 30 days.",
+  "fieldName" : "resend-api-key",
+  "gates" : [
+    "Log in to resend.com",
+    "Name the key",
+    "Pick the permission and, for sending access, the domain"
+  ],
+  "id" : "resend",
+  "minChars" : 30,
+  "minimalPermission" : "Permission = Sending access, limited to the one domain the task sends from. Full access can manage domains and other keys; do not suggest it.",
+  "name" : "Resend",
+  "prefixes" : [
+    "re_"
+  ],
+  "rotateURL" : "https:\/\/resend.com\/api-keys",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists domains; a sending-only key answers 'restricted', which also proves it is real",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401,
+      403
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.resend.com\/domains",
+    "validIfBodyContains" : [
+      "restricted_api_key"
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

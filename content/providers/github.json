@@ -1,0 +1,47 @@
+{
+  "aliases" : [
+    "gh",
+    "github-token",
+    "github-pat"
+  ],
+  "createURL" : "https:\/\/github.com\/settings\/personal-access-tokens\/new",
+  "expiryNote" : "Fine-grained tokens expire on the date chosen (1–366 days, or never); classic tokens unused for a year are deleted.",
+  "fieldName" : "github-token",
+  "gates" : [
+    "Log in to github.com (2FA where the organization requires it)",
+    "Choose the resource owner (you or an organization; an organization may have to approve)",
+    "Set the expiry"
+  ],
+  "id" : "github",
+  "minChars" : 40,
+  "minimalPermission" : "Fine-grained token: Repository access = Only select repositories (the ones the task touches), and only the permissions the task needs (e.g. Contents: Read). Leave everything else at No access. Expiry: 30 days or less.",
+  "name" : "GitHub",
+  "prefixes" : [
+    "github_pat_",
+    "ghp_"
+  ],
+  "rotateURL" : "https:\/\/github.com\/settings\/personal-access-tokens",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "reads the account the token belongs to (needs no permissions)",
+    "extraHeaders" : {
+      "Accept" : "application\/vnd.github+json",
+      "X-GitHub-Api-Version" : "2022-11-28"
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401,
+      403
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.github.com\/user",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

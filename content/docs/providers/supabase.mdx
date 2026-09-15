@@ -1,0 +1,53 @@
+---
+title: Supabase
+description: How an agent gets a Supabase key through KeyKeeper, what to choose on supabase.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `supabase` (also `supabase-cli`, `supabase-access-token`) |
+|---|---|
+| Field | `supabase-access-token` → `SUPABASE_ACCESS_TOKEN` in `keykeeper run` |
+| Key looks like | starts with `sbp_`, at least 20 characters, shown once when created |
+| Created at | [supabase.com](https://supabase.com/dashboard/account/tokens) |
+| Verified by KeyKeeper | `GET https://api.supabase.com/v1/projects` — lists the projects this token can see |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show supabase
+keykeeper save --provider supabase --from-clipboard --create --purpose "what this task does"
+keykeeper run -c supabase -- <your command>
+```
+
+`--provider supabase` fills in the credential id and the field. The field's environment
+variable is the one Supabase's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Log in to supabase.com</Step>
+<Step>Name the token</Step>
+<Step>Pick an expiry</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+This is the account access token the Supabase CLI and Management API use; it has the account's full power, so give it an expiry. For an app's own database access use the project's Settings → API Keys instead: publishable (sb_publishable_) for clients, secret (sb_secret_) only on a server.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Supabase key (starts with `sbp_`, at least 20 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.supabase.com/v1/projects` with the key in the `Authorization` header (lists the projects this token can see). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+## Rotation and expiry
+
+Set an expiry when creating it; project API keys never expire. Rotate or revoke at [supabase.com](https://supabase.com/dashboard/account/tokens).

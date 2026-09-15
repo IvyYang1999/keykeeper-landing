@@ -1,0 +1,44 @@
+{
+  "aliases" : [
+    "supabase-cli",
+    "supabase-access-token"
+  ],
+  "createURL" : "https:\/\/supabase.com\/dashboard\/account\/tokens",
+  "expiryNote" : "Set an expiry when creating it; project API keys never expire.",
+  "fieldName" : "supabase-access-token",
+  "gates" : [
+    "Log in to supabase.com",
+    "Name the token",
+    "Pick an expiry"
+  ],
+  "id" : "supabase",
+  "minChars" : 20,
+  "minimalPermission" : "This is the account access token the Supabase CLI and Management API use; it has the account's full power, so give it an expiry. For an app's own database access use the project's Settings → API Keys instead: publishable (sb_publishable_) for clients, secret (sb_secret_) only on a server.",
+  "name" : "Supabase",
+  "prefixes" : [
+    "sbp_"
+  ],
+  "rotateURL" : "https:\/\/supabase.com\/dashboard\/account\/tokens",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists the projects this token can see",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401,
+      403
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.supabase.com\/v1\/projects",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

@@ -2,7 +2,7 @@ export type Language = "en" | "zh";
 
 export const siteCopy = {
   en: {
-    nav: { github: "GitHub", language: "Language" },
+    nav: { github: "GitHub", docs: "Docs", language: "Language" },
     hero: {
       title: ["Your AI sees the key's name.", "Never the value."],
       lede: "KeyKeeper keeps API keys in the macOS Keychain and hands them only to the command you approve. No .env file. No master password.",
@@ -48,7 +48,7 @@ export const siteCopy = {
     footer: { license: "MIT license", security: "Security model", support: "Support", tagline: "A small macOS app that keeps API keys out of your prompts." },
   },
   zh: {
-    nav: { github: "GitHub", language: "语言" },
+    nav: { github: "GitHub", docs: "文档", language: "语言" },
     hero: {
       title: ["AI 只看到 key 的名字，", "看不到值。"],
       lede: "KeyKeeper 把 API key 存进 macOS 钥匙串，只交给你批准的那条命令。不用 .env，也没有主密码。",

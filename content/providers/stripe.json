@@ -1,0 +1,47 @@
+{
+  "aliases" : [
+    "stripe-key",
+    "stripe-api-key"
+  ],
+  "createURL" : "https:\/\/dashboard.stripe.com\/apikeys",
+  "expiryNote" : "No expiry; Rotate key gives the old value up to 7 days of grace. A key unused for 180 days gets restricted.",
+  "fieldName" : "stripe-api-key",
+  "gates" : [
+    "Log in to dashboard.stripe.com",
+    "Choose sandbox (test) or live mode",
+    "Create restricted key: name it and pick per-resource permissions",
+    "A 2FA code is required to create a live key"
+  ],
+  "id" : "stripe",
+  "minChars" : 32,
+  "minimalPermission" : "Always a Restricted key (rk_…), never the Secret key (sk_…): set each resource to None except the ones the task needs (Read where Read is enough). Start in sandbox (rk_test_) and only create a live key when the task really goes live. Balance: Read lets KeyKeeper verify it.",
+  "name" : "Stripe",
+  "prefixes" : [
+    "rk_live_",
+    "rk_test_",
+    "sk_live_",
+    "sk_test_"
+  ],
+  "rotateURL" : "https:\/\/dashboard.stripe.com\/apikeys",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "reads the account balance (Balance: Read)",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.stripe.com\/v1\/balance",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

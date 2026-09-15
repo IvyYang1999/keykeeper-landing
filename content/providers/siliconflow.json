@@ -1,0 +1,42 @@
+{
+  "aliases" : [
+    "硅基流动",
+    "siliconflow-cn"
+  ],
+  "createURL" : "https:\/\/cloud.siliconflow.cn\/account\/ak",
+  "expiryNote" : "No expiry setting; delete and recreate to rotate.",
+  "fieldName" : "siliconflow-api-key",
+  "gates" : [
+    "Log in with phone or email",
+    "Some models require real-name verification first"
+  ],
+  "id" : "siliconflow",
+  "minChars" : 40,
+  "minimalPermission" : "Keys have no scopes: one key is the whole account. Create a separate key per project so it can be deleted alone.",
+  "name" : "SiliconFlow",
+  "prefixes" : [
+    "sk-"
+  ],
+  "rotateURL" : "https:\/\/cloud.siliconflow.cn\/account\/ak",
+  "shownOnce" : false,
+  "validation" : {
+    "description" : "lists the models this key can use",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.siliconflow.cn\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

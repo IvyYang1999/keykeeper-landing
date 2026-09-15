@@ -1,0 +1,53 @@
+---
+title: GitHub
+description: How an agent gets a GitHub key through KeyKeeper, what to choose on github.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `github` (also `gh`, `github-token`, `github-pat`) |
+|---|---|
+| Field | `github-token` → `GITHUB_TOKEN` in `keykeeper run` |
+| Key looks like | starts with `github_pat_` or `ghp_`, at least 40 characters, shown once when created |
+| Created at | [github.com](https://github.com/settings/personal-access-tokens/new) |
+| Verified by KeyKeeper | `GET https://api.github.com/user` — reads the account the token belongs to (needs no permissions) |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show github
+keykeeper save --provider github --from-clipboard --create --purpose "what this task does"
+keykeeper run -c github -- <your command>
+```
+
+`--provider github` fills in the credential id and the field. The field's environment
+variable is the one GitHub's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Log in to github.com (2FA where the organization requires it)</Step>
+<Step>Choose the resource owner (you or an organization; an organization may have to approve)</Step>
+<Step>Set the expiry</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Fine-grained token: Repository access = Only select repositories (the ones the task touches), and only the permissions the task needs (e.g. Contents: Read). Leave everything else at No access. Expiry: 30 days or less.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a GitHub key (starts with `github_pat_` or `ghp_`, at least 40 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.github.com/user` with the key in the `Authorization` header (reads the account the token belongs to (needs no permissions)). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+## Rotation and expiry
+
+Fine-grained tokens expire on the date chosen (1–366 days, or never); classic tokens unused for a year are deleted. Rotate or revoke at [github.com](https://github.com/settings/personal-access-tokens).

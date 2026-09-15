@@ -1,0 +1,53 @@
+---
+title: Anthropic
+description: How an agent gets a Anthropic key through KeyKeeper, what to choose on console.anthropic.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `anthropic` (also `claude`, `anthropic-api`) |
+|---|---|
+| Field | `anthropic-api-key` → `ANTHROPIC_API_KEY` in `keykeeper run` |
+| Key looks like | starts with `sk-ant-`, at least 60 characters, shown once when created |
+| Created at | [console.anthropic.com](https://console.anthropic.com/settings/keys) |
+| Verified by KeyKeeper | `GET https://api.anthropic.com/v1/models` — lists the models this key can use |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show anthropic
+keykeeper save --provider anthropic --from-clipboard --create --purpose "what this task does"
+keykeeper run -c anthropic -- <your command>
+```
+
+`--provider anthropic` fills in the credential id and the field. The field's environment
+variable is the one Anthropic's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Log in to console.anthropic.com</Step>
+<Step>Choose the workspace</Step>
+<Step>Billing or credits must be set up before the key can be used</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Create the key in a workspace that only holds this project; there are no per-key scopes, so the workspace is the boundary.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Anthropic key (starts with `sk-ant-`, at least 60 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.anthropic.com/v1/models` with the key in the `x-api-key` header (lists the models this key can use). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+## Rotation and expiry
+
+Keys do not expire unless revoked. Rotate or revoke at [console.anthropic.com](https://console.anthropic.com/settings/keys).

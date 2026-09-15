@@ -1,0 +1,45 @@
+{
+  "aliases" : [
+    "gpt",
+    "chatgpt",
+    "openai-api"
+  ],
+  "createURL" : "https:\/\/platform.openai.com\/api-keys",
+  "expiryNote" : "Keys do not expire unless revoked.",
+  "fieldName" : "openai-api-key",
+  "gates" : [
+    "Log in to platform.openai.com",
+    "Choose the project (keys are per project)",
+    "Billing must be set up before the key can be used"
+  ],
+  "id" : "openai",
+  "minChars" : 40,
+  "minimalPermission" : "Create a key with Restricted permissions: only the capabilities the task needs (usually Model capabilities: Write). Not All.",
+  "name" : "OpenAI",
+  "prefixes" : [
+    "sk-"
+  ],
+  "rotateURL" : "https:\/\/platform.openai.com\/api-keys",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists the models this key can use",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401,
+      403
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.openai.com\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

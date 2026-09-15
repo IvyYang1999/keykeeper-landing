@@ -1,0 +1,71 @@
+---
+title: Approvals
+description: The three answers, what an approval covers, and how to take one back.
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## The window
+
+When a program asks for a key it has not been approved for, KeyKeeper shows one window, top to
+bottom:
+
+1. **Who wants what** — the caller's real icon and name, how sure KeyKeeper is about its identity, the key's fields.
+2. **What it says** — the caller's own sentence, marked *not verified*, and the command it is about to run.
+3. **What KeyKeeper thinks** — an offline rule check of the request against the use declared when the key was created; optionally a second model's opinion (see below).
+4. **Three answers.** The recommended one is highlighted.
+
+## The three answers
+
+| Answer | Lasts | Good for |
+|---|---|---|
+| **Just this once** | This run; each field is handed out once. | One call. |
+| **While it runs** | Until the asking program quits (a terminal session, or the agent's process). | The same agent doing the same job. |
+| **Don't ask again** | Until you revoke it. | A script that runs unattended. |
+
+There is no "1 hour": it answered a question nobody had. *While it runs* is bound to the
+process itself — pid and start time — so a reused pid inherits nothing.
+
+## What an approval covers
+
+An approval is for **the program that asked**, identified from the connection, not from what
+it says its name is:
+
+- A **signed app** (Developer ID) is recognised by its team and bundle; the approval covers that app and code it runs, like extensions.
+- An **unsigned app or tool** is recognised by the file it runs from; anything started from that file counts as it.
+- A caller that came **through the `keykeeper` command** (Codex, Claude Code, a script) is recognised by the app or file it was started from, so *don't ask again* covers everything started inside it.
+- A caller KeyKeeper **cannot identify** gets *just this once* and nothing is remembered.
+
+The window says which of these applies, in one line under the buttons.
+
+## Background keys
+
+A credential can be **Ask every time** or **Background OK**. Background keys are still not
+free for all: a fresh install *enforces* background approvals, so each new caller is shown to
+you once and then keeps working unattended. Settings → Background access turns that off.
+
+## Declared use and inflated requests
+
+When an agent creates a key it declares what it is for: purpose, expected caller, how often
+(once, now and then, on a schedule) and whether it must work unattended. Later requests are
+checked against that declaration. A one-off purpose that asks for background use, or *always*
+on a key that was never declared as recurring and unattended, is pointed out in the window as
+inflated, and the recommended answer moves down.
+
+## Independent reviewer
+
+Optionally, a second model — any Anthropic- or OpenAI-style endpoint, with a key you paste into
+Settings — reads the request (names, the stated reason, the command, the declared use; never a
+value) and adds a line: necessity 1–5, whether the scope is the smallest that works, a comment.
+It advises; it never approves.
+
+## Taking an approval back
+
+Every approval is listed on the key's page and in the menu bar, with who, what and how long.
+Revoke there, or with `keykeeper grants list` / `keykeeper grants revoke <id>`. Approvals live
+in a single Keychain item that only KeyKeeper can write.
+
+<Callout type="info">
+Renaming a key or editing its notes never asks — those are notes for people and agents. The
+window always shows the key's unchangeable ID next to its title for that reason.
+</Callout>

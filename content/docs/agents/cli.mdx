@@ -1,0 +1,17 @@
+---
+title: Command line
+description: The keykeeper commands, briefly. Each has --help.
+---
+
+| Command | What it does |
+|---|---|
+| `keykeeper list [--detail]` | Names, fields, expiry, inject-only marks. Never values. |
+| `keykeeper providers [show <id>]` | Provider templates. |
+| `keykeeper save --provider <id> --from-clipboard --create --purpose "…"` | Save a new key from the clipboard through the template; `-c`/`--field` when there is no template; `--from-source`/`--from-file` for a Python literal or a service-account file; `--replace --expect <shape>` to correct a stored value. |
+| `keykeeper run -c <id> [--reason "…"] [--duration once\|run\|always] -- <command>` | Run a command with the key in its environment, output redacted. |
+| `keykeeper get <id> <field> [--reason "…"]` | Print a value to a pipe — refused for inject-only keys, and for a terminal without `--reveal`. |
+| `keykeeper edit <id> --title/--notes/--set/--unset/--expires` | Names, notes, plain fields and expiry. Never values, never a prompt. |
+| `keykeeper grants list [--credential <id>]` / `grants revoke <id>` | Approvals: who may use what, for how long; revoke one. |
+| `keykeeper requests` | Pending approval requests. |
+| `keykeeper status` | Whether the app is running and the store is initialised. |
+| `keykeeper session …` | Website login sessions handed to an agent. |

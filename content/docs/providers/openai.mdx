@@ -1,0 +1,53 @@
+---
+title: OpenAI
+description: How an agent gets a OpenAI key through KeyKeeper, what to choose on platform.openai.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `openai` (also `gpt`, `chatgpt`, `openai-api`) |
+|---|---|
+| Field | `openai-api-key` → `OPENAI_API_KEY` in `keykeeper run` |
+| Key looks like | starts with `sk-`, at least 40 characters, shown once when created |
+| Created at | [platform.openai.com](https://platform.openai.com/api-keys) |
+| Verified by KeyKeeper | `GET https://api.openai.com/v1/models` — lists the models this key can use |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show openai
+keykeeper save --provider openai --from-clipboard --create --purpose "what this task does"
+keykeeper run -c openai -- <your command>
+```
+
+`--provider openai` fills in the credential id and the field. The field's environment
+variable is the one OpenAI's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Log in to platform.openai.com</Step>
+<Step>Choose the project (keys are per project)</Step>
+<Step>Billing must be set up before the key can be used</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Create a key with Restricted permissions: only the capabilities the task needs (usually Model capabilities: Write). Not All.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a OpenAI key (starts with `sk-`, at least 40 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.openai.com/v1/models` with the key in the `Authorization` header (lists the models this key can use). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+## Rotation and expiry
+
+Keys do not expire unless revoked. Rotate or revoke at [platform.openai.com](https://platform.openai.com/api-keys).

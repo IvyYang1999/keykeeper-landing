@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Fumadocs (the /docs pages) must share Tailwind's stylesheet: its presets use @apply. */
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
 
 /* One canvas, one ink, one gray. The only color on the page is in the app icon and the
    macOS-blue Allow button inside the window mock — the same way the product itself looks. */

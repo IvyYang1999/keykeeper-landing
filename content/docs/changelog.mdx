@@ -1,0 +1,17 @@
+---
+title: Changelog
+description: What changed in each release.
+---
+
+The full list is in [CHANGELOG.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/CHANGELOG.md);
+releases with signed downloads are on [GitHub Releases](https://github.com/IvyYang1999/KeyKeeper/releases).
+
+## 0.3.4 — 2026-09-15
+
+- Approvals moved from plain files into a single app-owned Keychain item. *Always* is scoped to the approved program; an unsigned app is identified by the file it runs from; a fresh install enforces background approvals. Existing approvals ask once more.
+- Approval window redesigned: the caller's message in the middle, KeyKeeper's own verdict, three answers — just this once, while it runs, don't ask again.
+- A first request must carry `--reason`; new keys declare a purpose; rules flag inflated requests; an optional second-model reviewer adds an opinion.
+- Inject-only credentials: keys an agent creates are served only to `keykeeper run`.
+- Plain fields written over the socket are not injected until confirmed in the app.
+- Clipboard saves take what is on the clipboard and show a masked preview with the copy time.
+- Login sessions can be opened inside KeyKeeper; credentials can record an expiry date.

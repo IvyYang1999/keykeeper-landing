@@ -1,0 +1,53 @@
+---
+title: Cloudflare
+description: How an agent gets a Cloudflare key through KeyKeeper, what to choose on dash.cloudflare.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `cloudflare` (also `cf`, `cloudflare-token`, `wrangler`) |
+|---|---|
+| Field | `cloudflare-api-token` → `CLOUDFLARE_API_TOKEN` in `keykeeper run` |
+| Key looks like | at least 40 characters, shown once when created |
+| Created at | [dash.cloudflare.com](https://dash.cloudflare.com/profile/api-tokens) |
+| Verified by KeyKeeper | `GET https://api.cloudflare.com/client/v4/user/tokens/verify` — asks Cloudflare whether this user token is active |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show cloudflare
+keykeeper save --provider cloudflare --from-clipboard --create --purpose "what this task does"
+keykeeper run -c cloudflare -- <your command>
+```
+
+`--provider cloudflare` fills in the credential id and the field. The field's environment
+variable is the one Cloudflare's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Log in to dash.cloudflare.com (2FA if enabled)</Step>
+<Step>Choose Create Token → a template or Create Custom Token</Step>
+<Step>Pick permissions, the zone/account resources, optionally a TTL</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Create Custom Token: permissions at Read where possible, Zone Resources = Specific zone (never All zones), and a TTL. Use an account-owned token only if the task needs it (it verifies at a different endpoint).
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Cloudflare key (at least 40 characters, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.cloudflare.com/client/v4/user/tokens/verify` with the key in the `Authorization` header (asks Cloudflare whether this user token is active). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+## Rotation and expiry
+
+No expiry unless a TTL was set at creation; Roll replaces the secret and keeps the permissions. Rotate or revoke at [dash.cloudflare.com](https://dash.cloudflare.com/profile/api-tokens).

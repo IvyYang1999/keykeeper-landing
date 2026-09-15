@@ -1,0 +1,50 @@
+---
+title: Getting started
+description: Install KeyKeeper, then let your agent get its first key.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+<Steps>
+<Step>
+### Install
+
+Download the DMG from [keykeeper.dev](/#install), drag KeyKeeper into Applications and open it.
+It lives in the menu bar. Apple Silicon, macOS 14 or later; signed and notarized. In the app,
+install the command line (`keykeeper`) with one click under Settings → Command line.
+</Step>
+<Step>
+### Tell your agent
+
+Codex and Claude Code pick KeyKeeper up through its skill: point them at
+[skill/keykeeper.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/skill/keykeeper.md), or
+just say *"use KeyKeeper for API keys"*. From then on, when a task needs a key, the agent runs the
+KeyKeeper flow instead of asking you to paste one.
+</Step>
+<Step>
+### The first key
+
+Say what you want done — *"help me set up Stripe refunds"*. The agent finds the Stripe template,
+opens the key page for you, and tells you what to pick. You log in and copy the key. A window
+appears:
+
+- **Save as** `stripe · stripe-api-key`
+- **Provider** Stripe — checked after saving with a read-only request to api.stripe.com
+- **Declared use** what the agent says the key is for
+
+Click Save. KeyKeeper stores the key in the Keychain, verifies it with Stripe, and the agent
+continues. It has not seen the value at any point.
+</Step>
+<Step>
+### The first approval
+
+When the agent runs a command that needs the key, an approval window shows who is asking, what
+it says it is doing, and KeyKeeper's own one-line verdict. Answer **just this once**, **while it
+runs**, or **don't ask again**. See [Approvals](/docs/approvals).
+</Step>
+</Steps>
+
+<Callout type="warn" title="Beta">
+KeyKeeper is in beta. It works and is being hardened; keep your own copy of any key you store in it.
+</Callout>

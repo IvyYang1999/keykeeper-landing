@@ -1,0 +1,44 @@
+{
+  "aliases" : [
+    "claude",
+    "anthropic-api"
+  ],
+  "createURL" : "https:\/\/console.anthropic.com\/settings\/keys",
+  "expiryNote" : "Keys do not expire unless revoked.",
+  "fieldName" : "anthropic-api-key",
+  "gates" : [
+    "Log in to console.anthropic.com",
+    "Choose the workspace",
+    "Billing or credits must be set up before the key can be used"
+  ],
+  "id" : "anthropic",
+  "minChars" : 60,
+  "minimalPermission" : "Create the key in a workspace that only holds this project; there are no per-key scopes, so the workspace is the boundary.",
+  "name" : "Anthropic",
+  "prefixes" : [
+    "sk-ant-"
+  ],
+  "rotateURL" : "https:\/\/console.anthropic.com\/settings\/keys",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists the models this key can use",
+    "extraHeaders" : {
+      "anthropic-version" : "2023-06-01"
+    },
+    "header" : "x-api-key",
+    "invalidStatuses" : [
+      401,
+      403
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.anthropic.com\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : ""
+  },
+  "verified" : "2026-09-15"
+}
