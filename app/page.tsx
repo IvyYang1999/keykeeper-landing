@@ -3,12 +3,12 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { siteCopy } from "./i18n";
+import { providerPaths, providers } from "./providerMarks";
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
 const downloadUrl = `${githubUrl}/releases/download/v0.3.4/KeyKeeper-0.3.4.dmg`;
 const quickStartUrl = `${githubUrl}#quick-start`;
-const securityUrl = `${githubUrl}#security-model`;
 const buildCommands = [
   "git clone https://github.com/IvyYang1999/KeyKeeper.git",
   "cd KeyKeeper && ./scripts/build-app.sh",
@@ -52,34 +52,48 @@ function CopyButton({ text, label, copiedLabel }: { text: string; label: string;
   );
 }
 
-/// A menu-bar-window sized mock of the app. It is the only frosted-glass element on the page,
-/// so the blur reads as "this is a macOS window" instead of decoration.
-function AppWindow({ copy }: { copy: typeof siteCopy.en.window | typeof siteCopy.zh.window }) {
+function ProviderMark({ id, letter, size = 22 }: { id: string; letter?: string; size?: number }) {
+  const d = providerPaths[id];
+  if (!d) {
+    return <span className="mark mark-letter" style={{ width: size, height: size, fontSize: size * 0.55 }} aria-hidden="true">{letter ?? id[0].toUpperCase()}</span>;
+  }
+  return (
+    <svg className="mark" width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+      <path d={d} fill="currentColor" />
+    </svg>
+  );
+}
+
+/// The approval window as it really looks: who wants what, what it says, KeyKeeper's own line,
+/// three answers. The only frosted-glass element on the page.
+function ApprovalWindow({ copy }: { copy: typeof siteCopy.en.prompt | typeof siteCopy.zh.prompt }) {
   return (
     <div className="window" role="img" aria-label={copy.aria}>
-      <div className="window-bar">
-        <span className="window-title">{copy.title}</span>
-        <span className="window-plus" aria-hidden="true">+</span>
+      <div className="win-head">
+        <Image src="/keykeeper-app-icon.png" width={64} height={64} alt="" className="win-icon" />
+        <div>
+          <strong>{copy.title}</strong>
+          <span>{copy.sub}</span>
+        </div>
       </div>
-      <ul className="window-rows" aria-hidden="true">
-        {copy.rows.map((row) => (
-          <li key={row.id}>
-            <span className="row-id">{row.id}</span>
-            <span className="row-field">{row.field}</span>
-            <span className="row-mask">••••••••</span>
-          </li>
-        ))}
-      </ul>
-      <div className="ask" aria-hidden="true">
-        <Image src="/keykeeper-app-icon.png" width={64} height={64} alt="" className="ask-icon" />
-        <div className="ask-text">
-          <strong>{copy.askTitle}</strong>
-          <span>{copy.askBody}</span>
+      <div className="win-says" aria-hidden="true">
+        <div className="win-says-label">
+          <span>{copy.saysLabel}</span>
+          <em>{copy.unverified}</em>
         </div>
-        <div className="ask-actions">
-          <span>{copy.deny}</span>
-          <span className="ask-allow">{copy.allow}</span>
-        </div>
+        <p>{copy.says}</p>
+        <code>{copy.command}</code>
+      </div>
+      <div className="win-verdict" aria-hidden="true">
+        <b>{copy.verdictLabel}</b>
+        <span>{copy.verdict}</span>
+      </div>
+      <div className="win-actions" aria-hidden="true">
+        <span className="win-deny">{copy.deny}</span>
+        <span className="win-spacer" />
+        <span>{copy.once}</span>
+        <span className="win-primary">{copy.run}</span>
+        <span>{copy.always}</span>
       </div>
     </div>
   );
@@ -88,6 +102,7 @@ function AppWindow({ copy }: { copy: typeof siteCopy.en.window | typeof siteCopy
 export default function Home() {
   const language = useSyncExternalStore<Language>(subscribeToLanguage, currentLanguage, () => "en");
   const copy = siteCopy[language];
+  const docsUrl = language === "zh" ? "/zh/docs" : "/docs";
 
   useEffect(() => {
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
@@ -105,7 +120,7 @@ export default function Home() {
             <button type="button" aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
             <button type="button" aria-pressed={language === "zh"} onClick={() => setLanguage("zh")}>中文</button>
           </div>
-          <a className="pill pill-light" href={language === "zh" ? "/zh/docs" : "/docs"}>{copy.nav.docs}</a>
+          <a className="pill pill-light" href={docsUrl}>{copy.nav.docs}</a>
           <a className="pill pill-dark" href={githubUrl} target="_blank" rel="noreferrer">{copy.nav.github}</a>
         </div>
       </nav>
@@ -119,29 +134,75 @@ export default function Home() {
         <p className="lede">{copy.hero.lede}</p>
         <div className="actions">
           <a className="pill pill-dark" href={downloadUrl}>{copy.hero.primary}</a>
-          <a className="pill pill-light" href={githubUrl} target="_blank" rel="noreferrer">{copy.hero.secondary}</a>
+          <a className="pill pill-light" href={docsUrl}>{copy.hero.secondary}</a>
         </div>
         <p className="beta-note">{copy.hero.betaNote}</p>
         <p className="facts">{copy.hero.facts}</p>
 
         <div className="stage">
           <div className="stage-glow" aria-hidden="true" />
-          <AppWindow copy={copy.window} />
+          <ApprovalWindow copy={copy.prompt} />
         </div>
       </section>
 
-      <section className="cards" aria-label={language === "zh" ? "三个要点" : "Three points"}>
-        {copy.cards.map((card) => (
-          <article className="card" key={card.title}>
-            {"command" in card && card.command ? (
-              <code className="card-command">
-                <span className="prompt">$</span> {card.command}
-              </code>
-            ) : null}
-            <h2>{card.title}</h2>
-            <p>{card.copy}</p>
-          </article>
-        ))}
+      <section className="story" aria-label={copy.story.title}>
+        <h2 className="section-title">{copy.story.title}</h2>
+        <div className="steps">
+          {copy.story.steps.map((step) => (
+            <article className="step" key={step.n}>
+              <div className="step-visual" aria-hidden="true">
+                {step.visual === "chat" && "chat" in step ? (
+                  <div className="bubble">{step.chat}</div>
+                ) : null}
+                {step.visual === "save" && "save" in step ? (
+                  <div className="mini-save">
+                    <div className="mini-row"><span>{step.save.saveAs}</span><code>{step.save.target}</code></div>
+                    <div className="mini-row"><span>{step.save.provider}</span><b className="mini-provider"><ProviderMark id="stripe" size={16} />{step.save.providerName}</b></div>
+                    <div className="mini-note">{step.save.note}</div>
+                    <div className="mini-button">{step.save.button}</div>
+                  </div>
+                ) : null}
+                {step.visual === "terminal" && "terminal" in step ? (
+                  <div className="mini-terminal">
+                    {step.terminal.map((line, i) => <div key={line} className={i === 0 ? "" : "ok"}>{line}</div>)}
+                  </div>
+                ) : null}
+              </div>
+              <div className="step-num">{step.n}</div>
+              <h3>{step.title}</h3>
+              <p>{step.copy}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="providers" aria-label={copy.providers.title}>
+        <h2 className="section-title">{copy.providers.title}</h2>
+        <p className="section-copy">{copy.providers.copy}</p>
+        <ul className="provider-list">
+          {providers.map((p) => (
+            <li key={p.id}>
+              <a href={`${docsUrl}/providers/${p.id}`}>
+                <ProviderMark id={p.id} letter={p.letter} size={26} />
+                <span>{p.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a className="textlink" href={`${docsUrl}/providers`}>{copy.providers.more} →</a>
+      </section>
+
+      <section className="promises" aria-label={copy.promises.title}>
+        <h2 className="section-title">{copy.promises.title}</h2>
+        <ul>
+          {copy.promises.items.map(([head, tail]) => (
+            <li key={head}>
+              <span className="check" aria-hidden="true">✓</span>
+              <div><strong>{head}</strong> <span>{tail}</span></div>
+            </li>
+          ))}
+        </ul>
+        <p className="honest">{copy.promises.honest} <a href={`${docsUrl}/security`}>{copy.promises.link} →</a></p>
       </section>
 
       <section className="install" id="install">
@@ -163,10 +224,10 @@ export default function Home() {
       <footer className="footer">
         <span>{copy.footer.tagline}</span>
         <div>
-          <a href={language === "zh" ? "/zh/docs" : "/docs"}>{copy.nav.docs}</a>
+          <a href={docsUrl}>{copy.nav.docs}</a>
           <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>
           <a href={`${githubUrl}/blob/main/LICENSE`} target="_blank" rel="noreferrer">{copy.footer.license}</a>
-          <a href={securityUrl} target="_blank" rel="noreferrer">{copy.footer.security}</a>
+          <a href={`${docsUrl}/security`}>{copy.footer.security}</a>
           <a href="mailto:support@keykeeper.dev">{copy.footer.support}</a>
         </div>
       </footer>
