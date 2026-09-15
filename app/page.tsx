@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { siteCopy } from "./i18n";
 import { providerPaths, providers } from "./providerMarks";
@@ -9,11 +9,6 @@ import type { Language } from "./i18n";
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
 const downloadUrl = `${githubUrl}/releases/download/v0.3.4/KeyKeeper-0.3.4.dmg`;
 const quickStartUrl = `${githubUrl}#quick-start`;
-const buildCommands = [
-  "git clone https://github.com/IvyYang1999/KeyKeeper.git",
-  "cd KeyKeeper && ./scripts/build-app.sh",
-  "cp -R dist/dmg/KeyKeeper.app /Applications/",
-];
 
 function currentLanguage(): Language {
   const saved = window.localStorage.getItem("keykeeper-language");
@@ -32,24 +27,6 @@ function subscribeToLanguage(change: () => void) {
 function setLanguage(next: Language) {
   window.localStorage.setItem("keykeeper-language", next);
   window.dispatchEvent(new Event("keykeeper-language-change"));
-}
-
-function CopyButton({ text, label, copiedLabel }: { text: string; label: string; copiedLabel: string }) {
-  const [copied, setCopied] = useState(false);
-  return (
-    <button
-      type="button"
-      className="copy"
-      onClick={() => {
-        navigator.clipboard.writeText(text).then(() => {
-          setCopied(true);
-          window.setTimeout(() => setCopied(false), 1600);
-        });
-      }}
-    >
-      {copied ? copiedLabel : label}
-    </button>
-  );
 }
 
 function ProviderMark({ id, letter, size = 22 }: { id: string; letter?: string; size?: number }) {
@@ -136,7 +113,6 @@ export default function Home() {
           <a className="pill pill-dark" href={downloadUrl}>{copy.hero.primary}</a>
           <a className="pill pill-light" href={docsUrl}>{copy.hero.secondary}</a>
         </div>
-        <p className="beta-note">{copy.hero.betaNote}</p>
         <p className="facts">{copy.hero.facts}</p>
 
         <div className="stage">
@@ -202,26 +178,20 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <p className="honest">{copy.promises.honest} <a href={`${docsUrl}/security`}>{copy.promises.link} →</a></p>
       </section>
 
       <section className="install" id="install">
-        <div className="install-text">
-          <h2>{copy.install.title}</h2>
-          <p>{copy.install.copy}</p>
-          <p><a href={downloadUrl} className="pill pill-dark">{copy.hero.primary}</a></p>
-          <a href={quickStartUrl} target="_blank" rel="noreferrer" className="textlink">README ↗</a>
+        <h2>{copy.install.title}</h2>
+        <p>{copy.install.copy}</p>
+        <div className="actions">
+          <a className="pill pill-dark" href={downloadUrl}>{copy.hero.primary}</a>
         </div>
-        <div className="terminal">
-          <div className="terminal-bar">
-            <span className="dots" aria-hidden="true"><i /><i /><i /></span>
-            <CopyButton text={buildCommands.join("\n")} label={copy.install.copyButton} copiedLabel={copy.install.copied} />
-          </div>
-          <pre><code>{buildCommands.map((line) => <span key={line}><span className="prompt">$</span> {line}{"\n"}</span>)}</code></pre>
-        </div>
+        <p className="facts">{copy.hero.facts}</p>
+        <a href={quickStartUrl} target="_blank" rel="noreferrer" className="textlink">{copy.install.build} ↗</a>
       </section>
 
       <footer className="footer">
+        <p className="footer-beta">{copy.footer.beta} <a href={`${docsUrl}/security`}>{copy.footer.security} →</a></p>
         <span>{copy.footer.tagline}</span>
         <div>
           <a href={docsUrl}>{copy.nav.docs}</a>

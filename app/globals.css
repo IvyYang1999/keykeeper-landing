@@ -181,21 +181,18 @@ main { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
 .honest { max-width: 44rem; margin: 2rem auto 0; font-size: 0.9rem; line-height: 1.55; color: var(--gray-light); }
 .honest a { color: var(--blue); font-weight: 500; }
 
-/* Install */
-.install { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; margin-top: 7rem; }
-.install h2 { font-size: 1.9rem; letter-spacing: -0.03em; }
-.install p { margin-top: 0.8rem; font-size: 1rem; line-height: 1.55; color: var(--gray); }
+/* Install: one centered call to action. */
+.install { margin-top: 7rem; text-align: center; }
+.install h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); letter-spacing: -0.03em; }
+.install p { max-width: 34rem; margin: 0.8rem auto 0; font-size: 1.05rem; line-height: 1.55; color: var(--gray); }
+.install .actions { margin-top: 1.6rem; }
+.install .facts { margin-top: 1rem; }
 .textlink { display: inline-block; margin-top: 1rem; font-size: 0.95rem; color: var(--blue); font-weight: 500; }
-.terminal { border-radius: 16px; background: var(--terminal-bg); color: var(--terminal-ink); overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18); }
-.terminal-bar { display: flex; align-items: center; justify-content: space-between; padding: 0.7rem 0.9rem; }
-.dots { display: flex; gap: 0.4rem; }
-.dots i { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: #3a3a3c; }
-.copy { border: 0; cursor: pointer; font: inherit; font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.7rem; border-radius: 999px; background: #3a3a3c; color: var(--terminal-ink); }
-.copy:hover { background: #48484a; }
-.terminal pre { margin: 0; padding: 0.4rem 1.2rem 1.4rem; font-size: 0.85rem; line-height: 1.75; overflow-x: auto; }
 
 /* Footer */
 .footer { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 7rem; padding: 2rem 0 3rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--gray-light); }
+.footer-beta { flex-basis: 100%; max-width: 48rem; font-size: 0.8rem; line-height: 1.55; }
+.footer-beta a { color: var(--blue); font-weight: 500; }
 .footer div { display: flex; gap: 1.5rem; }
 .footer a:hover { color: var(--ink); }
 
@@ -204,7 +201,7 @@ main { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
   .story, .providers, .promises { margin-top: 5rem; }
   .provider-list { grid-template-columns: repeat(3, 1fr); }
   .step-visual { min-height: 0; }
-  .install { grid-template-columns: 1fr; gap: 2rem; margin-top: 5rem; }
+  .install { margin-top: 5rem; }
   .hero { padding-top: 3.5rem; }
   .stage { margin-top: 3.5rem; }
   .footer { flex-direction: column; align-items: flex-start; }
