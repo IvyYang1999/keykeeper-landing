@@ -1,0 +1,3 @@
+{ "gates": ["登录 platform.openai.com", "选择项目（key 是按项目建的）", "先设置好账单，key 才能用"],
+  "minimalPermission": "创建 Restricted（受限）权限的 key：只勾任务需要的能力（通常是 Model capabilities: Write），不要选 All。",
+  "expiryNote": "key 不会过期，除非撤销。", "validation": "列出这把 key 能用的模型" }

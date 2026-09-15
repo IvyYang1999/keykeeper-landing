@@ -1,14 +1,14 @@
 import { source } from "@/lib/source";
-import { DocsBody, DocsDescription, DocsPage, DocsTitle, MarkdownCopyButton } from "fumadocs-ui/layouts/docs/page";
+import { DocsBody, DocsDescription, DocsPage, DocsTitle, MarkdownCopyButton } from "fumadocs-ui/layouts/notebook/page";
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/components/mdx";
 import type { Metadata } from "next";
 import { createRelativeLink } from "fumadocs-ui/mdx";
 import { getPageMarkdownUrl } from "@/lib/shared";
 
-export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
+export default async function Page(props: PageProps<"/[lang]/docs/[[...slug]]">) {
+  const { slug, lang } = await props.params;
+  const page = source.getPage(slug, lang);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -29,15 +29,16 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 }
 
 export async function generateStaticParams() {
-  return source.generateParams();
+  return source.generateParams("slug", "lang");
 }
 
-export async function generateMetadata(props: PageProps<"/docs/[[...slug]]">): Promise<Metadata> {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
+export async function generateMetadata(props: PageProps<"/[lang]/docs/[[...slug]]">): Promise<Metadata> {
+  const { slug, lang } = await props.params;
+  const page = source.getPage(slug, lang);
   if (!page) notFound();
+  const suffix = lang === "zh" ? "KeyKeeper 文档" : "KeyKeeper Docs";
   return {
-    title: page.data.title === "KeyKeeper" ? "KeyKeeper Docs" : `${page.data.title} — KeyKeeper Docs`,
+    title: page.data.title === "KeyKeeper" ? suffix : `${page.data.title} — ${suffix}`,
     description: page.data.description,
     alternates: { canonical: page.url },
   };

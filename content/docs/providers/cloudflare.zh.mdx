@@ -1,0 +1,51 @@
+---
+title: Cloudflare
+description: Agent 怎样通过 KeyKeeper 拿到 Cloudflare 的 key，在 dash.cloudflare.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `cloudflare`（别名 `cf`、`cloudflare-token`、`wrangler`） |
+|---|---|
+| 字段 | `cloudflare-api-token` → `keykeeper run` 里的 `CLOUDFLARE_API_TOKEN` |
+| key 长什么样 | 至少 40 个字符，创建时只显示一次 |
+| 创建页面 | [dash.cloudflare.com](https://dash.cloudflare.com/profile/api-tokens) |
+| KeyKeeper 的验证 | `GET https://api.cloudflare.com/client/v4/user/tokens/verify`——向 Cloudflare 确认这个用户 token 是否有效 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show cloudflare
+keykeeper save --provider cloudflare --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c cloudflare -- <你的命令>
+```
+
+`--provider cloudflare` 会补上凭据 ID 和字段名。这个字段的环境变量就是 Cloudflare 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 dash.cloudflare.com（开了 2FA 就要过 2FA）</Step>
+<Step>选 Create Token → 一个模板或 Create Custom Token</Step>
+<Step>选权限、zone/账号资源，可选 TTL</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Create Custom Token：能用 Read 就用 Read，Zone Resources 选 Specific zone（绝不选 All zones），并设 TTL。只有任务需要时才用账号级 token（它的验证接口不同）。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Cloudflare 的 key（至少 40 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://api.cloudflare.com/client/v4/user/tokens/verify`，key 放在 `Authorization` 请求头里（向 Cloudflare 确认这个用户 token 是否有效）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+## 轮换与过期
+
+创建时没设 TTL 就不过期；Roll 会换掉密文、保留权限。 在 [dash.cloudflare.com](https://dash.cloudflare.com/profile/api-tokens) 轮换或撤销。

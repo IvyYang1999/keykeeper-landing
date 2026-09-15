@@ -1,0 +1,17 @@
+---
+title: 命令行
+description: keykeeper 的各条命令，简要版。每条都有 --help。
+---
+
+| 命令 | 做什么 |
+|---|---|
+| `keykeeper list [--detail]` | 名字、字段、过期日、只注入标记。从不显示值。 |
+| `keykeeper providers [show <id>]` | 服务商模板。 |
+| `keykeeper save --provider <id> --from-clipboard --create --purpose "…"` | 从剪贴板按模板存一把新 key；没模板时用 `-c`/`--field`；`--from-source`/`--from-file` 存 Python 字面量或服务账号文件；`--replace --expect <形状>` 纠正已存的值。 |
+| `keykeeper run -c <id> [--reason "…"] [--duration once\|run\|always] -- <命令>` | 把 key 放进命令的环境变量运行，输出脱敏。 |
+| `keykeeper get <id> <字段> [--reason "…"]` | 把值打到管道——只注入的 key 拒绝；打到终端要加 `--reveal`。 |
+| `keykeeper edit <id> --title/--notes/--set/--unset/--expires` | 名字、备注、明文字段、过期日。从不碰值，从不弹窗。 |
+| `keykeeper grants list [--credential <id>]` / `grants revoke <id>` | 授权：谁能用什么、多久；撤销一条。 |
+| `keykeeper requests` | 等待中的授权请求。 |
+| `keykeeper status` | App 是否在运行、存储是否初始化。 |
+| `keykeeper session …` | 交给 Agent 的网站登录态。 |

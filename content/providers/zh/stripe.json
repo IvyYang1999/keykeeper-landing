@@ -1,0 +1,3 @@
+{ "gates": ["登录 dashboard.stripe.com", "选 sandbox（测试）或 live 模式", "Create restricted key：起名并逐资源选权限", "创建 live key 需要 2FA 验证码"],
+  "minimalPermission": "永远用 Restricted key（rk_…），不要用 Secret key（sk_…）：每个资源设为 None，只给任务需要的（够用就选 Read）。先在 sandbox 建（rk_test_），任务真的上线了再建 live key。Balance: Read 让 KeyKeeper 能验证它。",
+  "expiryNote": "不过期；Rotate key 给旧值最多 7 天宽限。180 天没用的 key 会被限权。", "validation": "读取账户余额（Balance: Read）" }

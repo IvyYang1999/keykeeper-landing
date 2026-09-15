@@ -105,7 +105,7 @@ export default function Home() {
             <button type="button" aria-pressed={language === "en"} onClick={() => setLanguage("en")}>EN</button>
             <button type="button" aria-pressed={language === "zh"} onClick={() => setLanguage("zh")}>中文</button>
           </div>
-          <a className="pill pill-light" href="/docs">{copy.nav.docs}</a>
+          <a className="pill pill-light" href={language === "zh" ? "/zh/docs" : "/docs"}>{copy.nav.docs}</a>
           <a className="pill pill-dark" href={githubUrl} target="_blank" rel="noreferrer">{copy.nav.github}</a>
         </div>
       </nav>
@@ -163,7 +163,7 @@ export default function Home() {
       <footer className="footer">
         <span>{copy.footer.tagline}</span>
         <div>
-          <a href="/docs">{copy.nav.docs}</a>
+          <a href={language === "zh" ? "/zh/docs" : "/docs"}>{copy.nav.docs}</a>
           <a href={githubUrl} target="_blank" rel="noreferrer">GitHub</a>
           <a href={`${githubUrl}/blob/main/LICENSE`} target="_blank" rel="noreferrer">{copy.footer.license}</a>
           <a href={securityUrl} target="_blank" rel="noreferrer">{copy.footer.security}</a>

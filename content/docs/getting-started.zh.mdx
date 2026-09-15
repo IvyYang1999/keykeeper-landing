@@ -1,0 +1,45 @@
+---
+title: 开始使用
+description: 装好 KeyKeeper，然后让 Agent 去拿第一把 key。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+<Steps>
+<Step>
+### 安装
+
+从 [keykeeper.dev](/#install) 下载 DMG，把 KeyKeeper 拖进「应用程序」打开，它住在菜单栏里。
+Apple Silicon，macOS 14 或更新；已签名并公证。在 App 的「设置 → 命令行」里一键装好 `keykeeper` 命令。
+</Step>
+<Step>
+### 告诉你的 Agent
+
+Codex 和 Claude Code 通过 skill 认识 KeyKeeper：把
+[skill/keykeeper.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/skill/keykeeper.md)
+给它，或者直接说「API key 用 KeyKeeper」。之后任务缺 key 时，Agent 会走 KeyKeeper 的流程，而不是让你把 key 粘进聊天。
+</Step>
+<Step>
+### 第一把 key
+
+说你要做的事——「帮我接 Stripe 退款」。Agent 找到 Stripe 的模板，替你打开创建 key 的页面，告诉你该选什么。
+你登录、复制。弹出一个窗口：
+
+- **存为** `stripe · stripe-api-key`
+- **服务商** Stripe——保存后会向 api.stripe.com 发一个只读请求验证
+- **声明用途** Agent 说这把 key 是用来做什么的
+
+点保存。KeyKeeper 把 key 存进钥匙串，向 Stripe 验证，Agent 接着干活。整个过程它没见过值。
+</Step>
+<Step>
+### 第一次授权
+
+Agent 运行需要这把 key 的命令时，授权窗会显示谁在请求、它说自己在做什么、以及 KeyKeeper 自己的一句话结论。
+你回答**仅这一次**、**这次运行期间**或**以后都不问**。见[授权](/zh/docs/approvals)。
+</Step>
+</Steps>
+
+<Callout type="warn" title="内测版">
+KeyKeeper 还在内测。能用，也在持续加固；存进来的 key 请自己另外留一份。
+</Callout>

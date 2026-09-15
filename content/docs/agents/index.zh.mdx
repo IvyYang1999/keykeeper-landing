@@ -1,0 +1,44 @@
+---
+title: 给 Agent
+description: Agent 在 KeyKeeper 里要遵守的规则，一页说完。完整的 skill 文件在仓库里。
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+完整说明在
+[skill/keykeeper.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/skill/keykeeper.md)，
+Codex 和 Claude Code 读的就是它。这一页是给人看的短版，方便你核对 Agent 被告知了什么。
+每个文档页也都有 Markdown 版：URL 后加 `.md`，或读 [/llms.txt](/llms.txt)。
+
+## 用 key，但看不到它
+
+```bash
+keykeeper list                                   # 只有名字
+keykeeper run -c openai --reason "一句话说明为什么" -- python app.py
+```
+
+`run` 把 key 放进那条命令的环境变量，并从命令的输出里脱敏。一个调用方的首次请求必须说明理由（`--reason`），人会读。
+`--duration once|run|always` 是它的愿望，人会在 KeyKeeper 自己的建议旁边看到。
+
+## 拿一把用户还没有的 key
+
+```bash
+keykeeper providers                              # 模板
+keykeeper providers show stripe                  # 在哪创建、选什么、key 长什么样、怎么验证
+keykeeper save --provider stripe --from-clipboard --create --purpose "商店的退款接口"
+```
+
+Agent 替用户打开服务商页面并说明该选什么；用户登录、复制；KeyKeeper 写入前检查形状、保存后验证。
+Agent 得到的是「接受 / 拒绝 / 联系不上」——从不是值。见[服务商](/zh/docs/providers)。
+
+## 会被拒绝的
+
+- 对 Agent 自己建的 key 用 `keykeeper get`（只注入）——改用 `run`。
+- 首次请求不带 `--reason`。
+- 值看起来不像这家服务商的 key 的保存。
+- 新建 key 用 `--security standard` 却不给 `--purpose`。
+- Agent 通过命令行写的明文字段，在人确认之前不会被注入。
+
+<Callout type="warn">
+把 key 粘进聊天、文件或命令行的 Agent 已经把它泄露了。skill 要求它如实说明、让用户先撤销，再通过 KeyKeeper 重来。
+</Callout>

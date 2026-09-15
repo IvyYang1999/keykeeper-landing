@@ -1,0 +1,3 @@
+{ "gates": ["用 Google 账号登录", "首次使用要接受条款", "选择或导入一个 Google Cloud 项目"],
+  "minimalPermission": "创建只限 Gemini API 的 key（默认就是）。2026 年底起 Gemini 会拒绝不受限的 Standard key。",
+  "expiryNote": "key 不过期；删掉的 key 30 天内可以恢复。", "validation": "列出这把 key 能用的模型" }

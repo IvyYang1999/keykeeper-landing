@@ -1,0 +1,51 @@
+---
+title: Supabase
+description: Agent 怎样通过 KeyKeeper 拿到 Supabase 的 key，在 supabase.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `supabase`（别名 `supabase-cli`、`supabase-access-token`） |
+|---|---|
+| 字段 | `supabase-access-token` → `keykeeper run` 里的 `SUPABASE_ACCESS_TOKEN` |
+| key 长什么样 | 以 `sbp_` 开头，至少 20 个字符，创建时只显示一次 |
+| 创建页面 | [supabase.com](https://supabase.com/dashboard/account/tokens) |
+| KeyKeeper 的验证 | `GET https://api.supabase.com/v1/projects`——列出这个 token 能看到的项目 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show supabase
+keykeeper save --provider supabase --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c supabase -- <你的命令>
+```
+
+`--provider supabase` 会补上凭据 ID 和字段名。这个字段的环境变量就是 Supabase 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 supabase.com</Step>
+<Step>给 token 起名</Step>
+<Step>选一个过期时间</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+这是 Supabase CLI 和 Management API 用的账号 access token，权限等于整个账号，所以要设过期。应用自己访问数据库请用项目的 Settings → API Keys：给客户端用 publishable（sb_publishable_），secret（sb_secret_）只放在服务端。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Supabase 的 key（以 `sbp_` 开头，至少 20 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://api.supabase.com/v1/projects`，key 放在 `Authorization` 请求头里（列出这个 token 能看到的项目）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+## 轮换与过期
+
+创建时设过期；项目 API key 永不过期。 在 [supabase.com](https://supabase.com/dashboard/account/tokens) 轮换或撤销。

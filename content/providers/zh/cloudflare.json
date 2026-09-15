@@ -1,0 +1,3 @@
+{ "gates": ["登录 dash.cloudflare.com（开了 2FA 就要过 2FA）", "选 Create Token → 一个模板或 Create Custom Token", "选权限、zone/账号资源，可选 TTL"],
+  "minimalPermission": "Create Custom Token：能用 Read 就用 Read，Zone Resources 选 Specific zone（绝不选 All zones），并设 TTL。只有任务需要时才用账号级 token（它的验证接口不同）。",
+  "expiryNote": "创建时没设 TTL 就不过期；Roll 会换掉密文、保留权限。", "validation": "向 Cloudflare 确认这个用户 token 是否有效" }

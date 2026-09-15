@@ -1,0 +1,3 @@
+{ "gates": ["登录 github.com（组织要求时需 2FA）", "选择资源所有者（你自己或某个组织；组织可能要审批）", "设置过期时间"],
+  "minimalPermission": "Fine-grained token：Repository access 选 Only select repositories（任务涉及的仓库），权限只给任务需要的（比如 Contents: Read），其余保持 No access。过期：30 天以内。",
+  "expiryNote": "Fine-grained token 在所选日期过期（1–366 天，或永不）；一年没用的 classic token 会被删除。", "validation": "读取 token 所属的账号（不需要任何权限）" }

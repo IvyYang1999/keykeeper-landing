@@ -1,0 +1,3 @@
+{ "gates": ["登录 resend.com", "给 key 起名", "选权限；仅发送时选域名"],
+  "minimalPermission": "权限选 Sending access，并限定到任务发信用的那一个域名。Full access 能管理域名和其他 key，不要建议。",
+  "expiryNote": "key 不过期；Resend 建议删掉 30 天没用的 key。", "validation": "列出域名；仅发送的 key 会回「受限」，这同样证明它是真的" }

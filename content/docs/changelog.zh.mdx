@@ -1,0 +1,17 @@
+---
+title: 更新说明
+description: 每个版本改了什么。
+---
+
+完整列表在 [CHANGELOG.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/CHANGELOG.md)；
+带签名安装包的版本在 [GitHub Releases](https://github.com/IvyYang1999/KeyKeeper/releases)。
+
+## 0.3.4 — 2026-09-15
+
+- 授权记录从明文文件搬进 App 独占的钥匙串条目。「始终」只对被批准的程序有效；没签名的 App 按它运行的文件认；新安装默认强制后台审批。已有授权会各再问一次。
+- 授权窗改版：Agent 的留言放正中，KeyKeeper 自己的结论，三个回答——仅这一次、这次运行期间、以后都不问。
+- 首次请求必须带 `--reason`；新建 key 要声明用途；规则会点名夸大的请求；可选的第二模型审查员给意见。
+- 只注入的凭据：Agent 新建的 key 只交给 `keykeeper run`。
+- 通过命令行写入的明文字段，人在 App 里确认后才注入。
+- 剪贴板保存直接取当前内容，并显示遮罩预览和复制时间。
+- 可以在 KeyKeeper 里登录网站；凭据可以记录过期日。

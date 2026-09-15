@@ -1,9 +1,0 @@
-/* Loaded by the docs layout only: Fumadocs' theme tuned to the landing page's ink and canvas. */
-:root {
-  --color-fd-primary: #1d1d1f;
-  --color-fd-primary-foreground: #ffffff;
-}
-.dark {
-  --color-fd-primary: #f5f5f7;
-  --color-fd-primary-foreground: #000000;
-}

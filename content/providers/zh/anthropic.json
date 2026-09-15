@@ -1,0 +1,3 @@
+{ "gates": ["登录 console.anthropic.com", "选择工作区", "先设置好账单或额度，key 才能用"],
+  "minimalPermission": "在只放这个项目的工作区里创建 key；key 本身没有权限范围，工作区就是边界。",
+  "expiryNote": "key 不会过期，除非撤销。", "validation": "列出这把 key 能用的模型" }
