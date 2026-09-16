@@ -8,16 +8,19 @@ verified, some templates carry a **referral sign-up link** from the provider's o
 
 ## The rules
 
-- **Only for people without an account.** The link sits next to the normal "create the key" page,
-  never instead of it. If you already have an account, you never see it; the agent is told to offer
-  it only when you say you have none, and to drop it if you would rather not.
+- **Only for people without an account.** At the first login step, the agent asks whether you
+  already have an account when the conversation has not answered that. If you do, it gives only
+  the normal "create the key" page. If you do not, it gives that page first and the optional
+  referral sign-up page as a second link.
 - **Always disclosed, in the data itself.** Every template with a link states what you get and what
-  KeyKeeper gets. `keykeeper providers show <id>` prints it, the agent says it word for word, the
-  app shows it on hover, and this page lists it.
+  KeyKeeper gets. `keykeeper providers show <id>` prints those fields, the agent says both benefits
+  in its second sentence, each provider page labels the sign-up link separately, and this page
+  lists every program.
 - **Never influences what is listed or in what order.** Providers are listed alphabetically inside
   fixed categories; a test in the repository fails if that changes. The recommended permissions
   and every other word of advice in a template are written the same way for providers with and
   without a program.
-- **One switch turns it off.** Settings → Sign-up links.
+- **No extra App surface.** Referral links do not appear in KeyKeeper's add-key form or Settings.
+  Decline one and the agent continues with the ordinary provider flow.
 
 ## Providers with a referral link

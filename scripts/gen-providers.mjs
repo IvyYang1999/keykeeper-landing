@@ -10,6 +10,11 @@ const out = "content/docs/providers";
 const catalog = JSON.parse(readFileSync(join(src, "_catalog.json"), "utf8"));
 const files = readdirSync(src).filter((f) => f.endsWith(".json") && !f.startsWith("_"));
 const byId = Object.fromEntries(files.map((f) => JSON.parse(readFileSync(join(src, f), "utf8"))).map((t) => [t.id, t]));
+const zhDir = join(src, "zh");
+const zhById = Object.fromEntries(files.map((f) => {
+  try { return [f.slice(0, -5), JSON.parse(readFileSync(join(zhDir, f), "utf8"))]; }
+  catch { return [f.slice(0, -5), {}]; }
+}));
 
 const categoryOrder = ["models", "gateways", "cloud", "development", "apple", "analytics", "messaging", "payments"];
 const categoryName = {
@@ -152,10 +157,9 @@ ${esc(t.expiryNote ?? "")}${t.rotateURL ? ` Rotate or revoke at [${host(t.rotate
 
 // Chinese pages: the same facts, with content/providers/zh/<id>.json overriding the free-text
 // fields (gates, minimalPermission, expiryNote, validation description) where a translation exists.
-const zhDir = join(src, "zh");
 for (const t of ordered) {
-  let zh = {};
-  try { zh = JSON.parse(readFileSync(join(zhDir, `${t.id}.json`), "utf8")); } catch {}
+  const zh = zhById[t.id] ?? {};
+  const signup = zh.signup ?? t.signup;
   const isIdentity = t.fields.some((f) => f.kind === "localIdentity");
   const fileField = t.fields.find((f) => f.kind === "secretFile");
   const shapeParts = [
@@ -189,7 +193,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 ${fieldRows}
 | key 长什么样 | ${esc(shape)} |
 | 创建页面 | [${host(t.createURL)}](${t.createURL}) |
-${t.signup ? `| 还没账号 | [在 ${host(t.signup.url)} 注册](${t.signup.url})——${esc(signupDisclosure(t.signup, "zh"))}见[推荐链接政策](/zh/docs/referrals)。 |\n` : ""}| KeyKeeper 的验证 | ${v ? `\`${v.method} ${v.url}\`——${esc(zh.validation ?? v.description)}` : "不验证"} |
+${signup ? `| 还没账号 | [在 ${host(signup.url)} 注册](${signup.url})——${esc(signupDisclosure(signup, "zh"))}见[推荐链接政策](/zh/docs/referrals)。 |\n` : ""}| KeyKeeper 的验证 | ${v ? `\`${v.method} ${v.url}\`——${esc(zh.validation ?? v.description)}` : "不验证"} |
 | 模板核实日期 | ${t.verified} |
 ${isIdentity ? `
 <Callout type="warn">
@@ -258,7 +262,7 @@ for (const lang of ["en", "zh"]) {
   const withSignup = ordered.filter((t) => t.signup);
   const base = lang === "en" ? "/docs/providers/" : "/zh/docs/providers/";
   const list = withSignup.length
-    ? withSignup.map((t) => `- [${t.name}](${base}${t.id}) — ${signupDisclosure(t.signup, lang)}`).join("\n")
+    ? withSignup.map((t) => `- [${t.name}](${base}${t.id}) — ${signupDisclosure(lang === "zh" ? (zhById[t.id]?.signup ?? t.signup) : t.signup, lang)}`).join("\n")
     : (lang === "en" ? "_None yet. This list grows only when a program is joined and disclosed here._" : "_暂时没有。只有加入了某家的推荐计划并在这里写明，这份清单才会变长。_");
   writeFileSync(lang === "en" ? "content/docs/referrals.mdx" : "content/docs/referrals.zh.mdx", intro.trimEnd() + "\n\n" + list + "\n");
 }

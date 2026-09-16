@@ -37,6 +37,12 @@
   ],
   "rotateURL" : "https:\/\/cloud.siliconflow.cn\/account\/ak",
   "shownOnce" : false,
+  "signup" : {
+    "code" : "rYSj1fxJ",
+    "url" : "https:\/\/cloud.siliconflow.cn\/i\/rYSj1fxJ",
+    "whatWeGet" : "a ¥16 platform-wide coupon",
+    "whatYouGet" : "a ¥16 platform-wide coupon after registration and real-name verification"
+  },
   "sources" : [
     "https:\/\/docs.siliconflow.com\/en\/usercases\/use-siliconcloud-in-DB-GPT"
   ],
