@@ -28,6 +28,8 @@ export const siteCopy = {
     },
     story: {
       title: "What happens when an agent needs a key",
+      aside: "Already have a .env? One command moves it in — secrets to the Keychain, settings beside them, the file left for you to delete.",
+      asideCommand: "keykeeper import ./.env",
       steps: [
         {
           n: "1",
@@ -104,6 +106,8 @@ export const siteCopy = {
     },
     story: {
       title: "Agent 缺一把 key 的时候",
+      aside: "项目里已经有 .env？一条命令搬进来：密钥进钥匙串，设置项放旁边，文件留给你自己删。",
+      asideCommand: "keykeeper import ./.env",
       steps: [
         {
           n: "1",

@@ -6,6 +6,11 @@ description: 每个版本改了什么。
 完整列表在 [CHANGELOG.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/CHANGELOG.md)；
 带签名安装包的版本在 [GitHub Releases](https://github.com/IvyYang1999/KeyKeeper/releases)。
 
+## 未发布
+
+- `keykeeper import ./.env` 把项目的明文 env 文件搬成一条凭据：App 列出变量名等你批准，密钥进钥匙串，明文设置放旁边，文件留给你自己删。
+- 服务商选择器按品牌分行，地区和套餐折在品牌下；113 个模板，每个一页文档。
+
 ## 0.3.4 — 2026-09-15
 
 - 授权记录从明文文件搬进 App 独占的钥匙串条目。「始终」只对被批准的程序有效；没签名的 App 按它运行的文件认；新安装默认强制后台审批。已有授权会各再问一次。

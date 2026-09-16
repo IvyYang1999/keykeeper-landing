@@ -152,6 +152,7 @@ export default function Home() {
             </article>
           ))}
         </div>
+        <p className="story-aside"><code>{copy.story.asideCommand}</code><span>{copy.story.aside}</span></p>
       </section>
 
       <section className="providers" aria-label={copy.providers.title}>

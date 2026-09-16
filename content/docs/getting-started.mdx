@@ -37,6 +37,17 @@ Click Save. KeyKeeper stores the key in the Keychain, verifies it with Stripe, a
 continues. It has not seen the value at any point.
 </Step>
 <Step>
+### Already have a .env?
+
+```bash
+keykeeper import ./.env --id my-app
+```
+
+KeyKeeper shows you the variable names it found and, once you approve, moves the secrets into the
+Keychain and keeps the plain settings next to them. Then `keykeeper run -c my-app -- npm run dev`
+gives the project the same variables without the file. Delete the file when everything runs, and
+rotate keys that were sitting in plaintext.
+
 ### The first approval
 
 When the agent runs a command that needs the key, an approval window shows who is asking, what

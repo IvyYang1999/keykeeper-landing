@@ -6,6 +6,11 @@ description: What changed in each release.
 The full list is in [CHANGELOG.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/CHANGELOG.md);
 releases with signed downloads are on [GitHub Releases](https://github.com/IvyYang1999/KeyKeeper/releases).
 
+## Unreleased
+
+- `keykeeper import ./.env` moves a project's plaintext env file into one credential: the app shows the variable names for approval, secrets go to the Keychain, plain settings stay beside them, the file is left for you to delete.
+- Provider picker lists brands with regional and plan variants underneath; 113 templates, one docs page each.
+
 ## 0.3.4 — 2026-09-15
 
 - Approvals moved from plain files into a single app-owned Keychain item. *Always* is scoped to the approved program; an unsigned app is identified by the file it runs from; a fresh install enforces background approvals. Existing approvals ask once more.

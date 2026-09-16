@@ -36,6 +36,20 @@ copies the key; KeyKeeper checks the shape before writing and verifies the key a
 agent gets *accepted*, *rejected* or *could not reach* — never the value. See
 [Providers](/docs/providers).
 
+## Move a project's .env in
+
+```bash
+keykeeper import ./.env --id my-app --purpose "what this project is"
+keykeeper run -c my-app -- npm run dev
+```
+
+The app opens the file itself and shows the person the variable names — secrets, plain
+settings, skipped lines — before anything is stored. Names that look like secrets (`KEY`,
+`TOKEN`, `SECRET`, `PASSWORD`…) or whose value looks like one go into the Keychain; the rest
+become plain fields. The agent gets counts back, never a value; the credential is inject-only.
+The file is left untouched: tell the person to delete it, add `.env` to `.gitignore`, and rotate
+keys that sat in plaintext.
+
 ## What is refused
 
 - `keykeeper get` on a key the agent created (inject-only) — use `run`.

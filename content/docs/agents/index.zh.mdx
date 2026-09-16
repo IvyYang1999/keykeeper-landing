@@ -31,6 +31,17 @@ keykeeper save --provider stripe --from-clipboard --create --purpose "商店的�
 Agent 替用户打开服务商页面并说明该选什么；用户登录、复制；KeyKeeper 写入前检查形状、保存后验证。
 Agent 得到的是「接受 / 拒绝 / 联系不上」——从不是值。见[服务商](/zh/docs/providers)。
 
+## 把项目的 .env 搬进来
+
+```bash
+keykeeper import ./.env --id my-app --purpose "这个项目是做什么的"
+keykeeper run -c my-app -- npm run dev
+```
+
+App 自己打开文件，先把变量名列给人看——哪些是密钥、哪些是明文设置、哪些跳过——批准后才存。
+名字像密钥的（`KEY`、`TOKEN`、`SECRET`、`PASSWORD`…）或值长得像密钥的进钥匙串，其余成为明文字段。
+Agent 只拿到数量，拿不到值；这条凭据只能注入。原文件不动：提醒人自己删掉、把 `.env` 加进 `.gitignore`、并去服务商那里轮换明文躺过的 key。
+
 ## 会被拒绝的
 
 - 对 Agent 自己建的 key 用 `keykeeper get`（只注入）——改用 `run`。
