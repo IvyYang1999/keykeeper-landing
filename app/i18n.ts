@@ -4,7 +4,7 @@ export const siteCopy = {
   en: {
     nav: { github: "GitHub", docs: "Docs", language: "Language" },
     hero: {
-      eyebrow: "For vibe coders",
+      eyebrow: "Built for vibe coders",
       title: ["Trust agents to manage", "your API keys. Safely."],
       lede: "They fetch, store, verify and use keys on your Mac. You approve; they never see the value.",
       primary: "Download for macOS",
@@ -79,7 +79,7 @@ export const siteCopy = {
   zh: {
     nav: { github: "GitHub", docs: "文档", language: "语言" },
     hero: {
-      eyebrow: "为 vibe coder 而做",
+      eyebrow: "vibe coder 的密钥管理工具",
       title: ["把 API Key", "放心交给 Agent。"],
       lede: "它去拿、存好、验证、用上，都在你的 Mac 上。你批准，它看不到值。",
       primary: "下载 macOS 版",

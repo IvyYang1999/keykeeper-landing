@@ -19,7 +19,8 @@ keykeeper run -c openai --reason "why, in one line" -- python app.py
 ```
 
 `run` puts the key into that command's environment and redacts it from the command's output.
-The first request from a caller must say why (`--reason`); the person reads it. `--duration
+Always say why (`--reason`); the person reads it. Without it the person still gets the window,
+but it says in orange that you gave no reason and recommends allowing you only once. `--duration
 once|run|always` is a wish the person sees next to KeyKeeper's own suggestion.
 
 ## Get a key the user does not have
@@ -38,7 +39,6 @@ agent gets *accepted*, *rejected* or *could not reach* — never the value. See
 ## What is refused
 
 - `keykeeper get` on a key the agent created (inject-only) — use `run`.
-- A first request without `--reason`.
 - A save whose value does not look like the provider's key.
 - `--security standard` on a new key without a `--purpose`.
 - Plain fields an agent writes over the command line are not injected until the person confirms them in the app.

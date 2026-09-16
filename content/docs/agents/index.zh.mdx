@@ -17,7 +17,7 @@ keykeeper list                                   # 只有名字
 keykeeper run -c openai --reason "一句话说明为什么" -- python app.py
 ```
 
-`run` 把 key 放进那条命令的环境变量，并从命令的输出里脱敏。一个调用方的首次请求必须说明理由（`--reason`），人会读。
+`run` 把 key 放进那条命令的环境变量，并从命令的输出里脱敏。每次都要说明理由（`--reason`），人会读。不带理由不会被拒，但窗口会用橙字写「你没有说明为什么」，并建议只允许这一次。
 `--duration once|run|always` 是它的愿望，人会在 KeyKeeper 自己的建议旁边看到。
 
 ## 拿一把用户还没有的 key
@@ -34,7 +34,6 @@ Agent 得到的是「接受 / 拒绝 / 联系不上」——从不是值。见[�
 ## 会被拒绝的
 
 - 对 Agent 自己建的 key 用 `keykeeper get`（只注入）——改用 `run`。
-- 首次请求不带 `--reason`。
 - 值看起来不像这家服务商的 key 的保存。
 - 新建 key 用 `--security standard` 却不给 `--purpose`。
 - Agent 通过命令行写的明文字段，在人确认之前不会被注入。
