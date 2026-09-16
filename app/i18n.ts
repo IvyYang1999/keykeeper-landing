@@ -9,7 +9,7 @@ export const siteCopy = {
       lede: "They fetch, store, verify and use keys on your Mac. You approve; they never see the value.",
       primary: "Download for macOS",
       secondary: "Read the docs",
-      facts: "v0.3.4 · Free · Apple Silicon · macOS 14+ · No account",
+      facts: "v0.3.5 · Free · Apple Silicon · macOS 14+ · No account",
     },
     prompt: {
       aria: "Illustration of KeyKeeper's approval window",
@@ -87,7 +87,7 @@ export const siteCopy = {
       lede: "它去拿、存好、验证、用上，都在你的 Mac 上。你批准，它看不到值。",
       primary: "下载 macOS 版",
       secondary: "看文档",
-      facts: "v0.3.4 · 免费 · Apple Silicon · macOS 14+ · 无需账号",
+      facts: "v0.3.5 · 免费 · Apple Silicon · macOS 14+ · 无需账号",
     },
     prompt: {
       aria: "KeyKeeper 授权窗示意图",

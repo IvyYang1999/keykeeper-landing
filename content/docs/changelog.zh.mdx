@@ -6,11 +6,14 @@ description: 每个版本改了什么。
 完整列表在 [CHANGELOG.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/CHANGELOG.md)；
 带签名安装包的版本在 [GitHub Releases](https://github.com/IvyYang1999/KeyKeeper/releases)。
 
-## 未发布
+## 0.3.5 — 2026-09-16
 
 - 许可证：App、CLI、核心库从 MIT 改为 FSL-1.1-MIT——源码公开、不可做竞品、每个版本发布两年后变回 MIT。SDK、skill、插件保持 MIT。
-- `keykeeper import ./.env` 把项目的明文 env 文件搬成一条凭据：App 列出变量名等你批准，密钥进钥匙串，明文设置放旁边，文件留给你自己删。
+- `keykeeper import ./.env` 把项目导入成一条只注入凭据：批准变量名后，所有导入值进入钥匙串，不猜测哪些值可以公开。原文件保留，先核对跳过项并验证项目再自行删除。仅支持单行赋值，不执行变量/命令展开；格式不完整或多行值会整份拒绝。
 - 服务商选择器按品牌分行，地区和套餐折在品牌下；113 个模板，每个一页文档。
+- 随 App 提供 Codex 和 Claude Code 双插件，设置中有安装指引。
+- 访问/变更记录分开，记录与调用方权限均可下钻；历史结果与当前批准状态分开显示。
+- 修复批准状态刷新、展开授权窗后边角异常，以及已有网站登录态时 Chrome 导入入口丢失。
 
 ## 0.3.4 — 2026-09-15
 

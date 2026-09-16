@@ -44,8 +44,10 @@ keykeeper import ./.env --id my-app
 ```
 
 KeyKeeper shows you the variable names it found and, once you approve, moves the secrets into the
-Keychain and keeps the plain settings next to them. Then `keykeeper run -c my-app -- npm run dev`
-gives the project the same variables without the file. Delete the file when everything runs, and
+Keychain — including ordinary settings, so no secret is accidentally left in plain metadata.
+Then `keykeeper run -c my-app -- npm run dev` injects the imported variables. Empty, reserved or
+unsupported names are skipped; malformed/multiline syntax is refused and shell interpolation is
+not performed. Review skipped variables and delete the file only when everything runs, and
 rotate keys that were sitting in plaintext.
 
 ### The first approval

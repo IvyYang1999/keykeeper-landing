@@ -43,12 +43,13 @@ keykeeper import ./.env --id my-app --purpose "what this project is"
 keykeeper run -c my-app -- npm run dev
 ```
 
-The app opens the file itself and shows the person the variable names — secrets, plain
-settings, skipped lines — before anything is stored. Names that look like secrets (`KEY`,
-`TOKEN`, `SECRET`, `PASSWORD`…) or whose value looks like one go into the Keychain; the rest
-become plain fields. The agent gets counts back, never a value; the credential is inject-only.
-The file is left untouched: tell the person to delete it, add `.env` to `.gitignore`, and rotate
-keys that sat in plaintext.
+The app opens the file itself and shows the variable names and skipped fields before approval.
+All imported values go into the Keychain, including ordinary settings; names and lengths cannot
+prove that a value is safe to expose as plain metadata. The agent gets counts, never values;
+the credential is inject-only. Single-line assignments only; malformed/multiline syntax is refused,
+and shell interpolation is never performed. Empty, reserved and unsupported names are skipped.
+Keep the original until the project works through `run` and skipped variables are accounted for.
+Only then recommend removing it and adding `.env` to `.gitignore`; consider rotating exposed keys.
 
 ## What is refused
 

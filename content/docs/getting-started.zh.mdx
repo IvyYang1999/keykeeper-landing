@@ -39,8 +39,8 @@ Codex 和 Claude Code 通过 skill 认识 KeyKeeper：把
 keykeeper import ./.env --id my-app
 ```
 
-KeyKeeper 会把找到的变量名列给你看，你批准后密钥进钥匙串、明文设置放旁边。之后
-`keykeeper run -c my-app -- npm run dev` 给项目同样的变量，不再需要文件。跑通了就把文件删掉，明文躺过的 key 去轮换一下。
+KeyKeeper 会把找到的变量名列给你看，批准后所有导入值都进入钥匙串，包括普通设置，避免把密钥误判成明文。
+之后用 `keykeeper run -c my-app -- npm run dev` 注入。空值、保留变量和不支持的变量名会跳过；格式不完整或多行值会拒绝导入，不执行变量/命令展开。先核对跳过项并验证项目跑通，再自行删除原文件；明文躺过的 key 建议轮换。
 
 ### 第一次授权
 

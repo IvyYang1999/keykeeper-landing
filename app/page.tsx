@@ -8,7 +8,7 @@ import providerSummary from "../content/providers/_summary.json";
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
-const downloadUrl = `${githubUrl}/releases/download/v0.3.4/KeyKeeper-0.3.4.dmg`;
+const downloadUrl = `${githubUrl}/releases/download/v0.3.5/KeyKeeper-0.3.5.dmg`;
 const quickStartUrl = `${githubUrl}#quick-start`;
 
 function currentLanguage(): Language {
