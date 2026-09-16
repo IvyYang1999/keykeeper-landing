@@ -75,7 +75,7 @@ export const siteCopy = {
     },
     footer: {
       beta: "Beta: it works and is still being hardened. Keep a copy of any key you store. A command you approve can still misuse a value — the security model says what is and isn't promised.",
-      license: "MIT license", security: "Security model", support: "Support",
+      license: "Source-available (FSL)", security: "Security model", support: "Support",
       tagline: "A small macOS app that lets agents use API keys they never see.",
     },
   },
@@ -153,7 +153,7 @@ export const siteCopy = {
     },
     footer: {
       beta: "内测版：能用，也在持续加固；存进来的 key 请另外留一份。你批准过的命令仍可能滥用值——安全模型页写清了承诺什么、不承诺什么。",
-      license: "MIT 许可证", security: "安全模型", support: "支持",
+      license: "源码公开（FSL）", security: "安全模型", support: "支持",
       tagline: "一个小小的 macOS 应用，让 Agent 用上它看不到的 API key。",
     },
   },
