@@ -240,7 +240,7 @@ for (const lang of ["en", "zh"]) {
   const base = lang === "en" ? "/docs/providers/" : "/zh/docs/providers/";
   const list = grouped.map(({ cat, groups }) => `## ${categoryName[lang][cat]}\n\n` + groups.map((g) => {
     if (g.members.length === 1) return `- [${g.name}](${base}${g.members[0].id})`;
-    return `- **${g.name}** — ` + g.members.map((t) => `[${variantLabel(t)}](${base}${t.id})`).join(" · ");
+    return `- **${g.name}** — ` + g.members.map((t) => `[${variantLabel(t)}](${base}${t.id})`).join(lang === "en" ? ", " : "、");
   }).join("\n")).join("\n\n");
   const counts = lang === "en"
     ? `${total} templates across ${brands} providers.`
