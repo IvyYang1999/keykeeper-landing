@@ -1,4 +1,13 @@
 {
   "title": "Docs",
-  "pages": ["index", "getting-started", "approvals", "providers", "agents", "security", "changelog"]
+  "pages": [
+    "index",
+    "getting-started",
+    "approvals",
+    "providers",
+    "agents",
+    "security",
+    "referrals",
+    "changelog"
+  ]
 }

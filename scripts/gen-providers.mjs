@@ -53,6 +53,9 @@ const ordered = grouped.flatMap((g) => g.groups.flatMap((x) => x.members));
 const missing = Object.keys(byId).filter((id) => !ordered.some((t) => t.id === id));
 if (missing.length) throw new Error("templates without a category: " + missing.join(", "));
 
+const signupDisclosure = (s, lang) => lang === "en"
+  ? [s.whatYouGet ? `You get ${s.whatYouGet}.` : null, `Signing up through this link gives KeyKeeper ${s.whatWeGet}.`, s.code ? `Invite code: ${s.code}.` : null].filter(Boolean).join(" ")
+  : [s.whatYouGet ? `你会得到 ${s.whatYouGet}。` : null, `通过这个链接注册，KeyKeeper 会得到 ${s.whatWeGet}。`, s.code ? `邀请码：${s.code}。` : null].filter(Boolean).join("");
 const esc = (s) => String(s).replace(/</g, "&lt;").replace(/\{/g, "&#123;").replace(/\}/g, "&#125;");
 const env = (name) => name.toUpperCase().replace(/[^A-Z0-9]/g, "_");
 const host = (u) => { try { return new URL(u).host; } catch { return u; } };
@@ -99,7 +102,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 ${fieldRows}
 | Key looks like | ${esc(shape)} |
 | Created at | [${host(t.createURL)}](${t.createURL}) |
-| Verified by KeyKeeper | ${v ? `\`${v.method} ${v.url}\` — ${esc(v.description)}` : "not verified"} |
+${t.signup ? `| No account yet | [Sign up at ${host(t.signup.url)}](${t.signup.url}) — ${esc(t.signup.disclosure ?? signupDisclosure(t.signup, "en"))} See the [referral policy](/docs/referrals). |\n` : ""}| Verified by KeyKeeper | ${v ? `\`${v.method} ${v.url}\` — ${esc(v.description)}` : "not verified"} |
 | Template checked | ${t.verified} |
 ${isIdentity ? `
 <Callout type="warn">
@@ -186,7 +189,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 ${fieldRows}
 | key 长什么样 | ${esc(shape)} |
 | 创建页面 | [${host(t.createURL)}](${t.createURL}) |
-| KeyKeeper 的验证 | ${v ? `\`${v.method} ${v.url}\`——${esc(zh.validation ?? v.description)}` : "不验证"} |
+${t.signup ? `| 还没账号 | [在 ${host(t.signup.url)} 注册](${t.signup.url})——${esc(signupDisclosure(t.signup, "zh"))}见[推荐链接政策](/zh/docs/referrals)。 |\n` : ""}| KeyKeeper 的验证 | ${v ? `\`${v.method} ${v.url}\`——${esc(zh.validation ?? v.description)}` : "不验证"} |
 | 模板核实日期 | ${t.verified} |
 ${isIdentity ? `
 <Callout type="warn">
@@ -247,6 +250,17 @@ for (const lang of ["en", "zh"]) {
     : `${brands} 家服务商，${total} 个模板。`;
   writeFileSync(join(out, lang === "en" ? "index.mdx" : "index.zh.mdx"),
     intro.replace("{{COUNTS}}", counts).trimEnd() + "\n\n" + list + "\n");
+}
+
+// Referral policy page: the rules, then every provider with a sign-up link and what each side gets.
+for (const lang of ["en", "zh"]) {
+  const intro = readFileSync(join(src, `_referrals.${lang}.md`), "utf8");
+  const withSignup = ordered.filter((t) => t.signup);
+  const base = lang === "en" ? "/docs/providers/" : "/zh/docs/providers/";
+  const list = withSignup.length
+    ? withSignup.map((t) => `- [${t.name}](${base}${t.id}) — ${signupDisclosure(t.signup, lang)}`).join("\n")
+    : (lang === "en" ? "_None yet. This list grows only when a program is joined and disclosed here._" : "_暂时没有。只有加入了某家的推荐计划并在这里写明，这份清单才会变长。_");
+  writeFileSync(lang === "en" ? "content/docs/referrals.mdx" : "content/docs/referrals.zh.mdx", intro.trimEnd() + "\n\n" + list + "\n");
 }
 
 const pages = ["index", ...grouped.flatMap(({ cat, groups }) => [`---${categoryName.en[cat]}---`, ...groups.flatMap((g) => g.members.map((t) => t.id))])];

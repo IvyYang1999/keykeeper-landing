@@ -1,1 +1,13 @@
-{ "title": "文档", "pages": ["index", "getting-started", "approvals", "providers", "agents", "security", "changelog"] }
+{
+  "title": "文档",
+  "pages": [
+    "index",
+    "getting-started",
+    "approvals",
+    "providers",
+    "agents",
+    "security",
+    "referrals",
+    "changelog"
+  ]
+}
