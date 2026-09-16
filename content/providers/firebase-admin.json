@@ -1,0 +1,37 @@
+{
+  "aliases" : [
+    "firebase",
+    "firebase-service-account"
+  ],
+  "createURL" : "https:\/\/console.firebase.google.com\/project\/_\/settings\/serviceaccounts\/adminsdk",
+  "expiryNote" : "User-managed service-account keys usually remain valid until revoked, but organization policy can impose expiry. Record a date only when the console or policy shows one.",
+  "fieldName" : "google-application-credentials",
+  "fields" : [
+    {
+      "fileFormat" : "serviceAccountJSON",
+      "help" : "The complete downloaded JSON document; KeyKeeper materializes it as a temporary file for the child process.",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "Service-account JSON",
+      "name" : "google-application-credentials",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Firebase and choose the project",
+    "Open Project settings → Service accounts",
+    "Generate a JSON key only for a trusted non-Google runtime"
+  ],
+  "id" : "firebase-admin",
+  "minimalPermission" : "Firebase Admin credentials are privileged. Prefer Application Default Credentials on Google-hosted runtimes; otherwise assign only the Google Cloud roles needed by the exact Firebase products in use.",
+  "name" : "Firebase Admin",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

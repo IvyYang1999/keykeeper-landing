@@ -1,0 +1,65 @@
+---
+title: 阿里云百炼 · 按量 (北京)
+description: How an agent gets a 阿里云百炼 · 按量 (北京) key through KeyKeeper, what to choose on bailian.console.aliyun.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `alibaba-bailian` (also `dashscope`, `qwen`, `百炼`) |
+|---|---|
+| Field | `dashscope-api-key` → `DASHSCOPE_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [bailian.console.aliyun.com](https://bailian.console.aliyun.com/?tab=model#/api-key) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show alibaba-bailian
+keykeeper save --provider alibaba-bailian --from-clipboard --create --purpose "what this task does"
+keykeeper run -c alibaba-bailian -- <your command>
+```
+
+`--provider alibaba-bailian` fills in the credential id and the field. The environment
+variable is the one 阿里云百炼's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Alibaba Cloud and complete identity verification where required</Step>
+<Step>Choose the region and workspace</Step>
+<Step>Create an API key with custom model access</Step>
+<Step>此模板固定北京 cn-beijing；其他地区选择对应模板，不允许跨地区复用 key。</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a non-default workspace and Custom permission limited to the needed models and IP ranges. Keys and endpoints are region-specific.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a 阿里云百炼 · 按量 (北京) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** 阿里云百炼 · 按量 (北京) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://dashscope.aliyuncs.com/compatible-mode/v1` (cn-beijing)
+- **Anthropic** — `https://dashscope.aliyuncs.com/apps/anthropic` (cn-beijing)
+- **DashScope** — `https://dashscope.aliyuncs.com/api/v1` (cn-beijing)
+- **OpenAI · workspace (replace WorkspaceId)** — `https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/compatible-mode/v1` (cn-beijing)
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [bailian.console.aliyun.com](https://bailian.console.aliyun.com/?tab=model#/api-key).

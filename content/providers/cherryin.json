@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+    "cherry-in"
+  ],
+  "createURL" : "https:\/\/open.cherryin.net",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/open.cherryin.net\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/open.cherryin.net",
+      "protocolName" : "Anthropic Messages"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "cherryin-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "anthropic-auth-token"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "cherryin-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 CherryIN Console",
+    "充值后进入 Token Management",
+    "添加 Token 并选择分组",
+    "默认组用于通用模型；促销组 token 必须与对应模型组匹配"
+  ],
+  "id" : "cherryin",
+  "minimalPermission" : "日常通用调用使用 default 组的独立 token；折扣\/促销组另建 token，禁止把组别不同的 key 当作可互换。为 key 设置用户可承受的额度。",
+  "name" : "CherryIN",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/open.cherryin.net",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.cherryin.ai\/en\/docs\/newapi\/getting-started\/",
+    "https:\/\/docs.cherryin.ai\/en\/docs\/newapi\/openai-compatible-usage\/",
+    "https:\/\/docs.cherryin.ai\/en\/docs\/newapi\/claude-code-usage\/"
+  ],
+  "verified" : "2026-09-15"
+}

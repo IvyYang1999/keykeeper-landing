@@ -1,0 +1,36 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/t.me\/BotFather",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "telegram-bot-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "telegram-bot-token",
+      "prefixes" : [
+
+      ],
+      "regularExpression" : "^[0-9]+:[A-Za-z0-9_-]+$",
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Open the verified @BotFather chat",
+    "Create a bot or request a new token",
+    "Configure group privacy and admin rights separately"
+  ],
+  "id" : "telegram",
+  "minimalPermission" : "A bot token grants full control of that bot and has no scopes. Create a dedicated bot and grant it only the chat membership\/admin rights it needs.",
+  "name" : "Telegram Bot",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/t.me\/BotFather",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

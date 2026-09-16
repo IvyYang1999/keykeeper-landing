@@ -4,6 +4,7 @@ import { useEffect, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { siteCopy } from "./i18n";
 import { providerPaths, providers } from "./providerMarks";
+import providerSummary from "../content/providers/_summary.json";
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
@@ -154,8 +155,13 @@ export default function Home() {
       </section>
 
       <section className="providers" aria-label={copy.providers.title}>
-        <h2 className="section-title">{copy.providers.title}</h2>
+        <h2 className="section-title">{copy.providers.title.replace("{n}", String(providerSummary.total))}</h2>
         <p className="section-copy">{copy.providers.copy}</p>
+        <ul className="provider-cats" aria-label="Categories">
+          {Object.entries(providerSummary.categories).map(([key, count]) => (
+            <li key={key}><a href={`${docsUrl}/providers`}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></a></li>
+          ))}
+        </ul>
         <ul className="provider-list">
           {providers.map((p) => (
             <li key={p.id}>
@@ -166,7 +172,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <a className="textlink" href={`${docsUrl}/providers`}>{copy.providers.more} →</a>
+        <a className="textlink" href={`${docsUrl}/providers`}>{copy.providers.more.replace("{n}", String(providerSummary.total))} →</a>
       </section>
 
       <section className="promises" aria-label={copy.promises.title}>

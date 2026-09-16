@@ -1,0 +1,64 @@
+{
+  "aliases" : [
+    "dashscope",
+    "qwen",
+    "百炼"
+  ],
+  "createURL" : "https:\/\/bailian.console.aliyun.com\/?tab=model#\/api-key",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/dashscope.aliyuncs.com\/compatible-mode\/v1",
+      "protocolName" : "OpenAI",
+      "region" : "cn-beijing"
+    },
+    {
+      "baseURL" : "https:\/\/dashscope.aliyuncs.com\/apps\/anthropic",
+      "protocolName" : "Anthropic",
+      "region" : "cn-beijing"
+    },
+    {
+      "baseURL" : "https:\/\/dashscope.aliyuncs.com\/api\/v1",
+      "protocolName" : "DashScope",
+      "region" : "cn-beijing"
+    },
+    {
+      "baseURL" : "https:\/\/{WorkspaceId}.cn-beijing.maas.aliyuncs.com\/compatible-mode\/v1",
+      "protocolName" : "OpenAI · workspace (replace WorkspaceId)",
+      "region" : "cn-beijing"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "dashscope-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "dashscope-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Alibaba Cloud and complete identity verification where required",
+    "Choose the region and workspace",
+    "Create an API key with custom model access",
+    "此模板固定北京 cn-beijing；其他地区选择对应模板，不允许跨地区复用 key。"
+  ],
+  "id" : "alibaba-bailian",
+  "minimalPermission" : "Use a non-default workspace and Custom permission limited to the needed models and IP ranges. Keys and endpoints are region-specific.",
+  "name" : "阿里云百炼 · 按量 (北京)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/bailian.console.aliyun.com\/?tab=model#\/api-key",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/get-api-key",
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/base-url"
+  ],
+  "verified" : "2026-09-15"
+}

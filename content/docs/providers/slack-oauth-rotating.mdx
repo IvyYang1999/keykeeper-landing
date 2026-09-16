@@ -1,0 +1,58 @@
+---
+title: Slack · OAuth rotating token bundle
+description: How an agent gets a Slack · OAuth rotating token bundle key through KeyKeeper, what to choose on api.slack.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `slack-oauth-rotating` (also `slack-token-rotation`) |
+|---|---|
+| Field | `slack-bot-token` → `SLACK_BOT_TOKEN` · secret |
+| Also | `slack-refresh-token` → `SLACK_REFRESH_TOKEN` · secret |
+| Also | `slack-client-id` → `SLACK_CLIENT_ID` · plain, confirmed by you |
+| Also | `slack-client-secret` → `SLACK_CLIENT_SECRET` · secret |
+| Key looks like | starts with `xoxe.xoxb-`, can be viewed again in the console |
+| Created at | [api.slack.com](https://api.slack.com/apps) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show slack-oauth-rotating
+keykeeper save --provider slack-oauth-rotating --from-clipboard --create --purpose "what this task does"
+keykeeper run -c slack-oauth-rotating -- <your command>
+```
+
+`--provider slack-oauth-rotating` fills in the credential id and the fields. The environment
+variables are the ones Slack's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Slack</Step>
+<Step>Create/select an OAuth app</Step>
+<Step>Enable token rotation</Step>
+<Step>Install it and capture the complete access/refresh bundle</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Grant only method-specific bot scopes. Access tokens last 12 hours; the consuming workflow must exchange the refresh token and update this bundle safely.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Slack · OAuth rotating token bundle key (starts with `xoxe.xoxb-`, can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Slack · OAuth rotating token bundle offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+Rotating Slack access tokens last 12 hours. The stored date is only a reminder; the caller must perform refresh-token rotation.

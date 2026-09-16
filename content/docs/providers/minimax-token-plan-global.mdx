@@ -1,0 +1,63 @@
+---
+title: MiniMax · Token Plan (Global)
+description: How an agent gets a MiniMax · Token Plan (Global) key through KeyKeeper, what to choose on platform.minimax.io, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `minimax-token-plan-global` (also `minimax-coding-plan-global`) |
+|---|---|
+| Field | `minimax-api-key` → `MINIMAX_API_KEY` / `ANTHROPIC_AUTH_TOKEN` / `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` · secret |
+| Key looks like | starts with `sk-cp-`, shown once when created |
+| Created at | [platform.minimax.io](https://platform.minimax.io/subscribe/token-plan) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show minimax-token-plan-global
+keykeeper save --provider minimax-token-plan-global --from-clipboard --create --purpose "what this task does"
+keykeeper run -c minimax-token-plan-global -- <your command>
+```
+
+`--provider minimax-token-plan-global` fills in the credential id and the field. The environment
+variable is the one MiniMax's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the global MiniMax platform</Step>
+<Step>Subscribe to Token Plan</Step>
+<Step>Create the plan-specific key</Step>
+<Step>使用本模板对应的地区与计费类型；相同 endpoint 不代表按量与订阅 key 可以混用。</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+This subscription key is separate from pay-as-you-go. Use it only with the global Token Plan configuration.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a MiniMax · Token Plan (Global) key (starts with `sk-cp-`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** MiniMax · Token Plan (Global) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://api.minimax.io/v1`
+- **Anthropic** — `https://api.minimax.io/anthropic`
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [platform.minimax.io](https://platform.minimax.io/subscribe/token-plan).

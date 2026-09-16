@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/app.mailgun.com\/settings\/api_security",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "mailgun-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "mailgun-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Sending domain",
+      "name" : "mailgun-domain",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Region",
+      "name" : "mailgun-region",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Mailgun",
+    "Open the exact sending domain → Domain Settings → Sending Keys",
+    "Create a Domain Sending Key",
+    "Record whether the domain is US or EU"
+  ],
+  "id" : "mailgun",
+  "minimalPermission" : "Use a Domain Sending Key for mail delivery; it can only send for one domain. Do not use the primary account API key unless management endpoints are explicitly required.",
+  "name" : "Mailgun · Domain Sending Key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/app.mailgun.com\/settings\/api_security",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

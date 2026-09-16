@@ -1,0 +1,35 @@
+{
+  "aliases" : [
+    "productsign"
+  ],
+  "createURL" : "https:\/\/developer.apple.com\/account\/resources\/certificates\/add",
+  "expiryNote" : "The Apple-issued certificate has an expiration date; record it on the credential.",
+  "fieldName" : "signing-identity",
+  "fields" : [
+    {
+      "help" : "Use the full identity or certificate SHA-1; the private key stays in the macOS Keychain.",
+      "isPrimary" : true,
+      "kind" : "localIdentity",
+      "label" : "Developer ID Installer identity",
+      "name" : "signing-identity",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Apple Developer",
+    "Choose Developer ID Installer",
+    "Create it from a CSR whose private key remains on this Mac"
+  ],
+  "id" : "developer-id-installer",
+  "minimalPermission" : "Use Installer only for signed installer packages. Application binaries require the separate Developer ID Application identity.",
+  "name" : "Apple Developer ID · Installer",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/developer.apple.com\/account\/resources\/certificates\/list",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

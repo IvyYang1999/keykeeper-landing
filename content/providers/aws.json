@@ -1,0 +1,61 @@
+{
+  "aliases" : [
+    "amazon-web-services"
+  ],
+  "createURL" : "https:\/\/console.aws.amazon.com\/iam\/home#\/users",
+  "expiryNote" : "Long-lived IAM access keys do not expire automatically; rotate and revoke explicitly.",
+  "fieldName" : "aws-secret-access-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "Secret access key",
+      "minChars" : 40,
+      "name" : "aws-secret-access-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Access key ID",
+      "minChars" : 20,
+      "name" : "aws-access-key-id",
+      "prefixes" : [
+        "AKIA"
+      ],
+      "regularExpression" : "^AKIA[A-Z0-9]{16}$",
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Default region",
+      "name" : "aws-region",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "Sign in to AWS",
+    "Use IAM Identity Center or assume a role where possible",
+    "If a key is unavoidable, create\/select a dedicated IAM user",
+    "Open its Security credentials and copy the pair once"
+  ],
+  "id" : "aws",
+  "minimalPermission" : "Prefer temporary role credentials. Never create a root access key. If long-lived keys are unavoidable, attach a least-privilege policy limited by action and resource, and set rotation reminders.",
+  "name" : "AWS IAM · Long-lived access key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.aws.amazon.com\/iam\/home#\/users",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

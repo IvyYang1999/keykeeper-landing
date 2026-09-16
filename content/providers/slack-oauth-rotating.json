@@ -1,0 +1,68 @@
+{
+  "aliases" : [
+    "slack-token-rotation"
+  ],
+  "createURL" : "https:\/\/api.slack.com\/apps",
+  "expiryNote" : "Rotating Slack access tokens last 12 hours. The stored date is only a reminder; the caller must perform refresh-token rotation.",
+  "fieldName" : "slack-bot-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "Rotating bot access token",
+      "name" : "slack-bot-token",
+      "prefixes" : [
+        "xoxe.xoxb-"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "secretText",
+      "label" : "Refresh token",
+      "name" : "slack-refresh-token",
+      "prefixes" : [
+        "xoxe-"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Client ID",
+      "name" : "slack-client-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "secretText",
+      "label" : "Client secret",
+      "name" : "slack-client-secret",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Slack",
+    "Create\/select an OAuth app",
+    "Enable token rotation",
+    "Install it and capture the complete access\/refresh bundle"
+  ],
+  "id" : "slack-oauth-rotating",
+  "minimalPermission" : "Grant only method-specific bot scopes. Access tokens last 12 hours; the consuming workflow must exchange the refresh token and update this bundle safely.",
+  "name" : "Slack · OAuth rotating token bundle",
+  "prefixes" : [
+    "xoxe.xoxb-"
+  ],
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

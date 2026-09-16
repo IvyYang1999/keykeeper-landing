@@ -1,0 +1,64 @@
+---
+title: NVIDIA · NGC
+description: How an agent gets a NVIDIA · NGC key through KeyKeeper, what to choose on org.ngc.nvidia.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `nvidia-ngc` (also `NGC API key`, `NVIDIA GPU Cloud`) |
+|---|---|
+| Field | `ngc-api-key` → `NGC_API_KEY` · secret |
+| Also | `ngc-org` → `NGC_ORG` · plain, confirmed by you, optional |
+| Also | `ngc-team` → `NGC_TEAM` · plain, confirmed by you, optional |
+| Key looks like | shown once when created |
+| Created at | [org.ngc.nvidia.com](https://org.ngc.nvidia.com/setup/api-keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show nvidia-ngc
+keykeeper save --provider nvidia-ngc --from-clipboard --create --purpose "what this task does"
+keykeeper run -c nvidia-ngc -- <your command>
+```
+
+`--provider nvidia-ngc` fills in the credential id and the fields. The environment
+variables are the ones NVIDIA's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录正确的 NGC organization</Step>
+<Step>选择 Personal 或 Service Key</Step>
+<Step>选择到期日期、服务与所需 scope</Step>
+<Step>创建后立即安全保存</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Personal Key 仅选择所需 services；机器工作负载优先使用 Service Key，并按实体与动作收窄 scope。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a NVIDIA · NGC key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** NVIDIA · NGC offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OCI/Docker Registry** — `https://nvcr.io`
+
+## Rotation and expiry
+
+Personal Key 在创建时选择到期日期；Service Key 的统一到期合同未从本轮公开页面闭合。 Rotate or revoke at [org.ngc.nvidia.com](https://org.ngc.nvidia.com/setup/api-keys).

@@ -4,17 +4,29 @@
     "supabase-access-token"
   ],
   "createURL" : "https:\/\/supabase.com\/dashboard\/account\/tokens",
-  "expiryNote" : "Set an expiry when creating it; project API keys never expire.",
+  "expiryNote" : "Set the Management API token's expiry when creating it and record that date here.",
   "fieldName" : "supabase-access-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "supabase-access-token",
+      "prefixes" : [
+        "sbp_"
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in to supabase.com",
     "Name the token",
     "Pick an expiry"
   ],
   "id" : "supabase",
-  "minChars" : 20,
-  "minimalPermission" : "This is the account access token the Supabase CLI and Management API use; it has the account's full power, so give it an expiry. For an app's own database access use the project's Settings → API Keys instead: publishable (sb_publishable_) for clients, secret (sb_secret_) only on a server.",
-  "name" : "Supabase",
+  "minimalPermission" : "This is a Management API personal access token, not a database\/runtime key. Prefer a scoped PAT limited to one project and only the permissions needed; classic PATs inherit the account's broad access.",
+  "name" : "Supabase Management API",
   "prefixes" : [
     "sbp_"
   ],
@@ -27,8 +39,7 @@
     },
     "header" : "Authorization",
     "invalidStatuses" : [
-      401,
-      403
+      401
     ],
     "method" : "GET",
     "okStatuses" : [

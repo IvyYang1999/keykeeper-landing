@@ -4,21 +4,42 @@
     "siliconflow-cn"
   ],
   "createURL" : "https:\/\/cloud.siliconflow.cn\/account\/ak",
-  "expiryNote" : "No expiry setting; delete and recreate to rotate.",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.siliconflow.cn\/v1",
+      "protocolName" : "OpenAI"
+    }
+  ],
+  "expiryNote" : "The public guide does not promise one universal expiration policy; record a date only when the console shows one.",
   "fieldName" : "siliconflow-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "siliconflow-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in with phone or email",
     "Some models require real-name verification first"
   ],
   "id" : "siliconflow",
-  "minChars" : 40,
   "minimalPermission" : "Keys have no scopes: one key is the whole account. Create a separate key per project so it can be deleted alone.",
-  "name" : "SiliconFlow",
+  "name" : "SiliconFlow · China (硅基流动)",
   "prefixes" : [
-    "sk-"
+
   ],
   "rotateURL" : "https:\/\/cloud.siliconflow.cn\/account\/ak",
   "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.siliconflow.com\/en\/usercases\/use-siliconcloud-in-DB-GPT"
+  ],
   "validation" : {
     "description" : "lists the models this key can use",
     "extraHeaders" : {

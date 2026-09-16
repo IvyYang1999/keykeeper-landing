@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/console.pipellm.ai\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.pipellm.ai",
+      "protocolName" : "Native public routes"
+    },
+    {
+      "baseURL" : "https:\/\/api.pipellm.ai\/openai\/v1",
+      "protocolName" : "OpenAI converter"
+    },
+    {
+      "baseURL" : "https:\/\/api.pipellm.ai\/anthropic",
+      "protocolName" : "Anthropic converter"
+    },
+    {
+      "baseURL" : "https:\/\/api.pipellm.ai\/gemini",
+      "protocolName" : "Gemini converter"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "pipellm-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "pipellm-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "注册并登录 PipeLLM Console",
+    "充值余额",
+    "创建 API key"
+  ],
+  "id" : "pipellm",
+  "minimalPermission" : "官方文档未说明可为 key 设置细粒度权限；为每个项目创建独立 key，并只把固定的 PipeLLM base URL 配给调用方。",
+  "name" : "PipeLLM",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.pipellm.ai\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.pipellm.ai\/quickstart",
+    "https:\/\/docs.pipellm.ai\/api-reference\/introduction",
+    "https:\/\/docs.pipellm.ai\/api-reference\/list-models"
+  ],
+  "verified" : "2026-09-15"
+}

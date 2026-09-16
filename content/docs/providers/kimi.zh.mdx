@@ -1,0 +1,52 @@
+---
+title: Kimi · Open Platform (China)
+description: Agent 怎样通过 KeyKeeper 拿到 Kimi · Open Platform (China) 的 key，在 platform.moonshot.cn 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `kimi`（别名 `moonshot`、`moonshot-cn`） |
+|---|---|
+| 字段 | `moonshot-api-key` → `MOONSHOT_API_KEY` · 密钥 |
+| key 长什么样 | 创建时只显示一次 |
+| 创建页面 | [platform.moonshot.cn](https://platform.moonshot.cn/console/api-keys) |
+| KeyKeeper 的验证 | `GET https://api.moonshot.cn/v1/models`——lists available models |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show kimi
+keykeeper save --provider kimi --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c kimi -- <你的命令>
+```
+
+`--provider kimi` 会补上凭据 ID 和字段名。这些环境变量就是 Kimi 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to the China Kimi Open Platform</Step>
+<Step>Create a separate API key</Step>
+<Step>Make sure the pay-as-you-go account has balance</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+This is a pay-as-you-go China Open Platform key for https://api.moonshot.cn/v1. It is not interchangeable with a Kimi Code membership key. Keys have no granular scopes; use one per project.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Kimi · Open Platform (China) 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://api.moonshot.cn/v1/models`，key 放在 `Authorization` 请求头里（lists available models）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [platform.moonshot.cn](https://platform.moonshot.cn/console/api-keys) 轮换或撤销。

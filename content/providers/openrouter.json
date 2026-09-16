@@ -1,0 +1,63 @@
+{
+  "aliases" : [
+    "open-router"
+  ],
+  "createURL" : "https:\/\/openrouter.ai\/settings\/keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/openrouter.ai\/api\/v1",
+      "protocolName" : "OpenAI"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "openrouter-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "openrouter-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to OpenRouter",
+    "Choose the workspace",
+    "Set a credit limit and optional expiration"
+  ],
+  "id" : "openrouter",
+  "minimalPermission" : "Create a separate key for this project with the lowest practical credit limit and an expiration.",
+  "name" : "OpenRouter",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/openrouter.ai\/settings\/keys",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/openrouter.ai\/docs\/cookbook\/get-started\/migrate-to-openrouter"
+  ],
+  "validation" : {
+    "description" : "reads this key's limits and usage",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/openrouter.ai\/api\/v1\/key",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

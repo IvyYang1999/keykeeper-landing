@@ -1,0 +1,51 @@
+{
+  "aliases" : [
+    "ai-hub-mix"
+  ],
+  "createURL" : "https:\/\/aihubmix.com\/token",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/aihubmix.com\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "Primary"
+    },
+    {
+      "baseURL" : "https:\/\/api.inferera.com\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "Official backup"
+    }
+  ],
+  "expiryNote" : "官方要求留意每个 key 的 validity period；具体日期以创建页面显示为准。",
+  "fieldName" : "aihubmix-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "aihubmix-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 AIHubMix",
+    "创建独立 API key",
+    "记录该 key 页面显示的有效期",
+    "确认使用限制和余额"
+  ],
+  "id" : "aihubmix",
+  "minimalPermission" : "为每个项目创建独立 key，并按创建页面的有效期和使用限制收窄风险。备用域名只在主域名访问异常时使用。",
+  "name" : "AIHubMix",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/aihubmix.com\/token",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.aihubmix.com\/en\/quick-start"
+  ],
+  "verified" : "2026-09-15"
+}

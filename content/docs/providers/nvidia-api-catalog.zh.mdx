@@ -1,0 +1,59 @@
+---
+title: NVIDIA · API Catalog
+description: Agent 怎样通过 KeyKeeper 拿到 NVIDIA · API Catalog 的 key，在 build.nvidia.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `nvidia-api-catalog`（别名 `NVIDIA hosted NIM`、`build.nvidia.com`） |
+|---|---|
+| 字段 | `nvidia-api-key` → `NVIDIA_API_KEY` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [build.nvidia.com](https://build.nvidia.com/settings/api-keys) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show nvidia-api-catalog
+keykeeper save --provider nvidia-api-catalog --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c nvidia-api-catalog -- <你的命令>
+```
+
+`--provider nvidia-api-catalog` 会补上凭据 ID 和字段名。这些环境变量就是 NVIDIA 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 NVIDIA Build</Step>
+<Step>在 API Keys 页面生成 key</Step>
+<Step>创建后立即复制并安全保存；官方提示稍后可能无法再次查看完整 key</Step>
+<Step>接受所选模型要求的条款</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+用于 NVIDIA 托管 NIM/API Catalog 推理；不要以 NGC personal/service key 替代。公开页面未确认统一的 key 权限粒度，也未保证 key 必定只显示一次。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 NVIDIA · API Catalog 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** NVIDIA · API Catalog 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI compatible hosted NIM**——`https://integrate.api.nvidia.com/v1`
+
+## 轮换与过期
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 在 [build.nvidia.com](https://build.nvidia.com/settings/api-keys) 轮换或撤销。

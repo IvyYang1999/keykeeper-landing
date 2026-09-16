@@ -1,0 +1,54 @@
+---
+title: Telegram Bot
+description: How an agent gets a Telegram Bot key through KeyKeeper, what to choose on t.me, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `telegram` |
+|---|---|
+| Field | `telegram-bot-token` → `TELEGRAM_BOT_TOKEN` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [t.me](https://t.me/BotFather) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show telegram
+keykeeper save --provider telegram --from-clipboard --create --purpose "what this task does"
+keykeeper run -c telegram -- <your command>
+```
+
+`--provider telegram` fills in the credential id and the field. The environment
+variable is the one Telegram Bot's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Open the verified @BotFather chat</Step>
+<Step>Create a bot or request a new token</Step>
+<Step>Configure group privacy and admin rights separately</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+A bot token grants full control of that bot and has no scopes. Create a dedicated bot and grant it only the chat membership/admin rights it needs.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Telegram Bot key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Telegram Bot offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [t.me](https://t.me/BotFather).

@@ -1,0 +1,55 @@
+---
+title: Neon · Personal API Key
+description: How an agent gets a Neon · Personal API Key key through KeyKeeper, what to choose on console.neon.tech, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `neon` |
+|---|---|
+| Field | `neon-api-key` → `NEON_API_KEY` · secret |
+| Also | `neon-project-id` → `NEON_PROJECT_ID` · plain, confirmed by you, optional |
+| Key looks like | shown once when created |
+| Created at | [console.neon.tech](https://console.neon.tech/app/settings/api-keys) |
+| Verified by KeyKeeper | `GET https://console.neon.tech/api/v2/projects` — lists only projects visible to the key |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show neon
+keykeeper save --provider neon --from-clipboard --create --purpose "what this task does"
+keykeeper run -c neon -- <your command>
+```
+
+`--provider neon` fills in the credential id and the fields. The environment
+variables are the ones Neon's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Neon</Step>
+<Step>Choose the organization and project</Step>
+<Step>Create an API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+This item is a personal key and can reach projects visible to the person. Use the separate organization/project-scoped template for unattended agents.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Neon · Personal API Key key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://console.neon.tech/api/v2/projects` with the key in the `Authorization` header (lists only projects visible to the key). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [console.neon.tech](https://console.neon.tech/app/settings/api-keys).

@@ -1,0 +1,58 @@
+---
+title: xAI
+description: Agent 怎样通过 KeyKeeper 拿到 xAI 的 key，在 console.x.ai 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `xai`（别名 `grok`） |
+|---|---|
+| 字段 | `xai-api-key` → `XAI_API_KEY` · 密钥 |
+| key 长什么样 | 创建时只显示一次 |
+| 创建页面 | [console.x.ai](https://console.x.ai/team/default/api-keys) |
+| KeyKeeper 的验证 | `GET https://api.x.ai/v1/models`——lists available models |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show xai
+keykeeper save --provider xai --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c xai -- <你的命令>
+```
+
+`--provider xai` 会补上凭据 ID 和字段名。这些环境变量就是 xAI 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to the xAI Console</Step>
+<Step>Choose the team</Step>
+<Step>Create a key and configure spending limits</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Use a project-specific key with a spending limit. Do not reuse the team owner's general key.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 xAI 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://api.x.ai/v1/models`，key 放在 `Authorization` 请求头里（lists available models）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI**——`https://api.x.ai/v1`
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [console.x.ai](https://console.x.ai/team/default/api-keys) 轮换或撤销。

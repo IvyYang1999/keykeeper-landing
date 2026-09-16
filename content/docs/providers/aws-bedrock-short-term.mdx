@@ -1,0 +1,62 @@
+---
+title: Amazon Bedrock · Short-term bearer key
+description: How an agent gets a Amazon Bedrock · Short-term bearer key key through KeyKeeper, what to choose on console.aws.amazon.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `aws-bedrock-short-term` (also `bedrock short-term`) |
+|---|---|
+| Field | `aws-bearer-token-bedrock` → `AWS_BEARER_TOKEN_BEDROCK` · secret |
+| Also | `aws-region` → `AWS_REGION` · plain, confirmed by you |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.aws.amazon.com](https://console.aws.amazon.com/bedrock) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show aws-bedrock-short-term
+keykeeper save --provider aws-bedrock-short-term --from-clipboard --create --purpose "what this task does"
+keykeeper run -c aws-bedrock-short-term -- <your command>
+```
+
+`--provider aws-bedrock-short-term` fills in the credential id and the fields. The environment
+variables are the ones Amazon Bedrock's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 AWS Management Console</Step>
+<Step>选择目标 AWS Region</Step>
+<Step>使用有 Bedrock 调用权限的 IAM 身份生成短期 key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+短期 key 继承生成它的 IAM principal 权限，并且只能用于生成时选择的 Region；只授予实际需要的 Bedrock 调用权限。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Amazon Bedrock · Short-term bearer key key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Amazon Bedrock · Short-term bearer key offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **Bedrock Converse** — `https://bedrock-runtime.{region}.amazonaws.com` (AWS Region)
+
+## Rotation and expiry
+
+有效期取 12 小时与生成它的 IAM principal 会话剩余时长中的较短者。 Rotate or revoke at [console.aws.amazon.com](https://console.aws.amazon.com/bedrock).

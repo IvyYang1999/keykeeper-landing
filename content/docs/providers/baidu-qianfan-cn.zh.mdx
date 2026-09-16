@@ -1,0 +1,59 @@
+---
+title: 百度千帆 · 中国站
+description: Agent 怎样通过 KeyKeeper 拿到 百度千帆 · 中国站 的 key，在 console.bce.baidu.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `baidu-qianfan-cn`（别名 `Baidu Qianfan`、`Qianfan CN`） |
+|---|---|
+| 字段 | `qianfan-api-key` → `QIANFAN_API_KEY` · 密钥 |
+| 还有 | `qianfan-appid` → `QIANFAN_APPID` · 明文，需你确认，可选 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [console.bce.baidu.com](https://console.bce.baidu.com/iam/) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show baidu-qianfan-cn
+keykeeper save --provider baidu-qianfan-cn --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c baidu-qianfan-cn -- <你的命令>
+```
+
+`--provider baidu-qianfan-cn` 会补上凭据 ID 和字段名。这些环境变量就是 百度千帆 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录百度智能云</Step>
+<Step>在安全认证的 API Key 页面创建 key</Step>
+<Step>仅添加实际调用的服务或 appid 权限</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+只添加实际使用的千帆服务范围；若将 key 限定到 appid，调用时必须同时传入该 appid。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 百度千帆 · 中国站 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** 百度千帆 · 中国站 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI compatible**——`https://qianfan.baidubce.com/v2`
+
+## 轮换与过期
+
+千帆 V2 认证文档称控制台创建的普通 API Key 永久有效，直至用户撤销或更换。 在 [console.bce.baidu.com](https://console.bce.baidu.com/iam/) 轮换或撤销。

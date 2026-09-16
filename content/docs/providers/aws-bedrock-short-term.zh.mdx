@@ -1,0 +1,59 @@
+---
+title: Amazon Bedrock · Short-term bearer key
+description: Agent 怎样通过 KeyKeeper 拿到 Amazon Bedrock · Short-term bearer key 的 key，在 console.aws.amazon.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `aws-bedrock-short-term`（别名 `bedrock short-term`） |
+|---|---|
+| 字段 | `aws-bearer-token-bedrock` → `AWS_BEARER_TOKEN_BEDROCK` · 密钥 |
+| 还有 | `aws-region` → `AWS_REGION` · 明文，需你确认 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [console.aws.amazon.com](https://console.aws.amazon.com/bedrock) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show aws-bedrock-short-term
+keykeeper save --provider aws-bedrock-short-term --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c aws-bedrock-short-term -- <你的命令>
+```
+
+`--provider aws-bedrock-short-term` 会补上凭据 ID 和字段名。这些环境变量就是 Amazon Bedrock 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 AWS Management Console</Step>
+<Step>选择目标 AWS Region</Step>
+<Step>使用有 Bedrock 调用权限的 IAM 身份生成短期 key</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+短期 key 继承生成它的 IAM principal 权限，并且只能用于生成时选择的 Region；只授予实际需要的 Bedrock 调用权限。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Amazon Bedrock · Short-term bearer key 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Amazon Bedrock · Short-term bearer key 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **Bedrock Converse**——`https://bedrock-runtime.{region}.amazonaws.com`（AWS Region）
+
+## 轮换与过期
+
+有效期取 12 小时与生成它的 IAM principal 会话剩余时长中的较短者。 在 [console.aws.amazon.com](https://console.aws.amazon.com/bedrock) 轮换或撤销。

@@ -1,0 +1,56 @@
+---
+title: Azure Entra service principal · Client secret
+description: Agent 怎样通过 KeyKeeper 拿到 Azure Entra service principal · Client secret 的 key，在 portal.azure.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `azure`（别名 `microsoft-azure`） |
+|---|---|
+| 字段 | `azure-client-secret` → `AZURE_CLIENT_SECRET` · 密钥 |
+| 还有 | `azure-client-id` → `AZURE_CLIENT_ID` · 明文，需你确认 |
+| 还有 | `azure-tenant-id` → `AZURE_TENANT_ID` · 明文，需你确认 |
+| 还有 | `azure-subscription-id` → `AZURE_SUBSCRIPTION_ID` · 明文，需你确认，可选 |
+| key 长什么样 | 创建时只显示一次 |
+| 创建页面 | [portal.azure.com](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show azure
+keykeeper save --provider azure --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c azure -- <你的命令>
+```
+
+`--provider azure` 会补上凭据 ID 和字段名。这些环境变量就是 Azure Entra service principal · Client secret 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to Azure</Step>
+<Step>Create or select an app registration</Step>
+<Step>Create a client secret with the shortest suitable expiry</Step>
+<Step>Assign the service principal a role at the narrowest resource scope</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Prefer workload identity or managed identity. For a service principal, assign a task-specific role at resource or resource-group scope rather than subscription-wide Contributor.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Azure Entra service principal · Client secret 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Azure Entra service principal · Client secret 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 轮换与过期
+
+Client secrets expire on the date chosen at creation. 在 [portal.azure.com](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) 轮换或撤销。

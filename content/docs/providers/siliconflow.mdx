@@ -1,6 +1,6 @@
 ---
-title: SiliconFlow
-description: How an agent gets a SiliconFlow key through KeyKeeper, what to choose on cloud.siliconflow.cn, and how KeyKeeper verifies it.
+title: SiliconFlow · China (硅基流动)
+description: How an agent gets a SiliconFlow · China (硅基流动) key through KeyKeeper, what to choose on cloud.siliconflow.cn, and how KeyKeeper verifies it.
 ---
 
 import { Step, Steps } from "fumadocs-ui/components/steps";
@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | Template id | `siliconflow` (also `硅基流动`, `siliconflow-cn`) |
 |---|---|
-| Field | `siliconflow-api-key` → `SILICONFLOW_API_KEY` in `keykeeper run` |
-| Key looks like | starts with `sk-`, at least 40 characters, can be viewed again in the console |
+| Field | `siliconflow-api-key` → `SILICONFLOW_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
 | Created at | [cloud.siliconflow.cn](https://cloud.siliconflow.cn/account/ak) |
 | Verified by KeyKeeper | `GET https://api.siliconflow.cn/v1/models` — lists the models this key can use |
 | Template checked | 2026-09-15 |
@@ -22,8 +22,8 @@ keykeeper save --provider siliconflow --from-clipboard --create --purpose "what 
 keykeeper run -c siliconflow -- <your command>
 ```
 
-`--provider siliconflow` fills in the credential id and the field. The field's environment
-variable is the one SiliconFlow's own tools read, so nothing has to be mapped.
+`--provider siliconflow` fills in the credential id and the field. The environment
+variable is the one SiliconFlow 硅基流动's own tools read, so nothing has to be mapped.
 
 ## What only you can do
 
@@ -44,9 +44,17 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a SiliconFlow key (starts with `sk-`, at least 40 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a SiliconFlow · China (硅基流动) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://api.siliconflow.cn/v1/models` with the key in the `Authorization` header (lists the models this key can use). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://api.siliconflow.cn/v1`
 
 ## Rotation and expiry
 
-No expiry setting; delete and recreate to rotate. Rotate or revoke at [cloud.siliconflow.cn](https://cloud.siliconflow.cn/account/ak).
+The public guide does not promise one universal expiration policy; record a date only when the console shows one. Rotate or revoke at [cloud.siliconflow.cn](https://cloud.siliconflow.cn/account/ak).

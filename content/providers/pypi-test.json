@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/test.pypi.org\/manage\/account\/token\/",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "twine-password",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "minChars" : 90,
+      "name" : "twine-password",
+      "prefixes" : [
+        "pypi-"
+      ],
+      "regularExpression" : "^pypi-[A-Za-z0-9_-]{85,}$",
+      "required" : true
+    },
+    {
+      "help" : "Use the fixed value __token__. Point the upload repository at TestPyPI.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Twine username",
+      "name" : "twine-username",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the separate TestPyPI account",
+    "Create an API token",
+    "Choose the test project when it already exists"
+  ],
+  "id" : "pypi-test",
+  "minChars" : 90,
+  "minimalPermission" : "TestPyPI accounts and tokens are separate from production PyPI. Prefer a project-scoped token.",
+  "name" : "TestPyPI · API token",
+  "prefixes" : [
+    "pypi-"
+  ],
+  "rotateURL" : "https:\/\/test.pypi.org\/manage\/account\/token\/",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

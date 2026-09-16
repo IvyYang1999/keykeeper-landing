@@ -1,0 +1,62 @@
+---
+title: StepFun · Step Plan
+description: How an agent gets a StepFun · Step Plan key through KeyKeeper, what to choose on platform.stepfun.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `stepfun-step-plan` (also `Step Plan`, `StepFun coding plan`) |
+|---|---|
+| Field | `step-api-key` → `STEP_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [platform.stepfun.ai](https://platform.stepfun.ai/interface-key) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show stepfun-step-plan
+keykeeper save --provider stepfun-step-plan --from-clipboard --create --purpose "what this task does"
+keykeeper run -c stepfun-step-plan -- <your command>
+```
+
+`--provider stepfun-step-plan` fills in the credential id and the field. The environment
+variable is the one StepFun 阶跃's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 StepFun Open Platform</Step>
+<Step>先订阅或激活 Step Plan</Step>
+<Step>再创建用于 Step Plan 的 API Key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Step Plan 使用专属套餐/API Key，但与标准 API 共用兼容协议路径且无需额外前缀；调用前确认 key 所属套餐有效。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a StepFun · Step Plan key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** StepFun · Step Plan offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://api.stepfun.ai/v1`
+- **Anthropic compatible** — `https://api.stepfun.ai`
+
+## Rotation and expiry
+
+未确认 API Key 自身的统一到期时间；套餐额度按月清零，套餐取消后服务持续至当前计费周期结束。 Rotate or revoke at [platform.stepfun.ai](https://platform.stepfun.ai/interface-key).

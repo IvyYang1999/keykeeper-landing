@@ -1,0 +1,46 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/app.sendgrid.com\/settings\/api_keys",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "sendgrid-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "sendgrid-api-key",
+      "prefixes" : [
+        "SG."
+      ],
+      "required" : true
+    },
+    {
+      "help" : "Use https:\/\/api.sendgrid.com for this template; EU regional subusers need the EU template.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "API base",
+      "name" : "sendgrid-api-base",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to SendGrid",
+    "Create an API key",
+    "Choose Custom Access"
+  ],
+  "id" : "sendgrid",
+  "minimalPermission" : "Choose Custom Access and enable only Mail Send for a sending app. Do not use Full Access or Billing Access.",
+  "name" : "Twilio SendGrid · US",
+  "prefixes" : [
+    "SG."
+  ],
+  "rotateURL" : "https:\/\/app.sendgrid.com\/settings\/api_keys",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

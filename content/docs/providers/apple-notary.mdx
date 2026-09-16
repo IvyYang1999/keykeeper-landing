@@ -1,0 +1,56 @@
+---
+title: Apple Notary · App-Specific Password
+description: How an agent gets a Apple Notary · App-Specific Password key through KeyKeeper, what to choose on account.apple.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `apple-notary` (also `notarytool`, `apple-notarization`) |
+|---|---|
+| Field | `apple-app-specific-password` → `APPLE_APP_SPECIFIC_PASSWORD` · secret |
+| Also | `apple-id` → `APPLE_ID` · plain, confirmed by you |
+| Also | `apple-team-id` → `APPLE_TEAM_ID` · plain, confirmed by you |
+| Key looks like | can be viewed again in the console |
+| Created at | [account.apple.com](https://account.apple.com/account/manage) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show apple-notary
+keykeeper save --provider apple-notary --from-clipboard --create --purpose "what this task does"
+keykeeper run -c apple-notary -- <your command>
+```
+
+`--provider apple-notary` fills in the credential id and the fields. The environment
+variables are the ones Apple Notary's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the Apple Account</Step>
+<Step>Pass two-factor authentication</Step>
+<Step>Create a dedicated app-specific password under Sign-In and Security</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a dedicated app-specific password only for notarization. Keep Apple Account email and Team ID as non-secret fields in the same credential.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Apple Notary · App-Specific Password key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Apple Notary · App-Specific Password offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+It remains valid until revoked; changing the Apple Account password revokes all app-specific passwords. Rotate or revoke at [account.apple.com](https://account.apple.com/account/manage).

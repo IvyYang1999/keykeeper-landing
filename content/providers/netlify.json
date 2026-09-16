@@ -1,0 +1,65 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/app.netlify.com\/user\/applications#personal-access-tokens",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "netlify-auth-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "netlify-auth-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Project ID",
+      "name" : "netlify-site-id",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "Sign in to Netlify",
+    "Open Applications → Personal access tokens",
+    "Choose an expiration and SAML team access only if needed"
+  ],
+  "id" : "netlify",
+  "minimalPermission" : "Personal tokens are account-wide. Set an expiration, do not opt into SAML team access unless the task needs that team, and prefer OAuth for a public integration.",
+  "name" : "Netlify",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/app.netlify.com\/user\/applications#personal-access-tokens",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "reads the authenticated user",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.netlify.com\/api\/v1\/user",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

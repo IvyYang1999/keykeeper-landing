@@ -1,0 +1,35 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/gitlab.com\/dashboard\/projects",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "gitlab-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "gitlab-token",
+      "prefixes" : [
+        "glpat-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to GitLab.com with 2FA\/SSO",
+    "Open the target project → Settings → Access tokens",
+    "Select scopes and an expiration"
+  ],
+  "id" : "gitlab",
+  "minimalPermission" : "Use read_repository for inspection and add write_repository only for pushing. Repository-only tokens intentionally skip the \/user API probe.",
+  "name" : "GitLab.com · Project access token",
+  "prefixes" : [
+    "glpat-"
+  ],
+  "rotateURL" : "https:\/\/gitlab.com\/dashboard\/projects",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

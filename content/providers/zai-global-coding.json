@@ -1,0 +1,59 @@
+{
+  "aliases" : [
+    "zai-coding",
+    "zai-coding-plan",
+    "glm-coding-global"
+  ],
+  "createURL" : "https:\/\/z.ai\/manage-apikey\/apikey-list",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.z.ai\/api\/coding\/paas\/v4",
+      "protocolName" : "OpenAI Chat Completions",
+      "region" : "Global"
+    },
+    {
+      "baseURL" : "https:\/\/api.z.ai\/api\/anthropic",
+      "protocolName" : "Anthropic Messages",
+      "region" : "Global"
+    },
+    {
+      "baseURL" : "https:\/\/api.z.ai\/api\/v1",
+      "protocolName" : "OpenAI Responses",
+      "region" : "Global"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "zai-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "zai-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录国际 Z.AI 平台",
+    "确认个人或团队 Coding Plan 的订阅与 entitlement",
+    "从对应套餐页面获取 key；团队使用团队套餐签发的 key",
+    "个人套餐使用当前 API key 页并确认订阅；团队套餐使用 https:\/\/z.ai\/manage-apikey\/coding-plan\/team\/my-plan。"
+  ],
+  "id" : "zai-global-coding",
+  "minimalPermission" : "仅用于允许的 coding 场景：OpenAI 协议 https:\/\/api.z.ai\/api\/coding\/paas\/v4，Anthropic 协议 https:\/\/api.z.ai\/api\/anthropic。团队 key 与其他平台 key not interchangeable；不把团队规则推断为个人 key 有独立前缀或长度。",
+  "name" : "Z.AI · GLM Coding Plan (Global)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/z.ai\/manage-apikey\/apikey-list",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.z.ai\/api-reference\/introduction",
+    "https:\/\/docs.z.ai\/devpack\/quick-start"
+  ],
+  "verified" : "2026-09-15"
+}

@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | 模板 id | `stripe`（别名 `stripe-key`、`stripe-api-key`） |
 |---|---|
-| 字段 | `stripe-api-key` → `keykeeper run` 里的 `STRIPE_API_KEY` |
-| key 长什么样 | 以 `rk_live_` 或 `rk_test_` 或 `sk_live_` 或 `sk_test_` 开头，至少 32 个字符，创建时只显示一次 |
+| 字段 | `stripe-api-key` → `STRIPE_API_KEY` · 密钥 |
+| key 长什么样 | 以 `rk_live_` 或 `rk_test_` 或 `sk_live_` 或 `sk_test_` 开头，创建时只显示一次 |
 | 创建页面 | [dashboard.stripe.com](https://dashboard.stripe.com/apikeys) |
 | KeyKeeper 的验证 | `GET https://api.stripe.com/v1/balance`——读取账户余额（Balance: Read） |
 | 模板核实日期 | 2026-09-15 |
@@ -22,7 +22,7 @@ keykeeper save --provider stripe --from-clipboard --create --purpose "这个任�
 keykeeper run -c stripe -- <你的命令>
 ```
 
-`--provider stripe` 会补上凭据 ID 和字段名。这个字段的环境变量就是 Stripe 自家工具读的那个，不需要任何映射。
+`--provider stripe` 会补上凭据 ID 和字段名。这些环境变量就是 Stripe 自家工具读的那个，不需要任何映射。
 
 ## 只有你能做的
 
@@ -44,8 +44,9 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 Stripe 的 key（以 `rk_live_` 或 `rk_test_` 或 `sk_live_` 或 `sk_test_` 开头，至少 32 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **写入前：** 值必须像一把 Stripe 的 key（以 `rk_live_` 或 `rk_test_` 或 `sk_live_` 或 `sk_test_` 开头）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
 - **保存后：** KeyKeeper 自己发送 `GET https://api.stripe.com/v1/balance`，key 放在 `Authorization` 请求头里（读取账户余额（Balance: Read））。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
 
 ## 轮换与过期
 

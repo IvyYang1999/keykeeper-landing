@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | Template id | `stripe` (also `stripe-key`, `stripe-api-key`) |
 |---|---|
-| Field | `stripe-api-key` → `STRIPE_API_KEY` in `keykeeper run` |
-| Key looks like | starts with `rk_live_` or `rk_test_` or `sk_live_` or `sk_test_`, at least 32 characters, shown once when created |
+| Field | `stripe-api-key` → `STRIPE_API_KEY` · secret |
+| Key looks like | starts with `rk_live_` or `rk_test_` or `sk_live_` or `sk_test_`, shown once when created |
 | Created at | [dashboard.stripe.com](https://dashboard.stripe.com/apikeys) |
 | Verified by KeyKeeper | `GET https://api.stripe.com/v1/balance` — reads the account balance (Balance: Read) |
 | Template checked | 2026-09-15 |
@@ -22,7 +22,7 @@ keykeeper save --provider stripe --from-clipboard --create --purpose "what this 
 keykeeper run -c stripe -- <your command>
 ```
 
-`--provider stripe` fills in the credential id and the field. The field's environment
+`--provider stripe` fills in the credential id and the field. The environment
 variable is the one Stripe's own tools read, so nothing has to be mapped.
 
 ## What only you can do
@@ -46,9 +46,10 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Stripe key (starts with `rk_live_` or `rk_test_` or `sk_live_` or `sk_test_`, at least 32 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Stripe key (starts with `rk_live_` or `rk_test_` or `sk_live_` or `sk_test_`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://api.stripe.com/v1/balance` with the key in the `Authorization` header (reads the account balance (Balance: Read)). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
 
 ## Rotation and expiry
 
-No expiry; Rotate key gives the old value up to 7 days of grace. A key unused for 180 days gets restricted. Rotate or revoke at [dashboard.stripe.com](https://dashboard.stripe.com/apikeys).
+No automatic expiry. Rotation can give the old value a grace period; some payment and transfer capabilities can be limited after long inactivity. Rotate or revoke at [dashboard.stripe.com](https://dashboard.stripe.com/apikeys).

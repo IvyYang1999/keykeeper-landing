@@ -1,0 +1,80 @@
+{
+  "aliases" : [
+    "aws-temporary"
+  ],
+  "createURL" : "https:\/\/aws.amazon.com\/iam\/identity-center\/",
+  "expiryNote" : "STS credentials expire at the provider-issued timestamp; record it on the credential.",
+  "fieldName" : "aws-secret-access-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "Secret access key",
+      "name" : "aws-secret-access-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Access key ID",
+      "minChars" : 20,
+      "name" : "aws-access-key-id",
+      "prefixes" : [
+        "ASIA"
+      ],
+      "regularExpression" : "^ASIA[A-Z0-9]{16}$",
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "secretText",
+      "label" : "Session token",
+      "name" : "aws-session-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Default region",
+      "name" : "aws-region",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    },
+    {
+      "help" : "Record the provider-issued expiration timestamp; STS credentials stop working after it.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Expiration",
+      "name" : "aws-credential-expires-at",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Use IAM Identity Center or assume a least-privilege role",
+    "Obtain one complete STS credential set",
+    "Copy all three values and the issued expiration together"
+  ],
+  "id" : "aws-sts",
+  "minimalPermission" : "Temporary credentials must include ASIA access-key ID, secret, session token and expiration. Prefer an AWS profile\/credential provider chain when the tool supports it.",
+  "name" : "AWS STS · Temporary credentials",
+  "prefixes" : [
+
+  ],
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

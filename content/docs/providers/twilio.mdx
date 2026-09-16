@@ -1,0 +1,58 @@
+---
+title: Twilio API Key · US1
+description: How an agent gets a Twilio API Key · US1 key through KeyKeeper, what to choose on console.twilio.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `twilio` |
+|---|---|
+| Field | `twilio-api-secret` → `TWILIO_API_SECRET` · secret |
+| Also | `twilio-api-key` → `TWILIO_API_KEY` · plain, confirmed by you |
+| Also | `twilio-account-sid` → `TWILIO_ACCOUNT_SID` · plain, confirmed by you |
+| Also | `twilio-region` → `TWILIO_REGION` · plain, confirmed by you |
+| Key looks like | shown once when created |
+| Created at | [console.twilio.com](https://console.twilio.com/us1/account/keys-credentials/api-keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show twilio
+keykeeper save --provider twilio --from-clipboard --create --purpose "what this task does"
+keykeeper run -c twilio -- <your command>
+```
+
+`--provider twilio` fills in the credential id and the fields. The environment
+variables are the ones Twilio API Key · US1's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Twilio</Step>
+<Step>Choose the account/subaccount and region</Step>
+<Step>Create a Restricted API key where available</Step>
+<Step>Copy the secret once</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a Restricted API key with only the product actions required. Prefer a subaccount boundary. Do not use the account Auth Token for an application.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Twilio API Key · US1 key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Twilio API Key · US1 offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+API keys remain valid until revoked. Rotate or revoke at [console.twilio.com](https://console.twilio.com/us1/account/keys-credentials/api-keys).

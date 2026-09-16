@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "gsc",
+    "google-search-console"
+  ],
+  "createURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "expiryNote" : "User-managed service-account keys usually remain valid until revoked, but organization policy can impose expiry. Record a date only when the console or policy shows one.",
+  "fieldName" : "google-application-credentials",
+  "fields" : [
+    {
+      "fileFormat" : "serviceAccountJSON",
+      "help" : "The complete downloaded JSON document; KeyKeeper materializes it as a temporary file for the child process.",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "Service-account JSON",
+      "name" : "google-application-credentials",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "The exact URL-prefix property or sc-domain value used by the API.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Search Console property",
+      "name" : "search-console-site-url",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Google Cloud",
+    "Enable Search Console API",
+    "Create a dedicated service account",
+    "Add its email as a user of the exact Search Console property"
+  ],
+  "id" : "search-console",
+  "minimalPermission" : "Use Restricted user access when the task only reads search analytics. Grant Full only if URL inspection or property changes are explicitly required.",
+  "name" : "Google Search Console",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

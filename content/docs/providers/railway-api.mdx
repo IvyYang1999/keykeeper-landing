@@ -1,0 +1,54 @@
+---
+title: Railway · Account API Token
+description: How an agent gets a Railway · Account API Token key through KeyKeeper, what to choose on railway.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `railway-api` |
+|---|---|
+| Field | `railway-api-token` → `RAILWAY_API_TOKEN` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [railway.com](https://railway.com/account/tokens) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show railway-api
+keykeeper save --provider railway-api --from-clipboard --create --purpose "what this task does"
+keykeeper run -c railway-api -- <your command>
+```
+
+`--provider railway-api` fills in the credential id and the field. The environment
+variable is the one Railway's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Railway</Step>
+<Step>Choose Account Token or the intended Workspace token</Step>
+<Step>Name the token and record which owner issued it</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use this broader API token only for work that genuinely spans projects. For one environment use the separate Railway Project token.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Railway · Account API Token key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Railway · Account API Token offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [railway.com](https://railway.com/account/tokens).

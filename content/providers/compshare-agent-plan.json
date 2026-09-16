@@ -1,0 +1,56 @@
+{
+  "aliases" : [
+    "compshare-coding",
+    "compshare-coding-plan"
+  ],
+  "createURL" : "https:\/\/console.compshare.cn\/light-gpu\/model-manage",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/cp.compshare.cn\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/cp.compshare.cn",
+      "protocolName" : "Anthropic Messages"
+    }
+  ],
+  "expiryNote" : "密钥随 Agent Plan 到期或配额耗尽而停止工作；实际到期日以账户套餐页为准。",
+  "fieldName" : "compshare-agent-plan-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "openai-api-key",
+        "anthropic-auth-token"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "compshare-agent-plan-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Compshare",
+    "购买 Agent Plan",
+    "在模型管理页面创建套餐专用 API Key",
+    "确认套餐未过期且配额未耗尽"
+  ],
+  "id" : "compshare-agent-plan",
+  "minimalPermission" : "仅保存 Agent Plan 专用 key；官方明确要求从普通按量 API 切换时同时更换 Base URL 和 API Key。不要保存本地 ccx 代理的 PROXY_ACCESS_KEY。",
+  "name" : "Compshare · Agent Plan",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.compshare.cn\/light-gpu\/model-manage",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/compshare.cn\/docs\/modelverse\/codingfaq",
+    "https:\/\/compshare.cn\/docs\/modelverse\/package_plan\/usecases",
+    "https:\/\/compshare.cn\/docs\/modelverse\/best_practice\/codexagent"
+  ],
+  "verified" : "2026-09-15"
+}

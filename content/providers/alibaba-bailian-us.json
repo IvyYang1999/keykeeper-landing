@@ -1,0 +1,61 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/bailian.console.aliyun.com\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/dashscope-us.aliyuncs.com\/compatible-mode\/v1",
+      "protocolName" : "OpenAI",
+      "region" : "us-east-1"
+    },
+    {
+      "baseURL" : "https:\/\/dashscope-us.aliyuncs.com\/apps\/anthropic",
+      "protocolName" : "Anthropic",
+      "region" : "us-east-1"
+    },
+    {
+      "baseURL" : "https:\/\/dashscope-us.aliyuncs.com\/api\/v1",
+      "protocolName" : "DashScope",
+      "region" : "us-east-1"
+    },
+    {
+      "baseURL" : "https:\/\/{WorkspaceId}.us-east-1.maas.aliyuncs.com\/compatible-mode\/v1",
+      "protocolName" : "OpenAI · workspace (replace WorkspaceId)",
+      "region" : "us-east-1"
+    }
+  ],
+  "expiryNote" : "本模板管理持久 API Key，无固定有效期；不是最多 1800 秒的临时 key。仍可能被撤销。",
+  "fieldName" : "dashscope-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "dashscope-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录阿里云，选择 美国弗吉尼亚（us-east-1）与对应业务空间",
+    "在 API Key 管理中创建该地区的按量 key；不要复制 Coding \/ Token Plan key",
+    "配置同地区 endpoint；业务空间专属域名需从控制台确认 WorkspaceId"
+  ],
+  "id" : "alibaba-bailian-us",
+  "minimalPermission" : "不同地区的 key 不通用。优先独立业务空间、限制模型与 IP 的自定义权限。",
+  "name" : "阿里云百炼 · 按量 (美国弗吉尼亚)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/bailian.console.aliyun.com\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/get-api-key",
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/base-url"
+  ],
+  "verified" : "2026-09-15"
+}

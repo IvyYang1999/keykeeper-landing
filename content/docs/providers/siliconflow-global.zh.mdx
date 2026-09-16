@@ -1,0 +1,58 @@
+---
+title: SiliconFlow · Global
+description: Agent 怎样通过 KeyKeeper 拿到 SiliconFlow · Global 的 key，在 cloud.siliconflow.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `siliconflow-global`（别名 `siliconflow-com`） |
+|---|---|
+| 字段 | `siliconflow-api-key` → `SILICONFLOW_API_KEY` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [cloud.siliconflow.com](https://cloud.siliconflow.com/account/ak) |
+| KeyKeeper 的验证 | `GET https://api.siliconflow.com/v1/models`——lists models available on the global platform |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show siliconflow-global
+keykeeper save --provider siliconflow-global --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c siliconflow-global -- <你的命令>
+```
+
+`--provider siliconflow-global` 会补上凭据 ID 和字段名。这些环境变量就是 SiliconFlow 硅基流动 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to the global SiliconFlow platform</Step>
+<Step>Create a separate API key</Step>
+<Step>Confirm the workflow uses api.siliconflow.com</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Global and China platform compatibility is not promised. Use a dedicated global key per project and the matching .com API base.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 SiliconFlow · Global 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://api.siliconflow.com/v1/models`，key 放在 `Authorization` 请求头里（lists models available on the global platform）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI**——`https://api.siliconflow.com/v1`
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [cloud.siliconflow.com](https://cloud.siliconflow.com/account/ak) 轮换或撤销。

@@ -1,0 +1,62 @@
+---
+title: LongCat
+description: How an agent gets a LongCat key through KeyKeeper, what to choose on longcat.chat, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `longcat` (also `LongCat AI`) |
+|---|---|
+| Field | `longcat-api-key` → `LONGCAT_API_KEY` · secret |
+| Key looks like | shown once when created |
+| Created at | [longcat.chat](https://longcat.chat/platform/api_keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show longcat
+keykeeper save --provider longcat --from-clipboard --create --purpose "what this task does"
+keykeeper run -c longcat -- <your command>
+```
+
+`--provider longcat` fills in the credential id and the field. The environment
+variable is the one LongCat's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>注册并登录 LongCat API 开放平台</Step>
+<Step>在 API Keys 页面创建 key</Step>
+<Step>创建时立即复制并安全保存</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+官方快速开始未规定默认环境变量；LONGCAT_API_KEY 只是 KeyKeeper 的本地注入名，客户端必须显式读取或配置它。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a LongCat key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** LongCat offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://api.longcat.chat/openai`
+- **Anthropic compatible** — `https://api.longcat.chat/anthropic`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [longcat.chat](https://longcat.chat/platform/api_keys).

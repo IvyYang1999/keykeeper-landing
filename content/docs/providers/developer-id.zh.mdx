@@ -1,0 +1,41 @@
+---
+title: Apple Developer ID · Application
+description: Agent 怎样通过 KeyKeeper 拿到 Apple Developer ID · Application 的 key，在 developer.apple.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `developer-id`（别名 `codesign`、`developer-id-application`） |
+|---|---|
+| 字段 | `signing-identity` · macOS 钥匙串里的签名身份 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [developer.apple.com](https://developer.apple.com/account/resources/certificates/add) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+<Callout type="warn">
+这是留在 macOS 钥匙串里的签名身份。KeyKeeper 不保存它的私钥；模板只记录 Apple 在哪里管理它。
+</Callout>
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to the Apple Developer account</Step>
+<Step>Choose Developer ID Application</Step>
+<Step>Create the certificate from a CSR whose private key remains in this Mac's Keychain</Step>
+
+</Steps>
+
+## 该选什么
+
+Keep the non-exportable signing private key in the macOS Keychain and refer to the Developer ID Application identity by name. Do not copy it into a text credential.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+
+## 轮换与过期
+
+Developer ID certificates have an Apple-issued expiration date; replace before expiry. 在 [developer.apple.com](https://developer.apple.com/account/resources/certificates/list) 轮换或撤销。

@@ -1,0 +1,55 @@
+{
+  "aliases" : [
+    "moonshot",
+    "moonshot-cn"
+  ],
+  "createURL" : "https:\/\/platform.moonshot.cn\/console\/api-keys",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "moonshot-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "moonshot-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the China Kimi Open Platform",
+    "Create a separate API key",
+    "Make sure the pay-as-you-go account has balance"
+  ],
+  "id" : "kimi",
+  "minimalPermission" : "This is a pay-as-you-go China Open Platform key for https:\/\/api.moonshot.cn\/v1. It is not interchangeable with a Kimi Code membership key. Keys have no granular scopes; use one per project.",
+  "name" : "Kimi · Open Platform (China)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/platform.moonshot.cn\/console\/api-keys",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists available models",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.moonshot.cn\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | 模板 id | `gemini`（别名 `google-ai`、`google-gemini`、`aistudio`） |
 |---|---|
-| 字段 | `gemini-api-key` → `keykeeper run` 里的 `GEMINI_API_KEY` |
-| key 长什么样 | 以 `AIza` 开头，至少 39 个字符，创建时只显示一次 |
+| 字段 | `gemini-api-key` → `GEMINI_API_KEY` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
 | 创建页面 | [aistudio.google.com](https://aistudio.google.com/apikey) |
 | KeyKeeper 的验证 | `GET https://generativelanguage.googleapis.com/v1beta/models`——列出这把 key 能用的模型 |
 | 模板核实日期 | 2026-09-15 |
@@ -22,7 +22,7 @@ keykeeper save --provider gemini --from-clipboard --create --purpose "这个任�
 keykeeper run -c gemini -- <你的命令>
 ```
 
-`--provider gemini` 会补上凭据 ID 和字段名。这个字段的环境变量就是 Google Gemini 自家工具读的那个，不需要任何映射。
+`--provider gemini` 会补上凭据 ID 和字段名。这些环境变量就是 Google Gemini 自家工具读的那个，不需要任何映射。
 
 ## 只有你能做的
 
@@ -43,8 +43,9 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 Google Gemini 的 key（以 `AIza` 开头，至少 39 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **写入前：** 值必须像一把 Google Gemini 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
 - **保存后：** KeyKeeper 自己发送 `GET https://generativelanguage.googleapis.com/v1beta/models`，key 放在 `x-goog-api-key` 请求头里（列出这把 key 能用的模型）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
 
 ## 轮换与过期
 

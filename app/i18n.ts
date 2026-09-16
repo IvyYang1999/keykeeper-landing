@@ -53,9 +53,10 @@ export const siteCopy = {
       ],
     },
     providers: {
-      title: "Ten providers, out of the box",
-      copy: "Each template knows where the key is made, what to choose, what the key looks like, and how to verify it. More are coming; ask for one on GitHub.",
-      more: "All provider guides",
+      title: "{n} provider templates, out of the box",
+      copy: "AI models and gateways, cloud, Apple, analytics, messaging, payments. Each template knows where the key is made, what to choose, what it looks like and how to verify it.",
+      more: "All {n} templates",
+      categories: { models: "AI models", gateways: "AI gateways", cloud: "Cloud & databases", development: "Development", apple: "Apple", analytics: "Analytics", messaging: "Messaging", payments: "Payments" },
     },
     promises: {
       title: "Three things we promise",
@@ -128,9 +129,10 @@ export const siteCopy = {
       ],
     },
     providers: {
-      title: "开箱支持十家服务商",
-      copy: "每个模板都知道 key 在哪创建、该选什么、长什么样、怎么验证。还会继续加；想要哪家，到 GitHub 提。",
-      more: "全部服务商指南",
+      title: "开箱即用 {n} 个服务商模板",
+      copy: "AI 模型与网关、云平台、Apple、分析、消息、支付。每个模板都知道 key 在哪创建、该选什么、长什么样、怎么验证。",
+      more: "全部 {n} 个模板",
+      categories: { models: "AI 模型", gateways: "AI 网关", cloud: "云与数据库", development: "开发发布", apple: "Apple", analytics: "分析监控", messaging: "邮件消息", payments: "支付" },
     },
     promises: {
       title: "三句承诺",

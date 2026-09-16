@@ -1,0 +1,50 @@
+{
+  "aliases" : [
+    "Step Plan",
+    "StepFun coding plan"
+  ],
+  "createURL" : "https:\/\/platform.stepfun.ai\/interface-key",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.stepfun.ai\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/api.stepfun.ai",
+      "protocolName" : "Anthropic compatible"
+    }
+  ],
+  "expiryNote" : "未确认 API Key 自身的统一到期时间；套餐额度按月清零，套餐取消后服务持续至当前计费周期结束。",
+  "fieldName" : "step-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "step-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 StepFun Open Platform",
+    "先订阅或激活 Step Plan",
+    "再创建用于 Step Plan 的 API Key"
+  ],
+  "id" : "stepfun-step-plan",
+  "minimalPermission" : "Step Plan 使用专属套餐\/API Key，但与标准 API 共用兼容协议路径且无需额外前缀；调用前确认 key 所属套餐有效。",
+  "name" : "StepFun · Step Plan",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/platform.stepfun.ai\/interface-key",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/platform.stepfun.ai\/docs\/en\/step-plan\/overview",
+    "https:\/\/platform.stepfun.ai\/docs\/en\/step-plan\/quick-start"
+  ],
+  "verified" : "2026-09-15"
+}

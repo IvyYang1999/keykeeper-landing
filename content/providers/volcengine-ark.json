@@ -1,0 +1,37 @@
+{
+  "aliases" : [
+    "ark",
+    "doubao",
+    "火山方舟"
+  ],
+  "createURL" : "https:\/\/console.volcengine.com\/ark\/region:ark+cn-beijing\/apikey",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "ark-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "ark-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Volcengine",
+    "Activate Ark in the intended region",
+    "Create a dedicated API key"
+  ],
+  "id" : "volcengine-ark",
+  "minimalPermission" : "Use a dedicated key for this project and the matching regional Ark endpoint; avoid sharing an account-wide key across products.",
+  "name" : "火山方舟 · 按量 (中国)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.volcengine.com\/ark\/region:ark+cn-beijing\/apikey",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

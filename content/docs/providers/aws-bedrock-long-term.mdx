@@ -1,0 +1,63 @@
+---
+title: Amazon Bedrock · Long-term bearer key
+description: How an agent gets a Amazon Bedrock · Long-term bearer key key through KeyKeeper, what to choose on console.aws.amazon.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `aws-bedrock-long-term` (also `bedrock long-term`) |
+|---|---|
+| Field | `aws-bearer-token-bedrock` → `AWS_BEARER_TOKEN_BEDROCK` · secret |
+| Also | `aws-region` → `AWS_REGION` · plain, confirmed by you |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.aws.amazon.com](https://console.aws.amazon.com/bedrock) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show aws-bedrock-long-term
+keykeeper save --provider aws-bedrock-long-term --from-clipboard --create --purpose "what this task does"
+keykeeper run -c aws-bedrock-long-term -- <your command>
+```
+
+`--provider aws-bedrock-long-term` fills in the credential id and the fields. The environment
+variables are the ones Amazon Bedrock's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 AWS Management Console</Step>
+<Step>选择目标 AWS Region</Step>
+<Step>确认仅用于探索</Step>
+<Step>选择到期时间后生成</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+长期 key 由 IAM service-specific credential 支撑；仅用于探索，并在 Advanced permissions 中保留实际需要的 Bedrock 权限。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Amazon Bedrock · Long-term bearer key key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Amazon Bedrock · Long-term bearer key offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **Bedrock Converse** — `https://bedrock-runtime.{region}.amazonaws.com` (AWS Region)
+
+## Rotation and expiry
+
+有效至创建时配置的到期日期；具体日期必须以 AWS 创建结果为准。 Rotate or revoke at [console.aws.amazon.com](https://console.aws.amazon.com/bedrock).

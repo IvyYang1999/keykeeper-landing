@@ -1,0 +1,46 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/eu.posthog.com\/settings\/user-api-keys",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "posthog-personal-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "posthog-personal-api-key",
+      "prefixes" : [
+        "phx_"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "Use https:\/\/eu.posthog.com for this template.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "PostHog host",
+      "name" : "posthog-host",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to PostHog Cloud EU",
+    "Create a personal API key",
+    "Select only the required organization\/project scopes"
+  ],
+  "id" : "posthog-eu",
+  "minimalPermission" : "Restrict the personal API key to the target project and read-only scopes for analytics.",
+  "name" : "PostHog · Cloud EU",
+  "prefixes" : [
+    "phx_"
+  ],
+  "rotateURL" : "https:\/\/eu.posthog.com\/settings\/user-api-keys",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

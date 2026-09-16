@@ -5,19 +5,31 @@
     "openai-api"
   ],
   "createURL" : "https:\/\/platform.openai.com\/api-keys",
-  "expiryNote" : "Keys do not expire unless revoked.",
+  "expiryNote" : "OpenAI's public key guide does not promise one universal expiration policy. Record an expiry only when the project console shows one.",
   "fieldName" : "openai-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "openai-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in to platform.openai.com",
     "Choose the project (keys are per project)",
     "Billing must be set up before the key can be used"
   ],
   "id" : "openai",
-  "minChars" : 40,
   "minimalPermission" : "Create a key with Restricted permissions: only the capabilities the task needs (usually Model capabilities: Write). Not All.",
   "name" : "OpenAI",
   "prefixes" : [
-    "sk-"
+
   ],
   "rotateURL" : "https:\/\/platform.openai.com\/api-keys",
   "shownOnce" : true,
@@ -28,8 +40,7 @@
     },
     "header" : "Authorization",
     "invalidStatuses" : [
-      401,
-      403
+      401
     ],
     "method" : "GET",
     "okStatuses" : [

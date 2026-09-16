@@ -1,0 +1,53 @@
+---
+title: Neon · Personal API Key
+description: Agent 怎样通过 KeyKeeper 拿到 Neon · Personal API Key 的 key，在 console.neon.tech 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `neon` |
+|---|---|
+| 字段 | `neon-api-key` → `NEON_API_KEY` · 密钥 |
+| 还有 | `neon-project-id` → `NEON_PROJECT_ID` · 明文，需你确认，可选 |
+| key 长什么样 | 创建时只显示一次 |
+| 创建页面 | [console.neon.tech](https://console.neon.tech/app/settings/api-keys) |
+| KeyKeeper 的验证 | `GET https://console.neon.tech/api/v2/projects`——lists only projects visible to the key |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show neon
+keykeeper save --provider neon --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c neon -- <你的命令>
+```
+
+`--provider neon` 会补上凭据 ID 和字段名。这些环境变量就是 Neon 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to Neon</Step>
+<Step>Choose the organization and project</Step>
+<Step>Create an API key</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+This item is a personal key and can reach projects visible to the person. Use the separate organization/project-scoped template for unattended agents.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Neon · Personal API Key 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://console.neon.tech/api/v2/projects`，key 放在 `Authorization` 请求头里（lists only projects visible to the key）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [console.neon.tech](https://console.neon.tech/app/settings/api-keys) 轮换或撤销。

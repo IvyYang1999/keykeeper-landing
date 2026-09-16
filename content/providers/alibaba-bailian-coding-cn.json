@@ -1,0 +1,52 @@
+{
+  "aliases" : [
+    "bailian-coding-plan"
+  ],
+  "createURL" : "https:\/\/bailian.console.aliyun.com\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/coding.dashscope.aliyuncs.com\/v1",
+      "protocolName" : "OpenAI",
+      "region" : "cn-beijing"
+    },
+    {
+      "baseURL" : "https:\/\/coding.dashscope.aliyuncs.com\/apps\/anthropic",
+      "protocolName" : "Anthropic",
+      "region" : "cn-beijing"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "dashscope-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "dashscope-api-key",
+      "prefixes" : [
+        "sk-sp-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Alibaba Cloud",
+    "Subscribe to Coding Plan in the intended workspace",
+    "Create\/copy the plan key and use the plan base URL",
+    "仅限套餐允许的交互式 AI coding 工具，不能用于后端服务。"
+  ],
+  "id" : "alibaba-bailian-coding-cn",
+  "minimalPermission" : "A Coding Plan key\/base is isolated from pay-as-you-go. Mixing them can charge the pay-as-you-go account.",
+  "name" : "阿里云百炼 · Coding Plan (中国)",
+  "prefixes" : [
+    "sk-sp-"
+  ],
+  "rotateURL" : "https:\/\/bailian.console.aliyun.com\/",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/get-api-key",
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/base-url"
+  ],
+  "verified" : "2026-09-15"
+}

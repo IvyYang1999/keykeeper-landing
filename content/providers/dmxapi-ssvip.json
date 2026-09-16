@@ -1,0 +1,52 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/ssvip.dmxapi.com",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/ssvip.dmxapi.com\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "Global · USD undiscounted"
+    },
+    {
+      "baseURL" : "https:\/\/ssvip.dmxapi.com",
+      "protocolName" : "Anthropic Messages",
+      "region" : "Global · USD undiscounted"
+    }
+  ],
+  "expiryNote" : "创建时可设置到期时间；官方默认永久有效。以该令牌在创建页面选择的实际设置为准。",
+  "fieldName" : "dmx-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "dmx-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录这一 DMXAPI 站点",
+    "进入工作台 → 令牌管理",
+    "添加令牌并保持 default 分组",
+    "按需设置过期、模型、IP 和速率限制"
+  ],
+  "id" : "dmxapi-ssvip",
+  "minimalPermission" : "令牌与站点域名必须配套，禁止跨国内站、国际站和 SSVIP 混用。限制到任务需要的模型、IP、速率和有效期。",
+  "name" : "DMXAPI · SSVIP 国际服",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/ssvip.dmxapi.com",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/doc.dmxapi.com\/lingpai.html",
+    "https:\/\/doc.dmxapi.com\/baseurl.html"
+  ],
+  "verified" : "2026-09-15"
+}

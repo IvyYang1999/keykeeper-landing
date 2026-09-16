@@ -1,0 +1,55 @@
+---
+title: Twilio SendGrid · US
+description: How an agent gets a Twilio SendGrid · US key through KeyKeeper, what to choose on app.sendgrid.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `sendgrid` |
+|---|---|
+| Field | `sendgrid-api-key` → `SENDGRID_API_KEY` · secret |
+| Also | `sendgrid-api-base` → `SENDGRID_API_BASE` · plain, confirmed by you |
+| Key looks like | starts with `SG.`, shown once when created |
+| Created at | [app.sendgrid.com](https://app.sendgrid.com/settings/api_keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show sendgrid
+keykeeper save --provider sendgrid --from-clipboard --create --purpose "what this task does"
+keykeeper run -c sendgrid -- <your command>
+```
+
+`--provider sendgrid` fills in the credential id and the fields. The environment
+variables are the ones Twilio SendGrid's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to SendGrid</Step>
+<Step>Create an API key</Step>
+<Step>Choose Custom Access</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Choose Custom Access and enable only Mail Send for a sending app. Do not use Full Access or Billing Access.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Twilio SendGrid · US key (starts with `SG.`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Twilio SendGrid · US offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [app.sendgrid.com](https://app.sendgrid.com/settings/api_keys).

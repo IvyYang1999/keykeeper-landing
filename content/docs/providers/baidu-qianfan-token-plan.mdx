@@ -1,0 +1,62 @@
+---
+title: 百度千帆 · Token 福利包
+description: How an agent gets a 百度千帆 · Token 福利包 key through KeyKeeper, what to choose on console.bce.baidu.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `baidu-qianfan-token-plan` (also `Qianfan Token Plan`) |
+|---|---|
+| Field | `qianfan-token-plan-api-key` → `QIANFAN_TOKEN_PLAN_API_KEY` / `QIANFAN_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.bce.baidu.com](https://console.bce.baidu.com/iam/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show baidu-qianfan-token-plan
+keykeeper save --provider baidu-qianfan-token-plan --from-clipboard --create --purpose "what this task does"
+keykeeper run -c baidu-qianfan-token-plan -- <your command>
+```
+
+`--provider baidu-qianfan-token-plan` fills in the credential id and the field. The environment
+variable is the one 百度千帆's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录百度智能云千帆</Step>
+<Step>购买有效的 Token 福利包</Step>
+<Step>在控制台取得千帆通用 API Key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Token 福利包使用千帆通用认证；不要把它与有独立 key 和独立路径的 Coding Plan 混用。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a 百度千帆 · Token 福利包 key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** 百度千帆 · Token 福利包 offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://qianfan.baidubce.com/v2`
+- **Anthropic compatible** — `https://qianfan.baidubce.com/anthropic`
+
+## Rotation and expiry
+
+当前 Token 福利包文档列出的套餐有效期为 1 个月；API Key 本身是否随套餐到期未单独确认。 Rotate or revoke at [console.bce.baidu.com](https://console.bce.baidu.com/iam/).

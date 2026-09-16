@@ -1,6 +1,6 @@
 ---
-title: Cloudflare
-description: Agent 怎样通过 KeyKeeper 拿到 Cloudflare 的 key，在 dash.cloudflare.com 该选什么，KeyKeeper 怎么验证。
+title: Cloudflare · User API Token
+description: Agent 怎样通过 KeyKeeper 拿到 Cloudflare · User API Token 的 key，在 dash.cloudflare.com 该选什么，KeyKeeper 怎么验证。
 ---
 
 import { Step, Steps } from "fumadocs-ui/components/steps";
@@ -8,10 +8,10 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | 模板 id | `cloudflare`（别名 `cf`、`cloudflare-token`、`wrangler`） |
 |---|---|
-| 字段 | `cloudflare-api-token` → `keykeeper run` 里的 `CLOUDFLARE_API_TOKEN` |
-| key 长什么样 | 至少 40 个字符，创建时只显示一次 |
+| 字段 | `cloudflare-api-token` → `CLOUDFLARE_API_TOKEN` · 密钥 |
+| key 长什么样 | 创建时只显示一次 |
 | 创建页面 | [dash.cloudflare.com](https://dash.cloudflare.com/profile/api-tokens) |
-| KeyKeeper 的验证 | `GET https://api.cloudflare.com/client/v4/user/tokens/verify`——向 Cloudflare 确认这个用户 token 是否有效 |
+| KeyKeeper 的验证 | 不验证 |
 | 模板核实日期 | 2026-09-15 |
 
 ## Agent 做什么
@@ -22,7 +22,7 @@ keykeeper save --provider cloudflare --from-clipboard --create --purpose "这个
 keykeeper run -c cloudflare -- <你的命令>
 ```
 
-`--provider cloudflare` 会补上凭据 ID 和字段名。这个字段的环境变量就是 Cloudflare 自家工具读的那个，不需要任何映射。
+`--provider cloudflare` 会补上凭据 ID 和字段名。这些环境变量就是 Cloudflare 自家工具读的那个，不需要任何映射。
 
 ## 只有你能做的
 
@@ -43,8 +43,9 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 Cloudflare 的 key（至少 40 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
-- **保存后：** KeyKeeper 自己发送 `GET https://api.cloudflare.com/client/v4/user/tokens/verify`，key 放在 `Authorization` 请求头里（向 Cloudflare 确认这个用户 token 是否有效）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+- **写入前：** 值必须像一把 Cloudflare · User API Token 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Cloudflare · User API Token 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
 
 ## 轮换与过期
 

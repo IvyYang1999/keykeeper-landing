@@ -1,0 +1,63 @@
+{
+  "aliases" : [
+    "siliconflow-com"
+  ],
+  "createURL" : "https:\/\/cloud.siliconflow.com\/account\/ak",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.siliconflow.com\/v1",
+      "protocolName" : "OpenAI"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "siliconflow-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "siliconflow-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the global SiliconFlow platform",
+    "Create a separate API key",
+    "Confirm the workflow uses api.siliconflow.com"
+  ],
+  "id" : "siliconflow-global",
+  "minimalPermission" : "Global and China platform compatibility is not promised. Use a dedicated global key per project and the matching .com API base.",
+  "name" : "SiliconFlow · Global",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/cloud.siliconflow.com\/account\/ak",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.siliconflow.com\/en\/usercases\/use-siliconcloud-in-DB-GPT"
+  ],
+  "validation" : {
+    "description" : "lists models available on the global platform",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.siliconflow.com\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

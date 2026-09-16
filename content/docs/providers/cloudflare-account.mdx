@@ -1,0 +1,55 @@
+---
+title: Cloudflare · Account API Token
+description: How an agent gets a Cloudflare · Account API Token key through KeyKeeper, what to choose on dash.cloudflare.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `cloudflare-account` |
+|---|---|
+| Field | `cloudflare-api-token` → `CLOUDFLARE_API_TOKEN` · secret |
+| Also | `cloudflare-account-id` → `CLOUDFLARE_ACCOUNT_ID` · plain, confirmed by you |
+| Key looks like | starts with `cfat_`, shown once when created |
+| Created at | [dash.cloudflare.com](https://dash.cloudflare.com/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show cloudflare-account
+keykeeper save --provider cloudflare-account --from-clipboard --create --purpose "what this task does"
+keykeeper run -c cloudflare-account -- <your command>
+```
+
+`--provider cloudflare-account` fills in the credential id and the fields. The environment
+variables are the ones Cloudflare's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Cloudflare</Step>
+<Step>Open the target account → Manage Account → Account API Tokens</Step>
+<Step>Create a least-privilege account-owned token and record the Account ID</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use an account-owned token only for unattended account automation. Limit permissions/resources and set a TTL; it is distinct from a user token.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Cloudflare · Account API Token key (starts with `cfat_`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Cloudflare · Account API Token offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [dash.cloudflare.com](https://dash.cloudflare.com/).

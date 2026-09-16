@@ -1,0 +1,35 @@
+{
+  "aliases" : [
+    "doubao-coding-plan"
+  ],
+  "createURL" : "https:\/\/console.volcengine.com\/ark\/region:ark+cn-beijing\/codingplan",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "ark-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "ark-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Volcengine",
+    "Subscribe to Ark Coding Plan",
+    "Create\/copy the plan key"
+  ],
+  "id" : "volcengine-ark-coding",
+  "minimalPermission" : "Use this key only with the \/api\/coding\/v3 base. The ordinary \/api\/v3 base can fall back to pay-as-you-go billing.",
+  "name" : "火山方舟 · Coding Plan (中国)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.volcengine.com\/ark\/region:ark+cn-beijing\/codingplan",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

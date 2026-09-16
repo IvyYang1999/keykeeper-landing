@@ -5,35 +5,69 @@
   "createURL" : "https:\/\/vercel.com\/account\/tokens",
   "expiryNote" : "Expiry is chosen at creation (1 day to 1 year, or none). A token that leaks to a public repo is revoked automatically.",
   "fieldName" : "vercel-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "Access token",
+      "name" : "vercel-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Team or user ID",
+      "name" : "vercel-org-id",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Project ID",
+      "name" : "vercel-project-id",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
   "gates" : [
     "Log in to vercel.com",
     "Name the token",
-    "Pick the scope and the expiry (some teams require 2FA)"
+    "Pick the user or Team scope and expiry",
+    "Record project\/team IDs separately when the workflow needs them"
   ],
   "id" : "vercel",
-  "minChars" : 28,
-  "minimalPermission" : "Scope: the single project when the task is about one project; otherwise the team. Not Full Account. Expiration: the shortest that fits (7 or 30 days), not No Expiration.",
+  "minimalPermission" : "Vercel tokens are scoped to a user or Team, not one project. Choose the narrowest account or Team and shortest expiry; use the optional IDs to target one project.",
   "name" : "Vercel",
   "prefixes" : [
-    "vcp_"
+
   ],
   "rotateURL" : "https:\/\/vercel.com\/account\/tokens",
   "shownOnce" : true,
   "validation" : {
-    "description" : "lists the projects this token can see",
+    "description" : "reads the authenticated Vercel identity",
     "extraHeaders" : {
 
     },
     "header" : "Authorization",
     "invalidStatuses" : [
-      401,
-      403
+      401
     ],
     "method" : "GET",
     "okStatuses" : [
       200
     ],
-    "url" : "https:\/\/api.vercel.com\/v9\/projects",
+    "url" : "https:\/\/api.vercel.com\/v2\/user",
     "validIfBodyContains" : [
 
     ],

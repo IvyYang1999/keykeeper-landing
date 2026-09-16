@@ -1,0 +1,55 @@
+---
+title: Neon · Organization or project API Key
+description: How an agent gets a Neon · Organization or project API Key key through KeyKeeper, what to choose on console.neon.tech, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `neon-org` |
+|---|---|
+| Field | `neon-api-key` → `NEON_API_KEY` · secret |
+| Also | `neon-project-id` → `NEON_PROJECT_ID` · plain, confirmed by you |
+| Key looks like | starts with `napi_`, shown once when created |
+| Created at | [console.neon.tech](https://console.neon.tech/app) |
+| Verified by KeyKeeper | `GET https://console.neon.tech/api/v2/projects` — lists projects visible to this organization key |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show neon-org
+keykeeper save --provider neon-org --from-clipboard --create --purpose "what this task does"
+keykeeper run -c neon-org -- <your command>
+```
+
+`--provider neon-org` fills in the credential id and the fields. The environment
+variables are the ones Neon's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Neon</Step>
+<Step>Open the organization settings → API keys</Step>
+<Step>Create an organization key and restrict it to the target project where available</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Prefer a project-scoped organization key for an agent so it cannot see unrelated projects or create more keys.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Neon · Organization or project API Key key (starts with `napi_`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://console.neon.tech/api/v2/projects` with the key in the `Authorization` header (lists projects visible to this organization key). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [console.neon.tech](https://console.neon.tech/app).

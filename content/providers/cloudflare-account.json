@@ -1,0 +1,46 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/dash.cloudflare.com\/",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "cloudflare-api-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "cloudflare-api-token",
+      "prefixes" : [
+        "cfat_"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Account ID",
+      "name" : "cloudflare-account-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Cloudflare",
+    "Open the target account → Manage Account → Account API Tokens",
+    "Create a least-privilege account-owned token and record the Account ID"
+  ],
+  "id" : "cloudflare-account",
+  "minimalPermission" : "Use an account-owned token only for unattended account automation. Limit permissions\/resources and set a TTL; it is distinct from a user token.",
+  "name" : "Cloudflare · Account API Token",
+  "prefixes" : [
+    "cfat_"
+  ],
+  "rotateURL" : "https:\/\/dash.cloudflare.com\/",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

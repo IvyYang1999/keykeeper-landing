@@ -1,6 +1,6 @@
 ---
-title: Supabase
-description: How an agent gets a Supabase key through KeyKeeper, what to choose on supabase.com, and how KeyKeeper verifies it.
+title: Supabase Management API
+description: How an agent gets a Supabase Management API key through KeyKeeper, what to choose on supabase.com, and how KeyKeeper verifies it.
 ---
 
 import { Step, Steps } from "fumadocs-ui/components/steps";
@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | Template id | `supabase` (also `supabase-cli`, `supabase-access-token`) |
 |---|---|
-| Field | `supabase-access-token` → `SUPABASE_ACCESS_TOKEN` in `keykeeper run` |
-| Key looks like | starts with `sbp_`, at least 20 characters, shown once when created |
+| Field | `supabase-access-token` → `SUPABASE_ACCESS_TOKEN` · secret |
+| Key looks like | starts with `sbp_`, shown once when created |
 | Created at | [supabase.com](https://supabase.com/dashboard/account/tokens) |
 | Verified by KeyKeeper | `GET https://api.supabase.com/v1/projects` — lists the projects this token can see |
 | Template checked | 2026-09-15 |
@@ -22,8 +22,8 @@ keykeeper save --provider supabase --from-clipboard --create --purpose "what thi
 keykeeper run -c supabase -- <your command>
 ```
 
-`--provider supabase` fills in the credential id and the field. The field's environment
-variable is the one Supabase's own tools read, so nothing has to be mapped.
+`--provider supabase` fills in the credential id and the field. The environment
+variable is the one Supabase Management API's own tools read, so nothing has to be mapped.
 
 ## What only you can do
 
@@ -36,7 +36,7 @@ variable is the one Supabase's own tools read, so nothing has to be mapped.
 
 ## What to choose
 
-This is the account access token the Supabase CLI and Management API use; it has the account's full power, so give it an expiry. For an app's own database access use the project's Settings → API Keys instead: publishable (sb_publishable_) for clients, secret (sb_secret_) only on a server.
+This is a Management API personal access token, not a database/runtime key. Prefer a scoped PAT limited to one project and only the permissions needed; classic PATs inherit the account's broad access.
 
 <Callout type="info">
 The agent is told the same thing. It opens the page for you and says what to pick; it never
@@ -45,9 +45,10 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Supabase key (starts with `sbp_`, at least 20 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Supabase Management API key (starts with `sbp_`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://api.supabase.com/v1/projects` with the key in the `Authorization` header (lists the projects this token can see). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
 
 ## Rotation and expiry
 
-Set an expiry when creating it; project API keys never expire. Rotate or revoke at [supabase.com](https://supabase.com/dashboard/account/tokens).
+Set the Management API token's expiry when creating it and record that date here. Rotate or revoke at [supabase.com](https://supabase.com/dashboard/account/tokens).

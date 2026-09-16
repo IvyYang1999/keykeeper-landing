@@ -1,0 +1,46 @@
+{
+  "aliases" : [
+    "docker"
+  ],
+  "createURL" : "https:\/\/app.docker.com\/settings\/personal-access-tokens",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "docker-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "docker-token",
+      "prefixes" : [
+        "dckr_pat_"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Docker username",
+      "name" : "docker-username",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Docker Hub",
+    "Create a personal or organization access token",
+    "Choose repository permissions and expiry"
+  ],
+  "id" : "dockerhub",
+  "minimalPermission" : "This item is a personal access token. Grant only Read or Write as needed and use `docker login --password-stdin`; Docker CLI does not automatically consume a generic token environment variable.",
+  "name" : "Docker Hub · Personal access token",
+  "prefixes" : [
+    "dckr_pat_"
+  ],
+  "rotateURL" : "https:\/\/app.docker.com\/settings\/personal-access-tokens",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

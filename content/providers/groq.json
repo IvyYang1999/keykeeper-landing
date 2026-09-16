@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/console.groq.com\/keys",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "groq-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "groq-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to GroqCloud",
+    "Choose the project",
+    "Create an API key"
+  ],
+  "id" : "groq",
+  "minimalPermission" : "Create the key inside a project dedicated to this workload; project limits are the isolation boundary.",
+  "name" : "Groq",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.groq.com\/keys",
+  "shownOnce" : false,
+  "validation" : {
+    "description" : "lists available models",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.groq.com\/openai\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

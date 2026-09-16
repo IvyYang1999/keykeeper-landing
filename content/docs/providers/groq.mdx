@@ -1,0 +1,54 @@
+---
+title: Groq
+description: How an agent gets a Groq key through KeyKeeper, what to choose on console.groq.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `groq` |
+|---|---|
+| Field | `groq-api-key` → `GROQ_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.groq.com](https://console.groq.com/keys) |
+| Verified by KeyKeeper | `GET https://api.groq.com/openai/v1/models` — lists available models |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show groq
+keykeeper save --provider groq --from-clipboard --create --purpose "what this task does"
+keykeeper run -c groq -- <your command>
+```
+
+`--provider groq` fills in the credential id and the field. The environment
+variable is the one Groq's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to GroqCloud</Step>
+<Step>Choose the project</Step>
+<Step>Create an API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Create the key inside a project dedicated to this workload; project limits are the isolation boundary.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Groq key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.groq.com/openai/v1/models` with the key in the `Authorization` header (lists available models). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [console.groq.com](https://console.groq.com/keys).

@@ -1,0 +1,47 @@
+{
+  "aliases" : [
+    "飞书"
+  ],
+  "createURL" : "https:\/\/open.feishu.cn\/app",
+  "expiryNote" : "The App Secret remains valid until reset.",
+  "fieldName" : "feishu-app-secret",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "App Secret",
+      "name" : "feishu-app-secret",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "App ID",
+      "name" : "feishu-app-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Feishu Open Platform",
+    "Create or select a custom app",
+    "Add only required permissions and data scopes",
+    "Publish\/install the app in the intended tenant"
+  ],
+  "id" : "feishu",
+  "minimalPermission" : "Use a custom app with only the exact API permissions and smallest data scope needed. Keep App ID as public metadata and App Secret as the only secret field.",
+  "name" : "Feishu 飞书 (中国)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/open.feishu.cn\/app",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

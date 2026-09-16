@@ -1,0 +1,53 @@
+{
+  "aliases" : [
+    "the-router"
+  ],
+  "createURL" : "https:\/\/dashboard.therouter.ai\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.therouter.ai\/v1",
+      "protocolName" : "OpenAI-compatible"
+    },
+    {
+      "baseURL" : "https:\/\/api.therouter.ai",
+      "protocolName" : "Anthropic Messages \/ Claude Code"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "therouter-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "anthropic-auth-token"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "therouter-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 TheRouter.ai Dashboard",
+    "创建 API key",
+    "按用途设置消费额度"
+  ],
+  "id" : "therouter",
+  "minimalPermission" : "模型调用使用 THEROUTER_API_KEY。Claude Code 仅把同一值映射为 ANTHROPIC_AUTH_TOKEN，并按官方要求将 ANTHROPIC_API_KEY 置空。管理 key 可创建和撤销其他 key，权限更高，不能代替普通模型调用 key 保存。",
+  "name" : "TheRouter.ai",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/dashboard.therouter.ai\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/therouter.ai\/docs\/quickstart\/",
+    "https:\/\/therouter.ai\/docs\/guides\/guides\/claude-code-integration\/",
+    "https:\/\/therouter.ai\/docs\/guides\/guides\/api-key-rotation\/"
+  ],
+  "verified" : "2026-09-15"
+}

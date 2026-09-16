@@ -1,0 +1,55 @@
+---
+title: Netlify
+description: How an agent gets a Netlify key through KeyKeeper, what to choose on app.netlify.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `netlify` |
+|---|---|
+| Field | `netlify-auth-token` → `NETLIFY_AUTH_TOKEN` · secret |
+| Also | `netlify-site-id` → `NETLIFY_SITE_ID` · plain, confirmed by you, optional |
+| Key looks like | shown once when created |
+| Created at | [app.netlify.com](https://app.netlify.com/user/applications#personal-access-tokens) |
+| Verified by KeyKeeper | `GET https://api.netlify.com/api/v1/user` — reads the authenticated user |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show netlify
+keykeeper save --provider netlify --from-clipboard --create --purpose "what this task does"
+keykeeper run -c netlify -- <your command>
+```
+
+`--provider netlify` fills in the credential id and the fields. The environment
+variables are the ones Netlify's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Netlify</Step>
+<Step>Open Applications → Personal access tokens</Step>
+<Step>Choose an expiration and SAML team access only if needed</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Personal tokens are account-wide. Set an expiration, do not opt into SAML team access unless the task needs that team, and prefer OAuth for a public integration.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Netlify key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.netlify.com/api/v1/user` with the key in the `Authorization` header (reads the authenticated user). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [app.netlify.com](https://app.netlify.com/user/applications#personal-access-tokens).

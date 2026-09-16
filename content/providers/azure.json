@@ -1,0 +1,69 @@
+{
+  "aliases" : [
+    "microsoft-azure"
+  ],
+  "createURL" : "https:\/\/portal.azure.com\/#view\/Microsoft_AAD_RegisteredApps\/ApplicationsListBlade",
+  "expiryNote" : "Client secrets expire on the date chosen at creation.",
+  "fieldName" : "azure-client-secret",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "Client secret",
+      "name" : "azure-client-secret",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Application (client) ID",
+      "name" : "azure-client-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Directory (tenant) ID",
+      "name" : "azure-tenant-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Subscription ID",
+      "name" : "azure-subscription-id",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "Sign in to Azure",
+    "Create or select an app registration",
+    "Create a client secret with the shortest suitable expiry",
+    "Assign the service principal a role at the narrowest resource scope"
+  ],
+  "id" : "azure",
+  "minimalPermission" : "Prefer workload identity or managed identity. For a service principal, assign a task-specific role at resource or resource-group scope rather than subscription-wide Contributor.",
+  "name" : "Azure Entra service principal · Client secret",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/portal.azure.com\/#view\/Microsoft_AAD_RegisteredApps\/ApplicationsListBlade",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

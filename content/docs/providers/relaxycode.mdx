@@ -1,0 +1,61 @@
+---
+title: RelaxyCode
+description: How an agent gets a RelaxyCode key through KeyKeeper, what to choose on www.relaxycode.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `relaxycode` (also `relaxy-code`) |
+|---|---|
+| Field | `openai-api-key` → `OPENAI_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [www.relaxycode.com](https://www.relaxycode.com/dashboard/api-keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show relaxycode
+keykeeper save --provider relaxycode --from-clipboard --create --purpose "what this task does"
+keykeeper run -c relaxycode -- <your command>
+```
+
+`--provider relaxycode` fills in the credential id and the field. The environment
+variable is the one RelaxyCode's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>注册并登录 RelaxyCode</Step>
+<Step>充值或购买套餐</Step>
+<Step>在控制台创建并绑定套餐或余额的 API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+按官方首页在创建时绑定所需套餐或余额。Codex 教程中的“DMXAPI token”与 RelaxyCode 域名不一致，不能据此接受其他发行方 token；仅保存 RelaxyCode 控制台实际创建的 key。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a RelaxyCode key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** RelaxyCode offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI Responses for Codex** — `https://api.relaxycode.com/v1`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [www.relaxycode.com](https://www.relaxycode.com/dashboard/api-keys).

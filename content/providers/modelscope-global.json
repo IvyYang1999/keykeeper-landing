@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "ModelScope International",
+    "ModelScope AI"
+  ],
+  "createURL" : "https:\/\/modelscope.ai\/my\/access\/token",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/modelscope.ai\/openapi\/v1",
+      "protocolName" : "ModelScope Hub\/OpenAPI"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "modelscope-api-token",
+  "fields" : [
+    {
+      "aliases" : [
+        "modelscope-api-key"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "modelscope-api-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 modelscope.ai",
+    "在 Global 站访问令牌页面创建 token",
+    "确认客户端 endpoint 指向 Global 站"
+  ],
+  "id" : "modelscope-global",
+  "minimalPermission" : "中国站与 Global 站的账号、token 和内容目录独立；只授予当前 Hub\/OpenAPI 操作所需的权限。",
+  "name" : "ModelScope 魔搭 · Global",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/modelscope.ai\/my\/access\/token",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/github.com\/modelscope\/modelscope_hub",
+    "https:\/\/github.com\/modelscope\/modelscope-skills\/blob\/main\/skills\/ms-hub\/SKILL.md"
+  ],
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,55 @@
+---
+title: Kimi · Kimi Code
+description: How an agent gets a Kimi · Kimi Code key through KeyKeeper, what to choose on www.kimi.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `kimi-code` (also `kimi-coding`, `kimi-for-coding`) |
+|---|---|
+| Field | `kimi-api-key` → `KIMI_API_KEY` · secret |
+| Key looks like | starts with `sk-kimi-`, shown once when created |
+| Created at | [www.kimi.com](https://www.kimi.com/code/console) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show kimi-code
+keykeeper save --provider kimi-code --from-clipboard --create --purpose "what this task does"
+keykeeper run -c kimi-code -- <your command>
+```
+
+`--provider kimi-code` fills in the credential id and the field. The environment
+variable is the one Kimi's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Kimi</Step>
+<Step>Activate a Kimi membership that includes Kimi Code</Step>
+<Step>Create a Kimi Code API key in the console (maximum five)</Step>
+<Step>Copy it before closing; the full key is shown once</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+This membership key is only for supported coding tools. It is not interchangeable with a Kimi Open Platform key. Use https://api.kimi.com/coding/v1 for OpenAI-compatible tools or https://api.kimi.com/coding/ for Anthropic-compatible tools, and keep the tool's real User-Agent.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Kimi · Kimi Code key (starts with `sk-kimi-`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Kimi · Kimi Code offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [www.kimi.com](https://www.kimi.com/code/console).

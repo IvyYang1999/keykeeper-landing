@@ -1,0 +1,58 @@
+---
+title: Azure Entra service principal · Client secret
+description: How an agent gets a Azure Entra service principal · Client secret key through KeyKeeper, what to choose on portal.azure.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `azure` (also `microsoft-azure`) |
+|---|---|
+| Field | `azure-client-secret` → `AZURE_CLIENT_SECRET` · secret |
+| Also | `azure-client-id` → `AZURE_CLIENT_ID` · plain, confirmed by you |
+| Also | `azure-tenant-id` → `AZURE_TENANT_ID` · plain, confirmed by you |
+| Also | `azure-subscription-id` → `AZURE_SUBSCRIPTION_ID` · plain, confirmed by you, optional |
+| Key looks like | shown once when created |
+| Created at | [portal.azure.com](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show azure
+keykeeper save --provider azure --from-clipboard --create --purpose "what this task does"
+keykeeper run -c azure -- <your command>
+```
+
+`--provider azure` fills in the credential id and the fields. The environment
+variables are the ones Azure Entra service principal · Client secret's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Azure</Step>
+<Step>Create or select an app registration</Step>
+<Step>Create a client secret with the shortest suitable expiry</Step>
+<Step>Assign the service principal a role at the narrowest resource scope</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Prefer workload identity or managed identity. For a service principal, assign a task-specific role at resource or resource-group scope rather than subscription-wide Contributor.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Azure Entra service principal · Client secret key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Azure Entra service principal · Client secret offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+Client secrets expire on the date chosen at creation. Rotate or revoke at [portal.azure.com](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationsListBlade).

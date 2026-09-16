@@ -1,0 +1,57 @@
+---
+title: Apple Push Notification service
+description: How an agent gets a Apple Push Notification service key through KeyKeeper, what to choose on developer.apple.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `apns` (also `apple-push`, `push-notifications`) |
+|---|---|
+| Field | `private-key` → `PRIVATE_KEY` · credential file |
+| Also | `key-id` → `KEY_ID` · plain, confirmed by you |
+| Also | `team-id` → `TEAM_ID` · plain, confirmed by you |
+| Key looks like | shown once when created |
+| Created at | [developer.apple.com](https://developer.apple.com/account/resources/authkeys/add) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show apns
+keykeeper save --provider apns --from-file /path/to/private-key.p8 --create --purpose "what this task does"
+keykeeper run -c apns -- <your command>
+```
+
+`--provider apns` fills in the credential id and the fields. The environment
+variables are the ones Apple Push Notification service's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the Apple Developer account</Step>
+<Step>An Account Holder or Admin creates a key</Step>
+<Step>Enable only Apple Push Notifications service</Step>
+<Step>Download the .p8 file immediately</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Create a key with only Apple Push Notifications service enabled. Use topic restrictions where Apple offers them.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Apple Push Notification service key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Apple Push Notification service offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+Keys do not expire automatically; revoke and replace them from Certificates, Identifiers & Profiles. Rotate or revoke at [developer.apple.com](https://developer.apple.com/account/resources/authkeys/list).

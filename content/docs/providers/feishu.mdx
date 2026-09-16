@@ -1,0 +1,56 @@
+---
+title: Feishu 飞书 (中国)
+description: How an agent gets a Feishu 飞书 (中国) key through KeyKeeper, what to choose on open.feishu.cn, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `feishu` (also `飞书`) |
+|---|---|
+| Field | `feishu-app-secret` → `FEISHU_APP_SECRET` · secret |
+| Also | `feishu-app-id` → `FEISHU_APP_ID` · plain, confirmed by you |
+| Key looks like | can be viewed again in the console |
+| Created at | [open.feishu.cn](https://open.feishu.cn/app) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show feishu
+keykeeper save --provider feishu --from-clipboard --create --purpose "what this task does"
+keykeeper run -c feishu -- <your command>
+```
+
+`--provider feishu` fills in the credential id and the fields. The environment
+variables are the ones Feishu / Lark's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Feishu Open Platform</Step>
+<Step>Create or select a custom app</Step>
+<Step>Add only required permissions and data scopes</Step>
+<Step>Publish/install the app in the intended tenant</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a custom app with only the exact API permissions and smallest data scope needed. Keep App ID as public metadata and App Secret as the only secret field.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Feishu 飞书 (中国) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Feishu 飞书 (中国) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+The App Secret remains valid until reset. Rotate or revoke at [open.feishu.cn](https://open.feishu.cn/app).

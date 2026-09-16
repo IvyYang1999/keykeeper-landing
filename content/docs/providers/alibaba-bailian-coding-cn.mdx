@@ -1,0 +1,63 @@
+---
+title: 阿里云百炼 · Coding Plan (中国)
+description: How an agent gets a 阿里云百炼 · Coding Plan (中国) key through KeyKeeper, what to choose on bailian.console.aliyun.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `alibaba-bailian-coding-cn` (also `bailian-coding-plan`) |
+|---|---|
+| Field | `dashscope-api-key` → `DASHSCOPE_API_KEY` · secret |
+| Key looks like | starts with `sk-sp-`, shown once when created |
+| Created at | [bailian.console.aliyun.com](https://bailian.console.aliyun.com/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show alibaba-bailian-coding-cn
+keykeeper save --provider alibaba-bailian-coding-cn --from-clipboard --create --purpose "what this task does"
+keykeeper run -c alibaba-bailian-coding-cn -- <your command>
+```
+
+`--provider alibaba-bailian-coding-cn` fills in the credential id and the field. The environment
+variable is the one 阿里云百炼's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Alibaba Cloud</Step>
+<Step>Subscribe to Coding Plan in the intended workspace</Step>
+<Step>Create/copy the plan key and use the plan base URL</Step>
+<Step>仅限套餐允许的交互式 AI coding 工具，不能用于后端服务。</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+A Coding Plan key/base is isolated from pay-as-you-go. Mixing them can charge the pay-as-you-go account.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a 阿里云百炼 · Coding Plan (中国) key (starts with `sk-sp-`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** 阿里云百炼 · Coding Plan (中国) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://coding.dashscope.aliyuncs.com/v1` (cn-beijing)
+- **Anthropic** — `https://coding.dashscope.aliyuncs.com/apps/anthropic` (cn-beijing)
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [bailian.console.aliyun.com](https://bailian.console.aliyun.com/).

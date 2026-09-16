@@ -1,0 +1,61 @@
+{
+  "aliases" : [
+    "asc",
+    "appstoreconnect",
+    "apple-api"
+  ],
+  "createURL" : "https:\/\/appstoreconnect.apple.com\/access\/integrations\/api",
+  "expiryNote" : "Keys do not expire automatically; revoke them on the Integrations page.",
+  "fieldName" : "private-key",
+  "fields" : [
+    {
+      "fileFormat" : "applePrivateKeyP8",
+      "help" : "The downloaded AuthKey file. Apple shows it once; keep the original.",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "API private key (.p8)",
+      "name" : "private-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "The 10-character ID shown next to the key.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Key ID",
+      "name" : "key-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "The issuer UUID shown on the Integrations page for team keys.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Issuer ID",
+      "name" : "issuer-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to App Store Connect",
+    "An Account Holder or Admin chooses Team Keys and creates the key",
+    "Choose the least privileged role the task needs",
+    "Download the .p8 file immediately; it is shown once"
+  ],
+  "id" : "app-store-connect",
+  "minimalPermission" : "Prefer a team key with the narrowest App Store Connect role that can perform the task. Use an individual key only for app and user endpoints; Apple does not allow individual keys for notarytool.",
+  "name" : "App Store Connect · Team API Key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/appstoreconnect.apple.com\/access\/integrations\/api",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+    "notarytool-api-key"
+  ],
+  "createURL" : "https:\/\/appstoreconnect.apple.com\/access\/integrations\/api",
+  "expiryNote" : "The team key does not expire automatically; revoke it from App Store Connect.",
+  "fieldName" : "private-key",
+  "fields" : [
+    {
+      "fileFormat" : "applePrivateKeyP8",
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "Team API private key (.p8)",
+      "name" : "private-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Key ID",
+      "name" : "key-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Issuer ID",
+      "name" : "issuer-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in as Account Holder or Admin",
+    "Choose Team Keys and create a key allowed to submit notarization",
+    "Download the .p8 file immediately"
+  ],
+  "id" : "apple-notary-api-key",
+  "minimalPermission" : "notarytool accepts a team App Store Connect API key bundle. Individual App Store Connect keys are not accepted for notarization.",
+  "name" : "Apple Notary · App Store Connect Team API Key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/appstoreconnect.apple.com\/access\/integrations\/api",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

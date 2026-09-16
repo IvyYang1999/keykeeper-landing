@@ -1,0 +1,56 @@
+---
+title: Apple Notary · App Store Connect Team API Key
+description: How an agent gets a Apple Notary · App Store Connect Team API Key key through KeyKeeper, what to choose on appstoreconnect.apple.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `apple-notary-api-key` (also `notarytool-api-key`) |
+|---|---|
+| Field | `private-key` → `PRIVATE_KEY` · credential file |
+| Also | `key-id` → `KEY_ID` · plain, confirmed by you |
+| Also | `issuer-id` → `ISSUER_ID` · plain, confirmed by you |
+| Key looks like | shown once when created |
+| Created at | [appstoreconnect.apple.com](https://appstoreconnect.apple.com/access/integrations/api) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show apple-notary-api-key
+keykeeper save --provider apple-notary-api-key --from-file /path/to/private-key.p8 --create --purpose "what this task does"
+keykeeper run -c apple-notary-api-key -- <your command>
+```
+
+`--provider apple-notary-api-key` fills in the credential id and the fields. The environment
+variables are the ones Apple Notary's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in as Account Holder or Admin</Step>
+<Step>Choose Team Keys and create a key allowed to submit notarization</Step>
+<Step>Download the .p8 file immediately</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+notarytool accepts a team App Store Connect API key bundle. Individual App Store Connect keys are not accepted for notarization.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Apple Notary · App Store Connect Team API Key key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Apple Notary · App Store Connect Team API Key offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+The team key does not expire automatically; revoke it from App Store Connect. Rotate or revoke at [appstoreconnect.apple.com](https://appstoreconnect.apple.com/access/integrations/api).

@@ -1,0 +1,63 @@
+---
+title: OpenCode · Zen (Console)
+description: How an agent gets a OpenCode · Zen (Console) key through KeyKeeper, what to choose on opencode.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `opencode-zen` (also `opencode-console`) |
+|---|---|
+| Field | `opencode-api-key` → `OPENCODE_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [opencode.ai](https://opencode.ai/console/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show opencode-zen
+keykeeper save --provider opencode-zen --from-clipboard --create --purpose "what this task does"
+keykeeper run -c opencode-zen -- <your command>
+```
+
+`--provider opencode-zen` fills in the credential id and the field. The environment
+variable is the one OpenCode's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 OpenCode Console</Step>
+<Step>添加按量余额</Step>
+<Step>复制 Console API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+按量 Console 与 Go 是不同计费产品；官方未确认两者的 key 可互换，保存和路由时不要混用。Console 未公开按 key 权限范围，按项目单独创建便于撤销。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a OpenCode · Zen (Console) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** OpenCode · Zen (Console) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI Responses / Chat Completions** — `https://opencode.ai/zen/v1`
+- **Anthropic Messages** — `https://opencode.ai/zen/v1`
+- **Gemini** — `https://opencode.ai/zen/v1`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [opencode.ai](https://opencode.ai/console/).

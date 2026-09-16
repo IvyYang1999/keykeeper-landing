@@ -1,0 +1,61 @@
+---
+title: Z.AI · GLM Coding Plan (Global)
+description: Agent 怎样通过 KeyKeeper 拿到 Z.AI · GLM Coding Plan (Global) 的 key，在 z.ai 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `zai-global-coding`（别名 `zai-coding`、`zai-coding-plan`、`glm-coding-global`） |
+|---|---|
+| 字段 | `zai-api-key` → `ZAI_API_KEY` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [z.ai](https://z.ai/manage-apikey/apikey-list) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show zai-global-coding
+keykeeper save --provider zai-global-coding --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c zai-global-coding -- <你的命令>
+```
+
+`--provider zai-global-coding` 会补上凭据 ID 和字段名。这些环境变量就是 智谱 · Z.AI 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录国际 Z.AI 平台</Step>
+<Step>确认个人或团队 Coding Plan 的订阅与 entitlement</Step>
+<Step>从对应套餐页面获取 key；团队使用团队套餐签发的 key</Step>
+<Step>个人套餐使用当前 API key 页并确认订阅；团队套餐使用 https://z.ai/manage-apikey/coding-plan/team/my-plan。</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+仅用于允许的 coding 场景：OpenAI 协议 https://api.z.ai/api/coding/paas/v4，Anthropic 协议 https://api.z.ai/api/anthropic。团队 key 与其他平台 key not interchangeable；不把团队规则推断为个人 key 有独立前缀或长度。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Z.AI · GLM Coding Plan (Global) 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Z.AI · GLM Coding Plan (Global) 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI Chat Completions**——`https://api.z.ai/api/coding/paas/v4`（Global）
+- **Anthropic Messages**——`https://api.z.ai/api/anthropic`（Global）
+- **OpenAI Responses**——`https://api.z.ai/api/v1`（Global）
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [z.ai](https://z.ai/manage-apikey/apikey-list) 轮换或撤销。

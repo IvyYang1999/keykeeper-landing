@@ -1,0 +1,52 @@
+---
+title: Railway · Account API Token
+description: Agent 怎样通过 KeyKeeper 拿到 Railway · Account API Token 的 key，在 railway.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `railway-api` |
+|---|---|
+| 字段 | `railway-api-token` → `RAILWAY_API_TOKEN` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [railway.com](https://railway.com/account/tokens) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show railway-api
+keykeeper save --provider railway-api --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c railway-api -- <你的命令>
+```
+
+`--provider railway-api` 会补上凭据 ID 和字段名。这些环境变量就是 Railway 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to Railway</Step>
+<Step>Choose Account Token or the intended Workspace token</Step>
+<Step>Name the token and record which owner issued it</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Use this broader API token only for work that genuinely spans projects. For one environment use the separate Railway Project token.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Railway · Account API Token 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Railway · Account API Token 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [railway.com](https://railway.com/account/tokens) 轮换或撤销。

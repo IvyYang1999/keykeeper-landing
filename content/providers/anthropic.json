@@ -4,16 +4,29 @@
     "anthropic-api"
   ],
   "createURL" : "https:\/\/console.anthropic.com\/settings\/keys",
-  "expiryNote" : "Keys do not expire unless revoked.",
+  "expiryNote" : "Choose 3 hours, 1\/7\/30 days, a custom date, or never; prefer the shortest practical value.",
   "fieldName" : "anthropic-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "anthropic-api-key",
+      "prefixes" : [
+        "sk-ant-"
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in to console.anthropic.com",
-    "Choose the workspace",
+    "Choose a single workspace for this project",
+    "Choose the shortest practical expiration",
     "Billing or credits must be set up before the key can be used"
   ],
   "id" : "anthropic",
-  "minChars" : 60,
-  "minimalPermission" : "Create the key in a workspace that only holds this project; there are no per-key scopes, so the workspace is the boundary.",
+  "minimalPermission" : "Prefer a service-account key in a single dedicated workspace. Multi-workspace keys need an extra workspace header that this template does not guess.",
   "name" : "Anthropic",
   "prefixes" : [
     "sk-ant-"
@@ -27,8 +40,7 @@
     },
     "header" : "x-api-key",
     "invalidStatuses" : [
-      401,
-      403
+      401
     ],
     "method" : "GET",
     "okStatuses" : [

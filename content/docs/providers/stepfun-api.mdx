@@ -1,0 +1,61 @@
+---
+title: StepFun · API
+description: How an agent gets a StepFun · API key through KeyKeeper, what to choose on platform.stepfun.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `stepfun-api` (also `StepFun pay-as-you-go`, `阶跃星辰 API`) |
+|---|---|
+| Field | `step-api-key` → `STEP_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [platform.stepfun.ai](https://platform.stepfun.ai/interface-key) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show stepfun-api
+keykeeper save --provider stepfun-api --from-clipboard --create --purpose "what this task does"
+keykeeper run -c stepfun-api -- <your command>
+```
+
+`--provider stepfun-api` fills in the credential id and the field. The environment
+variable is the one StepFun 阶跃's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 StepFun Open Platform</Step>
+<Step>在 Account Management → Interface Keys 创建 key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+用于标准按量 API；标准 API 与 Step Plan 共用兼容协议路径，但 key、额度与计费产品不同，不要混用凭据。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a StepFun · API key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** StepFun · API offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://api.stepfun.ai/v1`
+- **Anthropic compatible** — `https://api.stepfun.ai`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [platform.stepfun.ai](https://platform.stepfun.ai/interface-key).

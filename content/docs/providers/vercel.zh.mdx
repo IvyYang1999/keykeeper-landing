@@ -8,10 +8,12 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | 模板 id | `vercel`（别名 `vercel-token`） |
 |---|---|
-| 字段 | `vercel-token` → `keykeeper run` 里的 `VERCEL_TOKEN` |
-| key 长什么样 | 以 `vcp_` 开头，至少 28 个字符，创建时只显示一次 |
+| 字段 | `vercel-token` → `VERCEL_TOKEN` · 密钥 |
+| 还有 | `vercel-org-id` → `VERCEL_ORG_ID` · 明文，需你确认，可选 |
+| 还有 | `vercel-project-id` → `VERCEL_PROJECT_ID` · 明文，需你确认，可选 |
+| key 长什么样 | 创建时只显示一次 |
 | 创建页面 | [vercel.com](https://vercel.com/account/tokens) |
-| KeyKeeper 的验证 | `GET https://api.vercel.com/v9/projects`——列出这个 token 能看到的项目 |
+| KeyKeeper 的验证 | `GET https://api.vercel.com/v2/user`——列出这个 token 能看到的项目 |
 | 模板核实日期 | 2026-09-15 |
 
 ## Agent 做什么
@@ -22,7 +24,7 @@ keykeeper save --provider vercel --from-clipboard --create --purpose "这个任�
 keykeeper run -c vercel -- <你的命令>
 ```
 
-`--provider vercel` 会补上凭据 ID 和字段名。这个字段的环境变量就是 Vercel 自家工具读的那个，不需要任何映射。
+`--provider vercel` 会补上凭据 ID 和字段名。这些环境变量就是 Vercel 自家工具读的那个，不需要任何映射。
 
 ## 只有你能做的
 
@@ -43,8 +45,9 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 Vercel 的 key（以 `vcp_` 开头，至少 28 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
-- **保存后：** KeyKeeper 自己发送 `GET https://api.vercel.com/v9/projects`，key 放在 `Authorization` 请求头里（列出这个 token 能看到的项目）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+- **写入前：** 值必须像一把 Vercel 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://api.vercel.com/v2/user`，key 放在 `Authorization` 请求头里（列出这个 token 能看到的项目）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
 
 ## 轮换与过期
 

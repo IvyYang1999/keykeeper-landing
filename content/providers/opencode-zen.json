@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+    "opencode-console"
+  ],
+  "createURL" : "https:\/\/opencode.ai\/console\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/opencode.ai\/zen\/v1",
+      "protocolName" : "OpenAI Responses \/ Chat Completions"
+    },
+    {
+      "baseURL" : "https:\/\/opencode.ai\/zen\/v1",
+      "protocolName" : "Anthropic Messages"
+    },
+    {
+      "baseURL" : "https:\/\/opencode.ai\/zen\/v1",
+      "protocolName" : "Gemini"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "opencode-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "opencode-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 OpenCode Console",
+    "添加按量余额",
+    "复制 Console API key"
+  ],
+  "id" : "opencode-zen",
+  "minimalPermission" : "按量 Console 与 Go 是不同计费产品；官方未确认两者的 key 可互换，保存和路由时不要混用。Console 未公开按 key 权限范围，按项目单独创建便于撤销。",
+  "name" : "OpenCode · Zen (Console)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/opencode.ai\/console\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/opencode.ai\/v2\/docs\/console\/models\/",
+    "https:\/\/opencode.ai\/v2\/docs\/providers",
+    "https:\/\/github.com\/anomalyco\/opencode\/blob\/dev\/.github\/workflows\/opencode.yml"
+  ],
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,76 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/sentry.io\/settings\/",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "sentry-auth-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "sentry-auth-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Organization slug",
+      "name" : "sentry-org",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Project slug",
+      "name" : "sentry-project",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "Sign in to Sentry Cloud",
+    "Open the target organization → Developer Settings → Auth",
+    "Create an organization token with only the scopes required"
+  ],
+  "id" : "sentry",
+  "minimalPermission" : "Prefer an organization token. Reporting needs org:read\/project:read; release automation should use org:ci. Do not grant write\/admin scopes unless the exact task requires them.",
+  "name" : "Sentry Cloud · Organization Auth Token",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/sentry.io\/settings\/",
+  "shownOnce" : false,
+  "validation" : {
+    "description" : "lists organizations visible to the token",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/sentry.io\/api\/0\/organizations\/",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

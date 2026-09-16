@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | 模板 id | `openai`（别名 `gpt`、`chatgpt`、`openai-api`） |
 |---|---|
-| 字段 | `openai-api-key` → `keykeeper run` 里的 `OPENAI_API_KEY` |
-| key 长什么样 | 以 `sk-` 开头，至少 40 个字符，创建时只显示一次 |
+| 字段 | `openai-api-key` → `OPENAI_API_KEY` · 密钥 |
+| key 长什么样 | 创建时只显示一次 |
 | 创建页面 | [platform.openai.com](https://platform.openai.com/api-keys) |
 | KeyKeeper 的验证 | `GET https://api.openai.com/v1/models`——列出这把 key 能用的模型 |
 | 模板核实日期 | 2026-09-15 |
@@ -22,7 +22,7 @@ keykeeper save --provider openai --from-clipboard --create --purpose "这个任�
 keykeeper run -c openai -- <你的命令>
 ```
 
-`--provider openai` 会补上凭据 ID 和字段名。这个字段的环境变量就是 OpenAI 自家工具读的那个，不需要任何映射。
+`--provider openai` 会补上凭据 ID 和字段名。这些环境变量就是 OpenAI 自家工具读的那个，不需要任何映射。
 
 ## 只有你能做的
 
@@ -43,8 +43,9 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 OpenAI 的 key（以 `sk-` 开头，至少 40 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **写入前：** 值必须像一把 OpenAI 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
 - **保存后：** KeyKeeper 自己发送 `GET https://api.openai.com/v1/models`，key 放在 `Authorization` 请求头里（列出这把 key 能用的模型）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
 
 ## 轮换与过期
 

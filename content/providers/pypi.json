@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/pypi.org\/manage\/account\/token\/",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "twine-password",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "minChars" : 90,
+      "name" : "twine-password",
+      "prefixes" : [
+        "pypi-"
+      ],
+      "regularExpression" : "^pypi-[A-Za-z0-9_-]{85,}$",
+      "required" : true
+    },
+    {
+      "help" : "Use the fixed value __token__ for API-token authentication.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Twine username",
+      "name" : "twine-username",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to PyPI with 2FA",
+    "Create an API token",
+    "Choose the single project when it already exists"
+  ],
+  "id" : "pypi",
+  "minChars" : 90,
+  "minimalPermission" : "Prefer Trusted Publishing (OIDC) for CI. When a stored token is unavoidable, use a project-scoped token; a pending trusted publisher can handle a first release without an account-wide token.",
+  "name" : "PyPI · API token",
+  "prefixes" : [
+    "pypi-"
+  ],
+  "rotateURL" : "https:\/\/pypi.org\/manage\/account\/token\/",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

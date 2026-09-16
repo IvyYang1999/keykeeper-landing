@@ -1,0 +1,65 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/crazyrouter.com\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.crazyrouter.com\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "International"
+    },
+    {
+      "baseURL" : "https:\/\/api.crazyrouter.com",
+      "protocolName" : "Anthropic Messages",
+      "region" : "International"
+    },
+    {
+      "baseURL" : "https:\/\/cn.crazyrouter.com\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "East Asia"
+    },
+    {
+      "baseURL" : "https:\/\/cn.crazyrouter.com",
+      "protocolName" : "Anthropic Messages",
+      "region" : "East Asia"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "crazyrouter-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "openai-api-key"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "crazyrouter-api-key",
+      "prefixes" : [
+        "sk-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 CrazyRouter 控制台",
+    "进入 Token Management 创建专用 token",
+    "限制可用模型",
+    "设置 IP 限制和额度上限（适用时）"
+  ],
+  "id" : "crazyrouter",
+  "minimalPermission" : "为每个 IDE、CLI 或 bot 创建不同 token；限制模型、IP 和日\/月预算。模型 API 必须发往 API 域名，账户管理仍使用 crazyrouter.com。",
+  "name" : "CrazyRouter",
+  "prefixes" : [
+    "sk-"
+  ],
+  "rotateURL" : "https:\/\/crazyrouter.com\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.crazyrouter.com\/en\/openclaw-deploy",
+    "https:\/\/docs.crazyrouter.com\/en\/api-endpoint"
+  ],
+  "verified" : "2026-09-15"
+}

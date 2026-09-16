@@ -7,40 +7,31 @@
   "createURL" : "https:\/\/dash.cloudflare.com\/profile\/api-tokens",
   "expiryNote" : "No expiry unless a TTL was set at creation; Roll replaces the secret and keeps the permissions.",
   "fieldName" : "cloudflare-api-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "cloudflare-api-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in to dash.cloudflare.com (2FA if enabled)",
     "Choose Create Token → a template or Create Custom Token",
     "Pick permissions, the zone\/account resources, optionally a TTL"
   ],
   "id" : "cloudflare",
-  "minChars" : 40,
   "minimalPermission" : "Create Custom Token: permissions at Read where possible, Zone Resources = Specific zone (never All zones), and a TTL. Use an account-owned token only if the task needs it (it verifies at a different endpoint).",
-  "name" : "Cloudflare",
+  "name" : "Cloudflare · User API Token",
   "prefixes" : [
 
   ],
   "rotateURL" : "https:\/\/dash.cloudflare.com\/profile\/api-tokens",
   "shownOnce" : true,
-  "validation" : {
-    "description" : "asks Cloudflare whether this user token is active",
-    "extraHeaders" : {
-
-    },
-    "header" : "Authorization",
-    "invalidStatuses" : [
-      400,
-      401,
-      403
-    ],
-    "method" : "GET",
-    "okStatuses" : [
-      200
-    ],
-    "url" : "https:\/\/api.cloudflare.com\/client\/v4\/user\/tokens\/verify",
-    "validIfBodyContains" : [
-
-    ],
-    "valuePrefix" : "Bearer "
-  },
   "verified" : "2026-09-15"
 }

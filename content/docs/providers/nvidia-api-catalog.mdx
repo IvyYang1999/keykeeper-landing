@@ -1,0 +1,62 @@
+---
+title: NVIDIA · API Catalog
+description: How an agent gets a NVIDIA · API Catalog key through KeyKeeper, what to choose on build.nvidia.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `nvidia-api-catalog` (also `NVIDIA hosted NIM`, `build.nvidia.com`) |
+|---|---|
+| Field | `nvidia-api-key` → `NVIDIA_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [build.nvidia.com](https://build.nvidia.com/settings/api-keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show nvidia-api-catalog
+keykeeper save --provider nvidia-api-catalog --from-clipboard --create --purpose "what this task does"
+keykeeper run -c nvidia-api-catalog -- <your command>
+```
+
+`--provider nvidia-api-catalog` fills in the credential id and the field. The environment
+variable is the one NVIDIA's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 NVIDIA Build</Step>
+<Step>在 API Keys 页面生成 key</Step>
+<Step>创建后立即复制并安全保存；官方提示稍后可能无法再次查看完整 key</Step>
+<Step>接受所选模型要求的条款</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+用于 NVIDIA 托管 NIM/API Catalog 推理；不要以 NGC personal/service key 替代。公开页面未确认统一的 key 权限粒度，也未保证 key 必定只显示一次。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a NVIDIA · API Catalog key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** NVIDIA · API Catalog offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible hosted NIM** — `https://integrate.api.nvidia.com/v1`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [build.nvidia.com](https://build.nvidia.com/settings/api-keys).

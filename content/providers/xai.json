@@ -1,0 +1,63 @@
+{
+  "aliases" : [
+    "grok"
+  ],
+  "createURL" : "https:\/\/console.x.ai\/team\/default\/api-keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.x.ai\/v1",
+      "protocolName" : "OpenAI"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "xai-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "xai-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the xAI Console",
+    "Choose the team",
+    "Create a key and configure spending limits"
+  ],
+  "id" : "xai",
+  "minimalPermission" : "Use a project-specific key with a spending limit. Do not reuse the team owner's general key.",
+  "name" : "xAI",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.x.ai\/team\/default\/api-keys",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/docs.x.ai\/developers\/quickstart"
+  ],
+  "validation" : {
+    "description" : "lists available models",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.x.ai\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,48 @@
+{
+  "aliases" : [
+    "zai",
+    "z.ai",
+    "zai-api"
+  ],
+  "createURL" : "https:\/\/z.ai\/manage-apikey\/apikey-list",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.z.ai\/api\/paas\/v4",
+      "protocolName" : "OpenAI Chat Completions",
+      "region" : "Global"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "zai-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "zai-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the global Z.AI Open Platform",
+    "Create a general API key",
+    "Activate pay-as-you-go billing or an API usage bundle if needed"
+  ],
+  "id" : "zai-global",
+  "minimalPermission" : "国际 Z.AI 通用 API 使用 https:\/\/api.z.ai\/api\/paas\/v4。Coding Plan 的 endpoint、订阅授权与允许用途不同；不能因为格式相同就混用或假定套餐结算。不要把中国平台 key 迁到此模板。",
+  "name" : "Z.AI · API (Global)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/z.ai\/manage-apikey\/apikey-list",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.z.ai\/api-reference\/introduction",
+    "https:\/\/docs.z.ai\/devpack\/quick-start"
+  ],
+  "verified" : "2026-09-15"
+}

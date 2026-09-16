@@ -1,0 +1,73 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/console.twilio.com\/us1\/account\/keys-credentials\/api-keys",
+  "expiryNote" : "API keys remain valid until revoked.",
+  "fieldName" : "twilio-api-secret",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key secret",
+      "name" : "twilio-api-secret",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "API key SID",
+      "minChars" : 34,
+      "name" : "twilio-api-key",
+      "prefixes" : [
+        "SK"
+      ],
+      "regularExpression" : "^SK[0-9a-fA-F]{32}$",
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Account SID",
+      "minChars" : 34,
+      "name" : "twilio-account-sid",
+      "prefixes" : [
+        "AC"
+      ],
+      "regularExpression" : "^AC[0-9a-fA-F]{32}$",
+      "required" : true
+    },
+    {
+      "help" : "This template creates US1 credentials. Record another region explicitly before using a regional endpoint.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Region",
+      "name" : "twilio-region",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Twilio",
+    "Choose the account\/subaccount and region",
+    "Create a Restricted API key where available",
+    "Copy the secret once"
+  ],
+  "id" : "twilio",
+  "minimalPermission" : "Use a Restricted API key with only the product actions required. Prefer a subaccount boundary. Do not use the account Auth Token for an application.",
+  "name" : "Twilio API Key · US1",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.twilio.com\/us1\/account\/keys-credentials\/api-keys",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

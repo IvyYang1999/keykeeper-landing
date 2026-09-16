@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | Template id | `resend` (also `resend-api-key`) |
 |---|---|
-| Field | `resend-api-key` → `RESEND_API_KEY` in `keykeeper run` |
-| Key looks like | starts with `re_`, at least 30 characters, shown once when created |
+| Field | `resend-api-key` → `RESEND_API_KEY` · secret |
+| Key looks like | starts with `re_`, shown once when created |
 | Created at | [resend.com](https://resend.com/api-keys) |
 | Verified by KeyKeeper | `GET https://api.resend.com/domains` — lists domains; a sending-only key answers 'restricted', which also proves it is real |
 | Template checked | 2026-09-15 |
@@ -22,7 +22,7 @@ keykeeper save --provider resend --from-clipboard --create --purpose "what this 
 keykeeper run -c resend -- <your command>
 ```
 
-`--provider resend` fills in the credential id and the field. The field's environment
+`--provider resend` fills in the credential id and the field. The environment
 variable is the one Resend's own tools read, so nothing has to be mapped.
 
 ## What only you can do
@@ -45,8 +45,9 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Resend key (starts with `re_`, at least 30 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Resend key (starts with `re_`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://api.resend.com/domains` with the key in the `Authorization` header (lists domains; a sending-only key answers 'restricted', which also proves it is real). A restricted key that answers with `restricted_api_key` counts as valid. The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
 
 ## Rotation and expiry
 

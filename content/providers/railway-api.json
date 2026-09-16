@@ -1,0 +1,35 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/railway.com\/account\/tokens",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "railway-api-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "railway-api-token",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Railway",
+    "Choose Account Token or the intended Workspace token",
+    "Name the token and record which owner issued it"
+  ],
+  "id" : "railway-api",
+  "minimalPermission" : "Use this broader API token only for work that genuinely spans projects. For one environment use the separate Railway Project token.",
+  "name" : "Railway · Account API Token",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/railway.com\/account\/tokens",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

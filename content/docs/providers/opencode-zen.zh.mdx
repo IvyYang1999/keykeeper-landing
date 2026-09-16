@@ -1,0 +1,60 @@
+---
+title: OpenCode · Zen (Console)
+description: Agent 怎样通过 KeyKeeper 拿到 OpenCode · Zen (Console) 的 key，在 opencode.ai 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `opencode-zen`（别名 `opencode-console`） |
+|---|---|
+| 字段 | `opencode-api-key` → `OPENCODE_API_KEY` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [opencode.ai](https://opencode.ai/console/) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show opencode-zen
+keykeeper save --provider opencode-zen --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c opencode-zen -- <你的命令>
+```
+
+`--provider opencode-zen` 会补上凭据 ID 和字段名。这些环境变量就是 OpenCode 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 OpenCode Console</Step>
+<Step>添加按量余额</Step>
+<Step>复制 Console API key</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+按量 Console 与 Go 是不同计费产品；官方未确认两者的 key 可互换，保存和路由时不要混用。Console 未公开按 key 权限范围，按项目单独创建便于撤销。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 OpenCode · Zen (Console) 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** OpenCode · Zen (Console) 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI Responses / Chat Completions**——`https://opencode.ai/zen/v1`
+- **Anthropic Messages**——`https://opencode.ai/zen/v1`
+- **Gemini**——`https://opencode.ai/zen/v1`
+
+## 轮换与过期
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 在 [opencode.ai](https://opencode.ai/console/) 轮换或撤销。

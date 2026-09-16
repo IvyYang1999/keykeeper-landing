@@ -1,0 +1,60 @@
+{
+  "aliases" : [
+    "apple-push",
+    "push-notifications"
+  ],
+  "createURL" : "https:\/\/developer.apple.com\/account\/resources\/authkeys\/add",
+  "expiryNote" : "Keys do not expire automatically; revoke and replace them from Certificates, Identifiers & Profiles.",
+  "fieldName" : "private-key",
+  "fields" : [
+    {
+      "fileFormat" : "applePrivateKeyP8",
+      "help" : "The downloaded AuthKey file. Apple allows one download.",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "APNs private key (.p8)",
+      "name" : "private-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Key ID",
+      "name" : "key-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Developer Team ID",
+      "name" : "team-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the Apple Developer account",
+    "An Account Holder or Admin creates a key",
+    "Enable only Apple Push Notifications service",
+    "Download the .p8 file immediately"
+  ],
+  "id" : "apns",
+  "minimalPermission" : "Create a key with only Apple Push Notifications service enabled. Use topic restrictions where Apple offers them.",
+  "name" : "Apple Push Notification service",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/developer.apple.com\/account\/resources\/authkeys\/list",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

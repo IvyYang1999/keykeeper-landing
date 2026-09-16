@@ -1,0 +1,64 @@
+---
+title: Xiaomi MiMo · Token Plan (China)
+description: How an agent gets a Xiaomi MiMo · Token Plan (China) key through KeyKeeper, what to choose on platform.xiaomimimo.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `xiaomi-mimo-token-plan-cn` (also `MiMo Token Plan CN`) |
+|---|---|
+| Field | `mimo-api-key` → `MIMO_API_KEY` · secret |
+| Also | `mimo-region` → `MIMO_REGION` · plain, confirmed by you |
+| Key looks like | starts with `tp-`, shown once when created |
+| Created at | [platform.xiaomimimo.com](https://platform.xiaomimimo.com/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show xiaomi-mimo-token-plan-cn
+keykeeper save --provider xiaomi-mimo-token-plan-cn --from-clipboard --create --purpose "what this task does"
+keykeeper run -c xiaomi-mimo-token-plan-cn -- <your command>
+```
+
+`--provider xiaomi-mimo-token-plan-cn` fills in the credential id and the fields. The environment
+variables are the ones Xiaomi MiMo's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 Xiaomi MiMo API Open Platform</Step>
+<Step>订阅有效的 Token Plan</Step>
+<Step>在 Token Plan 页面选择并确认 中国集群</Step>
+<Step>创建后立即安全保存专属 key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+仅用于 中国集群的 Token Plan；不能与按量 key 或其他集群 Base URL 混用。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Xiaomi MiMo · Token Plan (China) key (starts with `tp-`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Xiaomi MiMo · Token Plan (China) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://token-plan-cn.xiaomimimo.com/v1` (中国)
+- **Anthropic compatible** — `https://token-plan-cn.xiaomimimo.com/anthropic` (中国)
+
+## Rotation and expiry
+
+仅在所订阅 Token Plan 套餐的有效期内可用；到期后需续订。 Rotate or revoke at [platform.xiaomimimo.com](https://platform.xiaomimimo.com/).

@@ -1,0 +1,48 @@
+{
+  "aliases" : [
+    "asc-individual"
+  ],
+  "createURL" : "https:\/\/appstoreconnect.apple.com\/access\/integrations\/api",
+  "expiryNote" : "The key does not expire automatically; revoke it from App Store Connect.",
+  "fieldName" : "private-key",
+  "fields" : [
+    {
+      "fileFormat" : "applePrivateKeyP8",
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "Individual API private key (.p8)",
+      "name" : "private-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Key ID",
+      "name" : "key-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to App Store Connect",
+    "Choose Individual API Keys",
+    "Create the key",
+    "Download the .p8 file immediately"
+  ],
+  "id" : "app-store-connect-individual",
+  "minimalPermission" : "Individual keys use JWT subject user and no issuer ID. They cannot authenticate notarytool; use the team-key notary template for notarization.",
+  "name" : "App Store Connect · Individual API Key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/appstoreconnect.apple.com\/access\/integrations\/api",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

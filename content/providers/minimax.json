@@ -1,0 +1,57 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/platform.minimaxi.com\/user-center\/basic-information\/interface-key",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.minimaxi.com\/v1",
+      "protocolName" : "OpenAI"
+    },
+    {
+      "baseURL" : "https:\/\/api.minimaxi.com\/anthropic",
+      "protocolName" : "Anthropic"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "minimax-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "anthropic-auth-token",
+        "anthropic-api-key",
+        "openai-api-key"
+      ],
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "minimax-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to MiniMax Open Platform",
+    "Choose pay-as-you-go or Token Plan",
+    "Create the matching kind of API key",
+    "使用本模板对应的地区与计费类型；相同 endpoint 不代表按量与订阅 key 可以混用。"
+  ],
+  "id" : "minimax",
+  "minimalPermission" : "Keep pay-as-you-go and Token Plan keys separate; use the plan-specific key only with its matching endpoint.",
+  "name" : "MiniMax · Pay-as-you-go (China)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/platform.minimaxi.com\/user-center\/basic-information\/interface-key",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/platform.minimax.io\/docs\/api-reference\/api-overview",
+    "https:\/\/platform.minimax.io\/docs\/token-plan\/other-tools",
+    "https:\/\/platform.minimax.io\/docs\/token-plan\/claude-code",
+    "https:\/\/platform.minimax.io\/docs\/api-reference\/text-anthropic-api"
+  ],
+  "verified" : "2026-09-15"
+}

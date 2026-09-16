@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "google-analytics",
+    "analytics"
+  ],
+  "createURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "expiryNote" : "User-managed service-account keys usually remain valid until revoked, but organization policy can impose expiry. Record a date only when the console or policy shows one.",
+  "fieldName" : "google-application-credentials",
+  "fields" : [
+    {
+      "fileFormat" : "serviceAccountJSON",
+      "help" : "The complete downloaded JSON document; KeyKeeper materializes it as a temporary file for the child process.",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "Service-account JSON",
+      "name" : "google-application-credentials",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "The numeric property ID, not the measurement ID that starts with G-.",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "GA4 Property ID",
+      "name" : "ga4-property-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Google Cloud and choose a project",
+    "Enable Google Analytics Data API",
+    "Create a dedicated service account",
+    "In GA4 Property access management, add its email"
+  ],
+  "id" : "ga4",
+  "minimalPermission" : "GA4 property role = Viewer for reporting. Do not grant Editor or Administrator. Grant access only to the properties the task reads.",
+  "name" : "Google Analytics 4",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

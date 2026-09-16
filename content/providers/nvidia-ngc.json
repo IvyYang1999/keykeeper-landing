@@ -1,0 +1,69 @@
+{
+  "aliases" : [
+    "NGC API key",
+    "NVIDIA GPU Cloud"
+  ],
+  "createURL" : "https:\/\/org.ngc.nvidia.com\/setup\/api-keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/nvcr.io",
+      "protocolName" : "OCI\/Docker Registry"
+    }
+  ],
+  "expiryNote" : "Personal Key 在创建时选择到期日期；Service Key 的统一到期合同未从本轮公开页面闭合。",
+  "fieldName" : "ngc-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "ngc-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "NGC organization",
+      "name" : "ngc-org",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "NGC team",
+      "name" : "ngc-team",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "登录正确的 NGC organization",
+    "选择 Personal 或 Service Key",
+    "选择到期日期、服务与所需 scope",
+    "创建后立即安全保存"
+  ],
+  "id" : "nvidia-ngc",
+  "minimalPermission" : "Personal Key 仅选择所需 services；机器工作负载优先使用 Service Key，并按实体与动作收窄 scope。",
+  "name" : "NVIDIA · NGC",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/org.ngc.nvidia.com\/setup\/api-keys",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/docs.nvidia.com\/ngc\/latest\/ngc-user-guide.html",
+    "https:\/\/docs.nvidia.com\/nim\/large-language-models\/latest\/get-started\/configuration.html"
+  ],
+  "verified" : "2026-09-15"
+}

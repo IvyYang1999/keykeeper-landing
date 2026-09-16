@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/www.npmjs.com\/settings\/~\/tokens",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "npm-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "npm-token",
+      "prefixes" : [
+        "npm_"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to npm with 2FA",
+    "Create a granular access token",
+    "Choose packages\/scopes, permissions, expiry and optional IP ranges"
+  ],
+  "id" : "npm",
+  "minimalPermission" : "Select only the packages or scopes needed. Prefer stage-only for reviewable automation, otherwise read-only or package-specific publish. Keep organization access at No access unless required.",
+  "name" : "npm",
+  "prefixes" : [
+    "npm_"
+  ],
+  "rotateURL" : "https:\/\/www.npmjs.com\/settings\/~\/tokens",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "reads the npm identity for this token",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/registry.npmjs.org\/-\/whoami",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+    "bedrock long-term"
+  ],
+  "createURL" : "https:\/\/console.aws.amazon.com\/bedrock",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/bedrock-runtime.{region}.amazonaws.com",
+      "protocolName" : "Bedrock Converse",
+      "region" : "AWS Region"
+    }
+  ],
+  "expiryNote" : "有效至创建时配置的到期日期；具体日期必须以 AWS 创建结果为准。",
+  "fieldName" : "aws-bearer-token-bedrock",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "aws-bearer-token-bedrock",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "公开路由信息；保存时由用户明确填写。KeyKeeper 不从它推导或自动注入 Base URL。",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "AWS Region",
+      "name" : "aws-region",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 AWS Management Console",
+    "选择目标 AWS Region",
+    "确认仅用于探索",
+    "选择到期时间后生成"
+  ],
+  "id" : "aws-bedrock-long-term",
+  "minimalPermission" : "长期 key 由 IAM service-specific credential 支撑；仅用于探索，并在 Advanced permissions 中保留实际需要的 Bedrock 权限。",
+  "name" : "Amazon Bedrock · Long-term bearer key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.aws.amazon.com\/bedrock",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.aws.amazon.com\/bedrock\/latest\/userguide\/api-keys.html",
+    "https:\/\/docs.aws.amazon.com\/bedrock\/latest\/userguide\/api-keys-reference.html"
+  ],
+  "verified" : "2026-09-15"
+}

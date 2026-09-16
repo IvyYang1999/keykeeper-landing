@@ -1,0 +1,36 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/api.slack.com\/apps",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "slack-bot-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "slack-bot-token",
+      "prefixes" : [
+        "xoxb-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Slack",
+    "Create or select an app",
+    "Add only the required Bot Token Scopes",
+    "Install the app to the intended workspace"
+  ],
+  "id" : "slack",
+  "minimalPermission" : "Use a bot token, not a user token. Add only method-specific bot scopes (for example chat:write); avoid user impersonation and legacy umbrella scopes.",
+  "name" : "Slack · Bot Token (non-rotating)",
+  "prefixes" : [
+    "xoxb-"
+  ],
+  "rotateURL" : "https:\/\/api.slack.com\/apps",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

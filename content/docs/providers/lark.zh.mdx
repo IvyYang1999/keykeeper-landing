@@ -1,0 +1,54 @@
+---
+title: Lark (Global)
+description: Agent 怎样通过 KeyKeeper 拿到 Lark (Global) 的 key，在 open.larksuite.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `lark`（别名 `larksuite`） |
+|---|---|
+| 字段 | `lark-app-secret` → `LARK_APP_SECRET` · 密钥 |
+| 还有 | `lark-app-id` → `LARK_APP_ID` · 明文，需你确认 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [open.larksuite.com](https://open.larksuite.com/app) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show lark
+keykeeper save --provider lark --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c lark -- <你的命令>
+```
+
+`--provider lark` 会补上凭据 ID 和字段名。这些环境变量就是 Feishu / Lark 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to Lark Open Platform</Step>
+<Step>Create/select a custom app</Step>
+<Step>Add only required permissions and data scopes</Step>
+<Step>Publish/install it in the intended tenant</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Use the global Lark console, LARK environment names and the open.larksuite.com API base. Feishu China credentials/endpoints are separate.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Lark (Global) 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Lark (Global) 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 轮换与过期
+
+Public docs do not promise one universal App Secret expiration policy; reset it explicitly when rotating. 在 [open.larksuite.com](https://open.larksuite.com/app) 轮换或撤销。

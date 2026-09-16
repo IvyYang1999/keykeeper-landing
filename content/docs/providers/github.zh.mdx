@@ -8,8 +8,8 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | 模板 id | `github`（别名 `gh`、`github-token`、`github-pat`） |
 |---|---|
-| 字段 | `github-token` → `keykeeper run` 里的 `GITHUB_TOKEN` |
-| key 长什么样 | 以 `github_pat_` 或 `ghp_` 开头，至少 40 个字符，创建时只显示一次 |
+| 字段 | `github-token` → `GITHUB_TOKEN` · 密钥 |
+| key 长什么样 | 以 `github_pat_` 或 `ghp_` 开头，创建时只显示一次 |
 | 创建页面 | [github.com](https://github.com/settings/personal-access-tokens/new) |
 | KeyKeeper 的验证 | `GET https://api.github.com/user`——读取 token 所属的账号（不需要任何权限） |
 | 模板核实日期 | 2026-09-15 |
@@ -22,7 +22,7 @@ keykeeper save --provider github --from-clipboard --create --purpose "这个任�
 keykeeper run -c github -- <你的命令>
 ```
 
-`--provider github` 会补上凭据 ID 和字段名。这个字段的环境变量就是 GitHub 自家工具读的那个，不需要任何映射。
+`--provider github` 会补上凭据 ID 和字段名。这些环境变量就是 GitHub 自家工具读的那个，不需要任何映射。
 
 ## 只有你能做的
 
@@ -43,8 +43,9 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 GitHub 的 key（以 `github_pat_` 或 `ghp_` 开头，至少 40 个字符）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **写入前：** 值必须像一把 GitHub 的 key（以 `github_pat_` 或 `ghp_` 开头）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
 - **保存后：** KeyKeeper 自己发送 `GET https://api.github.com/user`，key 放在 `Authorization` 请求头里（读取 token 所属的账号（不需要任何权限））。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
 
 ## 轮换与过期
 

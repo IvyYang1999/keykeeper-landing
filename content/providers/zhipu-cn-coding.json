@@ -1,0 +1,61 @@
+{
+  "aliases" : [
+    "zhipu-coding",
+    "zhipu-coding-plan",
+    "glm-coding-cn"
+  ],
+  "createURL" : "https:\/\/bigmodel.cn\/coding-plan\/personal\/overview",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/open.bigmodel.cn\/api\/coding\/paas\/v4",
+      "protocolName" : "OpenAI Chat Completions",
+      "region" : "China"
+    },
+    {
+      "baseURL" : "https:\/\/open.bigmodel.cn\/api\/anthropic",
+      "protocolName" : "Anthropic Messages",
+      "region" : "China"
+    },
+    {
+      "baseURL" : "https:\/\/open.bigmodel.cn\/api\/v1",
+      "protocolName" : "OpenAI Responses",
+      "region" : "China"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "zai-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "zai-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the China Zhipu Open Platform",
+    "Subscribe to an individual or team GLM Coding Plan",
+    "For an individual plan, create the key under Personal Coding Plan → Plan Overview",
+    "For a team plan, obtain the team key under Team Coding Plan → My Plan",
+    "个人套餐入口为当前创建页；团队套餐使用 https:\/\/bigmodel.cn\/coding-plan?z_plan=team 的团队 key。"
+  ],
+  "id" : "zhipu-cn-coding",
+  "minimalPermission" : "Use only with officially supported coding tools and the dedicated https:\/\/open.bigmodel.cn\/api\/coding\/paas\/v4 endpoint (or https:\/\/open.bigmodel.cn\/api\/anthropic for Anthropic Messages). Team Coding Plan keys are not interchangeable with other platform API keys.",
+  "name" : "智谱 · GLM Coding Plan (中国)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/bigmodel.cn\/coding-plan\/personal\/overview",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.bigmodel.cn\/cn\/guide\/develop\/python\/introduction",
+    "https:\/\/docs.bigmodel.cn\/cn\/coding-plan\/extension\/coding-tool-helper",
+    "https:\/\/docs.bigmodel.cn\/cn\/coding-plan\/quick-start"
+  ],
+  "verified" : "2026-09-15"
+}

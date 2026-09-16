@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "MiMo API",
+    "小米 MiMo 按量"
+  ],
+  "createURL" : "https:\/\/platform.xiaomimimo.com\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.xiaomimimo.com\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/api.xiaomimimo.com\/anthropic",
+      "protocolName" : "Anthropic compatible"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "mimo-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "mimo-api-key",
+      "prefixes" : [
+        "sk-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Xiaomi MiMo API Open Platform",
+    "在 Console → API Keys 创建按量 key"
+  ],
+  "id" : "xiaomi-mimo-payg",
+  "minimalPermission" : "仅用于按量计费 API；不能用于 Token Plan endpoint。",
+  "name" : "Xiaomi MiMo · Pay-as-you-go",
+  "prefixes" : [
+    "sk-"
+  ],
+  "rotateURL" : "https:\/\/platform.xiaomimimo.com\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/mimo.mi.com\/docs\/en-US\/quick-start\/faq\/api-integration",
+    "https:\/\/mimo.mi.com\/docs\/en-US\/tokenplan\/integration\/tools-overview"
+  ],
+  "verified" : "2026-09-15"
+}

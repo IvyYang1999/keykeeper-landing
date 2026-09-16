@@ -8,10 +8,12 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 | Template id | `vercel` (also `vercel-token`) |
 |---|---|
-| Field | `vercel-token` → `VERCEL_TOKEN` in `keykeeper run` |
-| Key looks like | starts with `vcp_`, at least 28 characters, shown once when created |
+| Field | `vercel-token` → `VERCEL_TOKEN` · secret |
+| Also | `vercel-org-id` → `VERCEL_ORG_ID` · plain, confirmed by you, optional |
+| Also | `vercel-project-id` → `VERCEL_PROJECT_ID` · plain, confirmed by you, optional |
+| Key looks like | shown once when created |
 | Created at | [vercel.com](https://vercel.com/account/tokens) |
-| Verified by KeyKeeper | `GET https://api.vercel.com/v9/projects` — lists the projects this token can see |
+| Verified by KeyKeeper | `GET https://api.vercel.com/v2/user` — reads the authenticated Vercel identity |
 | Template checked | 2026-09-15 |
 
 ## What the agent does
@@ -22,21 +24,22 @@ keykeeper save --provider vercel --from-clipboard --create --purpose "what this 
 keykeeper run -c vercel -- <your command>
 ```
 
-`--provider vercel` fills in the credential id and the field. The field's environment
-variable is the one Vercel's own tools read, so nothing has to be mapped.
+`--provider vercel` fills in the credential id and the fields. The environment
+variables are the ones Vercel's own tools read, so nothing has to be mapped.
 
 ## What only you can do
 
 <Steps>
 <Step>Log in to vercel.com</Step>
 <Step>Name the token</Step>
-<Step>Pick the scope and the expiry (some teams require 2FA)</Step>
+<Step>Pick the user or Team scope and expiry</Step>
+<Step>Record project/team IDs separately when the workflow needs them</Step>
 <Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
 </Steps>
 
 ## What to choose
 
-Scope: the single project when the task is about one project; otherwise the team. Not Full Account. Expiration: the shortest that fits (7 or 30 days), not No Expiration.
+Vercel tokens are scoped to a user or Team, not one project. Choose the narrowest account or Team and shortest expiry; use the optional IDs to target one project.
 
 <Callout type="info">
 The agent is told the same thing. It opens the page for you and says what to pick; it never
@@ -45,8 +48,9 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Vercel key (starts with `vcp_`, at least 28 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
-- **After saving:** KeyKeeper itself sends `GET https://api.vercel.com/v9/projects` with the key in the `Authorization` header (lists the projects this token can see). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+- **Before writing:** the value must look like a Vercel key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.vercel.com/v2/user` with the key in the `Authorization` header (reads the authenticated Vercel identity). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
 
 ## Rotation and expiry
 

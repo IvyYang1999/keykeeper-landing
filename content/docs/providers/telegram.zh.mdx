@@ -1,0 +1,52 @@
+---
+title: Telegram Bot
+description: Agent 怎样通过 KeyKeeper 拿到 Telegram Bot 的 key，在 t.me 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `telegram` |
+|---|---|
+| 字段 | `telegram-bot-token` → `TELEGRAM_BOT_TOKEN` · 密钥 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [t.me](https://t.me/BotFather) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show telegram
+keykeeper save --provider telegram --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c telegram -- <你的命令>
+```
+
+`--provider telegram` 会补上凭据 ID 和字段名。这些环境变量就是 Telegram Bot 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Open the verified @BotFather chat</Step>
+<Step>Create a bot or request a new token</Step>
+<Step>Configure group privacy and admin rights separately</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+A bot token grants full control of that bot and has no scopes. Create a dedicated bot and grant it only the chat membership/admin rights it needs.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Telegram Bot 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Telegram Bot 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [t.me](https://t.me/BotFather) 轮换或撤销。

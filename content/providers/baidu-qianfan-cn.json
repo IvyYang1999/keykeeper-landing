@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+    "Baidu Qianfan",
+    "Qianfan CN"
+  ],
+  "createURL" : "https:\/\/console.bce.baidu.com\/iam\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/qianfan.baidubce.com\/v2",
+      "protocolName" : "OpenAI compatible"
+    }
+  ],
+  "expiryNote" : "千帆 V2 认证文档称控制台创建的普通 API Key 永久有效，直至用户撤销或更换。",
+  "fieldName" : "qianfan-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "qianfan-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "公开应用标识；仅当 API Key 被限制到特定 appid，或需要按应用区分用量时填写。",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "appid",
+      "name" : "qianfan-appid",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "登录百度智能云",
+    "在安全认证的 API Key 页面创建 key",
+    "仅添加实际调用的服务或 appid 权限"
+  ],
+  "id" : "baidu-qianfan-cn",
+  "minimalPermission" : "只添加实际使用的千帆服务范围；若将 key 限定到 appid，调用时必须同时传入该 appid。",
+  "name" : "百度千帆 · 中国站",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.bce.baidu.com\/iam\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/cloud.baidu.com\/doc\/qianfan-docs\/s\/qm8qxemze",
+    "https:\/\/cloud.baidu.com\/doc\/qianfan-api\/s\/ym9chdsy5",
+    "https:\/\/cloud.baidu.com\/doc\/qianfan-docs\/s\/rm8r4tl9u"
+  ],
+  "verified" : "2026-09-15"
+}

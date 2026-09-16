@@ -1,0 +1,54 @@
+---
+title: 火山方舟 · 按量 (中国)
+description: How an agent gets a 火山方舟 · 按量 (中国) key through KeyKeeper, what to choose on console.volcengine.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `volcengine-ark` (also `ark`, `doubao`, `火山方舟`) |
+|---|---|
+| Field | `ark-api-key` → `ARK_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.volcengine.com](https://console.volcengine.com/ark/region:ark+cn-beijing/apikey) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show volcengine-ark
+keykeeper save --provider volcengine-ark --from-clipboard --create --purpose "what this task does"
+keykeeper run -c volcengine-ark -- <your command>
+```
+
+`--provider volcengine-ark` fills in the credential id and the field. The environment
+variable is the one 火山方舟's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Volcengine</Step>
+<Step>Activate Ark in the intended region</Step>
+<Step>Create a dedicated API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a dedicated key for this project and the matching regional Ark endpoint; avoid sharing an account-wide key across products.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a 火山方舟 · 按量 (中国) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** 火山方舟 · 按量 (中国) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [console.volcengine.com](https://console.volcengine.com/ark/region:ark+cn-beijing/apikey).

@@ -1,0 +1,37 @@
+{
+  "aliases" : [
+    "kimi-coding",
+    "kimi-for-coding"
+  ],
+  "createURL" : "https:\/\/www.kimi.com\/code\/console",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "kimi-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "kimi-api-key",
+      "prefixes" : [
+        "sk-kimi-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Kimi",
+    "Activate a Kimi membership that includes Kimi Code",
+    "Create a Kimi Code API key in the console (maximum five)",
+    "Copy it before closing; the full key is shown once"
+  ],
+  "id" : "kimi-code",
+  "minimalPermission" : "This membership key is only for supported coding tools. It is not interchangeable with a Kimi Open Platform key. Use https:\/\/api.kimi.com\/coding\/v1 for OpenAI-compatible tools or https:\/\/api.kimi.com\/coding\/ for Anthropic-compatible tools, and keep the tool's real User-Agent.",
+  "name" : "Kimi · Kimi Code",
+  "prefixes" : [
+    "sk-kimi-"
+  ],
+  "rotateURL" : "https:\/\/www.kimi.com\/code\/console",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,67 @@
+{
+  "aliases" : [
+    "deep-seek"
+  ],
+  "createURL" : "https:\/\/platform.deepseek.com\/api_keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.deepseek.com",
+      "protocolName" : "OpenAI"
+    },
+    {
+      "baseURL" : "https:\/\/api.deepseek.com\/anthropic",
+      "protocolName" : "Anthropic"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "deepseek-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "deepseek-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the DeepSeek platform",
+    "Create a separate API key",
+    "Make sure the account has balance"
+  ],
+  "id" : "deepseek",
+  "minimalPermission" : "Keys have no per-key scopes. Use one key per project and revoke it independently.",
+  "name" : "DeepSeek",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/platform.deepseek.com\/api_keys",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/api-docs.deepseek.com\/"
+  ],
+  "validation" : {
+    "description" : "lists available models",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.deepseek.com\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

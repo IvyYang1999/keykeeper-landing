@@ -1,0 +1,61 @@
+---
+title: Xiaomi MiMo · Token Plan (Singapore)
+description: Agent 怎样通过 KeyKeeper 拿到 Xiaomi MiMo · Token Plan (Singapore) 的 key，在 platform.xiaomimimo.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `xiaomi-mimo-token-plan-sg`（别名 `MiMo Token Plan Singapore`） |
+|---|---|
+| 字段 | `mimo-api-key` → `MIMO_API_KEY` · 密钥 |
+| 还有 | `mimo-region` → `MIMO_REGION` · 明文，需你确认 |
+| key 长什么样 | 以 `tp-` 开头，创建时只显示一次 |
+| 创建页面 | [platform.xiaomimimo.com](https://platform.xiaomimimo.com/) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show xiaomi-mimo-token-plan-sg
+keykeeper save --provider xiaomi-mimo-token-plan-sg --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c xiaomi-mimo-token-plan-sg -- <你的命令>
+```
+
+`--provider xiaomi-mimo-token-plan-sg` 会补上凭据 ID 和字段名。这些环境变量就是 Xiaomi MiMo 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 Xiaomi MiMo API Open Platform</Step>
+<Step>订阅有效的 Token Plan</Step>
+<Step>在 Token Plan 页面选择并确认 新加坡集群</Step>
+<Step>创建后立即安全保存专属 key</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+仅用于 新加坡集群的 Token Plan；不能与按量 key 或其他集群 Base URL 混用。
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Xiaomi MiMo · Token Plan (Singapore) 的 key（以 `tp-` 开头）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** Xiaomi MiMo · Token Plan (Singapore) 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI compatible**——`https://token-plan-sgp.xiaomimimo.com/v1`（新加坡）
+- **Anthropic compatible**——`https://token-plan-sgp.xiaomimimo.com/anthropic`（新加坡）
+
+## 轮换与过期
+
+仅在所订阅 Token Plan 套餐的有效期内可用；到期后需续订。 在 [platform.xiaomimimo.com](https://platform.xiaomimimo.com/) 轮换或撤销。

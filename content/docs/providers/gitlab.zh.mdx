@@ -1,0 +1,52 @@
+---
+title: GitLab.com · Project access token
+description: Agent 怎样通过 KeyKeeper 拿到 GitLab.com · Project access token 的 key，在 gitlab.com 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `gitlab` |
+|---|---|
+| 字段 | `gitlab-token` → `GITLAB_TOKEN` · 密钥 |
+| key 长什么样 | 以 `glpat-` 开头，创建时只显示一次 |
+| 创建页面 | [gitlab.com](https://gitlab.com/dashboard/projects) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show gitlab
+keykeeper save --provider gitlab --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c gitlab -- <你的命令>
+```
+
+`--provider gitlab` 会补上凭据 ID 和字段名。这些环境变量就是 GitLab.com · Project access token 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to GitLab.com with 2FA/SSO</Step>
+<Step>Open the target project → Settings → Access tokens</Step>
+<Step>Select scopes and an expiration</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Use read_repository for inspection and add write_repository only for pushing. Repository-only tokens intentionally skip the /user API probe.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 GitLab.com · Project access token 的 key（以 `glpat-` 开头）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** GitLab.com · Project access token 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [gitlab.com](https://gitlab.com/dashboard/projects) 轮换或撤销。

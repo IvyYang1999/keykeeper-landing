@@ -1,0 +1,55 @@
+{
+  "aliases" : [
+    "kimi-api",
+    "moonshot-ai"
+  ],
+  "createURL" : "https:\/\/platform.kimi.ai\/console\/account",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "moonshot-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "moonshot-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the global Kimi API Platform",
+    "Create a separate API key in the console",
+    "Make sure the pay-as-you-go account has balance"
+  ],
+  "id" : "kimi-global",
+  "minimalPermission" : "This is a pay-as-you-go global platform key for https:\/\/api.moonshot.ai\/v1. It is not interchangeable with a Kimi Code membership key. Rate limits are shared at user level, so use separate keys for revocation rather than quota isolation.",
+  "name" : "Kimi · API Platform (Global)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/platform.kimi.ai\/console\/account",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists available models",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/api.moonshot.ai\/v1\/models",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

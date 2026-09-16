@@ -1,0 +1,47 @@
+{
+  "aliases" : [
+    "larksuite"
+  ],
+  "createURL" : "https:\/\/open.larksuite.com\/app",
+  "expiryNote" : "Public docs do not promise one universal App Secret expiration policy; reset it explicitly when rotating.",
+  "fieldName" : "lark-app-secret",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "App Secret",
+      "name" : "lark-app-secret",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "App ID",
+      "name" : "lark-app-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Lark Open Platform",
+    "Create\/select a custom app",
+    "Add only required permissions and data scopes",
+    "Publish\/install it in the intended tenant"
+  ],
+  "id" : "lark",
+  "minimalPermission" : "Use the global Lark console, LARK environment names and the open.larksuite.com API base. Feishu China credentials\/endpoints are separate.",
+  "name" : "Lark (Global)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/open.larksuite.com\/app",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,56 @@
+---
+title: Google Analytics 4
+description: How an agent gets a Google Analytics 4 key through KeyKeeper, what to choose on console.cloud.google.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `ga4` (also `google-analytics`, `analytics`) |
+|---|---|
+| Field | `google-application-credentials` → `GOOGLE_APPLICATION_CREDENTIALS` · credential file |
+| Also | `ga4-property-id` → `GA4_PROPERTY_ID` · plain, confirmed by you |
+| Key looks like | shown once when created |
+| Created at | [console.cloud.google.com](https://console.cloud.google.com/iam-admin/serviceaccounts) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show ga4
+keykeeper save --provider ga4 --from-file /path/to/google-application-credentials.json --create --purpose "what this task does"
+keykeeper run -c ga4 -- <your command>
+```
+
+`--provider ga4` fills in the credential id and the fields. The environment
+variables are the ones Google Analytics 4's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Google Cloud and choose a project</Step>
+<Step>Enable Google Analytics Data API</Step>
+<Step>Create a dedicated service account</Step>
+<Step>In GA4 Property access management, add its email</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+GA4 property role = Viewer for reporting. Do not grant Editor or Administrator. Grant access only to the properties the task reads.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Google Analytics 4 key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Google Analytics 4 offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+User-managed service-account keys usually remain valid until revoked, but organization policy can impose expiry. Record a date only when the console or policy shows one. Rotate or revoke at [console.cloud.google.com](https://console.cloud.google.com/iam-admin/serviceaccounts).

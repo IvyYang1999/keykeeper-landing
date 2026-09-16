@@ -1,0 +1,52 @@
+{
+  "aliases" : [
+    "bailian-token-plan"
+  ],
+  "createURL" : "https:\/\/bailian.console.aliyun.com\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/token-plan.cn-beijing.maas.aliyuncs.com\/compatible-mode\/v1",
+      "protocolName" : "OpenAI",
+      "region" : "cn-beijing"
+    },
+    {
+      "baseURL" : "https:\/\/token-plan.cn-beijing.maas.aliyuncs.com\/apps\/anthropic",
+      "protocolName" : "Anthropic",
+      "region" : "cn-beijing"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "dashscope-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "dashscope-api-key",
+      "prefixes" : [
+        "sk-sp-"
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Alibaba Cloud",
+    "Subscribe to Token Plan in the intended workspace",
+    "Create\/copy the plan key and use the plan base URL",
+    "仅限套餐允许的交互式 AI coding 工具，不能用于后端服务。"
+  ],
+  "id" : "alibaba-bailian-token-cn",
+  "minimalPermission" : "A Token Plan key\/base is isolated from both Coding Plan and pay-as-you-go. Mixing them can use the wrong quota or billing path.",
+  "name" : "阿里云百炼 · Token Plan (中国)",
+  "prefixes" : [
+    "sk-sp-"
+  ],
+  "rotateURL" : "https:\/\/bailian.console.aliyun.com\/",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/get-api-key",
+    "https:\/\/help.aliyun.com\/zh\/model-studio\/base-url"
+  ],
+  "verified" : "2026-09-15"
+}

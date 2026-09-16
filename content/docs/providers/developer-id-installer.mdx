@@ -1,0 +1,43 @@
+---
+title: Apple Developer ID · Installer
+description: How an agent gets a Apple Developer ID · Installer key through KeyKeeper, what to choose on developer.apple.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `developer-id-installer` (also `productsign`) |
+|---|---|
+| Field | `signing-identity` · signing identity in the macOS Keychain |
+| Key looks like | can be viewed again in the console |
+| Created at | [developer.apple.com](https://developer.apple.com/account/resources/certificates/add) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+<Callout type="warn">
+This is a signing identity that stays in the macOS Keychain. KeyKeeper stores no private key
+material for it; the template only records where Apple manages it.
+</Callout>
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Apple Developer</Step>
+<Step>Choose Developer ID Installer</Step>
+<Step>Create it from a CSR whose private key remains on this Mac</Step>
+
+</Steps>
+
+## What to choose
+
+Use Installer only for signed installer packages. Application binaries require the separate Developer ID Application identity.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+
+## Rotation and expiry
+
+The Apple-issued certificate has an expiration date; record it on the credential. Rotate or revoke at [developer.apple.com](https://developer.apple.com/account/resources/certificates/list).

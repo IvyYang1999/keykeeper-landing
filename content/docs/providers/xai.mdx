@@ -1,0 +1,61 @@
+---
+title: xAI
+description: How an agent gets a xAI key through KeyKeeper, what to choose on console.x.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `xai` (also `grok`) |
+|---|---|
+| Field | `xai-api-key` → `XAI_API_KEY` · secret |
+| Key looks like | shown once when created |
+| Created at | [console.x.ai](https://console.x.ai/team/default/api-keys) |
+| Verified by KeyKeeper | `GET https://api.x.ai/v1/models` — lists available models |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show xai
+keykeeper save --provider xai --from-clipboard --create --purpose "what this task does"
+keykeeper run -c xai -- <your command>
+```
+
+`--provider xai` fills in the credential id and the field. The environment
+variable is the one xAI's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the xAI Console</Step>
+<Step>Choose the team</Step>
+<Step>Create a key and configure spending limits</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a project-specific key with a spending limit. Do not reuse the team owner's general key.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a xAI key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.x.ai/v1/models` with the key in the `Authorization` header (lists available models). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://api.x.ai/v1`
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [console.x.ai](https://console.x.ai/team/default/api-keys).

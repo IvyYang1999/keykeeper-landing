@@ -1,0 +1,56 @@
+---
+title: Google Search Console
+description: How an agent gets a Google Search Console key through KeyKeeper, what to choose on console.cloud.google.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `search-console` (also `gsc`, `google-search-console`) |
+|---|---|
+| Field | `google-application-credentials` → `GOOGLE_APPLICATION_CREDENTIALS` · credential file |
+| Also | `search-console-site-url` → `SEARCH_CONSOLE_SITE_URL` · plain, confirmed by you |
+| Key looks like | shown once when created |
+| Created at | [console.cloud.google.com](https://console.cloud.google.com/iam-admin/serviceaccounts) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show search-console
+keykeeper save --provider search-console --from-file /path/to/google-application-credentials.json --create --purpose "what this task does"
+keykeeper run -c search-console -- <your command>
+```
+
+`--provider search-console` fills in the credential id and the fields. The environment
+variables are the ones Google Search Console's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Google Cloud</Step>
+<Step>Enable Search Console API</Step>
+<Step>Create a dedicated service account</Step>
+<Step>Add its email as a user of the exact Search Console property</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use Restricted user access when the task only reads search analytics. Grant Full only if URL inspection or property changes are explicitly required.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Google Search Console key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Google Search Console offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+User-managed service-account keys usually remain valid until revoked, but organization policy can impose expiry. Record a date only when the console or policy shows one. Rotate or revoke at [console.cloud.google.com](https://console.cloud.google.com/iam-admin/serviceaccounts).

@@ -1,0 +1,46 @@
+{
+  "aliases" : [
+    "fly"
+  ],
+  "createURL" : "https:\/\/fly.io\/dashboard",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "fly-api-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "fly-api-token",
+      "prefixes" : [
+        "FlyV1 "
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "App name",
+      "name" : "fly-app-name",
+      "prefixes" : [
+
+      ],
+      "required" : false
+    }
+  ],
+  "gates" : [
+    "Sign in to Fly.io",
+    "Use flyctl to create a token",
+    "Choose the app, organization and expiration"
+  ],
+  "id" : "flyio",
+  "minimalPermission" : "Prefer `fly tokens create deploy -a APP` for an app-scoped deploy token. Use an org token only when the task spans apps; do not use the short-lived all-powerful login token.",
+  "name" : "Fly.io",
+  "prefixes" : [
+    "FlyV1 "
+  ],
+  "rotateURL" : "https:\/\/fly.io\/dashboard",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

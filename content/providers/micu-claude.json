@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "micu-anthropic"
+  ],
+  "createURL" : "https:\/\/www.micuapi.ai\/sign-in?redirect=%2Fdashboard",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/www.micuapi.ai",
+      "protocolName" : "Anthropic Messages"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "micu-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "anthropic-api-key"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "micu-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Micu 控制台",
+    "在令牌管理创建 Token",
+    "选择与 Claude 模型匹配的渠道分组",
+    "确认 Token 未过期且余额充足"
+  ],
+  "id" : "micu-claude",
+  "minimalPermission" : "仅保存为 Claude\/Anthropic 协议和对应渠道分组创建的 Micu Token；分组不匹配会被拒绝，不要假设它与 Codex 分组互通。",
+  "name" : "Micu API · Claude Code",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/www.micuapi.ai\/sign-in?redirect=%2Fdashboard",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.micuapi.ai\/claude-code\/config",
+    "https:\/\/docs.micuapi.ai\/external-compat"
+  ],
+  "verified" : "2026-09-15"
+}

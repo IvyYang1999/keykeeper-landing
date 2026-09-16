@@ -1,0 +1,64 @@
+{
+  "aliases" : [
+    "MiMo Token Plan CN"
+  ],
+  "createURL" : "https:\/\/platform.xiaomimimo.com\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/token-plan-cn.xiaomimimo.com\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "中国"
+    },
+    {
+      "baseURL" : "https:\/\/token-plan-cn.xiaomimimo.com\/anthropic",
+      "protocolName" : "Anthropic compatible",
+      "region" : "中国"
+    }
+  ],
+  "expiryNote" : "仅在所订阅 Token Plan 套餐的有效期内可用；到期后需续订。",
+  "fieldName" : "mimo-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "mimo-api-key",
+      "prefixes" : [
+        "tp-"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "公开路由信息；保存时由用户明确填写。KeyKeeper 不从它推导或自动注入 Base URL。",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Token Plan cluster",
+      "name" : "mimo-region",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Xiaomi MiMo API Open Platform",
+    "订阅有效的 Token Plan",
+    "在 Token Plan 页面选择并确认 中国集群",
+    "创建后立即安全保存专属 key"
+  ],
+  "id" : "xiaomi-mimo-token-plan-cn",
+  "minimalPermission" : "仅用于 中国集群的 Token Plan；不能与按量 key 或其他集群 Base URL 混用。",
+  "name" : "Xiaomi MiMo · Token Plan (China)",
+  "prefixes" : [
+    "tp-"
+  ],
+  "rotateURL" : "https:\/\/platform.xiaomimimo.com\/",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/mimo.mi.com\/docs\/en-US\/quick-start\/faq\/api-integration",
+    "https:\/\/mimo.mi.com\/docs\/en-US\/tokenplan\/Token%20Plan\/subscription",
+    "https:\/\/mimo.mi.com\/docs\/en-US\/tokenplan\/Token%20Plan\/quick-access"
+  ],
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,61 @@
+---
+title: ModelScope 魔搭 · Global
+description: How an agent gets a ModelScope 魔搭 · Global key through KeyKeeper, what to choose on modelscope.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `modelscope-global` (also `ModelScope International`, `ModelScope AI`) |
+|---|---|
+| Field | `modelscope-api-token` → `MODELSCOPE_API_TOKEN` / `MODELSCOPE_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [modelscope.ai](https://modelscope.ai/my/access/token) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show modelscope-global
+keykeeper save --provider modelscope-global --from-clipboard --create --purpose "what this task does"
+keykeeper run -c modelscope-global -- <your command>
+```
+
+`--provider modelscope-global` fills in the credential id and the field. The environment
+variable is the one ModelScope 魔搭's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 modelscope.ai</Step>
+<Step>在 Global 站访问令牌页面创建 token</Step>
+<Step>确认客户端 endpoint 指向 Global 站</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+中国站与 Global 站的账号、token 和内容目录独立；只授予当前 Hub/OpenAPI 操作所需的权限。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a ModelScope 魔搭 · Global key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** ModelScope 魔搭 · Global offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **ModelScope Hub/OpenAPI** — `https://modelscope.ai/openapi/v1`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [modelscope.ai](https://modelscope.ai/my/access/token).

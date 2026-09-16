@@ -1,0 +1,64 @@
+---
+title: 阿里云百炼 · 按量 (中国香港)
+description: How an agent gets a 阿里云百炼 · 按量 (中国香港) key through KeyKeeper, what to choose on bailian.console.aliyun.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `alibaba-bailian-hk` |
+|---|---|
+| Field | `dashscope-api-key` → `DASHSCOPE_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [bailian.console.aliyun.com](https://bailian.console.aliyun.com/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show alibaba-bailian-hk
+keykeeper save --provider alibaba-bailian-hk --from-clipboard --create --purpose "what this task does"
+keykeeper run -c alibaba-bailian-hk -- <your command>
+```
+
+`--provider alibaba-bailian-hk` fills in the credential id and the field. The environment
+variable is the one 阿里云百炼's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录阿里云，选择 中国香港（cn-hongkong）与对应业务空间</Step>
+<Step>在 API Key 管理中创建该地区的按量 key；不要复制 Coding / Token Plan key</Step>
+<Step>配置同地区 endpoint；业务空间专属域名需从控制台确认 WorkspaceId</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+不同地区的 key 不通用。优先独立业务空间、限制模型与 IP 的自定义权限。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a 阿里云百炼 · 按量 (中国香港) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** 阿里云百炼 · 按量 (中国香港) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://cn-hongkong.dashscope.aliyuncs.com/compatible-mode/v1` (cn-hongkong)
+- **Anthropic** — `https://cn-hongkong.dashscope.aliyuncs.com/apps/anthropic` (cn-hongkong)
+- **DashScope** — `https://cn-hongkong.dashscope.aliyuncs.com/api/v1` (cn-hongkong)
+- **OpenAI · workspace (replace WorkspaceId)** — `https://{WorkspaceId}.cn-hongkong.maas.aliyuncs.com/compatible-mode/v1` (cn-hongkong)
+
+## Rotation and expiry
+
+本模板管理持久 API Key，无固定有效期；不是最多 1800 秒的临时 key。仍可能被撤销。 Rotate or revoke at [bailian.console.aliyun.com](https://bailian.console.aliyun.com/).

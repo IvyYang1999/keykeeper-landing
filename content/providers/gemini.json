@@ -5,22 +5,34 @@
     "aistudio"
   ],
   "createURL" : "https:\/\/aistudio.google.com\/apikey",
-  "expiryNote" : "Keys do not expire; a deleted key can be restored for 30 days.",
+  "expiryNote" : "The public Gemini key guide does not promise one universal expiry or recovery policy; review it in Google Cloud.",
   "fieldName" : "gemini-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "gemini-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in with the Google account",
     "Accept the terms on first use",
     "Choose or import a Google Cloud project"
   ],
   "id" : "gemini",
-  "minChars" : 39,
-  "minimalPermission" : "Create the key restricted to the Gemini API only (the default). Standard unrestricted keys are being rejected by Gemini from late 2026.",
+  "minimalPermission" : "Create the key restricted to the Gemini API only (the default). Standard unrestricted keys are rejected by Gemini API starting September 2026.",
   "name" : "Google Gemini",
   "prefixes" : [
-    "AIza"
+
   ],
   "rotateURL" : "https:\/\/aistudio.google.com\/apikey",
-  "shownOnce" : true,
+  "shownOnce" : false,
   "validation" : {
     "description" : "lists the models this key can use",
     "extraHeaders" : {
@@ -29,8 +41,7 @@
     "header" : "x-goog-api-key",
     "invalidStatuses" : [
       400,
-      401,
-      403
+      401
     ],
     "method" : "GET",
     "okStatuses" : [

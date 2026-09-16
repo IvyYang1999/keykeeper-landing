@@ -1,0 +1,14 @@
+{
+  "total": 113,
+  "brands": 69,
+  "categories": {
+    "models": 42,
+    "gateways": 25,
+    "cloud": 16,
+    "development": 7,
+    "apple": 7,
+    "analytics": 5,
+    "messaging": 10,
+    "payments": 1
+  }
+}

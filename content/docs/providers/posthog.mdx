@@ -1,0 +1,55 @@
+---
+title: PostHog · Cloud US
+description: How an agent gets a PostHog · Cloud US key through KeyKeeper, what to choose on us.posthog.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `posthog` |
+|---|---|
+| Field | `posthog-personal-api-key` → `POSTHOG_PERSONAL_API_KEY` · secret |
+| Also | `posthog-host` → `POSTHOG_HOST` · plain, confirmed by you |
+| Key looks like | starts with `phx_`, shown once when created |
+| Created at | [us.posthog.com](https://us.posthog.com/settings/user-api-keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show posthog
+keykeeper save --provider posthog --from-clipboard --create --purpose "what this task does"
+keykeeper run -c posthog -- <your command>
+```
+
+`--provider posthog` fills in the credential id and the fields. The environment
+variables are the ones PostHog's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the correct PostHog region</Step>
+<Step>Create a personal API key</Step>
+<Step>Select only the required organization/project scopes</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a personal API key restricted to the target project and read-only scopes for analytics. The client-side project key is not an admin API credential.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a PostHog · Cloud US key (starts with `phx_`, shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** PostHog · Cloud US offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [us.posthog.com](https://us.posthog.com/settings/user-api-keys).

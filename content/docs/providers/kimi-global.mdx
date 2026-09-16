@@ -1,0 +1,54 @@
+---
+title: Kimi · API Platform (Global)
+description: How an agent gets a Kimi · API Platform (Global) key through KeyKeeper, what to choose on platform.kimi.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `kimi-global` (also `kimi-api`, `moonshot-ai`) |
+|---|---|
+| Field | `moonshot-api-key` → `MOONSHOT_API_KEY` · secret |
+| Key looks like | shown once when created |
+| Created at | [platform.kimi.ai](https://platform.kimi.ai/console/account) |
+| Verified by KeyKeeper | `GET https://api.moonshot.ai/v1/models` — lists available models |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show kimi-global
+keykeeper save --provider kimi-global --from-clipboard --create --purpose "what this task does"
+keykeeper run -c kimi-global -- <your command>
+```
+
+`--provider kimi-global` fills in the credential id and the field. The environment
+variable is the one Kimi's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the global Kimi API Platform</Step>
+<Step>Create a separate API key in the console</Step>
+<Step>Make sure the pay-as-you-go account has balance</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+This is a pay-as-you-go global platform key for https://api.moonshot.ai/v1. It is not interchangeable with a Kimi Code membership key. Rate limits are shared at user level, so use separate keys for revocation rather than quota isolation.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Kimi · API Platform (Global) key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.moonshot.ai/v1/models` with the key in the `Authorization` header (lists available models). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [platform.kimi.ai](https://platform.kimi.ai/console/account).

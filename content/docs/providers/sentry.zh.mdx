@@ -1,0 +1,54 @@
+---
+title: Sentry Cloud · Organization Auth Token
+description: Agent 怎样通过 KeyKeeper 拿到 Sentry Cloud · Organization Auth Token 的 key，在 sentry.io 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `sentry` |
+|---|---|
+| 字段 | `sentry-auth-token` → `SENTRY_AUTH_TOKEN` · 密钥 |
+| 还有 | `sentry-org` → `SENTRY_ORG` · 明文，需你确认，可选 |
+| 还有 | `sentry-project` → `SENTRY_PROJECT` · 明文，需你确认，可选 |
+| key 长什么样 | 可在控制台再次查看 |
+| 创建页面 | [sentry.io](https://sentry.io/settings/) |
+| KeyKeeper 的验证 | `GET https://sentry.io/api/0/organizations/`——lists organizations visible to the token |
+| 模板核实日期 | 2026-09-15 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show sentry
+keykeeper save --provider sentry --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c sentry -- <你的命令>
+```
+
+`--provider sentry` 会补上凭据 ID 和字段名。这些环境变量就是 Sentry Cloud · Organization Auth Token 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>Sign in to Sentry Cloud</Step>
+<Step>Open the target organization → Developer Settings → Auth</Step>
+<Step>Create an organization token with only the scopes required</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Prefer an organization token. Reporting needs org:read/project:read; release automation should use org:ci. Do not grant write/admin scopes unless the exact task requires them.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 Sentry Cloud · Organization Auth Token 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** KeyKeeper 自己发送 `GET https://sentry.io/api/0/organizations/`，key 放在 `Authorization` 请求头里（lists organizations visible to the token）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
+
+
+## 轮换与过期
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. 在 [sentry.io](https://sentry.io/settings/) 轮换或撤销。

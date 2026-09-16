@@ -1,0 +1,64 @@
+---
+title: PipeLLM
+description: How an agent gets a PipeLLM key through KeyKeeper, what to choose on console.pipellm.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `pipellm` |
+|---|---|
+| Field | `pipellm-api-key` → `PIPELLM_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.pipellm.ai](https://console.pipellm.ai/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show pipellm
+keykeeper save --provider pipellm --from-clipboard --create --purpose "what this task does"
+keykeeper run -c pipellm -- <your command>
+```
+
+`--provider pipellm` fills in the credential id and the field. The environment
+variable is the one PipeLLM's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>注册并登录 PipeLLM Console</Step>
+<Step>充值余额</Step>
+<Step>创建 API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+官方文档未说明可为 key 设置细粒度权限；为每个项目创建独立 key，并只把固定的 PipeLLM base URL 配给调用方。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a PipeLLM key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** PipeLLM offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **Native public routes** — `https://api.pipellm.ai`
+- **OpenAI converter** — `https://api.pipellm.ai/openai/v1`
+- **Anthropic converter** — `https://api.pipellm.ai/anthropic`
+- **Gemini converter** — `https://api.pipellm.ai/gemini`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [console.pipellm.ai](https://console.pipellm.ai/).

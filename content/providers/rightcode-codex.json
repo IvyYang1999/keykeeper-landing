@@ -1,0 +1,50 @@
+{
+  "aliases" : [
+    "right-code",
+    "rightcode"
+  ],
+  "createURL" : "https:\/\/rightapi.ai\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/rightapi.ai\/codex\/v1",
+      "protocolName" : "OpenAI Responses"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "rightcode-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "openai-api-key"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "rightcode-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 RightCode 后台",
+    "进入令牌管理并创建密钥",
+    "确认密钥允许所需模型",
+    "若只用 Codex 套餐，关闭“允许使用余额”以防额外按量扣费"
+  ],
+  "id" : "rightcode-codex",
+  "minimalPermission" : "仅开放任务需要的模型；是否允许套餐耗尽后继续扣余额必须由用户明确选择。此模板只覆盖官方文档确认的 Codex endpoint。",
+  "name" : "RightCode · Codex",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/rightapi.ai\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.right.codes\/docs\/rc_quick_start\/apikey",
+    "https:\/\/docs.right.codes\/docs\/rc_cli_config\/codex"
+  ],
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,57 @@
+---
+title: Mailgun · Domain Sending Key
+description: How an agent gets a Mailgun · Domain Sending Key key through KeyKeeper, what to choose on app.mailgun.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `mailgun` |
+|---|---|
+| Field | `mailgun-api-key` → `MAILGUN_API_KEY` · secret |
+| Also | `mailgun-domain` → `MAILGUN_DOMAIN` · plain, confirmed by you |
+| Also | `mailgun-region` → `MAILGUN_REGION` · plain, confirmed by you |
+| Key looks like | shown once when created |
+| Created at | [app.mailgun.com](https://app.mailgun.com/settings/api_security) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show mailgun
+keykeeper save --provider mailgun --from-clipboard --create --purpose "what this task does"
+keykeeper run -c mailgun -- <your command>
+```
+
+`--provider mailgun` fills in the credential id and the fields. The environment
+variables are the ones Mailgun · Domain Sending Key's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Mailgun</Step>
+<Step>Open the exact sending domain → Domain Settings → Sending Keys</Step>
+<Step>Create a Domain Sending Key</Step>
+<Step>Record whether the domain is US or EU</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Use a Domain Sending Key for mail delivery; it can only send for one domain. Do not use the primary account API key unless management endpoints are explicitly required.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Mailgun · Domain Sending Key key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Mailgun · Domain Sending Key offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [app.mailgun.com](https://app.mailgun.com/settings/api_security).

@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+    "zhipu",
+    "bigmodel",
+    "glm",
+    "智谱",
+    "zhipu-ai"
+  ],
+  "createURL" : "https:\/\/bigmodel.cn\/usercenter\/proj-mgmt\/apikeys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/open.bigmodel.cn\/api\/paas\/v4",
+      "protocolName" : "OpenAI Chat Completions",
+      "region" : "China"
+    }
+  ],
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "zai-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "zhipuai-api-key"
+      ],
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "zai-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the China Zhipu Open Platform",
+    "Create a general API key",
+    "Activate pay-as-you-go billing or an API usage bundle if needed"
+  ],
+  "id" : "zhipu-cn",
+  "minimalPermission" : "中国通用 API 使用 https:\/\/open.bigmodel.cn\/api\/paas\/v4，按开放平台合同计费。Coding Plan 使用专用 endpoint 和套餐授权，不能按通用 API 路径假定扣套餐额度。每个项目单独建 key，保留独立撤销能力。",
+  "name" : "智谱 · 开放平台 (中国)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/bigmodel.cn\/usercenter\/proj-mgmt\/apikeys",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.bigmodel.cn\/cn\/guide\/develop\/python\/introduction",
+    "https:\/\/docs.bigmodel.cn\/cn\/coding-plan\/extension\/coding-tool-helper",
+    "https:\/\/docs.bigmodel.cn\/cn\/coding-plan\/quick-start"
+  ],
+  "verified" : "2026-09-15"
+}

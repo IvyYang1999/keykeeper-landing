@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+    "notarytool",
+    "apple-notarization"
+  ],
+  "createURL" : "https:\/\/account.apple.com\/account\/manage",
+  "expiryNote" : "It remains valid until revoked; changing the Apple Account password revokes all app-specific passwords.",
+  "fieldName" : "apple-app-specific-password",
+  "fields" : [
+    {
+      "help" : "A dedicated password from account.apple.com, not the Apple Account password.",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "App-specific password",
+      "name" : "apple-app-specific-password",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Apple Account email",
+      "name" : "apple-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Developer Team ID",
+      "name" : "apple-team-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to the Apple Account",
+    "Pass two-factor authentication",
+    "Create a dedicated app-specific password under Sign-In and Security"
+  ],
+  "id" : "apple-notary",
+  "minimalPermission" : "Use a dedicated app-specific password only for notarization. Keep Apple Account email and Team ID as non-secret fields in the same credential.",
+  "name" : "Apple Notary · App-Specific Password",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/account.apple.com\/account\/manage",
+  "shownOnce" : false,
+  "verified" : "2026-09-15"
+}

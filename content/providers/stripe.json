@@ -4,8 +4,24 @@
     "stripe-api-key"
   ],
   "createURL" : "https:\/\/dashboard.stripe.com\/apikeys",
-  "expiryNote" : "No expiry; Rotate key gives the old value up to 7 days of grace. A key unused for 180 days gets restricted.",
+  "expiryNote" : "No automatic expiry. Rotation can give the old value a grace period; some payment and transfer capabilities can be limited after long inactivity.",
   "fieldName" : "stripe-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "stripe-api-key",
+      "prefixes" : [
+        "rk_live_",
+        "rk_test_",
+        "sk_live_",
+        "sk_test_"
+      ],
+      "required" : true
+    }
+  ],
   "gates" : [
     "Log in to dashboard.stripe.com",
     "Choose sandbox (test) or live mode",
@@ -13,7 +29,6 @@
     "A 2FA code is required to create a live key"
   ],
   "id" : "stripe",
-  "minChars" : 32,
   "minimalPermission" : "Always a Restricted key (rk_…), never the Secret key (sk_…): set each resource to None except the ones the task needs (Read where Read is enough). Start in sandbox (rk_test_) and only create a live key when the task really goes live. Balance: Read lets KeyKeeper verify it.",
   "name" : "Stripe",
   "prefixes" : [

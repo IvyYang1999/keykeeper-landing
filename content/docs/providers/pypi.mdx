@@ -1,0 +1,55 @@
+---
+title: PyPI · API token
+description: How an agent gets a PyPI · API token key through KeyKeeper, what to choose on pypi.org, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `pypi` |
+|---|---|
+| Field | `twine-password` → `TWINE_PASSWORD` · secret |
+| Also | `twine-username` → `TWINE_USERNAME` · plain, confirmed by you |
+| Key looks like | starts with `pypi-`, at least 90 characters, shown once when created |
+| Created at | [pypi.org](https://pypi.org/manage/account/token/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show pypi
+keykeeper save --provider pypi --from-clipboard --create --purpose "what this task does"
+keykeeper run -c pypi -- <your command>
+```
+
+`--provider pypi` fills in the credential id and the fields. The environment
+variables are the ones PyPI's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to PyPI with 2FA</Step>
+<Step>Create an API token</Step>
+<Step>Choose the single project when it already exists</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Prefer Trusted Publishing (OIDC) for CI. When a stored token is unavoidable, use a project-scoped token; a pending trusted publisher can handle a first release without an account-wide token.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a PyPI · API token key (starts with `pypi-`, at least 90 characters). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** PyPI · API token offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [pypi.org](https://pypi.org/manage/account/token/).

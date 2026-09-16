@@ -1,0 +1,61 @@
+---
+title: SiliconFlow · Global
+description: How an agent gets a SiliconFlow · Global key through KeyKeeper, what to choose on cloud.siliconflow.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `siliconflow-global` (also `siliconflow-com`) |
+|---|---|
+| Field | `siliconflow-api-key` → `SILICONFLOW_API_KEY` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [cloud.siliconflow.com](https://cloud.siliconflow.com/account/ak) |
+| Verified by KeyKeeper | `GET https://api.siliconflow.com/v1/models` — lists models available on the global platform |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show siliconflow-global
+keykeeper save --provider siliconflow-global --from-clipboard --create --purpose "what this task does"
+keykeeper run -c siliconflow-global -- <your command>
+```
+
+`--provider siliconflow-global` fills in the credential id and the field. The environment
+variable is the one SiliconFlow 硅基流动's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the global SiliconFlow platform</Step>
+<Step>Create a separate API key</Step>
+<Step>Confirm the workflow uses api.siliconflow.com</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Global and China platform compatibility is not promised. Use a dedicated global key per project and the matching .com API base.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a SiliconFlow · Global key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.siliconflow.com/v1/models` with the key in the `Authorization` header (lists models available on the global platform). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI** — `https://api.siliconflow.com/v1`
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [cloud.siliconflow.com](https://cloud.siliconflow.com/account/ak).

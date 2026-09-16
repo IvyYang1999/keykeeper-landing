@@ -1,0 +1,62 @@
+---
+title: 百度千帆 · 国际站 (Baidu AI Cloud Qianfan)
+description: How an agent gets a 百度千帆 · 国际站 (Baidu AI Cloud Qianfan) key through KeyKeeper, what to choose on console.bce.baidu.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `baidu-qianfan-global` (also `Qianfan Global`, `Baidu Qianfan International`) |
+|---|---|
+| Field | `qianfan-api-key` → `QIANFAN_API_KEY` · secret |
+| Also | `qianfan-appid` → `QIANFAN_APPID` · plain, confirmed by you, optional |
+| Key looks like | can be viewed again in the console |
+| Created at | [console.bce.baidu.com](https://console.bce.baidu.com/iam/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show baidu-qianfan-global
+keykeeper save --provider baidu-qianfan-global --from-clipboard --create --purpose "what this task does"
+keykeeper run -c baidu-qianfan-global -- <your command>
+```
+
+`--provider baidu-qianfan-global` fills in the credential id and the fields. The environment
+variables are the ones 百度千帆's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录国际文档所链接的百度智能云控制台</Step>
+<Step>创建或选择 API Key</Step>
+<Step>确认该账号与 key 可用于 International endpoint</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+仅添加实际使用的服务范围；国际文档没有证明中国站与国际站账号或 key 可以互换。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a 百度千帆 · 国际站 (Baidu AI Cloud Qianfan) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** 百度千帆 · 国际站 (Baidu AI Cloud Qianfan) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://api.baiduqianfan.ai/v1`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [console.bce.baidu.com](https://console.bce.baidu.com/iam/).

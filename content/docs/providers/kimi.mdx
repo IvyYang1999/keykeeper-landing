@@ -1,0 +1,54 @@
+---
+title: Kimi · Open Platform (China)
+description: How an agent gets a Kimi · Open Platform (China) key through KeyKeeper, what to choose on platform.moonshot.cn, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `kimi` (also `moonshot`, `moonshot-cn`) |
+|---|---|
+| Field | `moonshot-api-key` → `MOONSHOT_API_KEY` · secret |
+| Key looks like | shown once when created |
+| Created at | [platform.moonshot.cn](https://platform.moonshot.cn/console/api-keys) |
+| Verified by KeyKeeper | `GET https://api.moonshot.cn/v1/models` — lists available models |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show kimi
+keykeeper save --provider kimi --from-clipboard --create --purpose "what this task does"
+keykeeper run -c kimi -- <your command>
+```
+
+`--provider kimi` fills in the credential id and the field. The environment
+variable is the one Kimi's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to the China Kimi Open Platform</Step>
+<Step>Create a separate API key</Step>
+<Step>Make sure the pay-as-you-go account has balance</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+This is a pay-as-you-go China Open Platform key for https://api.moonshot.cn/v1. It is not interchangeable with a Kimi Code membership key. Keys have no granular scopes; use one per project.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Kimi · Open Platform (China) key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.moonshot.cn/v1/models` with the key in the `Authorization` header (lists available models). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [platform.moonshot.cn](https://platform.moonshot.cn/console/api-keys).

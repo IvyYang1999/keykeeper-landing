@@ -1,0 +1,53 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/www.ccsub.net\/keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/www.ccsub.net\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/www.ccsub.net",
+      "protocolName" : "Anthropic Messages"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "ccsub-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "openai-api-key",
+        "anthropic-auth-token"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "ccsub-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 CCSub",
+    "进入 API Keys 页面",
+    "创建独立密钥",
+    "确认账户套餐或余额可用"
+  ],
+  "id" : "ccsub",
+  "minimalPermission" : "一个 CCSub key 可按官方配置用于 OpenAI 或 Anthropic 兼容客户端；为每个项目单独创建，避免跨工具复用。",
+  "name" : "CCSub",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/www.ccsub.net\/keys",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/www.ccsub.net\/docs\/install"
+  ],
+  "verified" : "2026-09-15"
+}

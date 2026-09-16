@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "NVIDIA hosted NIM",
+    "build.nvidia.com"
+  ],
+  "createURL" : "https:\/\/build.nvidia.com\/settings\/api-keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/integrate.api.nvidia.com\/v1",
+      "protocolName" : "OpenAI compatible hosted NIM"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "nvidia-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "nvidia-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 NVIDIA Build",
+    "在 API Keys 页面生成 key",
+    "创建后立即复制并安全保存；官方提示稍后可能无法再次查看完整 key",
+    "接受所选模型要求的条款"
+  ],
+  "id" : "nvidia-api-catalog",
+  "minimalPermission" : "用于 NVIDIA 托管 NIM\/API Catalog 推理；不要以 NGC personal\/service key 替代。公开页面未确认统一的 key 权限粒度，也未保证 key 必定只显示一次。",
+  "name" : "NVIDIA · API Catalog",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/build.nvidia.com\/settings\/api-keys",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/build.nvidia.com\/settings\/api-keys",
+    "https:\/\/docs.nvidia.com\/openshell\/sandboxes\/manage-providers",
+    "https:\/\/docs.nvidia.com\/nemo\/retriever\/latest\/extraction\/api-keys\/",
+    "https:\/\/docs.nvidia.com\/nemo\/curator\/latest\/curate-text\/synthetic\/llm-client"
+  ],
+  "verified" : "2026-09-15"
+}

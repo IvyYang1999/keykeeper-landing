@@ -1,0 +1,65 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/console.neon.tech\/app",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "neon-api-key",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "neon-api-key",
+      "prefixes" : [
+        "napi_"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Project ID",
+      "name" : "neon-project-id",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Neon",
+    "Open the organization settings → API keys",
+    "Create an organization key and restrict it to the target project where available"
+  ],
+  "id" : "neon-org",
+  "minimalPermission" : "Prefer a project-scoped organization key for an agent so it cannot see unrelated projects or create more keys.",
+  "name" : "Neon · Organization or project API Key",
+  "prefixes" : [
+    "napi_"
+  ],
+  "rotateURL" : "https:\/\/console.neon.tech\/app",
+  "shownOnce" : true,
+  "validation" : {
+    "description" : "lists projects visible to this organization key",
+    "extraHeaders" : {
+
+    },
+    "header" : "Authorization",
+    "invalidStatuses" : [
+      401
+    ],
+    "method" : "GET",
+    "okStatuses" : [
+      200
+    ],
+    "url" : "https:\/\/console.neon.tech\/api\/v2\/projects",
+    "validIfBodyContains" : [
+
+    ],
+    "valuePrefix" : "Bearer "
+  },
+  "verified" : "2026-09-15"
+}

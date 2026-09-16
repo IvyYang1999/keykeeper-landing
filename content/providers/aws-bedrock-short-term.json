@@ -1,0 +1,57 @@
+{
+  "aliases" : [
+    "bedrock short-term"
+  ],
+  "createURL" : "https:\/\/console.aws.amazon.com\/bedrock",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/bedrock-runtime.{region}.amazonaws.com",
+      "protocolName" : "Bedrock Converse",
+      "region" : "AWS Region"
+    }
+  ],
+  "expiryNote" : "有效期取 12 小时与生成它的 IAM principal 会话剩余时长中的较短者。",
+  "fieldName" : "aws-bearer-token-bedrock",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "aws-bearer-token-bedrock",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    },
+    {
+      "help" : "公开路由信息；保存时由用户明确填写。KeyKeeper 不从它推导或自动注入 Base URL。",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "AWS Region",
+      "name" : "aws-region",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 AWS Management Console",
+    "选择目标 AWS Region",
+    "使用有 Bedrock 调用权限的 IAM 身份生成短期 key"
+  ],
+  "id" : "aws-bedrock-short-term",
+  "minimalPermission" : "短期 key 继承生成它的 IAM principal 权限，并且只能用于生成时选择的 Region；只授予实际需要的 Bedrock 调用权限。",
+  "name" : "Amazon Bedrock · Short-term bearer key",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.aws.amazon.com\/bedrock",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/docs.aws.amazon.com\/bedrock\/latest\/userguide\/api-keys.html",
+    "https:\/\/docs.aws.amazon.com\/bedrock\/latest\/userguide\/api-keys-reference.html"
+  ],
+  "verified" : "2026-09-15"
+}

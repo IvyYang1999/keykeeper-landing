@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/amux.ai\/keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/gateway.amux.ai\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/gateway.amux.ai",
+      "protocolName" : "Anthropic Messages"
+    },
+    {
+      "baseURL" : "https:\/\/gateway.amux.ai",
+      "protocolName" : "Gemini native"
+    }
+  ],
+  "expiryNote" : "官方未说明统一到期策略；完整 key 可在 keys 页面再次查看，不需要仅为找回值而轮换。",
+  "fieldName" : "amux-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "amux-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Amux",
+    "先选择个人或组织 workspace 作为计费主体",
+    "充值后在 API keys 页面创建项目专用 key",
+    "确认该 workspace 的余额"
+  ],
+  "id" : "amux",
+  "minimalPermission" : "key 属于 workspace，费用由该 workspace 所属账户承担；按项目拆分 key。当前官方说明为预付按量计费，尚无订阅。",
+  "name" : "Amux API",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/amux.ai\/keys",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/amux.ai\/docs\/quickstart",
+    "https:\/\/amux.ai\/api-reference"
+  ],
+  "verified" : "2026-09-15"
+}

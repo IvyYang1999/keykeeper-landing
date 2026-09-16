@@ -1,0 +1,63 @@
+---
+title: Atlas Cloud · API (Pay-as-you-go)
+description: How an agent gets a Atlas Cloud · API (Pay-as-you-go) key through KeyKeeper, what to choose on www.atlascloud.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `atlascloud` (also `atlas-cloud`) |
+|---|---|
+| Field | `atlascloud-api-key` → `ATLASCLOUD_API_KEY` · secret |
+| Key looks like | shown once when created |
+| Created at | [www.atlascloud.ai](https://www.atlascloud.ai/console/api-keys) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show atlascloud
+keykeeper save --provider atlascloud --from-clipboard --create --purpose "what this task does"
+keykeeper run -c atlascloud -- <your command>
+```
+
+`--provider atlascloud` fills in the credential id and the field. The environment
+variable is the one Atlas Cloud's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 Atlas Cloud</Step>
+<Step>进入 API Keys 并创建独立密钥</Step>
+<Step>复制后立即保存：完整值只显示一次</Step>
+<Step>确认账户余额和模型可用地区</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+普通按量密钥；不要当作 Coding Plan 密钥。为每个项目创建独立密钥，便于单独撤销。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Atlas Cloud · API (Pay-as-you-go) key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** Atlas Cloud · API (Pay-as-you-go) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI compatible** — `https://api.atlascloud.ai/v1`
+- **Images, video and uploads** — `https://api.atlascloud.ai/api/v1`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [www.atlascloud.ai](https://www.atlascloud.ai/console/api-keys).

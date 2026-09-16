@@ -1,0 +1,54 @@
+---
+title: Render
+description: How an agent gets a Render key through KeyKeeper, what to choose on dashboard.render.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `render` |
+|---|---|
+| Field | `render-api-key` → `RENDER_API_KEY` · secret |
+| Key looks like | shown once when created |
+| Created at | [dashboard.render.com](https://dashboard.render.com/u/settings#api-keys) |
+| Verified by KeyKeeper | `GET https://api.render.com/v1/users` — reads the user associated with the key |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show render
+keykeeper save --provider render --from-clipboard --create --purpose "what this task does"
+keykeeper run -c render -- <your command>
+```
+
+`--provider render` fills in the credential id and the field. The environment
+variable is the one Render's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to Render</Step>
+<Step>Open Account Settings → API Keys</Step>
+<Step>Create a separate API key</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Render API keys currently cover every workspace the user belongs to and have no scopes. Use a dedicated account or short-lived key for sensitive automation.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a Render key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** KeyKeeper itself sends `GET https://api.render.com/v1/users` with the key in the `Authorization` header (reads the user associated with the key). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
+
+
+## Rotation and expiry
+
+No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown. Rotate or revoke at [dashboard.render.com](https://dashboard.render.com/u/settings#api-keys).

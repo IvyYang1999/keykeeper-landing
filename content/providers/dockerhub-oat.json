@@ -1,0 +1,46 @@
+{
+  "aliases" : [
+
+  ],
+  "createURL" : "https:\/\/app.docker.com\/admin",
+  "expiryNote" : "No universal expiry policy was confirmed for this credential type. Record the date shown by the provider, or leave it unknown.",
+  "fieldName" : "docker-token",
+  "fields" : [
+    {
+      "help" : "",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API token",
+      "name" : "docker-token",
+      "prefixes" : [
+        "dckr_oat_"
+      ],
+      "required" : true
+    },
+    {
+      "help" : "",
+      "isPrimary" : false,
+      "kind" : "publicText",
+      "label" : "Organization name",
+      "name" : "docker-username",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in as an organization owner",
+    "Open the organization admin console → Access tokens",
+    "Choose repositories, permissions and expiry"
+  ],
+  "id" : "dockerhub-oat",
+  "minimalPermission" : "Organization access tokens require an eligible subscription. Grant only exact repositories and Read\/Write; avoid Delete unless explicitly needed.",
+  "name" : "Docker Hub · Organization access token",
+  "prefixes" : [
+    "dckr_oat_"
+  ],
+  "rotateURL" : "https:\/\/app.docker.com\/admin",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

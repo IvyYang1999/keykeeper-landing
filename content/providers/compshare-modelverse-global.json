@@ -1,0 +1,58 @@
+{
+  "aliases" : [
+    "umodelverse",
+    "compshare-global"
+  ],
+  "createURL" : "https:\/\/console.compshare.cn\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.umodelverse.ai\/v1",
+      "protocolName" : "OpenAI compatible",
+      "region" : "Global fallback"
+    },
+    {
+      "baseURL" : "https:\/\/api.umodelverse.ai",
+      "protocolName" : "Anthropic Messages",
+      "region" : "Global fallback"
+    },
+    {
+      "baseURL" : "https:\/\/api.umodelverse.ai",
+      "protocolName" : "Gemini compatible",
+      "region" : "Global fallback"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "compshare-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "compshare-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Compshare 控制台",
+    "进入 ModelVerse API Key 管理",
+    "创建项目专用密钥",
+    "仅在 .cn 入口不可达时选择官方海外入口"
+  ],
+  "id" : "compshare-modelverse-global",
+  "minimalPermission" : "普通 ModelVerse 按量密钥；海外域名是官方备用访问地址，不是 Agent Plan。按项目拆分密钥。",
+  "name" : "Compshare · ModelVerse (Global)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.compshare.cn\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/compshare.cn\/docs\/modelverse\/models\/quick-start",
+    "https:\/\/compshare.cn\/docs\/modelverse\/models\/common\/certificate"
+  ],
+  "verified" : "2026-09-15"
+}

@@ -1,0 +1,39 @@
+{
+  "aliases" : [
+    "gcp",
+    "google-service-account"
+  ],
+  "createURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "expiryNote" : "User-managed service-account keys usually remain valid until revoked, but organization policy can impose expiry. Record a date only when the console or policy shows one.",
+  "fieldName" : "google-application-credentials",
+  "fields" : [
+    {
+      "fileFormat" : "serviceAccountJSON",
+      "help" : "The complete downloaded JSON document; KeyKeeper materializes it as a temporary file for the child process.",
+      "isPrimary" : true,
+      "kind" : "secretFile",
+      "label" : "Service-account JSON",
+      "name" : "google-application-credentials",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "Sign in to Google Cloud",
+    "Choose the project",
+    "Create or select a dedicated service account",
+    "Grant only the IAM roles the task needs",
+    "Create a JSON key only when workload identity or local user credentials cannot be used"
+  ],
+  "id" : "google-cloud",
+  "minimalPermission" : "Prefer Application Default Credentials or workload identity. If a downloaded key is unavoidable, use a dedicated service account with resource-level, task-specific IAM roles — never Owner or Editor.",
+  "name" : "Google Cloud",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.cloud.google.com\/iam-admin\/serviceaccounts",
+  "shownOnce" : true,
+  "verified" : "2026-09-15"
+}

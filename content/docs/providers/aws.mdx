@@ -1,0 +1,57 @@
+---
+title: AWS IAM · Long-lived access key
+description: How an agent gets a AWS IAM · Long-lived access key key through KeyKeeper, what to choose on console.aws.amazon.com, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `aws` (also `amazon-web-services`) |
+|---|---|
+| Field | `aws-secret-access-key` → `AWS_SECRET_ACCESS_KEY` · secret |
+| Also | `aws-access-key-id` → `AWS_ACCESS_KEY_ID` · plain, confirmed by you |
+| Also | `aws-region` → `AWS_REGION` · plain, confirmed by you, optional |
+| Key looks like | shown once when created |
+| Created at | [console.aws.amazon.com](https://console.aws.amazon.com/iam/home#/users) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show aws
+keykeeper save --provider aws --from-clipboard --create --purpose "what this task does"
+keykeeper run -c aws -- <your command>
+```
+
+`--provider aws` fills in the credential id and the fields. The environment
+variables are the ones AWS's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>Sign in to AWS</Step>
+<Step>Use IAM Identity Center or assume a role where possible</Step>
+<Step>If a key is unavoidable, create/select a dedicated IAM user</Step>
+<Step>Open its Security credentials and copy the pair once</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+Prefer temporary role credentials. Never create a root access key. If long-lived keys are unavoidable, attach a least-privilege policy limited by action and resource, and set rotation reminders.
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a AWS IAM · Long-lived access key key (shown once when created). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** AWS IAM · Long-lived access key offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Rotation and expiry
+
+Long-lived IAM access keys do not expire automatically; rotate and revoke explicitly. Rotate or revoke at [console.aws.amazon.com](https://console.aws.amazon.com/iam/home#/users).

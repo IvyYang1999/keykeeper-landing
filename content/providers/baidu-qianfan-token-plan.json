@@ -1,0 +1,53 @@
+{
+  "aliases" : [
+    "Qianfan Token Plan"
+  ],
+  "createURL" : "https:\/\/console.bce.baidu.com\/iam\/",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/qianfan.baidubce.com\/v2",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/qianfan.baidubce.com\/anthropic",
+      "protocolName" : "Anthropic compatible"
+    }
+  ],
+  "expiryNote" : "当前 Token 福利包文档列出的套餐有效期为 1 个月；API Key 本身是否随套餐到期未单独确认。",
+  "fieldName" : "qianfan-token-plan-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "qianfan-api-key"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "qianfan-token-plan-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录百度智能云千帆",
+    "购买有效的 Token 福利包",
+    "在控制台取得千帆通用 API Key"
+  ],
+  "id" : "baidu-qianfan-token-plan",
+  "minimalPermission" : "Token 福利包使用千帆通用认证；不要把它与有独立 key 和独立路径的 Coding Plan 混用。",
+  "name" : "百度千帆 · Token 福利包",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/console.bce.baidu.com\/iam\/",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/cloud.baidu.com\/doc\/qianfan\/s\/Smoghsq3g",
+    "https:\/\/cloud.baidu.com\/doc\/qianfan\/s\/bmovbdmzb",
+    "https:\/\/cloud.baidu.com\/doc\/qianfan\/s\/imlg0beiu"
+  ],
+  "verified" : "2026-09-15"
+}

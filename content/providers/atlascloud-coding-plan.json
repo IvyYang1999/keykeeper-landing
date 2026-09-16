@@ -1,0 +1,54 @@
+{
+  "aliases" : [
+    "atlascloud-coding",
+    "atlas-cloud-coding"
+  ],
+  "createURL" : "https:\/\/www.atlascloud.ai\/console\/api-keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.atlascloud.ai\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/api.atlascloud.ai",
+      "protocolName" : "Anthropic Messages"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "atlascloud-coding-api-key",
+  "fields" : [
+    {
+      "aliases" : [
+        "openai-api-key",
+        "anthropic-auth-token"
+      ],
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "atlascloud-coding-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Atlas Cloud",
+    "购买或选择 Coding Plan",
+    "在 Plan Management 中获取专用 API key",
+    "确认套餐仍有效且配额未耗尽"
+  ],
+  "id" : "atlascloud-coding-plan",
+  "minimalPermission" : "仅保存 Coding Plan 专用密钥；官方明确说明它与普通 Atlas Cloud API key 分离。仅用于套餐支持的 coding 工具。",
+  "name" : "Atlas Cloud · Coding Plan",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/www.atlascloud.ai\/console\/api-keys",
+  "shownOnce" : false,
+  "sources" : [
+    "https:\/\/www.atlascloud.ai\/docs\/coding-plan\/api"
+  ],
+  "verified" : "2026-09-15"
+}

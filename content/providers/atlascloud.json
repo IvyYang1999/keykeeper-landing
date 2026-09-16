@@ -1,0 +1,49 @@
+{
+  "aliases" : [
+    "atlas-cloud"
+  ],
+  "createURL" : "https:\/\/www.atlascloud.ai\/console\/api-keys",
+  "endpoints" : [
+    {
+      "baseURL" : "https:\/\/api.atlascloud.ai\/v1",
+      "protocolName" : "OpenAI compatible"
+    },
+    {
+      "baseURL" : "https:\/\/api.atlascloud.ai\/api\/v1",
+      "protocolName" : "Images, video and uploads"
+    }
+  ],
+  "expiryNote" : "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "fieldName" : "atlascloud-api-key",
+  "fields" : [
+    {
+      "help" : "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。",
+      "isPrimary" : true,
+      "kind" : "secretText",
+      "label" : "API key",
+      "name" : "atlascloud-api-key",
+      "prefixes" : [
+
+      ],
+      "required" : true
+    }
+  ],
+  "gates" : [
+    "登录 Atlas Cloud",
+    "进入 API Keys 并创建独立密钥",
+    "复制后立即保存：完整值只显示一次",
+    "确认账户余额和模型可用地区"
+  ],
+  "id" : "atlascloud",
+  "minimalPermission" : "普通按量密钥；不要当作 Coding Plan 密钥。为每个项目创建独立密钥，便于单独撤销。",
+  "name" : "Atlas Cloud · API (Pay-as-you-go)",
+  "prefixes" : [
+
+  ],
+  "rotateURL" : "https:\/\/www.atlascloud.ai\/console\/api-keys",
+  "shownOnce" : true,
+  "sources" : [
+    "https:\/\/www.atlascloud.ai\/docs\/en\/api-keys"
+  ],
+  "verified" : "2026-09-15"
+}

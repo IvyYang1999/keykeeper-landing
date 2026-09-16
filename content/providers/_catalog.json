@@ -1,0 +1,478 @@
+{
+ "categories": {
+  "models": [
+   "openai",
+   "anthropic",
+   "gemini",
+   "deepseek",
+   "groq",
+   "xai",
+   "kimi",
+   "kimi-global",
+   "kimi-code",
+   "minimax",
+   "minimax-global",
+   "minimax-token-plan-cn",
+   "minimax-token-plan-global",
+   "zhipu-cn",
+   "zhipu-cn-coding",
+   "zai-global",
+   "zai-global-coding",
+   "alibaba-bailian",
+   "alibaba-bailian-coding-cn",
+   "alibaba-bailian-token-cn",
+   "alibaba-bailian-sg",
+   "alibaba-bailian-us",
+   "alibaba-bailian-hk",
+   "volcengine-ark",
+   "volcengine-ark-coding",
+   "aws-bedrock-short-term",
+   "aws-bedrock-long-term",
+   "baidu-qianfan-cn",
+   "baidu-qianfan-global",
+   "baidu-qianfan-token-plan",
+   "nvidia-api-catalog",
+   "nvidia-ngc",
+   "modelscope-cn",
+   "modelscope-global",
+   "novita-ai",
+   "longcat",
+   "stepfun-api",
+   "stepfun-step-plan",
+   "xiaomi-mimo-payg",
+   "xiaomi-mimo-token-plan-cn",
+   "xiaomi-mimo-token-plan-sg",
+   "xiaomi-mimo-token-plan-eu"
+  ],
+  "gateways": [
+   "siliconflow",
+   "siliconflow-global",
+   "openrouter",
+   "atlascloud",
+   "atlascloud-coding-plan",
+   "compshare-modelverse-cn",
+   "compshare-modelverse-global",
+   "compshare-agent-plan",
+   "ccsub",
+   "micu-claude",
+   "micu-codex",
+   "rightcode-codex",
+   "cubence",
+   "crazyrouter",
+   "dmxapi-cn",
+   "dmxapi-global",
+   "dmxapi-ssvip",
+   "aihubmix",
+   "amux",
+   "cherryin",
+   "opencode-zen",
+   "opencode-go",
+   "pipellm",
+   "relaxycode",
+   "therouter"
+  ],
+  "cloud": [
+   "supabase",
+   "vercel",
+   "cloudflare",
+   "cloudflare-account",
+   "google-cloud",
+   "firebase-admin",
+   "neon",
+   "neon-org",
+   "railway",
+   "railway-api",
+   "render",
+   "netlify",
+   "flyio",
+   "aws",
+   "aws-sts",
+   "azure"
+  ],
+  "development": [
+   "github",
+   "gitlab",
+   "npm",
+   "pypi",
+   "pypi-test",
+   "dockerhub",
+   "dockerhub-oat"
+  ],
+  "apple": [
+   "app-store-connect",
+   "app-store-connect-individual",
+   "apple-notary",
+   "apple-notary-api-key",
+   "apns",
+   "developer-id",
+   "developer-id-installer"
+  ],
+  "analytics": [
+   "ga4",
+   "search-console",
+   "sentry",
+   "posthog",
+   "posthog-eu"
+  ],
+  "messaging": [
+   "resend",
+   "twilio",
+   "sendgrid",
+   "sendgrid-eu",
+   "mailgun",
+   "slack",
+   "slack-oauth-rotating",
+   "feishu",
+   "lark",
+   "telegram"
+  ],
+  "payments": [
+   "stripe"
+  ]
+ },
+ "families": [
+  {
+   "id": "kimi",
+   "name": "Kimi",
+   "strip": [
+    "Kimi"
+   ],
+   "members": [
+    "kimi",
+    "kimi-global",
+    "kimi-code"
+   ]
+  },
+  {
+   "id": "minimax",
+   "name": "MiniMax",
+   "strip": [
+    "MiniMax"
+   ],
+   "members": [
+    "minimax",
+    "minimax-global",
+    "minimax-token-plan-cn",
+    "minimax-token-plan-global"
+   ]
+  },
+  {
+   "id": "zhipu",
+   "name": "智谱 · Z.AI",
+   "strip": [
+    "智谱",
+    "Z.AI"
+   ],
+   "members": [
+    "zhipu-cn",
+    "zhipu-cn-coding",
+    "zai-global",
+    "zai-global-coding"
+   ]
+  },
+  {
+   "id": "alibaba-bailian",
+   "name": "阿里云百炼",
+   "strip": [
+    "阿里云百炼"
+   ],
+   "members": [
+    "alibaba-bailian",
+    "alibaba-bailian-sg",
+    "alibaba-bailian-us",
+    "alibaba-bailian-hk",
+    "alibaba-bailian-coding-cn",
+    "alibaba-bailian-token-cn"
+   ]
+  },
+  {
+   "id": "volcengine-ark",
+   "name": "火山方舟",
+   "strip": [
+    "火山方舟"
+   ],
+   "members": [
+    "volcengine-ark",
+    "volcengine-ark-coding"
+   ]
+  },
+  {
+   "id": "aws-bedrock",
+   "name": "Amazon Bedrock",
+   "strip": [
+    "Amazon Bedrock"
+   ],
+   "members": [
+    "aws-bedrock-long-term",
+    "aws-bedrock-short-term"
+   ]
+  },
+  {
+   "id": "baidu-qianfan",
+   "name": "百度千帆",
+   "strip": [
+    "百度千帆"
+   ],
+   "members": [
+    "baidu-qianfan-cn",
+    "baidu-qianfan-global",
+    "baidu-qianfan-token-plan"
+   ]
+  },
+  {
+   "id": "nvidia",
+   "name": "NVIDIA",
+   "strip": [
+    "NVIDIA"
+   ],
+   "members": [
+    "nvidia-api-catalog",
+    "nvidia-ngc"
+   ]
+  },
+  {
+   "id": "modelscope",
+   "name": "ModelScope 魔搭",
+   "strip": [
+    "ModelScope 魔搭"
+   ],
+   "members": [
+    "modelscope-cn",
+    "modelscope-global"
+   ]
+  },
+  {
+   "id": "stepfun",
+   "name": "StepFun 阶跃",
+   "strip": [
+    "StepFun"
+   ],
+   "members": [
+    "stepfun-api",
+    "stepfun-step-plan"
+   ]
+  },
+  {
+   "id": "xiaomi-mimo",
+   "name": "Xiaomi MiMo",
+   "strip": [
+    "Xiaomi MiMo"
+   ],
+   "members": [
+    "xiaomi-mimo-payg",
+    "xiaomi-mimo-token-plan-cn",
+    "xiaomi-mimo-token-plan-sg",
+    "xiaomi-mimo-token-plan-eu"
+   ]
+  },
+  {
+   "id": "siliconflow",
+   "name": "SiliconFlow 硅基流动",
+   "strip": [
+    "SiliconFlow"
+   ],
+   "members": [
+    "siliconflow",
+    "siliconflow-global"
+   ]
+  },
+  {
+   "id": "atlascloud",
+   "name": "Atlas Cloud",
+   "strip": [
+    "Atlas Cloud"
+   ],
+   "members": [
+    "atlascloud",
+    "atlascloud-coding-plan"
+   ]
+  },
+  {
+   "id": "compshare",
+   "name": "Compshare",
+   "strip": [
+    "Compshare"
+   ],
+   "members": [
+    "compshare-modelverse-cn",
+    "compshare-modelverse-global",
+    "compshare-agent-plan"
+   ]
+  },
+  {
+   "id": "dmxapi",
+   "name": "DMXAPI",
+   "strip": [
+    "DMXAPI"
+   ],
+   "members": [
+    "dmxapi-cn",
+    "dmxapi-global",
+    "dmxapi-ssvip"
+   ]
+  },
+  {
+   "id": "micu",
+   "name": "Micu API",
+   "strip": [
+    "Micu API"
+   ],
+   "members": [
+    "micu-claude",
+    "micu-codex"
+   ]
+  },
+  {
+   "id": "opencode",
+   "name": "OpenCode",
+   "strip": [
+    "OpenCode"
+   ],
+   "members": [
+    "opencode-zen",
+    "opencode-go"
+   ]
+  },
+  {
+   "id": "cloudflare",
+   "name": "Cloudflare",
+   "strip": [
+    "Cloudflare"
+   ],
+   "members": [
+    "cloudflare",
+    "cloudflare-account"
+   ]
+  },
+  {
+   "id": "neon",
+   "name": "Neon",
+   "strip": [
+    "Neon"
+   ],
+   "members": [
+    "neon",
+    "neon-org"
+   ]
+  },
+  {
+   "id": "railway",
+   "name": "Railway",
+   "strip": [
+    "Railway"
+   ],
+   "members": [
+    "railway",
+    "railway-api"
+   ]
+  },
+  {
+   "id": "aws",
+   "name": "AWS",
+   "strip": [
+    "AWS"
+   ],
+   "members": [
+    "aws",
+    "aws-sts"
+   ]
+  },
+  {
+   "id": "dockerhub",
+   "name": "Docker Hub",
+   "strip": [
+    "Docker Hub"
+   ],
+   "members": [
+    "dockerhub",
+    "dockerhub-oat"
+   ]
+  },
+  {
+   "id": "pypi",
+   "name": "PyPI",
+   "strip": [
+    "PyPI"
+   ],
+   "members": [
+    "pypi",
+    "pypi-test"
+   ]
+  },
+  {
+   "id": "app-store-connect",
+   "name": "App Store Connect",
+   "strip": [
+    "App Store Connect"
+   ],
+   "members": [
+    "app-store-connect",
+    "app-store-connect-individual"
+   ]
+  },
+  {
+   "id": "apple-notary",
+   "name": "Apple Notary",
+   "strip": [
+    "Apple Notary"
+   ],
+   "members": [
+    "apple-notary",
+    "apple-notary-api-key"
+   ]
+  },
+  {
+   "id": "developer-id",
+   "name": "Apple Developer ID",
+   "strip": [
+    "Apple Developer ID"
+   ],
+   "members": [
+    "developer-id",
+    "developer-id-installer"
+   ]
+  },
+  {
+   "id": "posthog",
+   "name": "PostHog",
+   "strip": [
+    "PostHog"
+   ],
+   "members": [
+    "posthog",
+    "posthog-eu"
+   ]
+  },
+  {
+   "id": "sendgrid",
+   "name": "Twilio SendGrid",
+   "strip": [
+    "Twilio SendGrid"
+   ],
+   "members": [
+    "sendgrid",
+    "sendgrid-eu"
+   ]
+  },
+  {
+   "id": "slack",
+   "name": "Slack",
+   "strip": [
+    "Slack"
+   ],
+   "members": [
+    "slack",
+    "slack-oauth-rotating"
+   ]
+  },
+  {
+   "id": "feishu",
+   "name": "Feishu / Lark",
+   "strip": [],
+   "members": [
+    "feishu",
+    "lark"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,62 @@
+---
+title: TheRouter.ai
+description: How an agent gets a TheRouter.ai key through KeyKeeper, what to choose on dashboard.therouter.ai, and how KeyKeeper verifies it.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| Template id | `therouter` (also `the-router`) |
+|---|---|
+| Field | `therouter-api-key` → `THEROUTER_API_KEY` / `ANTHROPIC_AUTH_TOKEN` · secret |
+| Key looks like | can be viewed again in the console |
+| Created at | [dashboard.therouter.ai](https://dashboard.therouter.ai/) |
+| Verified by KeyKeeper | not verified |
+| Template checked | 2026-09-15 |
+
+## What the agent does
+
+```bash
+keykeeper providers show therouter
+keykeeper save --provider therouter --from-clipboard --create --purpose "what this task does"
+keykeeper run -c therouter -- <your command>
+```
+
+`--provider therouter` fills in the credential id and the field. The environment
+variable is the one TheRouter.ai's own tools read, so nothing has to be mapped.
+
+## What only you can do
+
+<Steps>
+<Step>登录 TheRouter.ai Dashboard</Step>
+<Step>创建 API key</Step>
+<Step>按用途设置消费额度</Step>
+<Step>Copy the key, then approve the save in KeyKeeper's window.</Step>
+</Steps>
+
+## What to choose
+
+模型调用使用 THEROUTER_API_KEY。Claude Code 仅把同一值映射为 ANTHROPIC_AUTH_TOKEN，并按官方要求将 ANTHROPIC_API_KEY 置空。管理 key 可创建和撤销其他 key，权限更高，不能代替普通模型调用 key 保存。
+
+<Callout type="info">
+The agent is told the same thing. It opens the page for you and says what to pick; it never
+logs in, passes 2FA or pays on your behalf.
+</Callout>
+
+## What KeyKeeper checks
+
+- **Before writing:** the value must look like a TheRouter.ai key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **After saving:** TheRouter.ai offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
+
+
+## Endpoints
+
+The key is a bearer token for these endpoints. `keykeeper run` sets only the variables above;
+point your client at the base URL yourself.
+
+- **OpenAI-compatible** — `https://api.therouter.ai/v1`
+- **Anthropic Messages / Claude Code** — `https://api.therouter.ai`
+
+## Rotation and expiry
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 Rotate or revoke at [dashboard.therouter.ai](https://dashboard.therouter.ai/).
