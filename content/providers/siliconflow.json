@@ -31,7 +31,7 @@
   ],
   "id" : "siliconflow",
   "minimalPermission" : "Keys have no scopes: one key is the whole account. Create a separate key per project so it can be deleted alone.",
-  "name" : "SiliconFlow · China (硅基流动)",
+  "name" : "SiliconFlow · China",
   "prefixes" : [
 
   ],

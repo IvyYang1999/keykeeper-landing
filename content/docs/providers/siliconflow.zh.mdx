@@ -1,6 +1,6 @@
 ---
-title: SiliconFlow · China (硅基流动)
-description: Agent 怎样通过 KeyKeeper 拿到 SiliconFlow · China (硅基流动) 的 key，在 cloud.siliconflow.cn 该选什么，KeyKeeper 怎么验证。
+title: SiliconFlow · China
+description: Agent 怎样通过 KeyKeeper 拿到 SiliconFlow · China 的 key，在 cloud.siliconflow.cn 该选什么，KeyKeeper 怎么验证。
 ---
 
 import { Step, Steps } from "fumadocs-ui/components/steps";
@@ -42,7 +42,7 @@ Agent 被告知的是同一件事。它替你打开页面、说明该选什么�
 
 ## KeyKeeper 检查什么
 
-- **写入前：** 值必须像一把 SiliconFlow · China (硅基流动) 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **写入前：** 值必须像一把 SiliconFlow · China 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
 - **保存后：** KeyKeeper 自己发送 `GET https://api.siliconflow.cn/v1/models`，key 放在 `Authorization` 请求头里（列出这把 key 能用的模型）。Agent 收到的是「接受」「拒绝」或「联系不上」——从不是值。
 
 
