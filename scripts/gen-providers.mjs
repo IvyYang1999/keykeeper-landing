@@ -8,7 +8,7 @@ import { join } from "node:path";
 const src = "content/providers";
 const out = "content/docs/providers";
 const catalog = JSON.parse(readFileSync(join(src, "_catalog.json"), "utf8"));
-// Website-only editorial grouping. The CLI/App catalog and provider IDs remain unchanged.
+// Website-only discovery policy. Old provider IDs stay resolvable in the CLI/App.
 const gatewayDisplay = JSON.parse(readFileSync(join(src, "_gateway-display.json"), "utf8"));
 const files = readdirSync(src).filter((f) => f.endsWith(".json") && !f.startsWith("_"));
 const byId = Object.fromEntries(files.map((f) => JSON.parse(readFileSync(join(src, f), "utf8"))).map((t) => [t.id, t]));
@@ -18,26 +18,31 @@ const zhById = Object.fromEntries(files.map((f) => {
   catch { return [f.slice(0, -5), {}]; }
 }));
 
-const categoryOrder = ["models", "namedGateways", "gateways", "cloud", "development", "apple", "analytics", "messaging", "payments"];
+const categoryOrder = ["models", "gateways", "cloud", "development", "apple", "analytics", "messaging", "payments"];
 const categoryName = {
-  en: { models: "AI models", namedGateways: "OpenRouter & SiliconFlow", gateways: "Other gateways & relays", cloud: "Cloud & databases", development: "Development & publishing",
+  en: { models: "Model makers", gateways: "Multi-model API platforms", cloud: "Cloud & databases", development: "Development & publishing",
     apple: "Apple services", analytics: "Analytics & monitoring", messaging: "Email & messaging", payments: "Payments" },
-  zh: { models: "AI 模型", namedGateways: "OpenRouter 与硅基流动", gateways: "其他网关与中转", cloud: "云平台与数据库", development: "开发与发布",
+  zh: { models: "模型厂商", gateways: "多模型 API 平台", cloud: "云平台与数据库", development: "开发与发布",
     apple: "Apple 服务", analytics: "分析与监控", messaging: "邮件与消息", payments: "支付" },
 };
 const familyOf = {};
 for (const fam of catalog.families) for (const id of fam.members) familyOf[id] = fam;
 const gatewayBrand = (id) => familyOf[id]?.id ?? id;
-const separateBrands = new Set(gatewayDisplay.separateBrands);
-const gatewayIds = catalog.categories.gateways;
-const matchedBrands = new Set(gatewayIds.map(gatewayBrand).filter((id) => separateBrands.has(id)));
-if (separateBrands.size !== gatewayDisplay.separateBrands.length || matchedBrands.size !== separateBrands.size)
-  throw new Error("gateway display brands must be unique and present in the app catalog");
+const multiModelBrands = new Set(gatewayDisplay.multiModelBrands);
+const legacyOnlyBrands = new Set(gatewayDisplay.legacyOnlyBrands);
+const allIds = Object.values(catalog.categories).flat();
+const knownBrands = new Set(allIds.map(gatewayBrand));
+if (multiModelBrands.size !== gatewayDisplay.multiModelBrands.length ||
+    legacyOnlyBrands.size !== gatewayDisplay.legacyOnlyBrands.length ||
+    [...multiModelBrands, ...legacyOnlyBrands].some((id) => !knownBrands.has(id)) ||
+    [...legacyOnlyBrands].some((id) => multiModelBrands.has(id)))
+  throw new Error("invalid multi-model / legacy-only brand policy");
 const displayCategories = {
   ...catalog.categories,
-  namedGateways: gatewayIds.filter((id) => separateBrands.has(gatewayBrand(id))),
-  gateways: gatewayIds.filter((id) => !separateBrands.has(gatewayBrand(id))),
+  models: catalog.categories.models.filter((id) => !multiModelBrands.has(gatewayBrand(id))),
+  gateways: allIds.filter((id) => multiModelBrands.has(gatewayBrand(id))),
 };
+for (const cat of categoryOrder) displayCategories[cat] = displayCategories[cat].filter((id) => !legacyOnlyBrands.has(gatewayBrand(id)));
 const familyName = (t) => familyOf[t.id]?.name ?? t.name;
 const variantLabel = (t) => {
   const fam = familyOf[t.id];
@@ -70,8 +75,8 @@ const grouped = categoryOrder.map((cat) => {
 const ordered = grouped.flatMap((g) => g.groups.flatMap((x) => x.members));
 if (new Set(ordered.map((t) => t.id)).size !== ordered.length)
   throw new Error("a template appears in more than one display category");
-const missing = Object.keys(byId).filter((id) => !ordered.some((t) => t.id === id));
-if (missing.length) throw new Error("templates without a category: " + missing.join(", "));
+const missing = Object.keys(byId).filter((id) => !ordered.some((t) => t.id === id) && !legacyOnlyBrands.has(gatewayBrand(id)));
+if (missing.length) throw new Error("templates neither curated nor legacy-only: " + missing.join(", "));
 
 const signupDisclosure = (s, lang) => lang === "en"
   ? [s.whatYouGet ? `You get ${s.whatYouGet}.` : null, `Signing up through this link gives KeyKeeper ${s.whatWeGet}.`, s.code ? `Invite code: ${s.code}.` : null].filter(Boolean).join(" ")
@@ -88,13 +93,12 @@ const kindWord = {
 for (const f of readdirSync(out)) if (f.endsWith(".mdx") && !f.startsWith("index")) unlinkSync(join(out, f));
 
 for (const t of ordered) {
-  const primary = t.fields.find((f) => f.isPrimary) ?? t.fields[0];
   const isIdentity = t.fields.some((f) => f.kind === "localIdentity");
   const fileField = t.fields.find((f) => f.kind === "secretFile");
   const shape = [
     t.prefixes?.length ? `starts with \`${t.prefixes.join("\` or \`")}\`` : null,
     t.minChars ? `at least ${t.minChars} characters` : null,
-    t.shownOnce ? "shown once when created" : "can be viewed again in the console",
+    t.shownOnce ? "shown once when created" : "whether it can be viewed again is unconfirmed",
   ].filter(Boolean).join(", ");
   const v = t.validation;
   const fieldRows = t.fields.map((f) => `| ${f.isPrimary ? "Field" : "Also"} | \`${f.name}\`${f.kind === "localIdentity" ? "" : ` → \`${env(f.name)}\``}${(f.aliases ?? []).map((a) => ` / \`${env(a)}\``).join("")} · ${kindWord.en[f.kind]}${f.required === false ? ", optional" : ""} |`).join("\n");
@@ -181,7 +185,7 @@ for (const t of ordered) {
     t.prefixes?.length ? `以 \`${t.prefixes.join("\` 或 \`")}\` 开头` : null,
     t.minChars ? `至少 ${t.minChars} 个字符` : null,
   ].filter(Boolean);
-  const shape = [...shapeParts, t.shownOnce ? "创建时只显示一次" : "可在控制台再次查看"].join("，");
+  const shape = [...shapeParts, t.shownOnce ? "创建时只显示一次" : "能否再次查看未确认"].join("，");
   const v = t.validation;
   const gates = zh.gates ?? t.gates;
   const fieldRows = t.fields.map((f) => `| ${f.isPrimary ? "字段" : "还有"} | \`${f.name}\`${f.kind === "localIdentity" ? "" : ` → \`${env(f.name)}\``}${(f.aliases ?? []).map((a) => ` / \`${env(a)}\``).join("")} · ${kindWord.zh[f.kind]}${f.required === false ? "，可选" : ""} |`).join("\n");

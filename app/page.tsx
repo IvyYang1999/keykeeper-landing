@@ -5,18 +5,17 @@ import Image from "next/image";
 import { siteCopy } from "./i18n";
 import { providerPaths } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
-import gatewayDisplay from "../content/providers/_gateway-display.json";
 import providerWall from "./providerWall.json";
 import providerWallPopular from "./providerWallPopular.json";
 
 type WallMark = { id: string; name: string; category: string; variants: number; brand: string; template?: boolean; viewBox?: string; svg?: string; png?: string; letter?: string };
 const wallMarks = providerWall as WallMark[];
-const separateGatewayBrands = new Set(gatewayDisplay.separateBrands);
 const popularMarks = (providerWallPopular as string[]).map((id) => wallMarks.find((m) => m.id === id)).filter((m): m is WallMark => Boolean(m));
 const distinctiveFallbacks: Record<string, string> = {
   "developer-id": "D",
   "apple-notary": "N",
   apns: "P",
+  xai: "xAI",
   sendgrid: "S",
 };
 
@@ -140,8 +139,7 @@ export default function Home() {
   const wallColumns = useSyncExternalStore(subscribeToWallColumns, currentWallColumns, () => 10);
   const copy = siteCopy[language];
   const docsUrl = language === "zh" ? "/zh/docs" : "/docs";
-  const visibleMarks = wallCategory === null ? popularMarks : wallMarks.filter((m) =>
-    (m.category === "gateways" && separateGatewayBrands.has(m.id) ? "namedGateways" : m.category) === wallCategory);
+  const visibleMarks = wallCategory === null ? popularMarks : wallMarks.filter((m) => m.category === wallCategory);
   const wallRows = Array.from({ length: Math.ceil(visibleMarks.length / wallColumns) }, (_, row) =>
     visibleMarks.slice(row * wallColumns, (row + 1) * wallColumns));
 
@@ -227,7 +225,7 @@ export default function Home() {
             <li key={key}><button type="button" role="tab" aria-selected={wallCategory === key} onClick={() => setWallCategory(key)}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></button></li>
           ))}
         </ul>
-        {wallCategory === "namedGateways" || wallCategory === "gateways" ?
+        {wallCategory === "gateways" ?
           <p className="provider-category-note">{copy.providers.gatewayNote}</p> : null}
         <div className={wallCategory === null ? "wall wall-popular" : "wall"}>
           {wallRows.map((row) => (

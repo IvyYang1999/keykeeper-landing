@@ -1,0 +1,61 @@
+---
+title: ZenMux · Pay As You Go
+description: Agent 怎样通过 KeyKeeper 拿到 ZenMux · Pay As You Go 的 key，在 zenmux.ai 该选什么，KeyKeeper 怎么验证。
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps";
+import { Callout } from "fumadocs-ui/components/callout";
+
+| 模板 id | `zenmux-payg`（别名 `zenmux`） |
+|---|---|
+| 字段 | `zenmux-api-key` → `ZENMUX_API_KEY` · 密钥 |
+| key 长什么样 | 能否再次查看未确认 |
+| 创建页面 | [zenmux.ai](https://zenmux.ai/platform/pay-as-you-go) |
+| KeyKeeper 的验证 | 不验证 |
+| 模板核实日期 | 2026-09-17 |
+
+## Agent 做什么
+
+```bash
+keykeeper providers show zenmux-payg
+keykeeper save --provider zenmux-payg --from-clipboard --create --purpose "这个任务是做什么的"
+keykeeper run -c zenmux-payg -- <你的命令>
+```
+
+`--provider zenmux-payg` 会补上凭据 ID 和字段名。这些环境变量就是 ZenMux 自家工具读的那个，不需要任何映射。
+
+## 只有你能做的
+
+<Steps>
+<Step>登录 ZenMux</Step>
+<Step>选择 Pay As You Go 管理页而非订阅页</Step>
+<Step>为独立项目创建按量 API key</Step>
+<Step>核对账户余额和目标模型可用性</Step>
+<Step>复制 key，然后在 KeyKeeper 的窗口里确认保存。</Step>
+</Steps>
+
+## 该选什么
+
+Only save a pay-as-you-go API key from this page. A Builder Plan subscription key uses a different billing balance; use zenmux-builder instead. No general key-scope guarantee is documented.
+
+<Callout type="info">
+Agent 被告知的是同一件事。它替你打开页面、说明该选什么；它从不替你登录、过 2FA 或付费。
+</Callout>
+
+## KeyKeeper 检查什么
+
+- **写入前：** 值必须像一把 ZenMux · Pay As You Go 的 key（没有形状规则）。贴错了会在存入之前被拒绝，并告诉 Agent 原因——不含值。
+- **保存后：** ZenMux · Pay As You Go 没有 KeyKeeper 可用的只读接口，第一次真实调用就是测试。
+
+
+## 接入地址
+
+这把 key 是下面这些地址的 bearer token。`keykeeper run` 只设置上面的环境变量，base URL 要你自己在客户端里指。
+
+- **OpenAI compatible**——`https://zenmux.ai/api/v1`
+- **Anthropic Messages**——`https://zenmux.ai/api/anthropic`
+- **Google Vertex AI compatible**——`https://zenmux.ai/api/vertex-ai`
+
+## 轮换与过期
+
+未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。 在 [zenmux.ai](https://zenmux.ai/platform/pay-as-you-go) 轮换或撤销。

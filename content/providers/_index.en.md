@@ -19,5 +19,6 @@ Every template records:
 Templates are checked against official documentation, not memory. If a provider changes its
 console, [open an issue](https://github.com/IvyYang1999/KeyKeeper/issues).
 
-The gateway groups below are for browsing, not a security rating or endorsement. Any third-party
-API platform may handle your prompts and data; review its policies before sending requests.
+Multi-model API platforms offer models from more than one maker. Listing is not a security
+endorsement. Smaller gateways without sufficient public identity evidence are omitted from
+discovery, but existing KeyKeeper credentials and legacy template IDs still work.

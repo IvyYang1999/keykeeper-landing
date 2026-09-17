@@ -12,7 +12,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 | Also | `slack-refresh-token` → `SLACK_REFRESH_TOKEN` · secret |
 | Also | `slack-client-id` → `SLACK_CLIENT_ID` · plain, confirmed by you |
 | Also | `slack-client-secret` → `SLACK_CLIENT_SECRET` · secret |
-| Key looks like | starts with `xoxe.xoxb-`, can be viewed again in the console |
+| Key looks like | starts with `xoxe.xoxb-`, whether it can be viewed again is unconfirmed |
 | Created at | [api.slack.com](https://api.slack.com/apps) |
 | Verified by KeyKeeper | not verified |
 | Template checked | 2026-09-15 |
@@ -49,7 +49,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Slack · OAuth rotating token bundle key (starts with `xoxe.xoxb-`, can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Slack · OAuth rotating token bundle key (starts with `xoxe.xoxb-`, whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** Slack · OAuth rotating token bundle offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
 
 

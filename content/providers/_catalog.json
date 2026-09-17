@@ -69,7 +69,9 @@
    "opencode-go",
    "pipellm",
    "relaxycode",
-   "therouter"
+   "therouter",
+   "zenmux-payg",
+   "zenmux-builder"
   ],
   "cloud": [
    "supabase",
@@ -330,8 +332,14 @@
    ],
    "members": [
     "opencode-zen",
-    "opencode-go"
+   "opencode-go"
    ]
+  },
+  {
+   "id": "zenmux",
+   "name": "ZenMux",
+   "strip": ["ZenMux"],
+   "members": ["zenmux-payg", "zenmux-builder"]
   },
   {
    "id": "cloudflare",

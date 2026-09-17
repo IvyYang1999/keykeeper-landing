@@ -9,7 +9,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 | Template id | `nvidia-api-catalog` (also `NVIDIA hosted NIM`, `build.nvidia.com`) |
 |---|---|
 | Field | `nvidia-api-key` → `NVIDIA_API_KEY` · secret |
-| Key looks like | can be viewed again in the console |
+| Key looks like | whether it can be viewed again is unconfirmed |
 | Created at | [build.nvidia.com](https://build.nvidia.com/settings/api-keys) |
 | Verified by KeyKeeper | not verified |
 | Template checked | 2026-09-15 |
@@ -46,7 +46,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a NVIDIA · API Catalog key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a NVIDIA · API Catalog key (whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** NVIDIA · API Catalog offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
 
 

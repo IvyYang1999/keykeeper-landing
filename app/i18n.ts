@@ -63,8 +63,8 @@ export const siteCopy = {
       ],
       popular: "Popular",
       more: "All {n} integrations",
-      categories: { models: "AI models", namedGateways: "OpenRouter & SiliconFlow", gateways: "Other gateways & relays", cloud: "Cloud & databases", development: "Development", apple: "Apple", analytics: "Analytics", messaging: "Messaging", payments: "Payments" },
-      gatewayNote: "Grouped for browsing, not a security rating. Third-party API platforms may process your requests; check their data policies before use.",
+      categories: { models: "Model makers", gateways: "Multi-model APIs", cloud: "Cloud & databases", development: "Development", apple: "Apple", analytics: "Analytics", messaging: "Messaging", payments: "Payments" },
+      gatewayNote: "These platforms offer models from more than one maker. Listing is not a security endorsement: check where your prompts go and how they are handled.",
     },
     promises: {
       title: "Three things we promise",
@@ -147,8 +147,8 @@ export const siteCopy = {
       ],
       popular: "常用",
       more: "全部 {n} 个集成",
-      categories: { models: "AI 模型", namedGateways: "OpenRouter 与硅基流动", gateways: "其他网关与中转", cloud: "云与数据库", development: "开发发布", apple: "Apple", analytics: "分析监控", messaging: "邮件消息", payments: "支付" },
-      gatewayNote: "这只是浏览分组，不是安全评级。第三方 API 平台可能处理你的请求；使用前请核对其数据政策。",
+      categories: { models: "模型厂商", gateways: "多模型 API 平台", cloud: "云与数据库", development: "开发发布", apple: "Apple", analytics: "分析监控", messaging: "邮件消息", payments: "支付" },
+      gatewayNote: "这里收录提供多家模型的 API 平台，不代表安全认证。使用前请核对请求去向与数据政策。",
     },
     promises: {
       title: "三句承诺",

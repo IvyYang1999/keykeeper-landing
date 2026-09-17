@@ -9,7 +9,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 | Template id | `groq` |
 |---|---|
 | Field | `groq-api-key` → `GROQ_API_KEY` · secret |
-| Key looks like | can be viewed again in the console |
+| Key looks like | whether it can be viewed again is unconfirmed |
 | Created at | [console.groq.com](https://console.groq.com/keys) |
 | Verified by KeyKeeper | `GET https://api.groq.com/openai/v1/models` — lists available models |
 | Template checked | 2026-09-15 |
@@ -45,7 +45,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Groq key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Groq key (whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://api.groq.com/openai/v1/models` with the key in the `Authorization` header (lists available models). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
 
 

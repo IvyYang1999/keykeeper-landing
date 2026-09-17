@@ -11,7 +11,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 | Field | `apple-app-specific-password` → `APPLE_APP_SPECIFIC_PASSWORD` · secret |
 | Also | `apple-id` → `APPLE_ID` · plain, confirmed by you |
 | Also | `apple-team-id` → `APPLE_TEAM_ID` · plain, confirmed by you |
-| Key looks like | can be viewed again in the console |
+| Key looks like | whether it can be viewed again is unconfirmed |
 | Created at | [account.apple.com](https://account.apple.com/account/manage) |
 | Verified by KeyKeeper | not verified |
 | Template checked | 2026-09-15 |
@@ -47,7 +47,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Apple Notary · App-Specific Password key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Apple Notary · App-Specific Password key (whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** Apple Notary · App-Specific Password offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
 
 

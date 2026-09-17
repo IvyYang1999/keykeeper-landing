@@ -9,7 +9,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 | Template id | `deepseek` (also `deep-seek`) |
 |---|---|
 | Field | `deepseek-api-key` → `DEEPSEEK_API_KEY` · secret |
-| Key looks like | can be viewed again in the console |
+| Key looks like | whether it can be viewed again is unconfirmed |
 | Created at | [platform.deepseek.com](https://platform.deepseek.com/api_keys) |
 | Verified by KeyKeeper | `GET https://api.deepseek.com/models` — lists available models |
 | Template checked | 2026-09-15 |
@@ -45,7 +45,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a DeepSeek key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a DeepSeek key (whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://api.deepseek.com/models` with the key in the `Authorization` header (lists available models). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
 
 

@@ -3,7 +3,7 @@ title: 服务商模板
 description: KeyKeeper 对每家服务知道些什么——key 在哪创建、该选什么、长什么样、怎么验证。
 ---
 
-69 家服务商，113 个模板。模板是 Agent 拿一把用户还没有的 key 时需要的东西，而且从头到尾看不到值。`keykeeper providers` 列出模板；
+58 家服务商，98 个模板。模板是 Agent 拿一把用户还没有的 key 时需要的东西，而且从头到尾看不到值。`keykeeper providers` 列出模板；
 `keykeeper providers show <id>` 以 JSON 打印一个。Agent 替你打开官方页面、说明该选什么，你复制之后它用
 `keykeeper save --provider <id>` 保存。
 
@@ -17,52 +17,38 @@ description: KeyKeeper 对每家服务知道些什么——key 在哪创建、�
 
 模板是对照官方文档核实的，不是凭记忆写的。服务商改了控制台，请[提 issue](https://github.com/IvyYang1999/KeyKeeper/issues)。
 
-下面的网关分组只是方便浏览，不代表安全评级或背书。第三方 API 平台可能经手你的请求和数据，使用前请核对其数据政策。
+「多模型 API 平台」提供不止一家厂商的模型；收录不代表安全认证。公开身份资料暂未核实充分的小型网关不再出现在推荐列表，但已有凭据及旧模板 ID 仍可使用。使用前请核对请求去向和数据政策。
 
-## AI 模型
+## 模型厂商
 
-- **Amazon Bedrock** — [Long-term bearer key](/zh/docs/providers/aws-bedrock-long-term)、[Short-term bearer key](/zh/docs/providers/aws-bedrock-short-term)
 - [Anthropic](/zh/docs/providers/anthropic)
 - [DeepSeek](/zh/docs/providers/deepseek)
 - [Google Gemini](/zh/docs/providers/gemini)
-- [Groq](/zh/docs/providers/groq)
 - **Kimi** — [Open Platform (China)](/zh/docs/providers/kimi)、[API Platform (Global)](/zh/docs/providers/kimi-global)、[Kimi Code](/zh/docs/providers/kimi-code)
 - [LongCat](/zh/docs/providers/longcat)
 - **MiniMax** — [Pay-as-you-go (China)](/zh/docs/providers/minimax)、[Pay-as-you-go (Global)](/zh/docs/providers/minimax-global)、[Token Plan (China)](/zh/docs/providers/minimax-token-plan-cn)、[Token Plan (Global)](/zh/docs/providers/minimax-token-plan-global)
-- **ModelScope 魔搭** — [魔搭社区 (中国)](/zh/docs/providers/modelscope-cn)、[Global](/zh/docs/providers/modelscope-global)
-- [Novita AI](/zh/docs/providers/novita-ai)
-- **NVIDIA** — [API Catalog](/zh/docs/providers/nvidia-api-catalog)、[NGC](/zh/docs/providers/nvidia-ngc)
 - [OpenAI](/zh/docs/providers/openai)
 - **StepFun 阶跃** — [API](/zh/docs/providers/stepfun-api)、[Step Plan](/zh/docs/providers/stepfun-step-plan)
 - [xAI](/zh/docs/providers/xai)
 - **Xiaomi MiMo** — [Pay-as-you-go](/zh/docs/providers/xiaomi-mimo-payg)、[Token Plan (China)](/zh/docs/providers/xiaomi-mimo-token-plan-cn)、[Token Plan (Singapore)](/zh/docs/providers/xiaomi-mimo-token-plan-sg)、[Token Plan (Europe)](/zh/docs/providers/xiaomi-mimo-token-plan-eu)
 - **智谱 · Z.AI** — [开放平台 (中国)](/zh/docs/providers/zhipu-cn)、[GLM Coding Plan (中国)](/zh/docs/providers/zhipu-cn-coding)、[API (Global)](/zh/docs/providers/zai-global)、[GLM Coding Plan (Global)](/zh/docs/providers/zai-global-coding)
+
+## 多模型 API 平台
+
+- [AIHubMix](/zh/docs/providers/aihubmix)
+- **Amazon Bedrock** — [Long-term bearer key](/zh/docs/providers/aws-bedrock-long-term)、[Short-term bearer key](/zh/docs/providers/aws-bedrock-short-term)
+- **Atlas Cloud** — [API (Pay-as-you-go)](/zh/docs/providers/atlascloud)、[Coding Plan](/zh/docs/providers/atlascloud-coding-plan)
+- [Groq](/zh/docs/providers/groq)
+- **ModelScope 魔搭** — [魔搭社区 (中国)](/zh/docs/providers/modelscope-cn)、[Global](/zh/docs/providers/modelscope-global)
+- [Novita AI](/zh/docs/providers/novita-ai)
+- **NVIDIA** — [API Catalog](/zh/docs/providers/nvidia-api-catalog)、[NGC](/zh/docs/providers/nvidia-ngc)
+- **OpenCode** — [Zen (Console)](/zh/docs/providers/opencode-zen)、[Go](/zh/docs/providers/opencode-go)
+- [OpenRouter](/zh/docs/providers/openrouter)
+- **SiliconFlow 硅基流动** — [China](/zh/docs/providers/siliconflow)、[Global](/zh/docs/providers/siliconflow-global)
+- **ZenMux** — [Pay As You Go](/zh/docs/providers/zenmux-payg)、[Builder Plan](/zh/docs/providers/zenmux-builder)
 - **火山方舟** — [按量 (中国)](/zh/docs/providers/volcengine-ark)、[Coding Plan (中国)](/zh/docs/providers/volcengine-ark-coding)
 - **百度千帆** — [中国站](/zh/docs/providers/baidu-qianfan-cn)、[国际站 (Baidu AI Cloud Qianfan)](/zh/docs/providers/baidu-qianfan-global)、[Token 福利包](/zh/docs/providers/baidu-qianfan-token-plan)
 - **阿里云百炼** — [按量 (北京)](/zh/docs/providers/alibaba-bailian)、[按量 (新加坡)](/zh/docs/providers/alibaba-bailian-sg)、[按量 (美国弗吉尼亚)](/zh/docs/providers/alibaba-bailian-us)、[按量 (中国香港)](/zh/docs/providers/alibaba-bailian-hk)、[Coding Plan (中国)](/zh/docs/providers/alibaba-bailian-coding-cn)、[Token Plan (中国)](/zh/docs/providers/alibaba-bailian-token-cn)
-
-## OpenRouter 与硅基流动
-
-- [OpenRouter](/zh/docs/providers/openrouter)
-- **SiliconFlow 硅基流动** — [China](/zh/docs/providers/siliconflow)、[Global](/zh/docs/providers/siliconflow-global)
-
-## 其他网关与中转
-
-- [AIHubMix](/zh/docs/providers/aihubmix)
-- [Amux API](/zh/docs/providers/amux)
-- **Atlas Cloud** — [API (Pay-as-you-go)](/zh/docs/providers/atlascloud)、[Coding Plan](/zh/docs/providers/atlascloud-coding-plan)
-- [CCSub](/zh/docs/providers/ccsub)
-- [CherryIN](/zh/docs/providers/cherryin)
-- **Compshare** — [ModelVerse (China)](/zh/docs/providers/compshare-modelverse-cn)、[ModelVerse (Global)](/zh/docs/providers/compshare-modelverse-global)、[Agent Plan](/zh/docs/providers/compshare-agent-plan)
-- [CrazyRouter](/zh/docs/providers/crazyrouter)
-- [Cubence](/zh/docs/providers/cubence)
-- **DMXAPI** — [国内站](/zh/docs/providers/dmxapi-cn)、[国际站](/zh/docs/providers/dmxapi-global)、[SSVIP 国际服](/zh/docs/providers/dmxapi-ssvip)
-- **Micu API** — [Claude Code](/zh/docs/providers/micu-claude)、[Codex](/zh/docs/providers/micu-codex)
-- **OpenCode** — [Zen (Console)](/zh/docs/providers/opencode-zen)、[Go](/zh/docs/providers/opencode-go)
-- [PipeLLM](/zh/docs/providers/pipellm)
-- [RelaxyCode](/zh/docs/providers/relaxycode)
-- [RightCode · Codex](/zh/docs/providers/rightcode-codex)
-- [TheRouter.ai](/zh/docs/providers/therouter)
 
 ## 云平台与数据库
 

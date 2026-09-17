@@ -1,0 +1,21 @@
+{
+  "id": "zenmux-builder",
+  "name": "ZenMux · Builder Plan",
+  "aliases": ["zenmux-subscription"],
+  "fieldName": "zenmux-api-key",
+  "fields": [{"name": "zenmux-api-key", "label": "API key", "kind": "secretText", "required": true, "isPrimary": true, "prefixes": [], "help": "只保存该供应商和本模板所列套餐的凭据；兼容协议不代表由 OpenAI 或 Anthropic 发行。"}],
+  "createURL": "https://zenmux.ai/platform/subscription",
+  "gates": ["登录 ZenMux", "选择 Builder Plan 并确认套餐规则", "购买后在订阅管理页创建订阅专属 API key", "确认套餐有效且目标模型在套餐范围内"],
+  "minimalPermission": "Only save a subscription-specific Builder Plan API key here. It consumes the plan's quota rather than pay-as-you-go balance; do not reuse a pay-as-you-go key.",
+  "prefixes": [],
+  "shownOnce": false,
+  "rotateURL": "https://zenmux.ai/platform/subscription",
+  "expiryNote": "未确认统一有效期；以创建页面显示的实际日期为准，未知时不要猜测。",
+  "verified": "2026-09-17",
+  "endpoints": [
+    {"protocolName": "OpenAI compatible", "baseURL": "https://zenmux.ai/api/v1"},
+    {"protocolName": "Anthropic Messages", "baseURL": "https://zenmux.ai/api/anthropic"},
+    {"protocolName": "Google Vertex AI compatible", "baseURL": "https://zenmux.ai/api/vertex-ai"}
+  ],
+  "sources": ["https://zenmux.ai/docs/guide/subscription", "https://zenmux.ai/docs/guide/quickstart"]
+}

@@ -1,3 +1,11 @@
 {
-  "separateBrands": ["openrouter", "siliconflow"]
+  "multiModelBrands": [
+    "openrouter", "siliconflow", "atlascloud", "aihubmix", "opencode", "zenmux",
+    "alibaba-bailian", "volcengine-ark", "baidu-qianfan", "modelscope",
+    "aws-bedrock", "groq", "nvidia", "novita-ai"
+  ],
+  "legacyOnlyBrands": [
+    "compshare", "ccsub", "micu", "rightcode-codex", "cubence", "crazyrouter",
+    "dmxapi", "amux", "cherryin", "pipellm", "relaxycode", "therouter"
+  ]
 }

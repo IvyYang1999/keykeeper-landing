@@ -11,7 +11,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 | Field | `sentry-auth-token` → `SENTRY_AUTH_TOKEN` · secret |
 | Also | `sentry-org` → `SENTRY_ORG` · plain, confirmed by you, optional |
 | Also | `sentry-project` → `SENTRY_PROJECT` · plain, confirmed by you, optional |
-| Key looks like | can be viewed again in the console |
+| Key looks like | whether it can be viewed again is unconfirmed |
 | Created at | [sentry.io](https://sentry.io/settings/) |
 | Verified by KeyKeeper | `GET https://sentry.io/api/0/organizations/` — lists organizations visible to the token |
 | Template checked | 2026-09-15 |
@@ -47,7 +47,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Sentry Cloud · Organization Auth Token key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Sentry Cloud · Organization Auth Token key (whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** KeyKeeper itself sends `GET https://sentry.io/api/0/organizations/` with the key in the `Authorization` header (lists organizations visible to the token). The agent receives *accepted*, *rejected* or *could not reach* — never the value.
 
 

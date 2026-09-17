@@ -10,7 +10,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 |---|---|
 | Field | `feishu-app-secret` → `FEISHU_APP_SECRET` · secret |
 | Also | `feishu-app-id` → `FEISHU_APP_ID` · plain, confirmed by you |
-| Key looks like | can be viewed again in the console |
+| Key looks like | whether it can be viewed again is unconfirmed |
 | Created at | [open.feishu.cn](https://open.feishu.cn/app) |
 | Verified by KeyKeeper | not verified |
 | Template checked | 2026-09-15 |
@@ -47,7 +47,7 @@ logs in, passes 2FA or pays on your behalf.
 
 ## What KeyKeeper checks
 
-- **Before writing:** the value must look like a Feishu 飞书 (中国) key (can be viewed again in the console). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
+- **Before writing:** the value must look like a Feishu 飞书 (中国) key (whether it can be viewed again is unconfirmed). A wrong paste is refused before anything is stored, and the agent is told why — without the value.
 - **After saving:** Feishu 飞书 (中国) offers no read-only endpoint KeyKeeper can use, so the first real call is the test.
 
 
