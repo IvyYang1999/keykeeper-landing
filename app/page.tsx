@@ -1,19 +1,25 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { siteCopy } from "./i18n";
 import { providerPaths, providers } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
 import providerWall from "./providerWall.json";
+import providerWallPopular from "./providerWallPopular.json";
 
-type WallMark = { id: string; name: string; brand: string; template: boolean; viewBox: string; svg?: string; png?: string };
+type WallMark = { id: string; name: string; category: string; variants: number; brand: string; template?: boolean; viewBox?: string; svg?: string; png?: string; letter?: string };
+const wallMarks = providerWall as WallMark[];
+const popularMarks = (providerWallPopular as string[]).map((id) => wallMarks.find((m) => m.id === id)).filter((m): m is WallMark => Boolean(m));
 
 /** One brand tile: the provider's own artwork on a white app-icon square, in its own colour. */
 function WallTile({ mark }: { mark: WallMark }) {
   return (
-    <span className="wall-tile">
-      {mark.png ? (
+    <span className={mark.letter ? "wall-tile wall-named" : "wall-tile"}>
+      {mark.variants > 1 ? <i className="wall-count">{mark.variants}</i> : null}
+      {mark.letter ? (
+        <b>{mark.name}</b>
+      ) : mark.png ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={`data:image/png;base64,${mark.png}`} alt="" width={28} height={28} />
       ) : (
@@ -97,6 +103,7 @@ function ApprovalWindow({ copy }: { copy: typeof siteCopy.en.prompt | typeof sit
 }
 
 export default function Home() {
+  const [wallCategory, setWallCategory] = useState<string | null>(null);
   const language = useSyncExternalStore<Language>(subscribeToLanguage, currentLanguage, () => "en");
   const copy = siteCopy[language];
   const docsUrl = language === "zh" ? "/zh/docs" : "/docs";
@@ -177,13 +184,14 @@ export default function Home() {
       <section className="providers" aria-label={copy.providers.title}>
         <h2 className="section-title">{copy.providers.title}</h2>
         <p className="section-copy">{copy.providers.copy.replace("{n}", String(providerSummary.total))}</p>
-        <ul className="provider-cats" aria-label="Categories">
+        <ul className="provider-cats" role="tablist" aria-label={copy.providers.title}>
+          <li><button type="button" role="tab" aria-selected={wallCategory === null} onClick={() => setWallCategory(null)}>{copy.providers.popular}</button></li>
           {Object.entries(providerSummary.categories).map(([key, count]) => (
-            <li key={key}><a href={`${docsUrl}/providers`}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></a></li>
+            <li key={key}><button type="button" role="tab" aria-selected={wallCategory === key} onClick={() => setWallCategory(key)}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></button></li>
           ))}
         </ul>
         <ul className="wall">
-          {(providerWall as WallMark[]).map((mark) => (
+          {(wallCategory === null ? popularMarks : wallMarks.filter((m) => m.category === wallCategory)).map((mark) => (
             <li key={mark.id}>
               <a href={`${docsUrl}/providers/${mark.id}`} title={mark.name} aria-label={mark.name}>
                 <WallTile mark={mark} />
