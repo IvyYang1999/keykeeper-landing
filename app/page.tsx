@@ -24,6 +24,16 @@ const distinctiveFallbacks: Record<string, string> = {
   xai: "xAI",
   sendgrid: "S",
 };
+// Official vector marks replace the embedded raster thumbnails for these wall tiles.
+// Sources: novita.ai/logo/logo_small.svg, atlascloud.ai/logo.svg,
+// stepfun.com/step_favicon.svg + platform.stepfun.ai/home-v2/logo/StepFunV2.png,
+// and a.slack-edge.com/9cc0056/marketing/img/nav/logo.svg.
+const vectorIconOverrides: Record<string, string> = {
+  "novita-ai": "/provider-icons/novita.svg",
+  atlascloud: "/provider-icons/atlascloud.svg",
+  "stepfun-api": "/provider-icons/stepfun.svg",
+  slack: "/provider-icons/slack.svg",
+};
 
 /** One brand tile: a compact logo that expands to a consistent logo-and-name label. */
 function WallTile({ mark }: { mark: WallMark }) {
@@ -46,6 +56,8 @@ function WallTile({ mark }: { mark: WallMark }) {
       <span className="wall-icon" aria-hidden="true">
         {mark.id === "zenmux-payg" ? (
           <span className="wall-emoji">🐙</span>
+        ) : vectorIconOverrides[mark.id] ? (
+          <Image src={vectorIconOverrides[mark.id]} alt="" width={28} height={28} unoptimized />
         ) : mark.letter ? (
           <b style={{ color: `#${mark.brand}` }}>{distinctiveFallbacks[mark.id] ?? mark.letter}</b>
         ) : mark.png ? (
