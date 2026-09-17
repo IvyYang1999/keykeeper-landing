@@ -7,7 +7,6 @@ import { providerPaths } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
 import providerWall from "./providerWall.json";
 import providerWallPopular from "./providerWallPopular.json";
-import { providerWordmarks } from "./providerWordmarks";
 
 type WallMark = { id: string; name: string; category: string; variants: number; brand: string; template?: boolean; viewBox?: string; svg?: string; png?: string; letter?: string };
 const wallMarks = providerWall as WallMark[];
@@ -19,11 +18,10 @@ const distinctiveFallbacks: Record<string, string> = {
   sendgrid: "S",
 };
 
-/** One brand tile: a compact mark that expands to a sourced wordmark or readable name. */
+/** One brand tile: a compact logo that expands to a consistent logo-and-name label. */
 function WallTile({ mark }: { mark: WallMark }) {
-  const wordmark = providerWordmarks[mark.id];
   return (
-    <span className={wordmark?.lockup ? "wall-tile wall-lockup" : "wall-tile"}>
+    <span className="wall-tile">
       {mark.variants > 1 ? <i className="wall-count">{mark.variants}</i> : null}
       <span className="wall-icon" aria-hidden="true">
         {mark.letter ? (
@@ -37,12 +35,7 @@ function WallTile({ mark }: { mark: WallMark }) {
             dangerouslySetInnerHTML={{ __html: mark.svg ?? "" }} />
         )}
       </span>
-      <span className="wall-wordmark" aria-hidden="true">
-        {wordmark ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={wordmark.src} alt="" />
-        ) : <b>{mark.name}</b>}
-      </span>
+      <span className="wall-label" aria-hidden="true">{mark.name}</span>
     </span>
   );
 }
@@ -69,6 +62,27 @@ function subscribeToLanguage(change: () => void) {
 function setLanguage(next: Language) {
   window.localStorage.setItem("keykeeper-language", next);
   window.dispatchEvent(new Event("keykeeper-language-change"));
+}
+
+function currentWallColumns() {
+  if (window.matchMedia("(max-width: 359px)").matches) return 4;
+  if (window.matchMedia("(max-width: 480px)").matches) return 5;
+  if (window.matchMedia("(max-width: 860px)").matches) return 7;
+  return 10;
+}
+
+function subscribeToWallColumns(change: () => void) {
+  const narrow = window.matchMedia("(max-width: 359px)");
+  const compact = window.matchMedia("(max-width: 480px)");
+  const medium = window.matchMedia("(max-width: 860px)");
+  narrow.addEventListener("change", change);
+  compact.addEventListener("change", change);
+  medium.addEventListener("change", change);
+  return () => {
+    narrow.removeEventListener("change", change);
+    compact.removeEventListener("change", change);
+    medium.removeEventListener("change", change);
+  };
 }
 
 function ProviderMark({ id, letter, size = 22 }: { id: string; letter?: string; size?: number }) {
@@ -121,8 +135,12 @@ function ApprovalWindow({ copy }: { copy: typeof siteCopy.en.prompt | typeof sit
 export default function Home() {
   const [wallCategory, setWallCategory] = useState<string | null>(null);
   const language = useSyncExternalStore<Language>(subscribeToLanguage, currentLanguage, () => "en");
+  const wallColumns = useSyncExternalStore(subscribeToWallColumns, currentWallColumns, () => 10);
   const copy = siteCopy[language];
   const docsUrl = language === "zh" ? "/zh/docs" : "/docs";
+  const visibleMarks = wallCategory === null ? popularMarks : wallMarks.filter((m) => m.category === wallCategory);
+  const wallRows = Array.from({ length: Math.ceil(visibleMarks.length / wallColumns) }, (_, row) =>
+    visibleMarks.slice(row * wallColumns, (row + 1) * wallColumns));
 
   useEffect(() => {
     document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
@@ -206,15 +224,19 @@ export default function Home() {
             <li key={key}><button type="button" role="tab" aria-selected={wallCategory === key} onClick={() => setWallCategory(key)}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></button></li>
           ))}
         </ul>
-        <ul className={wallCategory === null ? "wall wall-popular" : "wall"}>
-          {(wallCategory === null ? popularMarks : wallMarks.filter((m) => m.category === wallCategory)).map((mark) => (
-            <li key={mark.id}>
-              <a href={`${docsUrl}/providers/${mark.id}`} title={mark.name} aria-label={mark.name}>
-                <WallTile mark={mark} />
-              </a>
-            </li>
+        <div className={wallCategory === null ? "wall wall-popular" : "wall"}>
+          {wallRows.map((row) => (
+            <ul className="wall-row" key={row[0].id}>
+              {row.map((mark) => (
+                <li key={mark.id}>
+                  <a href={`${docsUrl}/providers/${mark.id}`} title={mark.name} aria-label={mark.name}>
+                    <WallTile mark={mark} />
+                  </a>
+                </li>
+              ))}
+            </ul>
           ))}
-        </ul>
+        </div>
         <div className="wall-cmds" aria-hidden="true">
           {copy.providers.commands.map(([command, result]) => (
             <div key={command}><code>$ {command}</code><span>{result}</span></div>
