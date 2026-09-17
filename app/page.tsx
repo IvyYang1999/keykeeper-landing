@@ -174,9 +174,9 @@ export default function Home() {
         <p className="story-aside"><code>{copy.story.asideCommand}</code><span>{copy.story.aside}</span></p>
       </section>
 
-      <section className="providers" aria-label={copy.providers.title.replace("{n}", String(providerSummary.total))}>
-        <h2 className="section-title">{copy.providers.title.replace("{n}", String(providerSummary.total))}</h2>
-        <p className="section-copy">{copy.providers.copy}</p>
+      <section className="providers" aria-label={copy.providers.title}>
+        <h2 className="section-title">{copy.providers.title}</h2>
+        <p className="section-copy">{copy.providers.copy.replace("{n}", String(providerSummary.total))}</p>
         <ul className="provider-cats" aria-label="Categories">
           {Object.entries(providerSummary.categories).map(([key, count]) => (
             <li key={key}><a href={`${docsUrl}/providers`}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></a></li>
@@ -191,6 +191,11 @@ export default function Home() {
             </li>
           ))}
         </ul>
+        <div className="wall-cmds" aria-hidden="true">
+          {copy.providers.commands.map(([command, result]) => (
+            <div key={command}><code>$ {command}</code><span>{result}</span></div>
+          ))}
+        </div>
         <a className="textlink" href={`${docsUrl}/providers`}>{copy.providers.more.replace("{n}", String(providerSummary.total))} →</a>
       </section>
 

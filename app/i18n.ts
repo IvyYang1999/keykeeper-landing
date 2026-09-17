@@ -55,9 +55,13 @@ export const siteCopy = {
       ],
     },
     providers: {
-      title: "{n} provider templates, out of the box",
-      copy: "AI models and gateways, cloud, Apple, analytics, messaging, payments. Each template knows where the key is made, what to choose, what it looks like and how to verify it.",
-      more: "All {n} templates",
+      title: "Save an API key in seconds. Use it in one command.",
+      copy: "KeyKeeper has {n} provider integrations built in: where the key is made, what to choose, what a real key looks like, how to verify it. You or your agent copy once, and it lands under the right name, checked with the provider.",
+      commands: [
+        ["keykeeper save --provider openai --from-clipboard", "saved · accepted by OpenAI"],
+        ["keykeeper run -c openai -- python app.py", "OPENAI_API_KEY set for this command only"],
+      ],
+      more: "All {n} integrations",
       categories: { models: "AI models", gateways: "AI gateways", cloud: "Cloud & databases", development: "Development", apple: "Apple", analytics: "Analytics", messaging: "Messaging", payments: "Payments" },
     },
     promises: {
@@ -133,9 +137,13 @@ export const siteCopy = {
       ],
     },
     providers: {
-      title: "开箱即用 {n} 个服务商模板",
-      copy: "AI 模型与网关、云平台、Apple、分析、消息、支付。每个模板都知道 key 在哪创建、该选什么、长什么样、怎么验证。",
-      more: "全部 {n} 个模板",
+      title: "几秒存好一把 API key，一条命令用上。",
+      copy: "KeyKeeper 内置 {n} 个服务商集成：key 在哪建、该选什么、真 key 长什么样、怎么验证。你或 Agent 复制一次，它就存到对的名字下，并向服务商验证过。",
+      commands: [
+        ["keykeeper save --provider openai --from-clipboard", "已保存 · OpenAI 已接受"],
+        ["keykeeper run -c openai -- python app.py", "OPENAI_API_KEY 只注入这一条命令"],
+      ],
+      more: "全部 {n} 个集成",
       categories: { models: "AI 模型", gateways: "AI 网关", cloud: "云与数据库", development: "开发发布", apple: "Apple", analytics: "分析监控", messaging: "邮件消息", payments: "支付" },
     },
     promises: {
