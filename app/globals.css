@@ -172,9 +172,6 @@ main { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
 
 /* Providers */
 .providers { margin-top: 7rem; text-align: center; }
-.provider-title { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
-.provider-eyebrow { color: var(--gray); font-size: 0.875rem; font-weight: 600; line-height: 1.2; letter-spacing: 0.04em; }
-.provider-headline { line-height: 1.1; }
 .provider-cats { list-style: none; margin: 1.5rem auto 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; max-width: 44rem; }
 .provider-cats button { border: 0; cursor: pointer; font: inherit; display: inline-flex; gap: 0.35rem; align-items: baseline; padding: 0.35rem 0.75rem; border-radius: 999px; background: var(--fill); font-size: 0.82rem; color: var(--gray); }
 .provider-cats button:hover { background: var(--fill-strong); }
