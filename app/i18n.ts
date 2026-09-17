@@ -63,7 +63,8 @@ export const siteCopy = {
       ],
       popular: "Popular",
       more: "All {n} integrations",
-      categories: { models: "AI models", gateways: "AI gateways", cloud: "Cloud & databases", development: "Development", apple: "Apple", analytics: "Analytics", messaging: "Messaging", payments: "Payments" },
+      categories: { models: "AI models", namedGateways: "OpenRouter & SiliconFlow", gateways: "Other gateways & relays", cloud: "Cloud & databases", development: "Development", apple: "Apple", analytics: "Analytics", messaging: "Messaging", payments: "Payments" },
+      gatewayNote: "Grouped for browsing, not a security rating. Third-party API platforms may process your requests; check their data policies before use.",
     },
     promises: {
       title: "Three things we promise",
@@ -146,7 +147,8 @@ export const siteCopy = {
       ],
       popular: "常用",
       more: "全部 {n} 个集成",
-      categories: { models: "AI 模型", gateways: "AI 网关", cloud: "云与数据库", development: "开发发布", apple: "Apple", analytics: "分析监控", messaging: "邮件消息", payments: "支付" },
+      categories: { models: "AI 模型", namedGateways: "OpenRouter 与硅基流动", gateways: "其他网关与中转", cloud: "云与数据库", development: "开发发布", apple: "Apple", analytics: "分析监控", messaging: "邮件消息", payments: "支付" },
+      gatewayNote: "这只是浏览分组，不是安全评级。第三方 API 平台可能处理你的请求；使用前请核对其数据政策。",
     },
     promises: {
       title: "三句承诺",

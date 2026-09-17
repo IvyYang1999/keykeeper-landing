@@ -8,6 +8,8 @@ import { join } from "node:path";
 const src = "content/providers";
 const out = "content/docs/providers";
 const catalog = JSON.parse(readFileSync(join(src, "_catalog.json"), "utf8"));
+// Website-only editorial grouping. The CLI/App catalog and provider IDs remain unchanged.
+const gatewayDisplay = JSON.parse(readFileSync(join(src, "_gateway-display.json"), "utf8"));
 const files = readdirSync(src).filter((f) => f.endsWith(".json") && !f.startsWith("_"));
 const byId = Object.fromEntries(files.map((f) => JSON.parse(readFileSync(join(src, f), "utf8"))).map((t) => [t.id, t]));
 const zhDir = join(src, "zh");
@@ -16,15 +18,26 @@ const zhById = Object.fromEntries(files.map((f) => {
   catch { return [f.slice(0, -5), {}]; }
 }));
 
-const categoryOrder = ["models", "gateways", "cloud", "development", "apple", "analytics", "messaging", "payments"];
+const categoryOrder = ["models", "namedGateways", "gateways", "cloud", "development", "apple", "analytics", "messaging", "payments"];
 const categoryName = {
-  en: { models: "AI models", gateways: "AI gateways", cloud: "Cloud & databases", development: "Development & publishing",
+  en: { models: "AI models", namedGateways: "OpenRouter & SiliconFlow", gateways: "Other gateways & relays", cloud: "Cloud & databases", development: "Development & publishing",
     apple: "Apple services", analytics: "Analytics & monitoring", messaging: "Email & messaging", payments: "Payments" },
-  zh: { models: "AI 模型", gateways: "AI 聚合与网关", cloud: "云平台与数据库", development: "开发与发布",
+  zh: { models: "AI 模型", namedGateways: "OpenRouter 与硅基流动", gateways: "其他网关与中转", cloud: "云平台与数据库", development: "开发与发布",
     apple: "Apple 服务", analytics: "分析与监控", messaging: "邮件与消息", payments: "支付" },
 };
 const familyOf = {};
 for (const fam of catalog.families) for (const id of fam.members) familyOf[id] = fam;
+const gatewayBrand = (id) => familyOf[id]?.id ?? id;
+const separateBrands = new Set(gatewayDisplay.separateBrands);
+const gatewayIds = catalog.categories.gateways;
+const matchedBrands = new Set(gatewayIds.map(gatewayBrand).filter((id) => separateBrands.has(id)));
+if (separateBrands.size !== gatewayDisplay.separateBrands.length || matchedBrands.size !== separateBrands.size)
+  throw new Error("gateway display brands must be unique and present in the app catalog");
+const displayCategories = {
+  ...catalog.categories,
+  namedGateways: gatewayIds.filter((id) => separateBrands.has(gatewayBrand(id))),
+  gateways: gatewayIds.filter((id) => !separateBrands.has(gatewayBrand(id))),
+};
 const familyName = (t) => familyOf[t.id]?.name ?? t.name;
 const variantLabel = (t) => {
   const fam = familyOf[t.id];
@@ -39,7 +52,7 @@ const variantLabel = (t) => {
 const collator = new Intl.Collator("en");
 // Category → brand groups in name order, variants in the family's own order.
 const grouped = categoryOrder.map((cat) => {
-  const ids = catalog.categories[cat] ?? [];
+  const ids = displayCategories[cat] ?? [];
   const groups = new Map();
   for (const id of ids) {
     const t = byId[id];
@@ -55,6 +68,8 @@ const grouped = categoryOrder.map((cat) => {
   return { cat, groups: [...groups.values()].sort((a, b) => collator.compare(a.name, b.name)) };
 });
 const ordered = grouped.flatMap((g) => g.groups.flatMap((x) => x.members));
+if (new Set(ordered.map((t) => t.id)).size !== ordered.length)
+  throw new Error("a template appears in more than one display category");
 const missing = Object.keys(byId).filter((id) => !ordered.some((t) => t.id === id));
 if (missing.length) throw new Error("templates without a category: " + missing.join(", "));
 

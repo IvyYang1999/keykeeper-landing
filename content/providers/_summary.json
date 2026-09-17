@@ -3,7 +3,8 @@
   "brands": 69,
   "categories": {
     "models": 42,
-    "gateways": 25,
+    "namedGateways": 3,
+    "gateways": 22,
     "cloud": 16,
     "development": 7,
     "apple": 7,

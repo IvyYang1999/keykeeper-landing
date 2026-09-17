@@ -178,6 +178,7 @@ main { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
 .provider-cats button[aria-selected="true"] { background: var(--ink); color: var(--canvas, #fff); }
 .provider-cats button[aria-selected="true"] b { color: inherit; }
 .provider-cats b { font-weight: 600; color: var(--ink); }
+.provider-category-note { max-width: 42rem; margin: 0.9rem auto 0; color: var(--gray); font-size: 0.83rem; line-height: 1.5; }
 /* Each row stays intact while a tile expands in-flow and pushes its neighbours aside. */
 .wall { margin: 1.5rem auto 0; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: 100%; }
 .wall-popular { min-height: 11.5rem; }
