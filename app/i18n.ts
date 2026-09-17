@@ -139,7 +139,7 @@ export const siteCopy = {
       ],
     },
     providers: {
-      title: "几秒存好一把 API key，一条命令用上。",
+      title: "apikey 妙存，秒用",
       copy: "KeyKeeper 内置 {n} 个服务商集成：key 在哪建、该选什么、真 key 长什么样、怎么验证。你或 Agent 复制一次，它就存到对的名字下，并向服务商验证过。",
       commands: [
         ["keykeeper save --provider openai --from-clipboard", "已保存 · OpenAI 已接受"],
