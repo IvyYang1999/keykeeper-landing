@@ -197,21 +197,31 @@ main { width: min(var(--max), calc(100% - 3rem)); margin: 0 auto; }
 .wall-label { min-width: 0; overflow: hidden; color: #1d1d1f; font-size: 0.88rem; font-weight: 650; white-space: nowrap; opacity: 0; transition: opacity 180ms ease; }
 .wall-label::after { content: ""; display: inline-block; width: 0.95rem; }
 .wall-count { position: absolute; top: 3px; right: 4px; font-style: normal; font-size: 0.6rem; font-weight: 600; color: #6e6e73; z-index: 1; }
+/* NVIDIA's complete vertical lockup needs 38px of artwork, so it gets a wider compact tile. */
+.wall-tile-nvidia { grid-template-columns: 4rem 0fr; min-width: 4rem; }
+.wall-nvidia-vertical { width: 4rem; height: 3rem; display: grid; place-items: center; opacity: 1; transition: opacity 120ms ease; }
+.wall-nvidia-horizontal { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; pointer-events: none; transition: opacity 160ms ease; }
 @media (min-width: 700px) {
   .wall a:focus-visible .wall-tile { grid-template-columns: 3rem 1fr; transition-duration: 320ms, 180ms; box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 12px 28px rgba(0,0,0,0.12); }
   .wall a:focus-visible .wall-label { opacity: 1; transition-delay: 90ms; }
   .wall a:focus-visible .wall-count { opacity: 0; }
+  .wall a:focus-visible .wall-tile-nvidia { grid-template-columns: 4rem 6.25rem; }
+  .wall a:focus-visible .wall-nvidia-vertical { opacity: 0; transition-delay: 60ms; }
+  .wall a:focus-visible .wall-nvidia-horizontal { opacity: 1; transition-delay: 120ms; }
 }
 @media (min-width: 700px) and (hover: hover) and (pointer: fine) {
   .wall a:hover .wall-tile { grid-template-columns: 3rem 1fr; transition-duration: 320ms, 180ms; transition-delay: 50ms, 0ms; box-shadow: 0 4px 12px rgba(0,0,0,0.12), 0 12px 28px rgba(0,0,0,0.12); }
   .wall a:hover .wall-label { opacity: 1; transition-delay: 140ms; }
   .wall a:hover .wall-count { opacity: 0; }
+  .wall a:hover .wall-tile-nvidia { grid-template-columns: 4rem 6.25rem; }
+  .wall a:hover .wall-nvidia-vertical { opacity: 0; transition-delay: 60ms; }
+  .wall a:hover .wall-nvidia-horizontal { opacity: 1; transition-delay: 120ms; }
 }
 @media (min-width: 700px) and (max-width: 860px) {
   .wall-tile { max-width: min(16rem, calc(100vw - 27rem)); }
 }
-@media (max-width: 699px) { .wall-tile { max-width: 3rem; } }
-@media (prefers-reduced-motion: reduce) { .wall-tile, .wall-label { transition: none; } }
+@media (max-width: 699px) { .wall-tile { max-width: 3rem; } .wall-tile-nvidia { max-width: 4rem; } }
+@media (prefers-reduced-motion: reduce) { .wall-tile, .wall-label, .wall-nvidia-vertical, .wall-nvidia-horizontal { transition: none; } }
 .wall-cmds { margin: 1.75rem auto 0; max-width: 40rem; padding: 0.9rem 1.2rem; border-radius: 14px; background: var(--fill); text-align: left; display: grid; gap: 0.5rem; }
 .wall-cmds div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.25rem 1rem; align-items: baseline; }
 .wall-cmds code { font-size: 0.82rem; color: var(--ink); }
