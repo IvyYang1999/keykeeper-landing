@@ -27,6 +27,7 @@ function WallTile({ mark }: { mark: WallMark }) {
         <span className="wall-nvidia-eye" aria-hidden="true">
           <Image src="/provider-wordmarks/nvidia-horizontal.svg" alt="" width={126} height={24} unoptimized />
         </span>
+        <span className="wall-nvidia-space" aria-hidden="true" />
         <span className="wall-nvidia-horizontal" aria-hidden="true">
           <Image src="/provider-wordmarks/nvidia-horizontal.svg" alt="" width={126} height={24} unoptimized />
         </span>
@@ -37,7 +38,9 @@ function WallTile({ mark }: { mark: WallMark }) {
     <span className="wall-tile">
       {mark.variants > 1 ? <i className="wall-count">{mark.variants}</i> : null}
       <span className="wall-icon" aria-hidden="true">
-        {mark.letter ? (
+        {mark.id === "zenmux-payg" ? (
+          <span className="wall-emoji">🐙</span>
+        ) : mark.letter ? (
           <b style={{ color: `#${mark.brand}` }}>{distinctiveFallbacks[mark.id] ?? mark.letter}</b>
         ) : mark.png ? (
           // eslint-disable-next-line @next/next/no-img-element
