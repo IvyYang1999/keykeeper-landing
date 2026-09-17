@@ -7,10 +7,16 @@ import { providerPaths } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
 import providerWall from "./providerWall.json";
 import providerWallPopular from "./providerWallPopular.json";
+import providerDisplayOrder from "../content/providers/_display-order.json";
 
 type WallMark = { id: string; name: string; category: string; variants: number; brand: string; template?: boolean; viewBox?: string; svg?: string; png?: string; letter?: string };
 const wallMarks = providerWall as WallMark[];
 const popularMarks = (providerWallPopular as string[]).map((id) => wallMarks.find((m) => m.id === id)).filter((m): m is WallMark => Boolean(m));
+const wallById = new Map(wallMarks.map((mark) => [mark.id, mark]));
+const categoryMarks = Object.fromEntries(Object.entries(providerDisplayOrder).map(([category, ids]) => [
+  category,
+  ids.map((id) => wallById.get(id)).filter((mark): mark is WallMark => Boolean(mark)),
+])) as Record<string, WallMark[]>;
 const distinctiveFallbacks: Record<string, string> = {
   "developer-id": "D",
   "apple-notary": "N",
@@ -154,7 +160,7 @@ export default function Home() {
   const wallColumns = useSyncExternalStore(subscribeToWallColumns, currentWallColumns, () => 10);
   const copy = siteCopy[language];
   const docsUrl = language === "zh" ? "/zh/docs" : "/docs";
-  const visibleMarks = wallCategory === null ? popularMarks : wallMarks.filter((m) => m.category === wallCategory);
+  const visibleMarks = wallCategory === null ? popularMarks : (categoryMarks[wallCategory] ?? []);
   const wallRows = Array.from({ length: Math.ceil(visibleMarks.length / wallColumns) }, (_, row) =>
     visibleMarks.slice(row * wallColumns, (row + 1) * wallColumns));
 

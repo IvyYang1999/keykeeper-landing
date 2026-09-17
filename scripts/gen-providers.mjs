@@ -8,6 +8,9 @@ import { join } from "node:path";
 const src = "content/providers";
 const out = "content/docs/providers";
 const catalog = JSON.parse(readFileSync(join(src, "_catalog.json"), "utf8"));
+// Editorial discovery order for KeyKeeper's AI-coding audience, not a market-share claim.
+// Shared with the homepage wall and kept explicit so new brands cannot silently land mid-list.
+const displayOrder = JSON.parse(readFileSync(join(src, "_display-order.json"), "utf8"));
 // Website-only discovery policy. Old provider IDs stay resolvable in the CLI/App.
 const gatewayDisplay = JSON.parse(readFileSync(join(src, "_gateway-display.json"), "utf8"));
 const files = readdirSync(src).filter((f) => f.endsWith(".json") && !f.startsWith("_"));
@@ -54,8 +57,7 @@ const variantLabel = (t) => {
   label = label.replace(/^[\s·:-]+/, "").trim();
   return label || t.name;
 };
-const collator = new Intl.Collator("en");
-// Category → brand groups in name order, variants in the family's own order.
+// Category → curated brand order, variants in the family's own order.
 const grouped = categoryOrder.map((cat) => {
   const ids = displayCategories[cat] ?? [];
   const groups = new Map();
@@ -70,7 +72,14 @@ const grouped = categoryOrder.map((cat) => {
     const order = familyOf[g.members[0].id]?.members ?? [];
     g.members.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
   }
-  return { cat, groups: [...groups.values()].sort((a, b) => collator.compare(a.name, b.name)) };
+  const rankedIds = displayOrder[cat];
+  const groupByTemplateId = new Map([...groups.entries()].flatMap(([key, g]) =>
+    g.members.map((t) => [t.id, key])));
+  const rankedGroupIds = Array.isArray(rankedIds) ? rankedIds.map((id) => groupByTemplateId.get(id)) : [];
+  if (!Array.isArray(rankedIds) || rankedIds.length !== groups.size ||
+      rankedGroupIds.some((id) => !id) || new Set(rankedGroupIds).size !== groups.size)
+    throw new Error(`display order for ${cat} must contain exactly one template per brand`);
+  return { cat, groups: rankedGroupIds.map((id) => groups.get(id)) };
 });
 const ordered = grouped.flatMap((g) => g.groups.flatMap((x) => x.members));
 if (new Set(ordered.map((t) => t.id)).size !== ordered.length)

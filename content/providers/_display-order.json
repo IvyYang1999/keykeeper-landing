@@ -1,0 +1,21 @@
+{
+  "models": [
+    "openai", "anthropic", "gemini", "deepseek", "xai", "zhipu-cn",
+    "kimi", "minimax", "stepfun-api", "xiaomi-mimo-payg", "longcat"
+  ],
+  "gateways": [
+    "openrouter", "siliconflow", "alibaba-bailian", "volcengine-ark",
+    "aws-bedrock-long-term", "groq", "opencode-zen", "nvidia-api-catalog",
+    "modelscope-cn", "baidu-qianfan-cn", "novita-ai", "zenmux-payg",
+    "aihubmix", "atlascloud"
+  ],
+  "cloud": [
+    "vercel", "supabase", "cloudflare", "aws", "google-cloud",
+    "firebase-admin", "railway", "neon", "netlify", "azure", "render", "flyio"
+  ],
+  "development": ["github", "npm", "dockerhub", "gitlab", "pypi"],
+  "apple": ["app-store-connect", "developer-id", "apple-notary", "apns"],
+  "analytics": ["ga4", "sentry", "posthog", "search-console"],
+  "messaging": ["resend", "slack", "telegram", "feishu", "sendgrid", "twilio", "mailgun"],
+  "payments": ["stripe"]
+}

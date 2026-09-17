@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:provider-order": "node --test scripts/provider-order.test.mjs"
   },
   "dependencies": {
     "cn": "^0.3.0",
