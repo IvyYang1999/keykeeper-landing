@@ -172,6 +172,7 @@ export default function Home() {
   const wallColumns = useSyncExternalStore(subscribeToWallColumns, currentWallColumns, () => 10);
   const copy = siteCopy[language];
   const docsUrl = language === "zh" ? "/zh/docs" : "/docs";
+  const providerHeading = [copy.providers.eyebrow, copy.providers.title].filter(Boolean).join(" ");
   const visibleMarks = wallCategory === null ? popularMarks : (categoryMarks[wallCategory] ?? []);
   const wallRows = Array.from({ length: Math.ceil(visibleMarks.length / wallColumns) }, (_, row) =>
     visibleMarks.slice(row * wallColumns, (row + 1) * wallColumns));
@@ -249,10 +250,12 @@ export default function Home() {
         <p className="story-aside"><code>{copy.story.asideCommand}</code><span>{copy.story.aside}</span></p>
       </section>
 
-      <section className="providers" aria-label={copy.providers.title}>
-        <h2 className="section-title">{copy.providers.title}</h2>
+      <section className="providers" aria-label={providerHeading}>
+        <h2 className={copy.providers.eyebrow ? "section-title provider-title" : "section-title"}>
+          {copy.providers.eyebrow ? <><span className="provider-eyebrow">{copy.providers.eyebrow}</span>{" "}<span className="provider-headline">{copy.providers.title}</span></> : copy.providers.title}
+        </h2>
         <p className="section-copy">{copy.providers.copy.replace("{n}", String(providerSummary.total))}</p>
-        <ul className="provider-cats" role="tablist" aria-label={copy.providers.title}>
+        <ul className="provider-cats" role="tablist" aria-label={providerHeading}>
           <li><button type="button" role="tab" aria-selected={wallCategory === null} onClick={() => setWallCategory(null)}>{copy.providers.popular}</button></li>
           {Object.entries(providerSummary.categories).map(([key, count]) => (
             <li key={key}><button type="button" role="tab" aria-selected={wallCategory === key} onClick={() => setWallCategory(key)}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></button></li>
