@@ -5,6 +5,25 @@ import Image from "next/image";
 import { siteCopy } from "./i18n";
 import { providerPaths, providers } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
+import providerWall from "./providerWall.json";
+
+type WallMark = { id: string; name: string; brand: string; template: boolean; viewBox: string; svg?: string; png?: string };
+
+/** One brand tile: the provider's own artwork on a white app-icon square, in its own colour. */
+function WallTile({ mark }: { mark: WallMark }) {
+  return (
+    <span className="wall-tile">
+      {mark.png ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={`data:image/png;base64,${mark.png}`} alt="" width={28} height={28} />
+      ) : (
+        <svg viewBox={mark.viewBox} width={26} height={26} aria-hidden="true"
+          fill={mark.template ? `#${mark.brand}` : undefined}
+          dangerouslySetInnerHTML={{ __html: mark.svg ?? "" }} />
+      )}
+    </span>
+  );
+}
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
@@ -155,7 +174,7 @@ export default function Home() {
         <p className="story-aside"><code>{copy.story.asideCommand}</code><span>{copy.story.aside}</span></p>
       </section>
 
-      <section className="providers" aria-label={copy.providers.title}>
+      <section className="providers" aria-label={copy.providers.title.replace("{n}", String(providerSummary.total))}>
         <h2 className="section-title">{copy.providers.title.replace("{n}", String(providerSummary.total))}</h2>
         <p className="section-copy">{copy.providers.copy}</p>
         <ul className="provider-cats" aria-label="Categories">
@@ -163,12 +182,11 @@ export default function Home() {
             <li key={key}><a href={`${docsUrl}/providers`}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></a></li>
           ))}
         </ul>
-        <ul className="provider-list">
-          {providers.map((p) => (
-            <li key={p.id}>
-              <a href={`${docsUrl}/providers/${p.id}`}>
-                <ProviderMark id={p.id} letter={p.letter} size={26} />
-                <span>{p.name}</span>
+        <ul className="wall">
+          {(providerWall as WallMark[]).map((mark) => (
+            <li key={mark.id}>
+              <a href={`${docsUrl}/providers/${mark.id}`} title={mark.name} aria-label={mark.name}>
+                <WallTile mark={mark} />
               </a>
             </li>
           ))}
