@@ -3,30 +3,46 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import { siteCopy } from "./i18n";
-import { providerPaths, providers } from "./providerMarks";
+import { providerPaths } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
 import providerWall from "./providerWall.json";
 import providerWallPopular from "./providerWallPopular.json";
+import { providerWordmarks } from "./providerWordmarks";
 
 type WallMark = { id: string; name: string; category: string; variants: number; brand: string; template?: boolean; viewBox?: string; svg?: string; png?: string; letter?: string };
 const wallMarks = providerWall as WallMark[];
 const popularMarks = (providerWallPopular as string[]).map((id) => wallMarks.find((m) => m.id === id)).filter((m): m is WallMark => Boolean(m));
+const distinctiveFallbacks: Record<string, string> = {
+  "developer-id": "D",
+  "apple-notary": "N",
+  apns: "P",
+  sendgrid: "S",
+};
 
-/** One brand tile: the provider's own artwork on a white app-icon square, in its own colour. */
+/** One brand tile: a compact mark that expands to a sourced wordmark or readable name. */
 function WallTile({ mark }: { mark: WallMark }) {
+  const wordmark = providerWordmarks[mark.id];
   return (
-    <span className={mark.letter ? "wall-tile wall-named" : "wall-tile"}>
+    <span className={wordmark?.lockup ? "wall-tile wall-lockup" : "wall-tile"}>
       {mark.variants > 1 ? <i className="wall-count">{mark.variants}</i> : null}
-      {mark.letter ? (
-        <b>{mark.name}</b>
-      ) : mark.png ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={`data:image/png;base64,${mark.png}`} alt="" width={28} height={28} />
-      ) : (
-        <svg viewBox={mark.viewBox} width={26} height={26} aria-hidden="true"
-          fill={mark.template ? `#${mark.brand}` : undefined}
-          dangerouslySetInnerHTML={{ __html: mark.svg ?? "" }} />
-      )}
+      <span className="wall-icon" aria-hidden="true">
+        {mark.letter ? (
+          <b style={{ color: `#${mark.brand}` }}>{distinctiveFallbacks[mark.id] ?? mark.letter}</b>
+        ) : mark.png ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={`data:image/png;base64,${mark.png}`} alt="" width={28} height={28} />
+        ) : (
+          <svg viewBox={mark.viewBox} width={26} height={26} aria-hidden="true"
+            fill={mark.template ? `#${mark.brand}` : undefined}
+            dangerouslySetInnerHTML={{ __html: mark.svg ?? "" }} />
+        )}
+      </span>
+      <span className="wall-wordmark" aria-hidden="true">
+        {wordmark ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={wordmark.src} alt="" />
+        ) : <b>{mark.name}</b>}
+      </span>
     </span>
   );
 }
@@ -190,7 +206,7 @@ export default function Home() {
             <li key={key}><button type="button" role="tab" aria-selected={wallCategory === key} onClick={() => setWallCategory(key)}>{copy.providers.categories[key as keyof typeof copy.providers.categories]} <b>{count}</b></button></li>
           ))}
         </ul>
-        <ul className="wall">
+        <ul className={wallCategory === null ? "wall wall-popular" : "wall"}>
           {(wallCategory === null ? popularMarks : wallMarks.filter((m) => m.category === wallCategory)).map((mark) => (
             <li key={mark.id}>
               <a href={`${docsUrl}/providers/${mark.id}`} title={mark.name} aria-label={mark.name}>
