@@ -24,8 +24,8 @@ function WallTile({ mark }: { mark: WallMark }) {
   if (mark.id === "nvidia-api-catalog") {
     return (
       <span className="wall-tile wall-tile-nvidia">
-        <span className="wall-nvidia-vertical" aria-hidden="true">
-          <Image src="/provider-wordmarks/nvidia-vertical.svg" alt="" width={49} height={38} unoptimized />
+        <span className="wall-nvidia-eye" aria-hidden="true">
+          <Image src="/provider-wordmarks/nvidia-horizontal.svg" alt="" width={126} height={24} unoptimized />
         </span>
         <span className="wall-nvidia-horizontal" aria-hidden="true">
           <Image src="/provider-wordmarks/nvidia-horizontal.svg" alt="" width={126} height={24} unoptimized />
