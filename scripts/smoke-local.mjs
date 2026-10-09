@@ -7,7 +7,7 @@ const server = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'star
 try {
   await new Promise((yes, no) => {
     const timeout = setTimeout(() => no(new Error('Local build did not start within 30 seconds')), 30_000);
-    const finish = (error) => { clearTimeout(timeout); error ? no(error) : yes(); };
+    const finish = (error) => { clearTimeout(timeout); if (error) no(error); else yes(); };
     server.once('error', finish);
     server.once('exit', (code) => finish(new Error(`Local server exited ${code}`)));
     server.stdout.on('data', (chunk) => { if (chunk.toString().includes('Ready')) finish(); });
