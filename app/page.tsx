@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
+import download from "../lib/download.json";
 import { siteCopy } from "./i18n";
 import { providerPaths } from "./providerMarks";
 import providerSummary from "../content/providers/_summary.json";
@@ -76,7 +77,7 @@ function WallTile({ mark }: { mark: WallMark }) {
 import type { Language } from "./i18n";
 
 const githubUrl = "https://github.com/IvyYang1999/KeyKeeper";
-const downloadUrl = `${githubUrl}/releases/download/v0.3.5/KeyKeeper-0.3.5.dmg`;
+const downloadUrl = download.url;
 const quickStartUrl = `${githubUrl}#quick-start`;
 
 function currentLanguage(): Language {

@@ -7,10 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:provider-order": "node --test scripts/provider-order.test.mjs"
+    "test:provider-order": "node --test scripts/provider-order.test.mjs",
+    "test:downloads": "node --test scripts/release-gate.test.mjs",
+    "check:downloads": "node scripts/release-gate.mjs",
+    "sync:downloads": "node scripts/release-gate.mjs --refresh",
+    "smoke:downloads": "node scripts/smoke-downloads.mjs",
+    "smoke:local": "node scripts/smoke-local.mjs"
   },
   "dependencies": {
     "cn": "^0.3.0",
+    "fast-xml-parser": "^5.11.2",
     "fumadocs-core": "^16.15.10",
     "fumadocs-mdx": "^15.4.0",
     "fumadocs-ui": "npm:@fumadocs/base-ui@^16.15.10",
@@ -20,6 +26,7 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.0",
     "@tailwindcss/postcss": "^4",
     "@types/mdx": "^2.0.14",
     "@types/node": "^20",
