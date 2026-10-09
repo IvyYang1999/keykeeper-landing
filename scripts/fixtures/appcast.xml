@@ -1,0 +1,11 @@
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0"><channel><item>
+            <title>0.3.4</title>
+            <pubDate>Mon, 14 Sep 2026 22:12:56 +0800</pubDate>
+            <link>https://github.com/IvyYang1999/KeyKeeper</link>
+            <sparkle:version>0.3.4</sparkle:version>
+            <sparkle:shortVersionString>0.3.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <sparkle:hardwareRequirements>arm64</sparkle:hardwareRequirements>
+            <enclosure url="https://github.com/IvyYang1999/KeyKeeper/releases/download/v0.3.4/KeyKeeper-0.3.4.dmg" length="7597070" type="application/octet-stream" sparkle:edSignature="KBUAoZH65qWNsuq8VW9kzzrCO8PvLKyd8NOl8zJvCgzAo4CUE6qirgqdc7HVAS0jCw9vrsK9eRX+4n6mY80xDA==" />
+        </item>
+        </channel></rss>
