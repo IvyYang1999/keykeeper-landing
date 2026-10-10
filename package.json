@@ -12,7 +12,9 @@
     "check:downloads": "node scripts/release-gate.mjs",
     "sync:downloads": "node scripts/release-gate.mjs --refresh",
     "smoke:downloads": "node scripts/smoke-downloads.mjs",
-    "smoke:local": "node scripts/smoke-local.mjs"
+    "smoke:local": "node scripts/smoke-local.mjs",
+    "check:sitemap": "node scripts/check-sitemap.mjs",
+    "smoke:install": "node scripts/smoke-install-prompt.mjs"
   },
   "dependencies": {
     "cn": "^0.3.0",

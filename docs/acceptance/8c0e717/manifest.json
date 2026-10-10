@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "subjectCommit": "8c0e717b56d0cfc73c7f1cfd69ffe28b5ff7b14e",
+  "subjectTree": "e48115d84d5939e8f2f5ac408d02b1f45c837c98",
+  "ciRun": "https://github.com/IvyYang1999/keykeeper-landing/actions/runs/38038870930",
+  "artifact": "download-smoke",
+  "artifactDirectory": "install-prompt",
+  "capture": "Linux CI headless Chromium, isolated production build, analytics blocked",
+  "images": [
+    {
+      "file": "en-desktop.png",
+      "bytes": 35579,
+      "sha256": "315f5719ee7937697007c06653136c29dcb3a2096aff05c49b3cf0554ebd6084",
+      "width": 1080,
+      "height": 312
+    },
+    {
+      "file": "zh-desktop.png",
+      "bytes": 40115,
+      "sha256": "488b2526c649069c27cc06404d297ab044709ad4b56d7b148d9a09a3ec45b481",
+      "width": 1080,
+      "height": 312
+    },
+    {
+      "file": "en-mobile.png",
+      "bytes": 29450,
+      "sha256": "ff8c46c0d706ac2e6e1bdd1f9e0ae521162d2e76eaaab6ff4df15bb232b6ebe7",
+      "width": 343,
+      "height": 401
+    },
+    {
+      "file": "zh-mobile.png",
+      "bytes": 34243,
+      "sha256": "3e73650c44c17233e7628bae634b3852a1c48482f67499d0a69881dc33bff49d",
+      "width": 343,
+      "height": 444
+    },
+    {
+      "file": "zh-dark.png",
+      "bytes": 40366,
+      "sha256": "814e166430a77ae0a979620ae2f341ba703b1fae2b79d5745cef99ecbfdbbb02",
+      "width": 1080,
+      "height": 312
+    },
+    {
+      "file": "zh-fallback.png",
+      "bytes": 65008,
+      "sha256": "194d6bca35c2046d2bb55fcf54cb4200140b04562fc98edfa52e6c9821919edc",
+      "width": 1080,
+      "height": 516
+    }
+  ],
+  "seoAcceptance": {
+    "state": "waiting_authorized_deployment",
+    "sitemap": "https://keykeeper.dev/sitemap.xml",
+    "submissionPerformed": false,
+    "searchConsoleReceipt": null
+  }
+}

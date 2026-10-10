@@ -80,6 +80,11 @@ export const siteCopy = {
       title: "Ready when your agent is.",
       copy: "Install it, then say \"use KeyKeeper for API keys\". The next time the agent needs one, this is what happens.",
       build: "Build from source",
+      copyPrompt: "Copy install prompt",
+      copying: "Copying…",
+      copied: "Copied. Paste it into Claude Code or Codex.",
+      copyError: "Could not copy. Select the prompt below and copy it manually.",
+      promptHint: "Let Claude Code or Codex install and set it up.",
     },
     footer: {
       beta: "Beta: it works and is still being hardened. Keep a copy of any key you store. A command you approve can still misuse a value — the security model says what is and isn't promised.",
@@ -164,6 +169,11 @@ export const siteCopy = {
       title: "Agent 准备好了，你也可以了。",
       copy: "装上，然后告诉它「API key 用 KeyKeeper」。下次它缺 key 时，就是上面那三步。",
       build: "自己编译",
+      copyPrompt: "复制安装 Prompt",
+      copying: "正在复制…",
+      copied: "已复制，粘贴给 Claude Code 或 Codex 即可。",
+      copyError: "复制失败，请选中下方 Prompt 手动复制。",
+      promptHint: "交给 Claude Code 或 Codex 下载并配置。",
     },
     footer: {
       beta: "内测版：能用，也在持续加固；存进来的 key 请另外留一份。你批准过的命令仍可能滥用值——安全模型页写清了承诺什么、不承诺什么。",

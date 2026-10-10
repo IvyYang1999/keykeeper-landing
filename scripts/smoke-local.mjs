@@ -12,9 +12,15 @@ try {
     server.once('exit', (code) => finish(new Error(`Local server exited ${code}`)));
     server.stdout.on('data', (chunk) => { if (chunk.toString().includes('Ready')) finish(); });
   });
-  const smoke = spawn(process.execPath, ['scripts/smoke-downloads.mjs', origin], { stdio: 'inherit', env: { ...process.env, SMOKE_ARTIFACT_DIR: resolve('test-results/local-download-smoke') } });
-  const [code] = await once(smoke, 'exit');
-  if (code !== 0) process.exitCode = 1;
+  for (const [script, artifactDir] of [
+    ['scripts/check-sitemap.mjs', 'test-results/sitemap'],
+    ['scripts/smoke-install-prompt.mjs', 'test-results/install-prompt'],
+    ['scripts/smoke-downloads.mjs', 'test-results/local-download-smoke'],
+  ]) {
+    const smoke = spawn(process.execPath, [script, origin], { stdio: 'inherit', env: { ...process.env, SMOKE_ARTIFACT_DIR: resolve(artifactDir) } });
+    const [code] = await once(smoke, 'exit');
+    if (code !== 0) { process.exitCode = 1; break; }
+  }
 } finally {
   server.kill('SIGTERM');
 }
