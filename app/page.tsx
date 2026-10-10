@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { InstallPrompt } from "@/components/install-prompt";
 import download from "../lib/download.json";
 import { siteCopy } from "./i18n";
 import { providerPaths } from "./providerMarks";
@@ -299,6 +300,7 @@ export default function Home() {
         <p>{copy.install.copy}</p>
         <div className="actions">
           <a className="pill pill-dark" href={downloadUrl}>{copy.hero.primary}</a>
+          <InstallPrompt key={language} language={language} />
         </div>
         <p className="facts">{copy.hero.facts}</p>
         <a href={quickStartUrl} target="_blank" rel="noreferrer" className="textlink">{copy.install.build} ↗</a>
