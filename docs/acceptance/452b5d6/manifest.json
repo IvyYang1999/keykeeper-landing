@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "subjectCommit": "452b5d654bd1f4c401f668fca4889ba447763043",
+  "subjectTree": "3c54dacda5bde845dbddae35deae75de0bf429de",
+  "ciRun": "https://github.com/IvyYang1999/keykeeper-landing/actions/runs/38040488996",
+  "ciConclusion": "success",
+  "artifact": "download-smoke",
+  "artifactId": 11665791487,
+  "artifactApiDigest": "sha256:8d649fb2806adcc31c4b789695eacfcb57ec858b1f45a09fce1ab1bc9b23a506",
+  "artifactDirectory": "install-prompt",
+  "capture": "Linux CI headless Chromium, isolated production build, analytics blocked; cropped #install screenshots",
+  "sourceBlobs": {
+    "app/globals.css": "687057e66547fbaf4bd67133f756aeafd2a0ea49",
+    "components/install-prompt.tsx": "250104c4451ea11ec14871c98c2f8a5cc0207e1a",
+    "app/page.tsx": "b60f4e8af0e7d61c0ea4eb8f55d942b473253f26",
+    "scripts/smoke-install-prompt.mjs": "6556db587b54701c5a8c709093a13720811ba222"
+  },
+  "images": [
+    {
+      "file": "en-desktop.png",
+      "bytes": 35611,
+      "sha256": "d8bc5af1dc593c797d97c7ac44d779e1a24845c51a480f50fef6c56d76fec17a",
+      "width": 1080,
+      "height": 312
+    },
+    {
+      "file": "zh-desktop.png",
+      "bytes": 40148,
+      "sha256": "e843eb26da4bc6fc7b136d62dbc4bb0cc9f58b52d8aa3b1a02da2dd4daca3a4b",
+      "width": 1080,
+      "height": 312
+    },
+    {
+      "file": "en-mobile.png",
+      "bytes": 29450,
+      "sha256": "ff8c46c0d706ac2e6e1bdd1f9e0ae521162d2e76eaaab6ff4df15bb232b6ebe7",
+      "width": 343,
+      "height": 401
+    },
+    {
+      "file": "zh-mobile.png",
+      "bytes": 33693,
+      "sha256": "e6724fcf94fc9a2d76fec99d084efa3d7c46132fbd8f6f8503584d0c0f2b86a7",
+      "width": 343,
+      "height": 388
+    },
+    {
+      "file": "zh-dark.png",
+      "bytes": 40371,
+      "sha256": "9141b483008296df0463729f3e58d49b196cea44ef803df6b6b32d99daebacbe",
+      "width": 1080,
+      "height": 312
+    },
+    {
+      "file": "zh-fallback.png",
+      "bytes": 123925,
+      "sha256": "e6be8811eb8b536ce4471a3e570251207d2a76cebd42723cef96d0724500f2b1",
+      "width": 1080,
+      "height": 516
+    }
+  ],
+  "visualReview": {
+    "reviewer": "Codex",
+    "date": "2026-10-10",
+    "method": "Opened all six original PNGs with view_image; read CI interaction assertions separately",
+    "result": "No blocker observed in the pictured install section",
+    "observations": [
+      "English and Chinese desktop buttons share a centered row; copied feedback occupies its own line below.",
+      "375px English buttons stack; Chinese buttons fit on one row. Labels and facts wrap without clipping.",
+      "Dark section fills the capture and all controls remain readable.",
+      "Clipboard rejection shows failure feedback and selected, scrollable manual-copy text without covering the buttons."
+    ]
+  },
+  "seoAcceptance": {
+    "state": "waiting_authorized_deployment",
+    "sitemap": "https://keykeeper.dev/sitemap.xml",
+    "submissionPerformed": false,
+    "searchConsoleReceipt": null
+  }
+}
