@@ -6,6 +6,28 @@ description: What changed in each release.
 The full list is in [CHANGELOG.md](https://github.com/IvyYang1999/KeyKeeper/blob/main/CHANGELOG.md);
 releases with signed downloads are on [GitHub Releases](https://github.com/IvyYang1999/KeyKeeper/releases).
 
+## 0.3.8 — 2026-11-26
+
+- Security: fixes [GHSA-hfqh-j87q-cccx](https://github.com/IvyYang1999/KeyKeeper/security/advisories/GHSA-hfqh-j87q-cccx) (medium). The migration helper in 0.3.7 could expose data from earlier versions to other local programs. Only 0.3.7 is affected.
+- Migration from versions before 0.3.7 now goes through a read-only migration service built into the app.
+- After copying, KeyKeeper lists the old Keychain item names still present and can open Keychain Access. KeyKeeper never deletes them itself.
+- If you upgraded from 0.3.6 or earlier, first check the credentials and website sessions you need in the current app, then review the old copy in Settings › Developer › Copy from before 0.3.7. Keep any duplicate or any item you cannot confirm was copied; a fresh install needs no cleanup.
+
+## 0.3.7 — 2026-11-10
+
+- Optional iCloud sync, off by default: encrypted keys, names, fields and notes across your Macs on the same Apple account. Records with a missing value are kept and never overwrite a value present on another Mac. Each Mac approves its own callers; approvals and website sessions stay local.
+- New protected storage under a new app identity; new installs have their own local setup. Upgrading from an earlier public version asks you to confirm a local, copy-first migration — the original data stays where it was, and callers need fresh approval.
+- Sync recovers automatically after a temporary pause. Fix a startup retry that turned sync off, and an old request that turned sync back on after you turned it off.
+- Redesigned onboarding, add and edit, details, settings, website sessions, permissions and access history. Choose Codex or Claude Code during setup; generated IDs and environment variable names are shown apart from names you type, and approval details can be expanded.
+- Fix the CLI showing an unknown version when built in a Git worktree, and Settings wrongly reporting it was up to date. Better Chinese and English text, narrow split views, text fields, expiry indicators and masked value previews.
+
+## 0.3.6 — 2026-10-28
+
+- Updates: while running, KeyKeeper checks every six hours by default, downloads signed updates in the background and installs them when you quit; long-running sessions get a reminder after a day. Saved update preferences are kept. The setting is now called "Download updates in the background"; turning it off keeps checking and asks before downloading.
+- `keykeeper run --env` maps a field to the exact environment variable name a program expects, and `--plan` previews the mapping and whether values are present locally without reading secret values or starting the command. When the command fails, `run` says whether anything was injected.
+- Clearer first-use guidance for agents and a simpler approval window.
+- Releases: both the update feed and the download are signature-checked and compared byte for byte with what is published. An interrupted release resumes safely without overwriting a different version, and a network failure is no longer taken to mean a version does not exist.
+
 ## 0.3.5 — 2026-09-16
 
 - License: the app, CLI and core move from MIT to FSL-1.1-MIT — source public, no competing products, MIT again two years after each release. SDKs, the skill and the plugin stay MIT.
