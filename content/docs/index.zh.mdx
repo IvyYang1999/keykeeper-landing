@@ -6,11 +6,11 @@ description: 把 API Key 放心交给 Agent。
 import { Card, Cards } from "fumadocs-ui/components/card";
 
 KeyKeeper 是一个小巧的 macOS 应用加命令行。它让 AI Agent——Codex、Claude Code、Cursor、一段脚本——在你的 Mac 上
-去拿、存好、验证并使用 API key，而每次使用都由你批准，Agent 从头到尾看不到值。
+去拿、存好、验证并使用 API key，每个调用方由你批准，值不进聊天、不进 Agent 的上下文、不进 `.env`。
 
 - key 存在 macOS 钥匙串里。不进聊天，不进 `.env`，不进项目文件。
-- 每次使用由你批准：**仅这一次**、**这次运行期间**、**以后都不问**——随时可撤销。
-- Agent 新建的 key **只能注入、不能读出**：只经 `keykeeper run` 进入命令的环境，不会被打印或返回。
+- 批准按调用方，而不是按次：**仅这一次**、**这次运行期间**、**以后都不问**——随时可撤销。
+- Agent 新建的 key **只能注入、不能读出**：只经 `keykeeper run` 进入命令的环境；KeyKeeper 自己不打印、不返回，但命令自己仍可能打印。
 - KeyKeeper 认识各家服务商：key 在哪里创建、该选什么、怎么验证。
 
 <Cards>

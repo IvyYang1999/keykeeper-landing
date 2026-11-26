@@ -7,10 +7,10 @@ import { Callout } from "fumadocs-ui/components/callout";
 
 ## What KeyKeeper promises
 
-- **Values never reach the agent by accident.** They live in the macOS Keychain, are injected into one process's environment by `keykeeper run`, and are redacted from that process's output. Keys an agent creates are inject-only: no command prints them.
-- **Every use is approved and attributed.** The caller is identified from the connection (audit token, code signature, or the file it runs from), not from a name it reports. Approvals are stored in one Keychain item only KeyKeeper can write.
-- **Every access is recorded** with the caller, its stated reason and the command line; approvals can be revoked at any time.
-- **Nothing leaves the Mac** except the read-only verification request to the provider you chose, and the optional reviewer call you configure.
+- **Values never reach the agent by accident.** They live in the macOS Keychain and go only into the environment of the command you approved, through `keykeeper run`. That command receives the real value; output masking replaces exact matches only, and is off with `--tty`. Keys an agent creates are inject-only: KeyKeeper itself never prints or returns them.
+- **Approval is per caller, not per use.** The first time a new app, terminal or script asks, you decide how long it may use the key. KeyKeeper works out the caller from the running processes — for requests through the `keykeeper` command, the app or file it was started from; for a direct connection, its code signature, or its path if unsigned — never from a name it reports. This tells your programs apart; it does not stop malware already running under your account from passing itself off as one of them. Approvals are stored in one Keychain item only KeyKeeper can write.
+- **What is recorded:** when each approved caller last used a key, background reads that happened without an approval, and requests that needed an approval or were missed. It is not a full audit trail. Approvals can be revoked at any time.
+- **No telemetry, analytics or crash reporting.** What does leave the Mac: an update check against GitHub every six hours and the download of signed updates; optional encrypted iCloud sync (off by default); a read-only verification request to the provider when you save a key whose template defines one; and the optional reviewer model you configure.
 
 ## What KeyKeeper does not promise
 
@@ -23,7 +23,7 @@ approval an informed one: it shows the command, the caller, and what the caller 
 </Callout>
 
 - An **unsigned program is recognised by its path**; replacing the file at that path inherits its approvals. The window says so.
-- **Malware running as your user** can prompt you for approvals and read the clipboard while a key is on it. KeyKeeper marks its own clipboard writes as concealed and clears them, but cannot protect a copy you made from a website before saving it.
+- **Malware running under your macOS account** can run commands inside an app you already approved, read the environment of a running command, pass itself off as an approved caller, prompt you for approvals, and read the clipboard while a key is on it. KeyKeeper marks its own clipboard writes as concealed and clears them, but cannot protect a copy you made from a website before saving it.
 - KeyKeeper is **not a password manager**: it holds developer credentials for agents, and is deliberately separate from your personal passwords.
 
 ## The reviewer sees no values
@@ -34,8 +34,10 @@ never in a credential, so no local program can redirect it.
 
 ## Reporting
 
-Security issues: security@keykeeper.dev, or a private report on GitHub. Findings from two
-independent audits on 2026-09-14 were fixed in 0.3.4; the release notes list them.
+Security issues: security@keykeeper.dev, or a private report on GitHub. Published advisories are
+on the repository's [Security page](https://github.com/IvyYang1999/KeyKeeper/security/advisories).
+Findings from two security reviews on 2026-09-14 were fixed in 0.3.4; the release notes list them.
+Those reviews were run by AI agents separate from the one that wrote the code, not by a third party.
 
 ## License
 

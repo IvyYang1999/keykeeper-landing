@@ -8,7 +8,7 @@ export const siteCopy = {
     hero: {
       eyebrow: "Built for vibe coders",
       title: ["Trust agents to manage", "your API keys. Safely."],
-      lede: "They fetch, store, verify and use keys on your Mac. You approve; they never see the value.",
+      lede: "They fetch, store, verify and use keys on your Mac. You approve each caller; the value stays out of the chat and .env.",
       primary: "Download for macOS",
       secondary: "Read the docs",
       facts: `${download.tag} · Free · Apple Silicon · macOS 14+ · No account`,
@@ -72,8 +72,8 @@ export const siteCopy = {
       title: "Three things we promise",
       items: [
         ["Keys stay in the macOS Keychain.", "Not in the chat, not in .env, not in the project."],
-        ["Every use is approved by you.", "Just this once, while it runs, or don't ask again — and revocable."],
-        ["Agent-created keys are inject-only.", "They reach a command's environment through keykeeper run and are never printed or returned."],
+        ["You approve each new caller.", "Per app, terminal or script: just this once, while it runs, or don't ask again — and revocable."],
+        ["Agent-created keys are inject-only.", "They reach a command's environment through keykeeper run; KeyKeeper itself never prints or returns them."],
       ],
     },
     install: {
@@ -89,7 +89,7 @@ export const siteCopy = {
     footer: {
       beta: "Beta: it works and is still being hardened. Keep a copy of any key you store. A command you approve can still misuse a value — the security model says what is and isn't promised.",
       license: "Source-available (FSL)", security: "Security model", support: "Support",
-      tagline: "A small macOS app that lets agents use API keys they never see.",
+      tagline: "A small macOS app that lets agents use API keys without putting them in the chat.",
     },
   },
   zh: {
@@ -97,7 +97,7 @@ export const siteCopy = {
     hero: {
       eyebrow: "vibe coder 的密钥管理工具",
       title: ["把 API Key", "放心交给 Agent。"],
-      lede: "它去拿、存好、验证、用上，都在你的 Mac 上。你批准，它看不到值。",
+      lede: "它去拿、存好、验证、用上，都在你的 Mac 上。你批准调用方；值不进聊天，也不进 .env。",
       primary: "下载 macOS 版",
       secondary: "看文档",
       facts: `${download.tag} · 免费 · Apple Silicon · macOS 14+ · 无需账号`,
@@ -161,8 +161,8 @@ export const siteCopy = {
       title: "三句承诺",
       items: [
         ["key 只在 macOS 钥匙串里。", "不进聊天，不进 .env，不进项目。"],
-        ["每次使用由你批准。", "仅这一次、这次运行期间、以后都不问——随时撤销。"],
-        ["Agent 建的 key 只能注入、不能读出。", "只经 keykeeper run 进入命令的环境，不打印、不返回。"],
+        ["每个新调用方由你批准。", "按应用、终端或脚本：仅这一次、这次运行期间、以后都不问——随时撤销。"],
+        ["Agent 建的 key 只能注入、不能读出。", "只经 keykeeper run 进入命令的环境，KeyKeeper 自己不打印、不返回。"],
       ],
     },
     install: {
@@ -178,7 +178,7 @@ export const siteCopy = {
     footer: {
       beta: "内测版：能用，也在持续加固；存进来的 key 请另外留一份。你批准过的命令仍可能滥用值——安全模型页写清了承诺什么、不承诺什么。",
       license: "源码公开（FSL）", security: "安全模型", support: "支持",
-      tagline: "一个小小的 macOS 应用，让 Agent 用上它看不到的 API key。",
+      tagline: "一个小小的 macOS 应用，让 Agent 用上 API key，而 key 不进聊天。",
     },
   },
 } as const;

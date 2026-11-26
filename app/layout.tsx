@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://keykeeper.dev"),
   applicationName: "KeyKeeper",
   title: "KeyKeeper — Trust agents to manage your API keys. Safely.",
-  description: "Let Codex, Claude Code or any agent fetch, store, verify and use API keys on your Mac. You approve each use; the agent never sees the value. Free, source-available (FSL), no account.",
+  description: "Let Codex, Claude Code or any agent fetch, store, verify and use API keys on your Mac. You approve each caller; the value stays out of the chat and .env files. Free, source-available (FSL), no account.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
     siteName: "KeyKeeper",
     title: "Trust agents to manage your API keys. Safely.",
-    description: "Agents fetch, store, verify and use keys on your Mac. You approve; they never see the value.",
+    description: "Agents fetch, store, verify and use keys on your Mac. You approve each caller; the value stays out of the chat and .env.",
   },
   twitter: {
     card: "summary_large_image",
